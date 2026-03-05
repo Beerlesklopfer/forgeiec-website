@@ -1,0 +1,43 @@
+baseURL = 'https://forgeiec.io/'
+languageCode = 'en'
+title = 'ForgeIEC'
+theme = 'docsy'
+
+enableRobotsTXT = true
+enableGitInfo = true
+
+[params]
+description = "IEC 61131-3 PLC Editor & Runtime for Linux"
+github_repo = "https://github.com/Beerlesklopfer/ForgeIEC"
+github_project_repo = "https://github.com/Beerlesklopfer/ForgeIEC"
+offlineSearch = true
+
+[params.ui]
+sidebar_menu_compact = true
+breadcrumb_disable = false
+navbar_logo = true
+
+[params.links]
+[[params.links.developer]]
+  name = "GitHub"
+  url = "https://github.com/Beerlesklopfer/ForgeIEC"
+  icon = "fab fa-github"
+[[params.links.developer]]
+  name = "Releases"
+  url = "https://github.com/Beerlesklopfer/ForgeIEC/releases"
+  icon = "fas fa-download"
+
+[menu]
+[[menu.main]]
+  name = "Documentation"
+  weight = 10
+  url = "/docs/"
+[[menu.main]]
+  name = "Download"
+  weight = 20
+  url = "https://github.com/Beerlesklopfer/ForgeIEC/releases"
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.110.0"
