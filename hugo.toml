@@ -1,43 +1,175 @@
 baseURL = 'https://forgeiec.io/'
-languageCode = 'en'
 title = 'ForgeIEC'
-theme = 'docsy'
-
+theme = 'ananke'
+defaultContentLanguage = 'de'
 enableRobotsTXT = true
-enableGitInfo = true
 
 [params]
-description = "IEC 61131-3 PLC Editor & Runtime for Linux"
-github_repo = "https://github.com/Beerlesklopfer/ForgeIEC"
-github_project_repo = "https://github.com/Beerlesklopfer/ForgeIEC"
-offlineSearch = true
+description = "IEC 61131-3 SPS-Entwicklungsumgebung"
 
-[params.ui]
-sidebar_menu_compact = true
-breadcrumb_disable = false
-navbar_logo = true
+[markup.goldmark.renderer]
+unsafe = true
 
-[params.links]
-[[params.links.developer]]
-  name = "GitHub"
-  url = "https://github.com/Beerlesklopfer/ForgeIEC"
-  icon = "fab fa-github"
-[[params.links.developer]]
-  name = "Releases"
-  url = "https://github.com/Beerlesklopfer/ForgeIEC/releases"
-  icon = "fas fa-download"
+# ---- Languages ----
+[languages]
 
-[menu]
-[[menu.main]]
-  name = "Documentation"
-  weight = 10
-  url = "/docs/"
-[[menu.main]]
-  name = "Download"
-  weight = 20
-  url = "https://github.com/Beerlesklopfer/ForgeIEC/releases"
+  [languages.de]
+  languageName = "Deutsch"
+  weight = 1
+  title = "ForgeIEC"
+  contentDir = "content/de"
+    [languages.de.params]
+    description = "IEC 61131-3 SPS-Entwicklungsumgebung fuer die Industrie"
+    [[languages.de.menu.main]]
+      name = "Funktionen"
+      pageRef = "/features/"
+      weight = 10
+    [[languages.de.menu.main]]
+      name = "Bussystem"
+      pageRef = "/bus-system/"
+      weight = 20
+    [[languages.de.menu.main]]
+      name = "Kontakt"
+      url = "mailto:blacksmith@forgeiec.io"
+      weight = 30
 
-[module]
-  [module.hugoVersion]
-    extended = true
-    min = "0.110.0"
+  [languages.en]
+  languageName = "English"
+  weight = 2
+  title = "ForgeIEC"
+  contentDir = "content/en"
+    [languages.en.params]
+    description = "IEC 61131-3 PLC Development Environment for Industry"
+    [[languages.en.menu.main]]
+      name = "Features"
+      pageRef = "/features/"
+      weight = 10
+    [[languages.en.menu.main]]
+      name = "Bus System"
+      pageRef = "/bus-system/"
+      weight = 20
+    [[languages.en.menu.main]]
+      name = "Contact"
+      url = "mailto:blacksmith@forgeiec.io"
+      weight = 30
+
+  [languages.fr]
+  languageName = "Francais"
+  weight = 3
+  title = "ForgeIEC"
+  contentDir = "content/fr"
+    [languages.fr.params]
+    description = "Environnement de developpement IEC 61131-3 pour l'industrie"
+    [[languages.fr.menu.main]]
+      name = "Fonctionnalites"
+      pageRef = "/features/"
+      weight = 10
+    [[languages.fr.menu.main]]
+      name = "Bus de terrain"
+      pageRef = "/bus-system/"
+      weight = 20
+    [[languages.fr.menu.main]]
+      name = "Contact"
+      url = "mailto:blacksmith@forgeiec.io"
+      weight = 30
+
+  [languages.es]
+  languageName = "Espanol"
+  weight = 4
+  title = "ForgeIEC"
+  contentDir = "content/es"
+    [languages.es.params]
+    description = "Entorno de desarrollo IEC 61131-3 para la industria"
+    [[languages.es.menu.main]]
+      name = "Funciones"
+      pageRef = "/features/"
+      weight = 10
+    [[languages.es.menu.main]]
+      name = "Sistema de bus"
+      pageRef = "/bus-system/"
+      weight = 20
+    [[languages.es.menu.main]]
+      name = "Contacto"
+      url = "mailto:blacksmith@forgeiec.io"
+      weight = 30
+
+  [languages.zh]
+  languageName = "中文"
+  weight = 5
+  title = "ForgeIEC"
+  contentDir = "content/zh"
+    [languages.zh.params]
+    description = "IEC 61131-3 工业自动化开发环境"
+    [[languages.zh.menu.main]]
+      name = "功能"
+      pageRef = "/features/"
+      weight = 10
+    [[languages.zh.menu.main]]
+      name = "总线系统"
+      pageRef = "/bus-system/"
+      weight = 20
+    [[languages.zh.menu.main]]
+      name = "联系"
+      url = "mailto:blacksmith@forgeiec.io"
+      weight = 30
+
+  [languages.ja]
+  languageName = "日本語"
+  weight = 6
+  title = "ForgeIEC"
+  contentDir = "content/ja"
+    [languages.ja.params]
+    description = "IEC 61131-3 産業用開発環境"
+    [[languages.ja.menu.main]]
+      name = "機能"
+      pageRef = "/features/"
+      weight = 10
+    [[languages.ja.menu.main]]
+      name = "バスシステム"
+      pageRef = "/bus-system/"
+      weight = 20
+    [[languages.ja.menu.main]]
+      name = "お問い合わせ"
+      url = "mailto:blacksmith@forgeiec.io"
+      weight = 30
+
+  [languages.tr]
+  languageName = "Türkçe"
+  weight = 7
+  title = "ForgeIEC"
+  contentDir = "content/tr"
+    [languages.tr.params]
+    description = "Endüstri için IEC 61131-3 geliştirme ortamı"
+    [[languages.tr.menu.main]]
+      name = "Özellikler"
+      pageRef = "/features/"
+      weight = 10
+    [[languages.tr.menu.main]]
+      name = "Bus Sistemi"
+      pageRef = "/bus-system/"
+      weight = 20
+    [[languages.tr.menu.main]]
+      name = "İletişim"
+      url = "mailto:blacksmith@forgeiec.io"
+      weight = 30
+
+  [languages.ar]
+  languageName = "العربية"
+  languageDirection = "rtl"
+  weight = 8
+  title = "ForgeIEC"
+  contentDir = "content/ar"
+    [languages.ar.params]
+    description = "بيئة تطوير IEC 61131-3 للصناعة"
+    [[languages.ar.menu.main]]
+      name = "الميزات"
+      pageRef = "/features/"
+      weight = 10
+    [[languages.ar.menu.main]]
+      name = "نظام الحافلات"
+      pageRef = "/bus-system/"
+      weight = 20
+    [[languages.ar.menu.main]]
+      name = "اتصل بنا"
+      url = "mailto:blacksmith@forgeiec.io"
+      weight = 30

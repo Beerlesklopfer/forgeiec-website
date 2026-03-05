@@ -1,0 +1,149 @@
+/* ForgeIEC — "Forge" Design Language
+   Amber fire on dark steel. Industrial, confident, recognizable. */
+
+:root {
+  --forge-amber: #F59E0B;
+  --forge-gold: #D97706;
+  --forge-steel: #1E293B;
+  --forge-iron: #0F172A;
+  --forge-cyan: #06B6D4;
+  --forge-warm-gray: #94A3B8;
+  --forge-light: #F8FAFC;
+}
+
+/* Override PaperMod dark theme variables */
+.dark {
+  --primary: var(--forge-amber);
+  --secondary: var(--forge-warm-gray);
+  --theme: var(--forge-iron);
+  --entry: var(--forge-steel);
+  --border: #334155;
+  --code-bg: #1a1a2e;
+}
+
+/* Navbar / Header */
+.nav {
+  border-bottom: 2px solid var(--forge-gold) !important;
+}
+
+.logo a {
+  color: var(--forge-amber) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em;
+  font-size: 1.4rem !important;
+}
+
+#menu a {
+  color: var(--forge-warm-gray);
+  transition: color 0.2s;
+}
+
+#menu a:hover,
+#menu a.active {
+  color: var(--forge-amber) !important;
+}
+
+/* Language switcher */
+.lang-switch a {
+  color: var(--forge-warm-gray) !important;
+}
+.lang-switch a:hover {
+  color: var(--forge-amber) !important;
+}
+
+/* Links */
+.post-content a {
+  color: var(--forge-cyan);
+}
+.post-content a:hover {
+  color: var(--forge-amber);
+}
+
+/* Headings */
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  color: var(--forge-amber);
+}
+
+.post-content h2 {
+  border-bottom: 2px solid var(--forge-gold);
+  padding-bottom: 0.4rem;
+  margin-top: 2.5rem;
+}
+
+/* Tables */
+.post-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.post-content th {
+  background: var(--forge-steel);
+  color: var(--forge-amber);
+  padding: 0.6rem 1rem;
+  text-align: left;
+}
+.post-content td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #334155;
+}
+.post-content tr:hover td {
+  background: rgba(245, 158, 11, 0.05);
+}
+
+/* Code blocks */
+.post-content pre {
+  background: var(--forge-steel) !important;
+  border-left: 3px solid var(--forge-gold);
+  border-radius: 2px;
+}
+
+/* Horizontal rules */
+.post-content hr {
+  border-color: var(--forge-gold);
+  opacity: 0.3;
+}
+
+/* Footer */
+.footer {
+  border-top: 2px solid var(--forge-gold) !important;
+}
+.footer a {
+  color: var(--forge-warm-gray);
+}
+.footer a:hover {
+  color: var(--forge-amber);
+}
+
+/* Hero centered text styling */
+.post-content div[style*="text-align:center"] h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--forge-amber), var(--forge-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  border-bottom: none;
+  margin-bottom: 0.5rem;
+}
+
+/* Lists with industrial feel */
+.post-content ul li {
+  margin-bottom: 0.4rem;
+}
+.post-content ul li strong {
+  color: var(--forge-amber);
+}
+
+/* Bold text in tables */
+.post-content td strong {
+  color: var(--forge-amber);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .post-content div[style*="text-align:center"] h1 {
+    font-size: 1.8rem;
+  }
+}

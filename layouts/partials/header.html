@@ -1,0 +1,27 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{{ .Site.Home.RelPermalink }}" class="logo">
+      <span class="logo-icon">&#9881;</span> {{ .Site.Title }}
+    </a>
+    <nav class="main-nav">
+      {{ if .Site.Menus.main }}
+        {{ range .Site.Menus.main }}
+          <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
+        {{ end }}
+      {{ end }}
+    </nav>
+    <div class="lang-switch">
+      {{ if .IsTranslated }}
+        {{ range .Translations }}
+          <a href="{{ .RelPermalink }}" class="lang-link">{{ .Lang }}</a>
+        {{ end }}
+      {{ else }}
+        {{ range .Site.Languages }}
+          {{ if ne .Lang $.Site.Language.Lang }}
+            <a href="/{{ .Lang }}/" class="lang-link">{{ .Lang }}</a>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</header>

@@ -1,37 +1,45 @@
 ---
-title: ForgeIEC
+title: "ForgeIEC"
 ---
 
-{{< blocks/cover title="ForgeIEC" image_anchor="top" height="full" >}}
-<a class="btn btn-lg btn-primary me-3 mb-4" href="/docs/">
-  Documentation <i class="fas fa-arrow-alt-circle-right ms-2"></i>
-</a>
-<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/Beerlesklopfer/ForgeIEC/releases">
-  Download <i class="fab fa-github ms-2 "></i>
-</a>
-<p class="lead mt-5">Open-Source IEC 61131-3 PLC Editor & Runtime for Linux</p>
-{{< /blocks/cover >}}
+<div style="text-align:center; padding: 3rem 1rem;">
 
-{{% blocks/lead color="primary" %}}
-ForgeIEC is a modern, open-source IEC 61131-3 PLC development environment
-built with C++/Qt6 and a Rust-based gRPC runtime server.
+# Forged for Industry.
 
-All five IEC languages: **ST, IL, FBD, LD, SFC**
-{{% /blocks/lead %}}
+**An IEC 61131-3 development environment built to industrial standards. Open source.**
 
-{{< blocks/section color="dark" type="row" >}}
-{{% blocks/feature icon="fas fa-code" title="5 IEC Languages" %}}
-Structured Text, Instruction List, Function Block Diagram,
-Ladder Diagram, and Sequential Function Chart with tree-sitter syntax highlighting.
-{{% /blocks/feature %}}
+[Contact](mailto:blacksmith@forgeiec.io)
 
-{{% blocks/feature icon="fas fa-network-wired" title="CoDeSys-style Bus System" %}}
-Modbus TCP/RTU segments, device management, auto-addressing,
-EtherCAT and Profibus DP bridges.
-{{% /blocks/feature %}}
+</div>
 
-{{% blocks/feature icon="fas fa-bolt" title="IceOryx2 Zero-Copy IPC" %}}
-PUBLISH/SUBSCRIBE keywords for zero-copy inter-process communication
-between PLC programs and external systems.
-{{% /blocks/feature %}}
-{{< /blocks/section >}}
+---
+
+## What We Are Building
+
+ForgeIEC is a full-featured IEC 61131-3 development environment for
+industrial automation — all five IEC languages, industrial bus systems,
+real-time debugging.
+
+Built with the ambition to meet established commercial systems on equal terms.
+Every feature is backed by documented tests before release.
+
+---
+
+## Why Open Source
+
+Industrial automation is a key technology. But access to professional tools
+is restricted by license costs and proprietary systems. ForgeIEC makes the
+value of automation accessible to everyone — no vendor lock-in, no license fees.
+
+As an open-source project, ForgeIEC belongs to the community.
+
+---
+
+<div style="text-align:center; padding: 2rem;">
+
+**We will publish detailed information once an industrial-grade release
+is available.**
+
+blacksmith@forgeiec.io
+
+</div>
