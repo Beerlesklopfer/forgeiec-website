@@ -25,13 +25,25 @@ unsafe = true
       pageRef = "/features/"
       weight = 10
     [[languages.de.menu.main]]
+      name = "Anvil"
+      pageRef = "/anvil/"
+      weight = 15
+    [[languages.de.menu.main]]
       name = "Bussystem"
       pageRef = "/bus-system/"
       weight = 20
     [[languages.de.menu.main]]
+      name = "Partner"
+      pageRef = "/partner/"
+      weight = 25
+    [[languages.de.menu.main]]
+      name = "Hilfe"
+      pageRef = "/hilfe/"
+      weight = 35
+    [[languages.de.menu.main]]
       name = "Kontakt"
       url = "mailto:blacksmith@forgeiec.io"
-      weight = 30
+      weight = 40
 
   [languages.en]
   languageName = "English"
@@ -45,13 +57,25 @@ unsafe = true
       pageRef = "/features/"
       weight = 10
     [[languages.en.menu.main]]
+      name = "Anvil"
+      pageRef = "/anvil/"
+      weight = 15
+    [[languages.en.menu.main]]
       name = "Bus System"
       pageRef = "/bus-system/"
       weight = 20
     [[languages.en.menu.main]]
+      name = "Partners"
+      pageRef = "/partner/"
+      weight = 25
+    [[languages.en.menu.main]]
+      name = "Help"
+      pageRef = "/hilfe/"
+      weight = 35
+    [[languages.en.menu.main]]
       name = "Contact"
       url = "mailto:blacksmith@forgeiec.io"
-      weight = 30
+      weight = 40
 
   [languages.fr]
   languageName = "Francais"
@@ -65,13 +89,25 @@ unsafe = true
       pageRef = "/features/"
       weight = 10
     [[languages.fr.menu.main]]
+      name = "Anvil"
+      pageRef = "/anvil/"
+      weight = 15
+    [[languages.fr.menu.main]]
       name = "Bus de terrain"
       pageRef = "/bus-system/"
       weight = 20
     [[languages.fr.menu.main]]
+      name = "Partenaires"
+      pageRef = "/partner/"
+      weight = 25
+    [[languages.fr.menu.main]]
+      name = "Aide"
+      pageRef = "/hilfe/"
+      weight = 35
+    [[languages.fr.menu.main]]
       name = "Contact"
       url = "mailto:blacksmith@forgeiec.io"
-      weight = 30
+      weight = 40
 
   [languages.es]
   languageName = "Espanol"
@@ -85,13 +121,25 @@ unsafe = true
       pageRef = "/features/"
       weight = 10
     [[languages.es.menu.main]]
+      name = "Anvil"
+      pageRef = "/anvil/"
+      weight = 15
+    [[languages.es.menu.main]]
       name = "Sistema de bus"
       pageRef = "/bus-system/"
       weight = 20
     [[languages.es.menu.main]]
+      name = "Socios"
+      pageRef = "/partner/"
+      weight = 25
+    [[languages.es.menu.main]]
+      name = "Ayuda"
+      pageRef = "/hilfe/"
+      weight = 35
+    [[languages.es.menu.main]]
       name = "Contacto"
       url = "mailto:blacksmith@forgeiec.io"
-      weight = 30
+      weight = 40
 
   [languages.zh]
   languageName = "中文"
@@ -105,13 +153,25 @@ unsafe = true
       pageRef = "/features/"
       weight = 10
     [[languages.zh.menu.main]]
+      name = "Anvil"
+      pageRef = "/anvil/"
+      weight = 15
+    [[languages.zh.menu.main]]
       name = "总线系统"
       pageRef = "/bus-system/"
       weight = 20
     [[languages.zh.menu.main]]
+      name = "合作伙伴"
+      pageRef = "/partner/"
+      weight = 25
+    [[languages.zh.menu.main]]
+      name = "帮助"
+      pageRef = "/hilfe/"
+      weight = 35
+    [[languages.zh.menu.main]]
       name = "联系"
       url = "mailto:blacksmith@forgeiec.io"
-      weight = 30
+      weight = 40
 
   [languages.ja]
   languageName = "日本語"
@@ -125,13 +185,25 @@ unsafe = true
       pageRef = "/features/"
       weight = 10
     [[languages.ja.menu.main]]
+      name = "Anvil"
+      pageRef = "/anvil/"
+      weight = 15
+    [[languages.ja.menu.main]]
       name = "バスシステム"
       pageRef = "/bus-system/"
       weight = 20
     [[languages.ja.menu.main]]
+      name = "パートナー"
+      pageRef = "/partner/"
+      weight = 25
+    [[languages.ja.menu.main]]
+      name = "ヘルプ"
+      pageRef = "/hilfe/"
+      weight = 35
+    [[languages.ja.menu.main]]
       name = "お問い合わせ"
       url = "mailto:blacksmith@forgeiec.io"
-      weight = 30
+      weight = 40
 
   [languages.tr]
   languageName = "Türkçe"
@@ -145,13 +217,25 @@ unsafe = true
       pageRef = "/features/"
       weight = 10
     [[languages.tr.menu.main]]
+      name = "Anvil"
+      pageRef = "/anvil/"
+      weight = 15
+    [[languages.tr.menu.main]]
       name = "Bus Sistemi"
       pageRef = "/bus-system/"
       weight = 20
     [[languages.tr.menu.main]]
+      name = "Ortaklar"
+      pageRef = "/partner/"
+      weight = 25
+    [[languages.tr.menu.main]]
+      name = "Yardım"
+      pageRef = "/hilfe/"
+      weight = 35
+    [[languages.tr.menu.main]]
       name = "İletişim"
       url = "mailto:blacksmith@forgeiec.io"
-      weight = 30
+      weight = 40
 
   [languages.ar]
   languageName = "العربية"
@@ -166,10 +250,22 @@ unsafe = true
       pageRef = "/features/"
       weight = 10
     [[languages.ar.menu.main]]
+      name = "Anvil"
+      pageRef = "/anvil/"
+      weight = 15
+    [[languages.ar.menu.main]]
       name = "نظام الحافلات"
       pageRef = "/bus-system/"
       weight = 20
     [[languages.ar.menu.main]]
+      name = "الشركاء"
+      pageRef = "/partner/"
+      weight = 25
+    [[languages.ar.menu.main]]
+      name = "المساعدة"
+      pageRef = "/hilfe/"
+      weight = 35
+    [[languages.ar.menu.main]]
       name = "اتصل بنا"
       url = "mailto:blacksmith@forgeiec.io"
-      weight = 30
+      weight = 40
