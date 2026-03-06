@@ -1,0 +1,42 @@
+<!doctype html><html lang=ar dir=rtl><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Anvil | ForgeIEC</title>
+<meta name=description content="بيئة تطوير IEC 61131-3 للصناعة"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/ar/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/ar/features/ class=nav-link>الميزات</a>
+<a href=/ar/anvil/ class=nav-link>Anvil</a>
+<a href=/ar/bus-system/ class=nav-link>نظام الحافلات</a>
+<a href=/ar/partner/ class=nav-link>الشركاء</a>
+<a href=/ar/hilfe/ class=nav-link>المساعدة</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>اتصل بنا</a></nav><div class=lang-switch><a href=/anvil/ class=lang-link>de</a>
+<a href=/en/anvil/ class=lang-link>en</a>
+<a href=/fr/anvil/ class=lang-link>fr</a>
+<a href=/es/anvil/ class=lang-link>es</a>
+<a href=/zh/anvil/ class=lang-link>zh</a>
+<a href=/ja/anvil/ class=lang-link>ja</a>
+<a href=/tr/anvil/ class=lang-link>tr</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Anvil</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=السندان-قلب-كل-مسبك>السندان: قلب كل مسبك</h2><p>في كل مسبك، السندان هو القطعة المركزية — حيث يُشكّل المعدن ويُقسّى
+ويُصقل. <strong>Anvil</strong> هو الطبقة الوسيطة بين نظام تشغيل PLC وجسور ناقل
+الحقل. هنا تُصاغ بيانات العملية الخاصة بكم: تُستقبل وتُحوّل وتُوزّع
+إلى المستقبلين المناسبين.</p><p>Anvil مبني داخلياً على <strong>IceOryx2</strong> — إطار عمل ذاكرة مشتركة بدون نسخ
+للاتصال بين العمليات. بدون تسلسل، بدون نسخ، بدون تنازلات.</p><hr><h2 id=الهندسة-المعمارية>الهندسة المعمارية</h2><pre tabindex=0><code>┌──────────────┐         ┌────────────┐         ┌──────────────────┐
+│              │         │            │         │                  │
+│ برنامج PLC  │◄───────►│  forgeiecd  │◄───────►│  جسر Modbus      │──► أجهزة حقلية
+│  (كود IEC)   │  gRPC   │  (خادم)    │  Anvil  │  جسر EtherCAT    │──► محركات
+│              │         │            │ IceOryx2│  جسر Profibus     │──► حساسات
+└──────────────┘         └────────────┘         │  جسر OPC-UA      │──► SCADA
+                                                └──────────────────┘
+
+                         ◄── Anvil ──►
+                         IPC بدون نسخ
+                         ذاكرة مشتركة
+</code></pre><p>يتم تبادل البيانات بين <code>forgeiecd</code> وجسور البروتوكول عبر <strong>Anvil</strong> —
+قناة IPC عالية الأداء مبنية على ذاكرة IceOryx2 المشتركة.
+كل قطاع يحصل على قناة اتصال خاصة به.</p><hr><h2 id=لماذا-anvil>لماذا Anvil؟</h2><h3 id=زمن-استجابة-بالميكروثانية>زمن استجابة بالميكروثانية</h3><p>آليات IPC التقليدية (الأنابيب، المقابس، طوابير الرسائل) تنسخ البيانات
+بين العمليات. Anvil يلغي كل عملية نسخ. البيانات موجودة في الذاكرة
+المشتركة — المستقبل يقرأ مباشرة.</p><table><thead><tr><th>الطريقة</th><th>زمن الاستجابة النموذجي</th><th>عمليات النسخ</th></tr></thead><tbody><tr><td>مقبس TCP</td><td>50–200 ميكروثانية</td><td>2–4</td></tr><tr><td>مقبس Unix</td><td>10–50 ميكروثانية</td><td>2</td></tr><tr><td><strong>Anvil (IceOryx2)</strong></td><td><strong>&lt; 1 ميكروثانية</strong></td><td><strong>0</strong></td></tr></tbody></table><h3 id=جودة-صناعية>جودة صناعية</h3><ul><li>سلوك حتمي — بدون تخصيص ذاكرة ديناميكي في المسار الحرج</li><li>خوارزميات بدون قفل — بدون حظر، بدون طريق مسدود</li><li>نموذج نشر/اشتراك — اقتران فضفاض بين المنتج والمستهلك</li><li>إدارة دورة حياة تلقائية — الجسور تُراقب وتُعاد تشغيلها عند الانهيار</li></ul><h3 id=publishsubscribe-في-برنامج-iec>PUBLISH/SUBSCRIBE في برنامج IEC</h3><pre tabindex=0><code class=language-iec data-lang=iec>VAR_GLOBAL PUBLISH &#39;Motors&#39;
+    K1_Mains    AT %QX0.0 : BOOL;
+    K1_Speed    AT %QW10  : INT;
+END_VAR
+
+VAR_GLOBAL SUBSCRIBE &#39;Sensors&#39;
+    Temperature AT %IW0   : INT;
+    Pressure    AT %IW2   : INT;
+END_VAR
+</code></pre><hr><h2 id=البروتوكولات-المدعومة>البروتوكولات المدعومة</h2><table><thead><tr><th>البروتوكول</th><th>الجسر</th><th>الحالة</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td><code>forgeiec-modbustcp</code></td><td>متوفر</td></tr><tr><td><strong>Modbus RTU</strong></td><td><code>forgeiec-modbusrtu</code></td><td>متوفر</td></tr><tr><td><strong>EtherCAT</strong></td><td><code>forgeiec-ethercat</code></td><td>قيد التطوير</td></tr><tr><td><strong>Profibus DP</strong></td><td><code>forgeiec-profibus</code></td><td>قيد التطوير</td></tr><tr><td><strong>OPC-UA</strong></td><td><code>forgeiec-opcua</code></td><td>مخطط</td></tr></tbody></table><p>كل جسر يعمل كعملية مستقلة. <code>forgeiecd</code> يبدأ ويراقب ويعيد تشغيل
+الجسور تلقائياً.</p><hr><div style=text-align:center;padding:2rem><p><strong>Anvil — حيث تُصاغ البيانات إلى أوامر تحكم.</strong></p><p><a href=mailto:blacksmith@forgeiec.io>blacksmith@forgeiec.io</a></p></div></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>بيئة تطوير IEC 61131-3 للصناعة</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

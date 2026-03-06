@@ -1,0 +1,45 @@
+<!doctype html><html lang=de><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Anvil | ForgeIEC</title>
+<meta name=description content="IEC 61131-3 SPS-Entwicklungsumgebung fuer die Industrie"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/features/ class=nav-link>Funktionen</a>
+<a href=/anvil/ class=nav-link>Anvil</a>
+<a href=/bus-system/ class=nav-link>Bussystem</a>
+<a href=/partner/ class=nav-link>Partner</a>
+<a href=/hilfe/ class=nav-link>Hilfe</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>Kontakt</a></nav><div class=lang-switch><a href=/en/anvil/ class=lang-link>en</a>
+<a href=/fr/anvil/ class=lang-link>fr</a>
+<a href=/es/anvil/ class=lang-link>es</a>
+<a href=/zh/anvil/ class=lang-link>zh</a>
+<a href=/ja/anvil/ class=lang-link>ja</a>
+<a href=/tr/anvil/ class=lang-link>tr</a>
+<a href=/ar/anvil/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Anvil</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=der-amboss-herzstück-jeder-schmiede>Der Amboss: Herzstück jeder Schmiede</h2><p>In jeder Schmiede ist der Amboss das zentrale Werkstück — hier wird geformt,
+gehärtet und veredelt. <strong>Anvil</strong> ist die Zwischenschicht zwischen dem
+SPS-Laufzeitsystem und den Feldbus-Bridges. Hier werden Ihre Prozessdaten
+geschmiedet: empfangen, transformiert und an die richtigen Empfänger verteilt.</p><p>Anvil basiert intern auf <strong>IceOryx2</strong> — einem Zero-Copy Shared-Memory-Framework
+für inter-Prozess-Kommunikation. Keine Serialisierung, keine Kopien,
+keine Kompromisse.</p><hr><h2 id=architektur>Architektur</h2><pre tabindex=0><code>┌──────────────┐         ┌────────────┐         ┌──────────────────┐
+│              │         │            │         │                  │
+│ SPS-Programm │◄───────►│  forgeiecd  │◄───────►│  Modbus-Bridge   │──► Feldgeräte
+│  (IEC Code)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT-Bridge │──► Antriebe
+│              │         │            │ IceOryx2│  Profibus-Bridge  │──► Sensoren
+└──────────────┘         └────────────┘         │  OPC-UA-Bridge   │──► SCADA
+                                                └──────────────────┘
+
+                         ◄── Anvil ──►
+                         Zero-Copy IPC
+                         Shared Memory
+</code></pre><p>Der Datenaustausch zwischen <code>forgeiecd</code> und den Protocol-Bridges erfolgt
+über <strong>Anvil</strong> — einen hochperformanten IPC-Kanal auf Basis von IceOryx2
+Shared Memory. Jedes Segment erhält seinen eigenen Kommunikationskanal.</p><hr><h2 id=warum-anvil>Warum Anvil?</h2><h3 id=mikrosekunden-latenz>Mikrosekunden-Latenz</h3><p>Konventionelle IPC-Mechanismen (Pipes, Sockets, Message Queues) kopieren
+Daten zwischen Prozessen. Anvil eliminiert jede Kopie. Die Daten liegen
+in gemeinsamem Speicher — der Empfänger liest direkt.</p><table><thead><tr><th>Methode</th><th>Typische Latenz</th><th>Kopien</th></tr></thead><tbody><tr><td>TCP Socket</td><td>50–200 µs</td><td>2–4</td></tr><tr><td>Unix Socket</td><td>10–50 µs</td><td>2</td></tr><tr><td><strong>Anvil (IceOryx2)</strong></td><td><strong>&lt; 1 µs</strong></td><td><strong>0</strong></td></tr></tbody></table><h3 id=industriequalität>Industriequalität</h3><ul><li>Deterministisches Verhalten — keine dynamische Speicherallokation im Hot Path</li><li>Lock-freie Algorithmen — kein Blockieren, kein Deadlock</li><li>Publish/Subscribe-Modell — lose Kopplung zwischen Produzent und Konsument</li><li>Automatische Lebenszyklusverwaltung — Bridges werden überwacht und bei Absturz neu gestartet</li></ul><h3 id=publishsubscribe-im-iec-programm>PUBLISH/SUBSCRIBE im IEC-Programm</h3><p>Anvil integriert sich nahtlos in die IEC 61131-3 Programmierung:</p><pre tabindex=0><code class=language-iec data-lang=iec>VAR_GLOBAL PUBLISH &#39;Motoren&#39;
+    K1_Mains    AT %QX0.0 : BOOL;
+    K1_Speed    AT %QW10  : INT;
+END_VAR
+
+VAR_GLOBAL SUBSCRIBE &#39;Sensoren&#39;
+    Temperatur  AT %IW0   : INT;
+    Druck       AT %IW2   : INT;
+END_VAR
+</code></pre><p>Die PUBLISH/SUBSCRIBE-Schlüsselwörter sind eine ForgeIEC-Erweiterung des
+IEC 61131-3 Standards. Der Compiler erzeugt automatisch die IceOryx2-Anbindung.</p><hr><h2 id=unterstützte-protokolle>Unterstützte Protokolle</h2><p>Anvil verbindet das SPS-Programm mit allen industriellen Feldbussen:</p><table><thead><tr><th>Protokoll</th><th>Bridge</th><th>Status</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td><code>forgeiec-modbustcp</code></td><td>Verfügbar</td></tr><tr><td><strong>Modbus RTU</strong></td><td><code>forgeiec-modbusrtu</code></td><td>Verfügbar</td></tr><tr><td><strong>EtherCAT</strong></td><td><code>forgeiec-ethercat</code></td><td>In Entwicklung</td></tr><tr><td><strong>Profibus DP</strong></td><td><code>forgeiec-profibus</code></td><td>In Entwicklung</td></tr><tr><td><strong>OPC-UA</strong></td><td><code>forgeiec-opcua</code></td><td>Geplant</td></tr></tbody></table><p>Jede Bridge läuft als eigenständiger Prozess. <code>forgeiecd</code> startet, überwacht
+und restartet Bridges automatisch. Ein Absturz einer Bridge beeinträchtigt
+weder die SPS noch andere Bridges.</p><hr><h2 id=technische-details>Technische Details</h2><ul><li><strong>IPC-Framework</strong>: IceOryx2 (Eclipse iceoryx2, Zero-Copy Shared Memory)</li><li><strong>Architektur</strong>: Ein Publisher/Subscriber-Kanal pro Bus-Segment</li><li><strong>Datenformat</strong>: Rohe IEC-Variablen — keine Serialisierung, kein Overhead</li><li><strong>Plattformen</strong>: x86_64, ARM64, ARMv7 (Linux)</li><li><strong>Prozessmodell</strong>: Ein Bridge-Prozess pro aktivem Segment</li></ul><hr><div style=text-align:center;padding:2rem><p><strong>Anvil — Wo Daten zu Steuerbefehlen geschmiedet werden.</strong></p><p><a href=mailto:blacksmith@forgeiec.io>blacksmith@forgeiec.io</a></p></div></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>IEC 61131-3 SPS-Entwicklungsumgebung fuer die Industrie</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

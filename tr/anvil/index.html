@@ -1,0 +1,43 @@
+<!doctype html><html lang=tr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Anvil | ForgeIEC</title>
+<meta name=description content="Endüstri için IEC 61131-3 geliştirme ortamı"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/tr/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/tr/features/ class=nav-link>Özellikler</a>
+<a href=/tr/anvil/ class=nav-link>Anvil</a>
+<a href=/tr/bus-system/ class=nav-link>Bus Sistemi</a>
+<a href=/tr/partner/ class=nav-link>Ortaklar</a>
+<a href=/tr/hilfe/ class=nav-link>Yardım</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>İletişim</a></nav><div class=lang-switch><a href=/anvil/ class=lang-link>de</a>
+<a href=/en/anvil/ class=lang-link>en</a>
+<a href=/fr/anvil/ class=lang-link>fr</a>
+<a href=/es/anvil/ class=lang-link>es</a>
+<a href=/zh/anvil/ class=lang-link>zh</a>
+<a href=/ja/anvil/ class=lang-link>ja</a>
+<a href=/ar/anvil/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Anvil</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=oerues-her-demirci-ocaginin-kalbi>Oerues: Her Demirci Ocaginin Kalbi</h2><p>Her demirci ocaginda oerues merkezi parcadir — metal burada sekillenir,
+sertlestirilir ve islenir. <strong>Anvil</strong>, PLC calisma zamani ile saha yolu
+koepruelerinin arasindaki ara katmandir. Proses verileriniz burada
+doevueluer: alinir, doenuestuerueluer ve dogru alicilara dagitilir.</p><p>Anvil dahili olarak <strong>IceOryx2</strong> uezerine insa edilmistir — suerecler arasi
+iletisim icin sifir-kopyali paylasimli bellek cercevesi. Serializasyon yok,
+kopyalama yok, taviz yok.</p><hr><h2 id=mimari>Mimari</h2><pre tabindex=0><code>┌──────────────┐         ┌────────────┐         ┌──────────────────┐
+│              │         │            │         │                  │
+│ PLC Programi │◄───────►│  forgeiecd  │◄───────►│  Modbus Koeprue  │──► Saha Cihazlari
+│  (IEC Kodu)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT Koeprue│──► Sueruecueler
+│              │         │            │ IceOryx2│  Profibus Koeprue │──► Sensörler
+└──────────────┘         └────────────┘         │  OPC-UA Koeprue  │──► SCADA
+                                                └──────────────────┘
+
+                         ◄── Anvil ──►
+                         Sifir-Kopya IPC
+                         Paylasimli Bellek
+</code></pre><p><code>forgeiecd</code> ile protokol koepruelerinin arasindaki veri degisimi <strong>Anvil</strong>
+uezerinden gerceklesir — IceOryx2 paylasimli bellek tabanli yuesek
+performansli bir IPC kanali.</p><hr><h2 id=neden-anvil>Neden Anvil?</h2><h3 id=mikrosaniye-gecikme>Mikrosaniye Gecikme</h3><p>Geleneksel IPC mekanizmalari (pipe, soket, mesaj kuyruklari) suerecler
+arasinda veri kopyalar. Anvil tuem kopyalamayi ortadan kaldirir.
+Veriler paylasimli bellekte bulunur — alici dogrudan okur.</p><table><thead><tr><th>Yoentem</th><th>Tipik Gecikme</th><th>Kopyalar</th></tr></thead><tbody><tr><td>TCP Soket</td><td>50–200 us</td><td>2–4</td></tr><tr><td>Unix Soket</td><td>10–50 us</td><td>2</td></tr><tr><td><strong>Anvil (IceOryx2)</strong></td><td><strong>&lt; 1 us</strong></td><td><strong>0</strong></td></tr></tbody></table><h3 id=enduestri-kalitesi>Enduestri Kalitesi</h3><ul><li>Deterministik davranis — kritik yolda dinamik bellek tahsisi yok</li><li>Kilitsiz algoritmalar — engelleme yok, deadlock yok</li><li>Publish/subscribe modeli — ueretici ve tueketici arasinda gevsek baglanti</li><li>Otomatik yasam doenguesue yoenetimi — koeprueler izlenir ve coekme durumunda yeniden baslatilir</li></ul><h3 id=iec-programinda-publishsubscribe>IEC Programinda PUBLISH/SUBSCRIBE</h3><pre tabindex=0><code class=language-iec data-lang=iec>VAR_GLOBAL PUBLISH &#39;Motors&#39;
+    K1_Mains    AT %QX0.0 : BOOL;
+    K1_Speed    AT %QW10  : INT;
+END_VAR
+
+VAR_GLOBAL SUBSCRIBE &#39;Sensors&#39;
+    Temperature AT %IW0   : INT;
+    Pressure    AT %IW2   : INT;
+END_VAR
+</code></pre><hr><h2 id=desteklenen-protokoller>Desteklenen Protokoller</h2><table><thead><tr><th>Protokol</th><th>Koeprue</th><th>Durum</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td><code>forgeiec-modbustcp</code></td><td>Mevcut</td></tr><tr><td><strong>Modbus RTU</strong></td><td><code>forgeiec-modbusrtu</code></td><td>Mevcut</td></tr><tr><td><strong>EtherCAT</strong></td><td><code>forgeiec-ethercat</code></td><td>Gelistirme asamasinda</td></tr><tr><td><strong>Profibus DP</strong></td><td><code>forgeiec-profibus</code></td><td>Gelistirme asamasinda</td></tr><tr><td><strong>OPC-UA</strong></td><td><code>forgeiec-opcua</code></td><td>Planli</td></tr></tbody></table><p>Her koeprue bagimsiz bir suerec olarak calisir. <code>forgeiecd</code> koepruelerini
+otomatik olarak baslatir, izler ve yeniden baslatir.</p><hr><div style=text-align:center;padding:2rem><p><strong>Anvil — Verilerin kontrol komutlarina doevueldugu yer.</strong></p><p><a href=mailto:blacksmith@forgeiec.io>blacksmith@forgeiec.io</a></p></div></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>Endüstri için IEC 61131-3 geliştirme ortamı</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

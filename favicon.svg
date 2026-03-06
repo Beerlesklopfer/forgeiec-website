@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <!-- Gradient for anvil body -->
+    <linearGradient id="anvilGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a5a5a"/>
+      <stop offset="50%" stop-color="#3d3d3d"/>
+      <stop offset="100%" stop-color="#2a2a2a"/>
+    </linearGradient>
+    <!-- Gradient for anvil top face -->
+    <linearGradient id="anvilTopGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6e6e6e"/>
+      <stop offset="100%" stop-color="#555555"/>
+    </linearGradient>
+    <!-- Gradient for hammer head -->
+    <linearGradient id="hammerHeadGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#606060"/>
+      <stop offset="50%" stop-color="#444444"/>
+      <stop offset="100%" stop-color="#333333"/>
+    </linearGradient>
+    <!-- Gradient for hammer handle -->
+    <linearGradient id="handleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8B6914"/>
+      <stop offset="30%" stop-color="#C49A3C"/>
+      <stop offset="70%" stop-color="#A67C2E"/>
+      <stop offset="100%" stop-color="#7A5C10"/>
+    </linearGradient>
+    <!-- Glow filter for sparks -->
+    <filter id="sparkGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Subtle glow for hot impact zone -->
+    <radialGradient id="impactGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FF8C00" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#FF6600" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FF4500" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ==================== ANVIL ==================== -->
+
+  <!-- Anvil base / pedestal -->
+  <path d="M80,210 L176,210 L170,235 Q168,242 160,242 L96,242 Q88,242 86,235 Z"
+        fill="#2a2a2a" stroke="#222" stroke-width="1"/>
+
+  <!-- Anvil body - the waist -->
+  <path d="M90,180 L166,180 L172,210 L84,210 Z"
+        fill="url(#anvilGrad)" stroke="#222" stroke-width="1"/>
+
+  <!-- Anvil face - the wide top working surface -->
+  <path d="M42,155 L214,155 L214,180 Q214,184 210,184 L180,184
+           L166,180 L90,180 L76,184 L46,184 Q42,184 42,180 Z"
+        fill="url(#anvilGrad)" stroke="#222" stroke-width="1"/>
+
+  <!-- Anvil top face (flat working surface) -->
+  <rect x="42" y="148" width="172" height="10" rx="2" ry="2"
+        fill="url(#anvilTopGrad)" stroke="#222" stroke-width="1"/>
+
+  <!-- Anvil horn (the pointed end on the left) -->
+  <path d="M42,155 L42,164 L16,170 Q10,171 10,167 L10,162 Q10,158 16,157 L42,152 Z"
+        fill="url(#anvilGrad)" stroke="#222" stroke-width="1"/>
+
+  <!-- Anvil hardy hole (small square on top) -->
+  <rect x="175" y="148" width="8" height="6" rx="1" fill="#1a1a1a"/>
+
+  <!-- Anvil pritchel hole -->
+  <circle cx="195" cy="152" r="3" fill="#1a1a1a"/>
+
+  <!-- Highlight on anvil face -->
+  <rect x="50" y="149" width="150" height="2" rx="1" fill="#777" opacity="0.4"/>
+
+  <!-- ==================== HAMMER ==================== -->
+
+  <!-- Hammer handle - angled, coming from upper right -->
+  <rect x="108" y="28" width="12" height="80" rx="3" ry="3"
+        fill="url(#handleGrad)" stroke="#5C3D0E" stroke-width="1"
+        transform="rotate(-20, 128, 90)"/>
+
+  <!-- Hammer head -->
+  <g transform="rotate(-20, 128, 90)">
+    <!-- Main hammer head block -->
+    <rect x="88" y="22" width="52" height="22" rx="3" ry="3"
+          fill="url(#hammerHeadGrad)" stroke="#222" stroke-width="1"/>
+    <!-- Hammer head face (striking surface) highlight -->
+    <rect x="88" y="22" width="5" height="22" rx="2" ry="2" fill="#555"/>
+    <!-- Peen end highlight -->
+    <rect x="135" y="24" width="5" height="18" rx="2" ry="2" fill="#555"/>
+    <!-- Top edge highlight -->
+    <rect x="90" y="22" width="48" height="3" rx="1" fill="#666" opacity="0.5"/>
+  </g>
+
+  <!-- ==================== IMPACT GLOW ==================== -->
+  <ellipse cx="128" cy="148" rx="30" ry="12" fill="url(#impactGlow)"/>
+
+  <!-- ==================== SPARKS / CODE FRAGMENTS ==================== -->
+
+  <!-- Spark particles (small dots flying outward) -->
+  <g filter="url(#sparkGlow)">
+    <!-- Left side sparks -->
+    <circle cx="75" cy="125" r="2.5" fill="#FFB020" opacity="0.9"/>
+    <circle cx="60" cy="118" r="2" fill="#FFCC44" opacity="0.8"/>
+    <circle cx="85" cy="110" r="1.8" fill="#FF9500" opacity="0.85"/>
+    <circle cx="68" cy="132" r="1.5" fill="#FFD060" opacity="0.7"/>
+    <circle cx="52" cy="128" r="1.2" fill="#FFAA30" opacity="0.6"/>
+
+    <!-- Right side sparks -->
+    <circle cx="181" cy="122" r="2.5" fill="#FFB020" opacity="0.9"/>
+    <circle cx="196" cy="115" r="2" fill="#FFCC44" opacity="0.8"/>
+    <circle cx="171" cy="108" r="1.8" fill="#FF9500" opacity="0.85"/>
+    <circle cx="188" cy="130" r="1.5" fill="#FFD060" opacity="0.7"/>
+    <circle cx="204" cy="126" r="1.2" fill="#FFAA30" opacity="0.6"/>
+
+    <!-- Upper sparks -->
+    <circle cx="110" cy="118" r="1.5" fill="#FFCC44" opacity="0.7"/>
+    <circle cx="146" cy="116" r="1.5" fill="#FFCC44" opacity="0.7"/>
+    <circle cx="128" cy="112" r="1.8" fill="#FFB020" opacity="0.6"/>
+  </g>
+
+  <!-- Spark trails (small lines showing motion) -->
+  <g stroke="#FF9500" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+    <line x1="78" y1="127" x2="72" y2="122"/>
+    <line x1="63" y1="120" x2="56" y2="114"/>
+    <line x1="178" y1="124" x2="184" y2="119"/>
+    <line x1="193" y1="117" x2="200" y2="111"/>
+  </g>
+
+  <!-- ==================== IEC CODE FRAGMENTS ==================== -->
+  <!-- Code text fragments flying outward like sparks from the impact point -->
+
+  <g font-family="'Consolas','Monaco','Courier New',monospace" font-weight="bold" filter="url(#sparkGlow)">
+    <!-- "IF" - flying upper left -->
+    <text x="56" y="106" font-size="14" fill="#FFA030" opacity="0.95"
+          transform="rotate(-25, 56, 106)">IF</text>
+
+    <!-- ":=" - flying left -->
+    <text x="42" y="140" font-size="12" fill="#FFB848" opacity="0.85"
+          transform="rotate(-10, 42, 140)">:=</text>
+
+    <!-- "END" - flying upper right -->
+    <text x="186" y="102" font-size="13" fill="#FFA030" opacity="0.95"
+          transform="rotate(20, 186, 102)">END</text>
+
+    <!-- "VAR" - flying right -->
+    <text x="200" y="138" font-size="11" fill="#FFB848" opacity="0.85"
+          transform="rotate(12, 200, 138)">VAR</text>
+
+    <!-- "FB" - flying up center-left -->
+    <text x="96" y="98" font-size="11" fill="#FFCC55" opacity="0.8"
+          transform="rotate(-15, 96, 98)">FB</text>
+
+    <!-- ";" - small fragment upper right -->
+    <text x="168" y="96" font-size="13" fill="#FFCC55" opacity="0.75"
+          transform="rotate(8, 168, 96)">;</text>
+
+    <!-- "ST" - flying up -->
+    <text x="132" y="92" font-size="12" fill="#FFD060" opacity="0.7"
+          transform="rotate(5, 132, 92)">ST</text>
+  </g>
+
+  <!-- ==================== SUBTLE BACKGROUND CIRCLE ==================== -->
+  <!-- Optional: faint circle behind to help with icon readability at small sizes -->
+  <!--
+  <circle cx="128" cy="140" r="120" fill="none" stroke="#444" stroke-width="1" opacity="0.15"/>
+  -->
+
+</svg>

@@ -1,0 +1,44 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Anvil | ForgeIEC</title>
+<meta name=description content="IEC 61131-3 PLC Development Environment for Industry"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/en/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/en/features/ class=nav-link>Features</a>
+<a href=/en/anvil/ class=nav-link>Anvil</a>
+<a href=/en/bus-system/ class=nav-link>Bus System</a>
+<a href=/en/partner/ class=nav-link>Partners</a>
+<a href=/en/hilfe/ class=nav-link>Help</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>Contact</a></nav><div class=lang-switch><a href=/anvil/ class=lang-link>de</a>
+<a href=/fr/anvil/ class=lang-link>fr</a>
+<a href=/es/anvil/ class=lang-link>es</a>
+<a href=/zh/anvil/ class=lang-link>zh</a>
+<a href=/ja/anvil/ class=lang-link>ja</a>
+<a href=/tr/anvil/ class=lang-link>tr</a>
+<a href=/ar/anvil/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Anvil</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=the-anvil-heart-of-every-forge>The Anvil: Heart of Every Forge</h2><p>In every forge, the anvil is the central workpiece — where metal is shaped,
+hardened and refined. <strong>Anvil</strong> is the intermediate layer between the
+PLC runtime and the fieldbus bridges. This is where your process data
+is forged: received, transformed and distributed to the right recipients.</p><p>Anvil is built on <strong>IceOryx2</strong> internally — a zero-copy shared memory framework
+for inter-process communication. No serialization, no copies, no compromises.</p><hr><h2 id=architecture>Architecture</h2><pre tabindex=0><code>┌──────────────┐         ┌────────────┐         ┌──────────────────┐
+│              │         │            │         │                  │
+│ PLC Program  │◄───────►│  forgeiecd  │◄───────►│  Modbus Bridge   │──► Field Devices
+│  (IEC Code)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT Bridge │──► Drives
+│              │         │            │ IceOryx2│  Profibus Bridge  │──► Sensors
+└──────────────┘         └────────────┘         │  OPC-UA Bridge   │──► SCADA
+                                                └──────────────────┘
+
+                         ◄── Anvil ──►
+                         Zero-Copy IPC
+                         Shared Memory
+</code></pre><p>Data exchange between <code>forgeiecd</code> and the protocol bridges runs through
+<strong>Anvil</strong> — a high-performance IPC channel based on IceOryx2 shared memory.
+Each segment gets its own communication channel.</p><hr><h2 id=why-anvil>Why Anvil?</h2><h3 id=microsecond-latency>Microsecond Latency</h3><p>Conventional IPC mechanisms (pipes, sockets, message queues) copy data
+between processes. Anvil eliminates every copy. The data resides in shared
+memory — the receiver reads directly.</p><table><thead><tr><th>Method</th><th>Typical Latency</th><th>Copies</th></tr></thead><tbody><tr><td>TCP Socket</td><td>50–200 us</td><td>2–4</td></tr><tr><td>Unix Socket</td><td>10–50 us</td><td>2</td></tr><tr><td><strong>Anvil (IceOryx2)</strong></td><td><strong>&lt; 1 us</strong></td><td><strong>0</strong></td></tr></tbody></table><h3 id=industrial-grade>Industrial Grade</h3><ul><li>Deterministic behavior — no dynamic memory allocation in the hot path</li><li>Lock-free algorithms — no blocking, no deadlocks</li><li>Publish/subscribe model — loose coupling between producer and consumer</li><li>Automatic lifecycle management — bridges are monitored and restarted on crash</li></ul><h3 id=publishsubscribe-in-the-iec-program>PUBLISH/SUBSCRIBE in the IEC Program</h3><p>Anvil integrates seamlessly into IEC 61131-3 programming:</p><pre tabindex=0><code class=language-iec data-lang=iec>VAR_GLOBAL PUBLISH &#39;Motors&#39;
+    K1_Mains    AT %QX0.0 : BOOL;
+    K1_Speed    AT %QW10  : INT;
+END_VAR
+
+VAR_GLOBAL SUBSCRIBE &#39;Sensors&#39;
+    Temperature AT %IW0   : INT;
+    Pressure    AT %IW2   : INT;
+END_VAR
+</code></pre><p>The PUBLISH/SUBSCRIBE keywords are a ForgeIEC extension to the IEC 61131-3
+standard. The compiler automatically generates the IceOryx2 bindings.</p><hr><h2 id=supported-protocols>Supported Protocols</h2><p>Anvil connects the PLC program to all industrial fieldbuses:</p><table><thead><tr><th>Protocol</th><th>Bridge</th><th>Status</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td><code>forgeiec-modbustcp</code></td><td>Available</td></tr><tr><td><strong>Modbus RTU</strong></td><td><code>forgeiec-modbusrtu</code></td><td>Available</td></tr><tr><td><strong>EtherCAT</strong></td><td><code>forgeiec-ethercat</code></td><td>In Development</td></tr><tr><td><strong>Profibus DP</strong></td><td><code>forgeiec-profibus</code></td><td>In Development</td></tr><tr><td><strong>OPC-UA</strong></td><td><code>forgeiec-opcua</code></td><td>Planned</td></tr></tbody></table><p>Each bridge runs as an independent process. <code>forgeiecd</code> starts, monitors
+and restarts bridges automatically. A bridge crash affects neither the PLC
+nor other bridges.</p><hr><h2 id=technical-details>Technical Details</h2><ul><li><strong>IPC Framework</strong>: IceOryx2 (Eclipse iceoryx2, zero-copy shared memory)</li><li><strong>Architecture</strong>: One publisher/subscriber channel per bus segment</li><li><strong>Data Format</strong>: Raw IEC variables — no serialization, no overhead</li><li><strong>Platforms</strong>: x86_64, ARM64, ARMv7 (Linux)</li><li><strong>Process Model</strong>: One bridge process per active segment</li></ul><hr><div style=text-align:center;padding:2rem><p><strong>Anvil — Where data is forged into control commands.</strong></p><p><a href=mailto:blacksmith@forgeiec.io>blacksmith@forgeiec.io</a></p></div></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>IEC 61131-3 PLC Development Environment for Industry</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

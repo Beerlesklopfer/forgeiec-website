@@ -1,0 +1,26 @@
+<!doctype html><html lang=ar dir=rtl><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>نظام الحافلات | ForgeIEC</title>
+<meta name=description content="بيئة تطوير IEC 61131-3 للصناعة"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/ar/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/ar/features/ class=nav-link>الميزات</a>
+<a href=/ar/anvil/ class=nav-link>Anvil</a>
+<a href=/ar/bus-system/ class=nav-link>نظام الحافلات</a>
+<a href=/ar/partner/ class=nav-link>الشركاء</a>
+<a href=/ar/hilfe/ class=nav-link>المساعدة</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>اتصل بنا</a></nav><div class=lang-switch><a href=/bus-system/ class=lang-link>de</a>
+<a href=/en/bus-system/ class=lang-link>en</a>
+<a href=/fr/bus-system/ class=lang-link>fr</a>
+<a href=/es/bus-system/ class=lang-link>es</a>
+<a href=/zh/bus-system/ class=lang-link>zh</a>
+<a href=/ja/bus-system/ class=lang-link>ja</a>
+<a href=/tr/bus-system/ class=lang-link>tr</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>نظام الحافلات</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=إدارة-هرمية-لنظام-الحافلات>إدارة هرمية لنظام الحافلات</h2><p>ينظم ForgeIEC الاتصالات الصناعية في هيكل شرائح
+متوافق مع CoDeSys:</p><pre tabindex=0><code>أنظمة الحافلات
++-- Modbus TCP: القاعة 1 (eth0) [نشط]
+|   +-- 192.168.1.100 -- وحدة الحرارة (Slave 1)
+|   |   +-- الحرارة : INT (%IW0)
+|   |   +-- القيمة_المرجعية : INT (%QW10)
+|   +-- 192.168.1.101 -- المضخة (Slave 2)
++-- Modbus RTU: المختبر (/dev/ttyUSB0)
++-- غير مخصص (مجموعة الماسح)
+    +-- 192.168.2.55 -- غير معروف
+</code></pre><h2 id=البروتوكولات-المدعومة>البروتوكولات المدعومة</h2><table><thead><tr><th>البروتوكول</th><th>الوسط</th><th>مجال الاستخدام</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td>إيثرنت</td><td>أتمتة المباني، تقنية العمليات</td></tr><tr><td><strong>Modbus RTU</strong></td><td>RS-485 (تسلسلي)</td><td>أجهزة الاستشعار، الأجهزة الميدانية البسيطة</td></tr><tr><td><strong>EtherCAT</strong></td><td>إيثرنت (الوقت الفعلي)</td><td>التحكم في الحركة، المدخلات/المخرجات السريعة</td></tr><tr><td><strong>Profibus DP</strong></td><td>تسلسلي (حافلة ميدانية)</td><td>أتمتة التصنيع</td></tr></tbody></table><h2 id=تعيين-العناوين-التلقائي>تعيين العناوين التلقائي</h2><p>يتم تعيين عناوين IEC (<code>%IX</code>، <code>%QW</code>، <code>%MD</code> إلخ) عالمياً وبدون تعارض.
+يتم مراعاة العناوين الحالية في قوائم المتغيرات العامة.</p><h2 id=اكتشاف-الأجهزة>اكتشاف الأجهزة</h2><p>يكتشف الماسح الشبكي المدمج الأجهزة المتوافقة مع Modbus تلقائياً.
+يمكن تخصيص الأجهزة المكتشفة مباشرة لشريحة.</p><h2 id=تتبع-التغييرات>تتبع التغييرات</h2><p>يتم عرض التغييرات في متغيرات الحافلة في حوار فروقات واضح
+قبل نقلها إلى نظام التشغيل. يحتفظ المستخدم بالسيطرة الكاملة.</p></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>بيئة تطوير IEC 61131-3 للصناعة</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

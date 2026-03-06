@@ -1,0 +1,45 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Anvil | ForgeIEC</title>
+<meta name=description content="IEC 61131-3 産業用開発環境"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/ja/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/ja/features/ class=nav-link>機能</a>
+<a href=/ja/anvil/ class=nav-link>Anvil</a>
+<a href=/ja/bus-system/ class=nav-link>バスシステム</a>
+<a href=/ja/partner/ class=nav-link>パートナー</a>
+<a href=/ja/hilfe/ class=nav-link>ヘルプ</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>お問い合わせ</a></nav><div class=lang-switch><a href=/anvil/ class=lang-link>de</a>
+<a href=/en/anvil/ class=lang-link>en</a>
+<a href=/fr/anvil/ class=lang-link>fr</a>
+<a href=/es/anvil/ class=lang-link>es</a>
+<a href=/zh/anvil/ class=lang-link>zh</a>
+<a href=/tr/anvil/ class=lang-link>tr</a>
+<a href=/ar/anvil/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Anvil</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=アンビル鍛冶場の心臓部>アンビル：鍛冶場の心臓部</h2><p>すべての鍛冶場において、アンビル（金床）は中心的な存在です——
+ここで金属が形作られ、焼き入れされ、精錬されます。<strong>Anvil</strong> は
+PLCランタイムとフィールドバスブリッジの間の中間層です。
+プロセスデータはここで鍛造されます：受信、変換、そして適切な
+受信者への配信。</p><p>Anvilは内部的に <strong>IceOryx2</strong> 上に構築されています——プロセス間通信のための
+ゼロコピー共有メモリフレームワークです。シリアライゼーションなし、
+コピーなし、妥協なし。</p><hr><h2 id=アーキテクチャ>アーキテクチャ</h2><pre tabindex=0><code>┌──────────────┐         ┌────────────┐         ┌──────────────────┐
+│              │         │            │         │                  │
+│ PLCプログラム │◄───────►│  forgeiecd  │◄───────►│  Modbusブリッジ   │──► フィールド機器
+│  (IECコード)  │  gRPC   │ (デーモン)  │  Anvil  │  EtherCATブリッジ  │──► ドライブ
+│              │         │            │ IceOryx2│  Profibusブリッジ   │──► センサー
+└──────────────┘         └────────────┘         │  OPC-UAブリッジ    │──► SCADA
+                                                └──────────────────┘
+
+                         ◄── Anvil ──►
+                         ゼロコピー IPC
+                         共有メモリ
+</code></pre><p><code>forgeiecd</code> とプロトコルブリッジ間のデータ交換は <strong>Anvil</strong> を通じて行われます——
+IceOryx2共有メモリに基づく高性能IPCチャネルです。
+各セグメントに独自の通信チャネルが割り当てられます。</p><hr><h2 id=なぜanvilか>なぜAnvilか？</h2><h3 id=マイクロ秒レベルの遅延>マイクロ秒レベルの遅延</h3><p>従来のIPCメカニズム（パイプ、ソケット、メッセージキュー）はプロセス間で
+データをコピーします。Anvilはすべてのコピーを排除します。データは共有メモリ
+に常駐し、受信側が直接読み取ります。</p><table><thead><tr><th>方式</th><th>典型的な遅延</th><th>コピー回数</th></tr></thead><tbody><tr><td>TCPソケット</td><td>50–200 マイクロ秒</td><td>2–4</td></tr><tr><td>Unixソケット</td><td>10–50 マイクロ秒</td><td>2</td></tr><tr><td><strong>Anvil (IceOryx2)</strong></td><td><strong>&lt; 1 マイクロ秒</strong></td><td><strong>0</strong></td></tr></tbody></table><h3 id=産業グレード>産業グレード</h3><ul><li>決定論的動作——ホットパスでの動的メモリ割り当てなし</li><li>ロックフリーアルゴリズム——ブロッキングなし、デッドロックなし</li><li>Publish/Subscribeモデル——プロデューサーとコンシューマーの疎結合</li><li>自動ライフサイクル管理——ブリッジは監視され、クラッシュ時に自動再起動</li></ul><h3 id=iecプログラムでのpublishsubscribe>IECプログラムでのPUBLISH/SUBSCRIBE</h3><pre tabindex=0><code class=language-iec data-lang=iec>VAR_GLOBAL PUBLISH &#39;Motors&#39;
+    K1_Mains    AT %QX0.0 : BOOL;
+    K1_Speed    AT %QW10  : INT;
+END_VAR
+
+VAR_GLOBAL SUBSCRIBE &#39;Sensors&#39;
+    Temperature AT %IW0   : INT;
+    Pressure    AT %IW2   : INT;
+END_VAR
+</code></pre><p>PUBLISH/SUBSCRIBEキーワードはForgeIECによるIEC 61131-3標準の拡張です。
+コンパイラがIceOryx2バインディングを自動生成します。</p><hr><h2 id=サポートされるプロトコル>サポートされるプロトコル</h2><table><thead><tr><th>プロトコル</th><th>ブリッジ</th><th>ステータス</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td><code>forgeiec-modbustcp</code></td><td>利用可能</td></tr><tr><td><strong>Modbus RTU</strong></td><td><code>forgeiec-modbusrtu</code></td><td>利用可能</td></tr><tr><td><strong>EtherCAT</strong></td><td><code>forgeiec-ethercat</code></td><td>開発中</td></tr><tr><td><strong>Profibus DP</strong></td><td><code>forgeiec-profibus</code></td><td>開発中</td></tr><tr><td><strong>OPC-UA</strong></td><td><code>forgeiec-opcua</code></td><td>計画中</td></tr></tbody></table><p>各ブリッジは独立したプロセスとして動作します。<code>forgeiecd</code> がブリッジの
+起動、監視、自動再起動を管理します。</p><hr><div style=text-align:center;padding:2rem><p><strong>Anvil——データが制御コマンドに鍛造される場所。</strong></p><p><a href=mailto:blacksmith@forgeiec.io>blacksmith@forgeiec.io</a></p></div></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>IEC 61131-3 産業用開発環境</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

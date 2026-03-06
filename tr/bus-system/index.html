@@ -1,0 +1,26 @@
+<!doctype html><html lang=tr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Bus Sistemi | ForgeIEC</title>
+<meta name=description content="Endüstri için IEC 61131-3 geliştirme ortamı"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/tr/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/tr/features/ class=nav-link>Özellikler</a>
+<a href=/tr/anvil/ class=nav-link>Anvil</a>
+<a href=/tr/bus-system/ class=nav-link>Bus Sistemi</a>
+<a href=/tr/partner/ class=nav-link>Ortaklar</a>
+<a href=/tr/hilfe/ class=nav-link>Yardım</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>İletişim</a></nav><div class=lang-switch><a href=/bus-system/ class=lang-link>de</a>
+<a href=/en/bus-system/ class=lang-link>en</a>
+<a href=/fr/bus-system/ class=lang-link>fr</a>
+<a href=/es/bus-system/ class=lang-link>es</a>
+<a href=/zh/bus-system/ class=lang-link>zh</a>
+<a href=/ja/bus-system/ class=lang-link>ja</a>
+<a href=/ar/bus-system/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Bus Sistemi</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=hiyerarşik-bus-sistemi-yönetimi>Hiyerarşik Bus Sistemi Yönetimi</h2><p>ForgeIEC, endüstriyel iletişimi CoDeSys uyumlu bir segment
+hiyerarşisinde organize eder:</p><pre tabindex=0><code>Bus Sistemleri
++-- Modbus TCP: Salon 1 (eth0) [aktif]
+|   +-- 192.168.1.100 -- Sıcaklık Modülü (Slave 1)
+|   |   +-- Sicaklik : INT (%IW0)
+|   |   +-- Ayar_Degeri : INT (%QW10)
+|   +-- 192.168.1.101 -- Pompa (Slave 2)
++-- Modbus RTU: Laboratuvar (/dev/ttyUSB0)
++-- Atanmamış (Tarayıcı Havuzu)
+    +-- 192.168.2.55 -- Bilinmeyen
+</code></pre><h2 id=desteklenen-protokoller>Desteklenen Protokoller</h2><table><thead><tr><th>Protokol</th><th>Ortam</th><th>Kullanım Alanı</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td>Ethernet</td><td>Bina otomasyonu, proses teknolojisi</td></tr><tr><td><strong>Modbus RTU</strong></td><td>RS-485 (seri)</td><td>Sensörler, basit alan cihazları</td></tr><tr><td><strong>EtherCAT</strong></td><td>Ethernet (gerçek zamanlı)</td><td>Hareket kontrolü, hızlı G/Ç</td></tr><tr><td><strong>Profibus DP</strong></td><td>Seri (alan veriyolu)</td><td>Üretim otomasyonu</td></tr></tbody></table><h2 id=otomatik-adres-ataması>Otomatik Adres Ataması</h2><p>IEC adresleri (<code>%IX</code>, <code>%QW</code>, <code>%MD</code> vb.) global ve çakışmasız atanır.
+Global değişken listelerindeki mevcut adresler dikkate alınır.</p><h2 id=cihaz-keşfi>Cihaz Keşfi</h2><p>Entegre ağ tarayıcı, Modbus uyumlu cihazları otomatik olarak keşfeder.
+Bulunan cihazlar doğrudan bir segmente atanabilir.</p><h2 id=değişiklik-izleme>Değişiklik İzleme</h2><p>Bus değişkenlerindeki değişiklikler, çalışma zamanı sistemine aktarılmadan
+önce açık bir fark diyaloğunda gösterilir. Kullanıcı tam kontrolü elinde tutar.</p></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>Endüstri için IEC 61131-3 geliştirme ortamı</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

@@ -1,0 +1,26 @@
+<!doctype html><html lang=es><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Bus System | ForgeIEC</title>
+<meta name=description content="Entorno de desarrollo IEC 61131-3 para la industria"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/es/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/es/features/ class=nav-link>Funciones</a>
+<a href=/es/anvil/ class=nav-link>Anvil</a>
+<a href=/es/bus-system/ class=nav-link>Sistema de bus</a>
+<a href=/es/partner/ class=nav-link>Socios</a>
+<a href=/es/hilfe/ class=nav-link>Ayuda</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>Contacto</a></nav><div class=lang-switch><a href=/bus-system/ class=lang-link>de</a>
+<a href=/en/bus-system/ class=lang-link>en</a>
+<a href=/fr/bus-system/ class=lang-link>fr</a>
+<a href=/zh/bus-system/ class=lang-link>zh</a>
+<a href=/ja/bus-system/ class=lang-link>ja</a>
+<a href=/tr/bus-system/ class=lang-link>tr</a>
+<a href=/ar/bus-system/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Bus System</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=hierarchical-bus-system-management>Hierarchical Bus System Management</h2><p>ForgeIEC organizes industrial communication in a CoDeSys-compatible
+segment hierarchy:</p><pre tabindex=0><code>Bus Systems
++-- Modbus TCP: Hall 1 (eth0) [enabled]
+|   +-- 192.168.1.100 -- Temp Module (Slave 1)
+|   |   +-- Temperature : INT (%IW0)
+|   |   +-- Setpoint : INT (%QW10)
+|   +-- 192.168.1.101 -- Pump (Slave 2)
++-- Modbus RTU: Lab (/dev/ttyUSB0)
++-- Unassigned (Scanner Pool)
+    +-- 192.168.2.55 -- Unknown
+</code></pre><h2 id=supported-protocols>Supported Protocols</h2><table><thead><tr><th>Protocol</th><th>Medium</th><th>Application</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td>Ethernet</td><td>Building automation, process control</td></tr><tr><td><strong>Modbus RTU</strong></td><td>RS-485 (serial)</td><td>Sensors, simple field devices</td></tr><tr><td><strong>EtherCAT</strong></td><td>Ethernet (real-time)</td><td>Motion control, fast I/O</td></tr><tr><td><strong>Profibus DP</strong></td><td>Serial (fieldbus)</td><td>Manufacturing automation</td></tr></tbody></table><h2 id=automatic-address-assignment>Automatic Address Assignment</h2><p>IEC addresses (<code>%IX</code>, <code>%QW</code>, <code>%MD</code> etc.) are assigned globally without
+collisions. Existing addresses in global variable lists are respected.</p><h2 id=device-discovery>Device Discovery</h2><p>The integrated network scanner automatically detects Modbus-capable devices.
+Discovered devices can be directly assigned to a segment.</p><h2 id=change-tracking>Change Tracking</h2><p>Changes to bus variables are displayed in a clear diff dialog before being
+transferred to the runtime system. The user retains full control.</p></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>Entorno de desarrollo IEC 61131-3 para la industria</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

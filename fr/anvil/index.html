@@ -1,0 +1,45 @@
+<!doctype html><html lang=fr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Anvil | ForgeIEC</title>
+<meta name=description content="Environnement de developpement IEC 61131-3 pour l'industrie"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/fr/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/fr/features/ class=nav-link>Fonctionnalites</a>
+<a href=/fr/anvil/ class=nav-link>Anvil</a>
+<a href=/fr/bus-system/ class=nav-link>Bus de terrain</a>
+<a href=/fr/partner/ class=nav-link>Partenaires</a>
+<a href=/fr/hilfe/ class=nav-link>Aide</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>Contact</a></nav><div class=lang-switch><a href=/anvil/ class=lang-link>de</a>
+<a href=/en/anvil/ class=lang-link>en</a>
+<a href=/es/anvil/ class=lang-link>es</a>
+<a href=/zh/anvil/ class=lang-link>zh</a>
+<a href=/ja/anvil/ class=lang-link>ja</a>
+<a href=/tr/anvil/ class=lang-link>tr</a>
+<a href=/ar/anvil/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Anvil</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=lenclume--coeur-de-chaque-forge>L&rsquo;Enclume : Coeur de chaque forge</h2><p>Dans chaque forge, l&rsquo;enclume est la piece maitresse — la ou le metal est
+faconne, trempe et affine. <strong>Anvil</strong> est la couche intermediaire entre le
+systeme d&rsquo;execution de l&rsquo;automate et les bridges de bus de terrain. C&rsquo;est
+ici que vos donnees de processus sont forgees : recues, transformees et
+distribuees aux bons destinataires.</p><p>Anvil est construit sur <strong>IceOryx2</strong> en interne — un framework de memoire
+partagee zero-copie pour la communication inter-processus. Pas de
+serialisation, pas de copies, pas de compromis.</p><hr><h2 id=architecture>Architecture</h2><pre tabindex=0><code>┌──────────────┐         ┌────────────┐         ┌──────────────────┐
+│              │         │            │         │                  │
+│ Programme    │◄───────►│  forgeiecd  │◄───────►│  Bridge Modbus   │──► Peripheriques
+│  automate    │  gRPC   │  (Daemon)  │  Anvil  │  Bridge EtherCAT │──► Variateurs
+│  (IEC)       │         │            │ IceOryx2│  Bridge Profibus  │──► Capteurs
+└──────────────┘         └────────────┘         │  Bridge OPC-UA   │──► SCADA
+                                                └──────────────────┘
+
+                         ◄── Anvil ──►
+                         Zero-Copy IPC
+                         Memoire partagee
+</code></pre><p>L&rsquo;echange de donnees entre <code>forgeiecd</code> et les bridges de protocole passe
+par <strong>Anvil</strong> — un canal IPC haute performance base sur la memoire partagee
+IceOryx2. Chaque segment dispose de son propre canal de communication.</p><hr><h2 id=pourquoi-anvil->Pourquoi Anvil ?</h2><h3 id=latence-microseconde>Latence microseconde</h3><p>Les mecanismes IPC conventionnels (pipes, sockets, files de messages)
+copient les donnees entre les processus. Anvil elimine chaque copie.
+Les donnees resident en memoire partagee — le recepteur lit directement.</p><table><thead><tr><th>Methode</th><th>Latence typique</th><th>Copies</th></tr></thead><tbody><tr><td>Socket TCP</td><td>50–200 us</td><td>2–4</td></tr><tr><td>Socket Unix</td><td>10–50 us</td><td>2</td></tr><tr><td><strong>Anvil (IceOryx2)</strong></td><td><strong>&lt; 1 us</strong></td><td><strong>0</strong></td></tr></tbody></table><h3 id=qualite-industrielle>Qualite industrielle</h3><ul><li>Comportement deterministe — pas d&rsquo;allocation dynamique dans le chemin critique</li><li>Algorithmes sans verrou — pas de blocage, pas de deadlock</li><li>Modele publish/subscribe — couplage lache entre producteur et consommateur</li><li>Gestion automatique du cycle de vie — les bridges sont surveillees et redemarrees en cas de crash</li></ul><h3 id=publishsubscribe-dans-le-programme-iec>PUBLISH/SUBSCRIBE dans le programme IEC</h3><p>Anvil s&rsquo;integre de maniere transparente dans la programmation IEC 61131-3 :</p><pre tabindex=0><code class=language-iec data-lang=iec>VAR_GLOBAL PUBLISH &#39;Moteurs&#39;
+    K1_Mains    AT %QX0.0 : BOOL;
+    K1_Speed    AT %QW10  : INT;
+END_VAR
+
+VAR_GLOBAL SUBSCRIBE &#39;Capteurs&#39;
+    Temperature AT %IW0   : INT;
+    Pression    AT %IW2   : INT;
+END_VAR
+</code></pre><p>Les mots-cles PUBLISH/SUBSCRIBE sont une extension ForgeIEC de la norme
+IEC 61131-3. Le compilateur genere automatiquement les liaisons IceOryx2.</p><hr><h2 id=protocoles-supportes>Protocoles supportes</h2><table><thead><tr><th>Protocole</th><th>Bridge</th><th>Statut</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td><code>forgeiec-modbustcp</code></td><td>Disponible</td></tr><tr><td><strong>Modbus RTU</strong></td><td><code>forgeiec-modbusrtu</code></td><td>Disponible</td></tr><tr><td><strong>EtherCAT</strong></td><td><code>forgeiec-ethercat</code></td><td>En developpement</td></tr><tr><td><strong>Profibus DP</strong></td><td><code>forgeiec-profibus</code></td><td>En developpement</td></tr><tr><td><strong>OPC-UA</strong></td><td><code>forgeiec-opcua</code></td><td>Prevu</td></tr></tbody></table><p>Chaque bridge fonctionne comme un processus independant. <code>forgeiecd</code> demarre,
+surveille et redemarre les bridges automatiquement.</p><hr><div style=text-align:center;padding:2rem><p><strong>Anvil — La ou les donnees sont forgees en commandes de controle.</strong></p><p><a href=mailto:blacksmith@forgeiec.io>blacksmith@forgeiec.io</a></p></div></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>Environnement de developpement IEC 61131-3 pour l'industrie</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

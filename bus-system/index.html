@@ -1,0 +1,27 @@
+<!doctype html><html lang=de><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Bussystem | ForgeIEC</title>
+<meta name=description content="IEC 61131-3 SPS-Entwicklungsumgebung fuer die Industrie"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/features/ class=nav-link>Funktionen</a>
+<a href=/anvil/ class=nav-link>Anvil</a>
+<a href=/bus-system/ class=nav-link>Bussystem</a>
+<a href=/partner/ class=nav-link>Partner</a>
+<a href=/hilfe/ class=nav-link>Hilfe</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>Kontakt</a></nav><div class=lang-switch><a href=/en/bus-system/ class=lang-link>en</a>
+<a href=/fr/bus-system/ class=lang-link>fr</a>
+<a href=/es/bus-system/ class=lang-link>es</a>
+<a href=/zh/bus-system/ class=lang-link>zh</a>
+<a href=/ja/bus-system/ class=lang-link>ja</a>
+<a href=/tr/bus-system/ class=lang-link>tr</a>
+<a href=/ar/bus-system/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Bussystem</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=hierarchische-bussystem-verwaltung>Hierarchische Bussystem-Verwaltung</h2><p>ForgeIEC organisiert die industrielle Kommunikation in einer CoDeSys-kompatiblen
+Segment-Hierarchie:</p><pre tabindex=0><code>Bussysteme
++-- Modbus TCP: Halle 1 (eth0) [aktiv]
+|   +-- 192.168.1.100 -- Temperaturmodul (Slave 1)
+|   |   +-- Temperatur : INT (%IW0)
+|   |   +-- Sollwert : INT (%QW10)
+|   +-- 192.168.1.101 -- Pumpe (Slave 2)
++-- Modbus RTU: Labor (/dev/ttyUSB0)
++-- Unzugeordnet (Scanner-Pool)
+    +-- 192.168.2.55 -- Unbekannt
+</code></pre><h2 id=unterstuetzte-protokolle>Unterstuetzte Protokolle</h2><table><thead><tr><th>Protokoll</th><th>Medium</th><th>Einsatzgebiet</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td>Ethernet</td><td>Gebaeudeautomation, Prozesstechnik</td></tr><tr><td><strong>Modbus RTU</strong></td><td>RS-485 (seriell)</td><td>Sensorik, einfache Feldgeraete</td></tr><tr><td><strong>EtherCAT</strong></td><td>Ethernet (Echtzeit)</td><td>Motion Control, schnelle E/A</td></tr><tr><td><strong>Profibus DP</strong></td><td>Seriell (Feldbus)</td><td>Fertigungsautomation</td></tr></tbody></table><h2 id=automatische-adressvergabe>Automatische Adressvergabe</h2><p>IEC-Adressen (<code>%IX</code>, <code>%QW</code>, <code>%MD</code> etc.) werden global und kollisionsfrei vergeben.
+Bestehende Adressen in globalen Variablenlisten werden beruecksichtigt.</p><h2 id=geraeteerkennung>Geraeteerkennung</h2><p>Der integrierte Netzwerk-Scanner erkennt Modbus-faehige Geraete automatisch.
+Gefundene Geraete koennen direkt einem Segment zugeordnet werden.</p><h2 id=aenderungsverfolgung>Aenderungsverfolgung</h2><p>Aenderungen an Bus-Variablen werden in einem uebersichtlichen Diff-Dialog
+dargestellt, bevor sie auf das Laufzeitsystem uebertragen werden. Der Anwender
+behaelt die volle Kontrolle.</p></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>IEC 61131-3 SPS-Entwicklungsumgebung fuer die Industrie</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>

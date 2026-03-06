@@ -1,0 +1,44 @@
+<!doctype html><html lang=es><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Anvil | ForgeIEC</title>
+<meta name=description content="Entorno de desarrollo IEC 61131-3 para la industria"><meta name=generator content="Hugo 0.131.0"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=stylesheet href=/css/forge.css></head><body><header class=site-header><div class="container header-inner"><a href=/es/ class=logo><span class=logo-icon>&#9881;</span> ForgeIEC</a><nav class=main-nav><a href=/es/features/ class=nav-link>Funciones</a>
+<a href=/es/anvil/ class=nav-link>Anvil</a>
+<a href=/es/bus-system/ class=nav-link>Sistema de bus</a>
+<a href=/es/partner/ class=nav-link>Socios</a>
+<a href=/es/hilfe/ class=nav-link>Ayuda</a>
+<a href=mailto:blacksmith@forgeiec.io class=nav-link>Contacto</a></nav><div class=lang-switch><a href=/anvil/ class=lang-link>de</a>
+<a href=/en/anvil/ class=lang-link>en</a>
+<a href=/fr/anvil/ class=lang-link>fr</a>
+<a href=/zh/anvil/ class=lang-link>zh</a>
+<a href=/ja/anvil/ class=lang-link>ja</a>
+<a href=/tr/anvil/ class=lang-link>tr</a>
+<a href=/ar/anvil/ class=lang-link>ar</a></div></div></header><main><div class="flex-l mt2 mw8 center"><article class="center cf pv5 ph3 ph4-ns mw7"><header><h1 class=f1>Anvil</h1></header><div class="nested-copy-line-height lh-copy f4 nested-links mid-gray"><h2 id=el-yunque-corazon-de-cada-fragua>El Yunque: Corazon de cada fragua</h2><p>En cada fragua, el yunque es la pieza central — donde el metal se moldea,
+se templa y se refina. <strong>Anvil</strong> es la capa intermedia entre el sistema de
+ejecucion del PLC y los bridges de bus de campo. Aqui es donde sus datos
+de proceso se forjan: se reciben, se transforman y se distribuyen a los
+destinatarios correctos.</p><p>Anvil esta construido internamente sobre <strong>IceOryx2</strong> — un framework de
+memoria compartida sin copias para comunicacion entre procesos. Sin
+serializacion, sin copias, sin compromisos.</p><hr><h2 id=arquitectura>Arquitectura</h2><pre tabindex=0><code>┌──────────────┐         ┌────────────┐         ┌──────────────────┐
+│              │         │            │         │                  │
+│ Programa PLC │◄───────►│  forgeiecd  │◄───────►│  Bridge Modbus   │──► Dispositivos
+│  (Codigo IEC)│  gRPC   │  (Daemon)  │  Anvil  │  Bridge EtherCAT │──► Accionamientos
+│              │         │            │ IceOryx2│  Bridge Profibus  │──► Sensores
+└──────────────┘         └────────────┘         │  Bridge OPC-UA   │──► SCADA
+                                                └──────────────────┘
+
+                         ◄── Anvil ──►
+                         Zero-Copy IPC
+                         Memoria compartida
+</code></pre><p>El intercambio de datos entre <code>forgeiecd</code> y los bridges de protocolo se
+realiza a traves de <strong>Anvil</strong> — un canal IPC de alto rendimiento basado
+en memoria compartida IceOryx2.</p><hr><h2 id=por-que-anvil>Por que Anvil?</h2><h3 id=latencia-de-microsegundos>Latencia de microsegundos</h3><p>Los mecanismos IPC convencionales (pipes, sockets, colas de mensajes) copian
+datos entre procesos. Anvil elimina cada copia. Los datos residen en memoria
+compartida — el receptor lee directamente.</p><table><thead><tr><th>Metodo</th><th>Latencia tipica</th><th>Copias</th></tr></thead><tbody><tr><td>Socket TCP</td><td>50–200 us</td><td>2–4</td></tr><tr><td>Socket Unix</td><td>10–50 us</td><td>2</td></tr><tr><td><strong>Anvil (IceOryx2)</strong></td><td><strong>&lt; 1 us</strong></td><td><strong>0</strong></td></tr></tbody></table><h3 id=calidad-industrial>Calidad industrial</h3><ul><li>Comportamiento determinista — sin asignacion dinamica de memoria en la ruta critica</li><li>Algoritmos sin bloqueo — sin bloqueos, sin deadlocks</li><li>Modelo publish/subscribe — acoplamiento debil entre productor y consumidor</li><li>Gestion automatica del ciclo de vida — los bridges se supervisan y reinician automaticamente</li></ul><h3 id=publishsubscribe-en-el-programa-iec>PUBLISH/SUBSCRIBE en el programa IEC</h3><pre tabindex=0><code class=language-iec data-lang=iec>VAR_GLOBAL PUBLISH &#39;Motores&#39;
+    K1_Mains    AT %QX0.0 : BOOL;
+    K1_Speed    AT %QW10  : INT;
+END_VAR
+
+VAR_GLOBAL SUBSCRIBE &#39;Sensores&#39;
+    Temperatura AT %IW0   : INT;
+    Presion     AT %IW2   : INT;
+END_VAR
+</code></pre><hr><h2 id=protocolos-soportados>Protocolos soportados</h2><table><thead><tr><th>Protocolo</th><th>Bridge</th><th>Estado</th></tr></thead><tbody><tr><td><strong>Modbus TCP</strong></td><td><code>forgeiec-modbustcp</code></td><td>Disponible</td></tr><tr><td><strong>Modbus RTU</strong></td><td><code>forgeiec-modbusrtu</code></td><td>Disponible</td></tr><tr><td><strong>EtherCAT</strong></td><td><code>forgeiec-ethercat</code></td><td>En desarrollo</td></tr><tr><td><strong>Profibus DP</strong></td><td><code>forgeiec-profibus</code></td><td>En desarrollo</td></tr><tr><td><strong>OPC-UA</strong></td><td><code>forgeiec-opcua</code></td><td>Planificado</td></tr></tbody></table><p>Cada bridge funciona como un proceso independiente. <code>forgeiecd</code> inicia,
+supervisa y reinicia los bridges automaticamente.</p><hr><div style=text-align:center;padding:2rem><p><strong>Anvil — Donde los datos se forjan en comandos de control.</strong></p><p><a href=mailto:blacksmith@forgeiec.io>blacksmith@forgeiec.io</a></p></div></div></article></div></main><footer class=site-footer><div class="container footer-inner"><div class=footer-brand><span class=footer-logo><span class=logo-icon>&#9881;</span> ForgeIEC</span><p class=footer-tagline>Entorno de desarrollo IEC 61131-3 para la industria</p></div><div class=footer-contact><p><strong>blacksmith@forgeiec.io</strong></p><p>&copy; ForgeIEC 2026</p></div></div></footer></body></html>
