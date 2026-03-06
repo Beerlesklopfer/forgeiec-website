@@ -1,17 +1,17 @@
 ---
-title: "Anvil"
+title: "Anvil Technology\u00ae"
 summary: "Verileriniz bizim oeruemuzde doevueluer"
 ---
 
 ## Oerues: Her Demirci Ocaginin Kalbi
 
 Her demirci ocaginda oerues merkezi parcadir — metal burada sekillenir,
-sertlestirilir ve islenir. **Anvil**, PLC calisma zamani ile saha yolu
+sertlestirilir ve islenir. **Anvil Technology\u00ae**, PLC calisma zamani ile saha yolu
 koepruelerinin arasindaki ara katmandir. Proses verileriniz burada
 doevueluer: alinir, doenuestuerueluer ve dogru alicilara dagitilir.
 
-Anvil dahili olarak **IceOryx2** uezerine insa edilmistir — suerecler arasi
-iletisim icin sifir-kopyali paylasimli bellek cercevesi. Serializasyon yok,
+Anvil dahili olarak tescilli bir sifir-kopyali paylasimli bellek tasima katmani
+kullanir — suerecler arasi iletisim icin. Serializasyon yok,
 kopyalama yok, taviz yok.
 
 ---
@@ -23,7 +23,7 @@ kopyalama yok, taviz yok.
 │              │         │            │         │                  │
 │ PLC Programi │◄───────►│  forgeiecd  │◄───────►│  Modbus Koeprue  │──► Saha Cihazlari
 │  (IEC Kodu)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT Koeprue│──► Sueruecueler
-│              │         │            │ IceOryx2│  Profibus Koeprue │──► Sensörler
+│              │         │            │ Anvil   │  Profibus Koeprue │──► Sensörler
 └──────────────┘         └────────────┘         │  OPC-UA Koeprue  │──► SCADA
                                                 └──────────────────┘
 
@@ -32,13 +32,13 @@ kopyalama yok, taviz yok.
                          Paylasimli Bellek
 ```
 
-`forgeiecd` ile protokol koepruelerinin arasindaki veri degisimi **Anvil**
-uezerinden gerceklesir — IceOryx2 paylasimli bellek tabanli yuesek
+`forgeiecd` ile protokol koepruelerinin arasindaki veri degisimi **Anvil Technology\u00ae**
+uezerinden gerceklesir — sifir-kopyali paylasimli bellek tabanli yuesek
 performansli bir IPC kanali.
 
 ---
 
-## Neden Anvil?
+## Neden Anvil Technology\u00ae?
 
 ### Mikrosaniye Gecikme
 
@@ -50,7 +50,7 @@ Veriler paylasimli bellekte bulunur — alici dogrudan okur.
 |---------|--------------|----------|
 | TCP Soket | 50–200 us | 2–4 |
 | Unix Soket | 10–50 us | 2 |
-| **Anvil (IceOryx2)** | **< 1 us** | **0** |
+| **Anvil Technology\u00ae** | **< 1 us** | **0** |
 
 ### Enduestri Kalitesi
 
@@ -92,7 +92,7 @@ otomatik olarak baslatir, izler ve yeniden baslatir.
 
 <div style="text-align:center; padding: 2rem;">
 
-**Anvil — Verilerin kontrol komutlarina doevueldugu yer.**
+**Anvil Technology\u00ae — Verilerin kontrol komutlarina doevueldugu yer.**
 
 blacksmith@forgeiec.io
 

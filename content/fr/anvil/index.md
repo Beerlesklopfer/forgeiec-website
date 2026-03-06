@@ -1,18 +1,18 @@
 ---
-title: "Anvil"
+title: "Anvil Technology\u00ae"
 summary: "Vos donnees sont forgees sur notre enclume"
 ---
 
 ## L'Enclume : Coeur de chaque forge
 
 Dans chaque forge, l'enclume est la piece maitresse — la ou le metal est
-faconne, trempe et affine. **Anvil** est la couche intermediaire entre le
+faconne, trempe et affine. **Anvil Technology\u00ae** est la couche intermediaire entre le
 systeme d'execution de l'automate et les bridges de bus de terrain. C'est
 ici que vos donnees de processus sont forgees : recues, transformees et
 distribuees aux bons destinataires.
 
-Anvil est construit sur **IceOryx2** en interne — un framework de memoire
-partagee zero-copie pour la communication inter-processus. Pas de
+Anvil utilise en interne un transport proprietaire de memoire partagee
+zero-copie pour la communication inter-processus. Pas de
 serialisation, pas de copies, pas de compromis.
 
 ---
@@ -24,7 +24,7 @@ serialisation, pas de copies, pas de compromis.
 │              │         │            │         │                  │
 │ Programme    │◄───────►│  forgeiecd  │◄───────►│  Bridge Modbus   │──► Peripheriques
 │  automate    │  gRPC   │  (Daemon)  │  Anvil  │  Bridge EtherCAT │──► Variateurs
-│  (IEC)       │         │            │ IceOryx2│  Bridge Profibus  │──► Capteurs
+│  (IEC)       │         │            │ Anvil   │  Bridge Profibus  │──► Capteurs
 └──────────────┘         └────────────┘         │  Bridge OPC-UA   │──► SCADA
                                                 └──────────────────┘
 
@@ -34,12 +34,12 @@ serialisation, pas de copies, pas de compromis.
 ```
 
 L'echange de donnees entre `forgeiecd` et les bridges de protocole passe
-par **Anvil** — un canal IPC haute performance base sur la memoire partagee
-IceOryx2. Chaque segment dispose de son propre canal de communication.
+par **Anvil Technology\u00ae** — un canal IPC haute performance base sur la memoire partagee
+zero-copie. Chaque segment dispose de son propre canal de communication.
 
 ---
 
-## Pourquoi Anvil ?
+## Pourquoi Anvil Technology\u00ae ?
 
 ### Latence microseconde
 
@@ -51,7 +51,7 @@ Les donnees resident en memoire partagee — le recepteur lit directement.
 |---------|----------------|--------|
 | Socket TCP | 50–200 us | 2–4 |
 | Socket Unix | 10–50 us | 2 |
-| **Anvil (IceOryx2)** | **< 1 us** | **0** |
+| **Anvil Technology\u00ae** | **< 1 us** | **0** |
 
 ### Qualite industrielle
 
@@ -62,7 +62,7 @@ Les donnees resident en memoire partagee — le recepteur lit directement.
 
 ### PUBLISH/SUBSCRIBE dans le programme IEC
 
-Anvil s'integre de maniere transparente dans la programmation IEC 61131-3 :
+Anvil Technology\u00ae s'integre de maniere transparente dans la programmation IEC 61131-3 :
 
 ```iec
 VAR_GLOBAL PUBLISH 'Moteurs'
@@ -77,7 +77,7 @@ END_VAR
 ```
 
 Les mots-cles PUBLISH/SUBSCRIBE sont une extension ForgeIEC de la norme
-IEC 61131-3. Le compilateur genere automatiquement les liaisons IceOryx2.
+IEC 61131-3. Le compilateur genere automatiquement les liaisons Anvil.
 
 ---
 
@@ -98,7 +98,7 @@ surveille et redemarre les bridges automatiquement.
 
 <div style="text-align:center; padding: 2rem;">
 
-**Anvil — La ou les donnees sont forgees en commandes de controle.**
+**Anvil Technology\u00ae — La ou les donnees sont forgees en commandes de controle.**
 
 blacksmith@forgeiec.io
 

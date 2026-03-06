@@ -1,16 +1,16 @@
 ---
-title: "Anvil"
+title: "Anvil Technology\u00ae"
 summary: "Auf unserem Amboss werden Ihre Daten geschmiedet"
 ---
 
 ## Der Amboss: Herzstück jeder Schmiede
 
 In jeder Schmiede ist der Amboss das zentrale Werkstück — hier wird geformt,
-gehärtet und veredelt. **Anvil** ist die Zwischenschicht zwischen dem
+gehärtet und veredelt. **Anvil Technology\u00ae** ist die Zwischenschicht zwischen dem
 SPS-Laufzeitsystem und den Feldbus-Bridges. Hier werden Ihre Prozessdaten
 geschmiedet: empfangen, transformiert und an die richtigen Empfänger verteilt.
 
-Anvil basiert intern auf **IceOryx2** — einem Zero-Copy Shared-Memory-Framework
+Anvil nutzt intern eine proprietäre Zero-Copy Shared-Memory-Transportschicht
 für inter-Prozess-Kommunikation. Keine Serialisierung, keine Kopien,
 keine Kompromisse.
 
@@ -23,7 +23,7 @@ keine Kompromisse.
 │              │         │            │         │                  │
 │ SPS-Programm │◄───────►│  forgeiecd  │◄───────►│  Modbus-Bridge   │──► Feldgeräte
 │  (IEC Code)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT-Bridge │──► Antriebe
-│              │         │            │ IceOryx2│  Profibus-Bridge  │──► Sensoren
+│              │         │            │ Anvil   │  Profibus-Bridge  │──► Sensoren
 └──────────────┘         └────────────┘         │  OPC-UA-Bridge   │──► SCADA
                                                 └──────────────────┘
 
@@ -33,12 +33,12 @@ keine Kompromisse.
 ```
 
 Der Datenaustausch zwischen `forgeiecd` und den Protocol-Bridges erfolgt
-über **Anvil** — einen hochperformanten IPC-Kanal auf Basis von IceOryx2
+über **Anvil Technology\u00ae** — einen hochperformanten IPC-Kanal auf Basis von Zero-Copy
 Shared Memory. Jedes Segment erhält seinen eigenen Kommunikationskanal.
 
 ---
 
-## Warum Anvil?
+## Warum Anvil Technology\u00ae?
 
 ### Mikrosekunden-Latenz
 
@@ -50,7 +50,7 @@ in gemeinsamem Speicher — der Empfänger liest direkt.
 |---------|----------------|--------|
 | TCP Socket | 50–200 µs | 2–4 |
 | Unix Socket | 10–50 µs | 2 |
-| **Anvil (IceOryx2)** | **< 1 µs** | **0** |
+| **Anvil Technology\u00ae** | **< 1 µs** | **0** |
 
 ### Industriequalität
 
@@ -61,7 +61,7 @@ in gemeinsamem Speicher — der Empfänger liest direkt.
 
 ### PUBLISH/SUBSCRIBE im IEC-Programm
 
-Anvil integriert sich nahtlos in die IEC 61131-3 Programmierung:
+Anvil Technology\u00ae integriert sich nahtlos in die IEC 61131-3 Programmierung:
 
 ```iec
 VAR_GLOBAL PUBLISH 'Motoren'
@@ -76,13 +76,13 @@ END_VAR
 ```
 
 Die PUBLISH/SUBSCRIBE-Schlüsselwörter sind eine ForgeIEC-Erweiterung des
-IEC 61131-3 Standards. Der Compiler erzeugt automatisch die IceOryx2-Anbindung.
+IEC 61131-3 Standards. Der Compiler erzeugt automatisch die Anvil-Anbindung.
 
 ---
 
 ## Unterstützte Protokolle
 
-Anvil verbindet das SPS-Programm mit allen industriellen Feldbussen:
+Anvil Technology\u00ae verbindet das SPS-Programm mit allen industriellen Feldbussen:
 
 | Protokoll | Bridge | Status |
 |-----------|--------|--------|
@@ -100,7 +100,7 @@ weder die SPS noch andere Bridges.
 
 ## Technische Details
 
-- **IPC-Framework**: IceOryx2 (Eclipse iceoryx2, Zero-Copy Shared Memory)
+- **IPC-Framework**: Anvil Technology\u00ae (proprietäres Zero-Copy Shared Memory)
 - **Architektur**: Ein Publisher/Subscriber-Kanal pro Bus-Segment
 - **Datenformat**: Rohe IEC-Variablen — keine Serialisierung, kein Overhead
 - **Plattformen**: x86_64, ARM64, ARMv7 (Linux)
@@ -110,7 +110,7 @@ weder die SPS noch andere Bridges.
 
 <div style="text-align:center; padding: 2rem;">
 
-**Anvil — Wo Daten zu Steuerbefehlen geschmiedet werden.**
+**Anvil Technology\u00ae — Wo Daten zu Steuerbefehlen geschmiedet werden.**
 
 blacksmith@forgeiec.io
 

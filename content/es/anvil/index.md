@@ -1,18 +1,18 @@
 ---
-title: "Anvil"
+title: "Anvil Technology\u00ae"
 summary: "Sus datos se forjan en nuestro yunque"
 ---
 
 ## El Yunque: Corazon de cada fragua
 
 En cada fragua, el yunque es la pieza central — donde el metal se moldea,
-se templa y se refina. **Anvil** es la capa intermedia entre el sistema de
+se templa y se refina. **Anvil Technology\u00ae** es la capa intermedia entre el sistema de
 ejecucion del PLC y los bridges de bus de campo. Aqui es donde sus datos
 de proceso se forjan: se reciben, se transforman y se distribuyen a los
 destinatarios correctos.
 
-Anvil esta construido internamente sobre **IceOryx2** — un framework de
-memoria compartida sin copias para comunicacion entre procesos. Sin
+Anvil utiliza internamente un transporte propietario de memoria compartida
+sin copias para comunicacion entre procesos. Sin
 serializacion, sin copias, sin compromisos.
 
 ---
@@ -24,7 +24,7 @@ serializacion, sin copias, sin compromisos.
 │              │         │            │         │                  │
 │ Programa PLC │◄───────►│  forgeiecd  │◄───────►│  Bridge Modbus   │──► Dispositivos
 │  (Codigo IEC)│  gRPC   │  (Daemon)  │  Anvil  │  Bridge EtherCAT │──► Accionamientos
-│              │         │            │ IceOryx2│  Bridge Profibus  │──► Sensores
+│              │         │            │ Anvil   │  Bridge Profibus  │──► Sensores
 └──────────────┘         └────────────┘         │  Bridge OPC-UA   │──► SCADA
                                                 └──────────────────┘
 
@@ -34,12 +34,12 @@ serializacion, sin copias, sin compromisos.
 ```
 
 El intercambio de datos entre `forgeiecd` y los bridges de protocolo se
-realiza a traves de **Anvil** — un canal IPC de alto rendimiento basado
-en memoria compartida IceOryx2.
+realiza a traves de **Anvil Technology\u00ae** — un canal IPC de alto rendimiento basado
+en memoria compartida zero-copy.
 
 ---
 
-## Por que Anvil?
+## Por que Anvil Technology\u00ae?
 
 ### Latencia de microsegundos
 
@@ -51,7 +51,7 @@ compartida — el receptor lee directamente.
 |--------|----------------|--------|
 | Socket TCP | 50–200 us | 2–4 |
 | Socket Unix | 10–50 us | 2 |
-| **Anvil (IceOryx2)** | **< 1 us** | **0** |
+| **Anvil Technology\u00ae** | **< 1 us** | **0** |
 
 ### Calidad industrial
 
@@ -93,7 +93,7 @@ supervisa y reinicia los bridges automaticamente.
 
 <div style="text-align:center; padding: 2rem;">
 
-**Anvil — Donde los datos se forjan en comandos de control.**
+**Anvil Technology\u00ae — Donde los datos se forjan en comandos de control.**
 
 blacksmith@forgeiec.io
 

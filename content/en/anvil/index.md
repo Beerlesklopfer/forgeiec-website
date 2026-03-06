@@ -1,16 +1,16 @@
 ---
-title: "Anvil"
+title: "Anvil Technology\u00ae"
 summary: "Your data is forged on our anvil"
 ---
 
-## The Anvil: Heart of Every Forge
+## Anvil Technology\u00ae: Heart of Every Forge
 
 In every forge, the anvil is the central workpiece — where metal is shaped,
-hardened and refined. **Anvil** is the intermediate layer between the
+hardened and refined. **Anvil Technology\u00ae** is the intermediate layer between the
 PLC runtime and the fieldbus bridges. This is where your process data
 is forged: received, transformed and distributed to the right recipients.
 
-Anvil is built on **IceOryx2** internally — a zero-copy shared memory framework
+Anvil uses a proprietary zero-copy shared memory transport
 for inter-process communication. No serialization, no copies, no compromises.
 
 ---
@@ -22,7 +22,7 @@ for inter-process communication. No serialization, no copies, no compromises.
 │              │         │            │         │                  │
 │ PLC Program  │◄───────►│  forgeiecd  │◄───────►│  Modbus Bridge   │──► Field Devices
 │  (IEC Code)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT Bridge │──► Drives
-│              │         │            │ IceOryx2│  Profibus Bridge  │──► Sensors
+│              │         │            │ Anvil   │  Profibus Bridge  │──► Sensors
 └──────────────┘         └────────────┘         │  OPC-UA Bridge   │──► SCADA
                                                 └──────────────────┘
 
@@ -32,12 +32,12 @@ for inter-process communication. No serialization, no copies, no compromises.
 ```
 
 Data exchange between `forgeiecd` and the protocol bridges runs through
-**Anvil** — a high-performance IPC channel based on IceOryx2 shared memory.
+**Anvil Technology\u00ae** — a high-performance IPC channel based on zero-copy shared memory.
 Each segment gets its own communication channel.
 
 ---
 
-## Why Anvil?
+## Why Anvil Technology\u00ae?
 
 ### Microsecond Latency
 
@@ -49,7 +49,7 @@ memory — the receiver reads directly.
 |--------|----------------|--------|
 | TCP Socket | 50–200 us | 2–4 |
 | Unix Socket | 10–50 us | 2 |
-| **Anvil (IceOryx2)** | **< 1 us** | **0** |
+| **Anvil Technology\u00ae** | **< 1 us** | **0** |
 
 ### Industrial Grade
 
@@ -60,7 +60,7 @@ memory — the receiver reads directly.
 
 ### PUBLISH/SUBSCRIBE in the IEC Program
 
-Anvil integrates seamlessly into IEC 61131-3 programming:
+Anvil Technology\u00ae integrates seamlessly into IEC 61131-3 programming:
 
 ```iec
 VAR_GLOBAL PUBLISH 'Motors'
@@ -75,13 +75,13 @@ END_VAR
 ```
 
 The PUBLISH/SUBSCRIBE keywords are a ForgeIEC extension to the IEC 61131-3
-standard. The compiler automatically generates the IceOryx2 bindings.
+standard. The compiler automatically generates the Anvil bindings.
 
 ---
 
 ## Supported Protocols
 
-Anvil connects the PLC program to all industrial fieldbuses:
+Anvil Technology\u00ae connects the PLC program to all industrial fieldbuses:
 
 | Protocol | Bridge | Status |
 |----------|--------|--------|
@@ -99,7 +99,7 @@ nor other bridges.
 
 ## Technical Details
 
-- **IPC Framework**: IceOryx2 (Eclipse iceoryx2, zero-copy shared memory)
+- **IPC Framework**: Anvil Technology\u00ae (proprietary zero-copy shared memory)
 - **Architecture**: One publisher/subscriber channel per bus segment
 - **Data Format**: Raw IEC variables — no serialization, no overhead
 - **Platforms**: x86_64, ARM64, ARMv7 (Linux)
@@ -109,7 +109,7 @@ nor other bridges.
 
 <div style="text-align:center; padding: 2rem;">
 
-**Anvil — Where data is forged into control commands.**
+**Anvil Technology\u00ae — Where data is forged into control commands.**
 
 blacksmith@forgeiec.io
 
