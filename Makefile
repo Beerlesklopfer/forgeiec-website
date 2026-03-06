@@ -4,7 +4,7 @@
 HUGO        ?= hugo
 DEPLOY_HOST ?= forgeiec.io
 DEPLOY_USER ?= root
-DEPLOY_PATH ?= /var/www/forgeiec.io/
+DEPLOY_PATH ?= /var/www/forgeiec.io/public/
 DEPLOY_SSH  ?= $(DEPLOY_USER)@$(DEPLOY_HOST)
 
 .PHONY: build serve deploy clean
