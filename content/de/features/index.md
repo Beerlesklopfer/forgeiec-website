@@ -39,7 +39,7 @@ externen Systemen. PUBLISH/SUBSCRIBE direkt im IEC-Programm.
 
 ## Remote-Betrieb
 
-- Kompilierung auf der Workstation — kein Compiler auf der SPS noetig
+- IEC-Kompilierung auf der Workstation — SPS benoetigt make, g++, libstdc++ und librt
 - Verschluesselter Upload auf das Zielsystem
 - Benutzerverwaltung mit Rechtesystem
 - Automatischer Neustart nach Stromausfall

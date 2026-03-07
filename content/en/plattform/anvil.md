@@ -110,8 +110,9 @@ The compilation follows a two-stage model:
 2. **Target system**: `anvild` generates a platform-specific Makefile
    and calls `make` (g++)
 
-No compiler required on the PLC. The workstation handles the
-compute-intensive work.
+The IEC compiler (`iec2c`) only runs on the workstation. The target
+system requires `make`, `g++`, `libstdc++` and `librt` to compile the
+generated C code at deployment time.
 
 ---
 

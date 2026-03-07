@@ -39,7 +39,7 @@ external systems. PUBLISH/SUBSCRIBE directly in the IEC program.
 
 ## Remote Operation
 
-- Compilation on the workstation — no compiler needed on the PLC
+- IEC compilation on the workstation — PLC requires make, g++, libstdc++ and librt
 - Encrypted upload to the target system
 - User management with access control
 - Automatic restart after power failure

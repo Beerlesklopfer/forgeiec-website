@@ -39,7 +39,7 @@ sıfır kopyalama veri alışverişi.
 
 ## Uzaktan Çalışma
 
-- İş istasyonunda derleme — SPS üzerinde derleyici gerekmez
+- IEC derlemesi is istasyonunda — SPS make, g++, libstdc++ ve librt gerektirir
 - Hedef sisteme şifreli yükleme
 - Yetki sistemi ile kullanıcı yönetimi
 - Güç kesintisi sonrası otomatik yeniden başlatma

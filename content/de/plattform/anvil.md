@@ -112,8 +112,9 @@ Die Kompilierung folgt einem zweistufigen Modell:
 2. **Zielsystem**: `anvild` generiert ein plattformspezifisches Makefile
    und ruft `make` (g++) auf
 
-Kein Compiler auf der SPS erforderlich. Die Workstation uebernimmt die
-rechenintensive Arbeit.
+Der IEC-Compiler (`iec2c`) laeuft nur auf der Workstation. Auf dem
+Zielsystem werden `make`, `g++`, `libstdc++` und `librt` benoetigt,
+um den generierten C-Code zur Laufzeit zu kompilieren.
 
 ---
 
