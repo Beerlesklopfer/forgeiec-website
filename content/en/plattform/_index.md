@@ -1,83 +1,107 @@
 ---
 title: "Platform"
-description: "The ForgeIEC Platform — seven tools for industrial automation"
+description: "The ForgeIEC Platform -- all components for industrial automation"
 weight: 10
 ---
 
-## The ForgeIEC Forge
+## The ForgeIEC Platform
 
-Every forge needs the right tools. ForgeIEC is not a single application,
-but a complete platform for industrial automation — from design on screen
-to control at the machine.
-
-Seven tools, each forged for its purpose:
+ForgeIEC is a complete industrial automation platform -- from the development
+environment to the supervisory system. Each component bears the name of a
+blacksmith's tool, because ForgeIEC is forged for industry.
 
 ---
 
-### [Forge Studio](/en/plattform/forge-studio/)
+### Forge Studio
 
-The development environment. This is where the PLC program is created — in all
-five IEC 61131-3 languages, with a native Qt6 interface and intelligent
-code completion. Forge Studio is the workbench where ideas take shape.
+**IEC 61131-3 Development Environment**
 
----
+The professional IDE for PLC programming. All five IEC languages, graphical
+and textual editing, local compilation, remote deployment. Built with C++17
+and Qt6.
 
-### [Anvil](/en/plattform/anvil/)
-
-The runtime environment. On the anvil, source code becomes a running real-time
-program. Anvil manages the scan cycle, the process images, and the zero-copy
-data exchange with the fieldbus bridges. This is where the forging happens.
+[Learn more](forge-studio/)
 
 ---
 
-### [Bellows](/en/plattform/bellows/) — *In Development*
+### Anvil
 
-The bellows keep the fire alive. Bellows is the OPC UA gateway for
-standardized machine-to-machine communication — the link between
-workshop and control room.
+**Real-Time PLC Runtime**
 
----
+The runtime daemon that executes IEC programs on the target system. Zero-Copy
+communication between the runtime and protocol bridges via Anvil shared memory
+technology.
 
-### [Hearth](/en/plattform/hearth/) — *In Development*
-
-The fireplace of the forge. Hearth is the SCADA/HMI solution for
-process visualization and plant operation — dashboards, alarm management,
-and trend recording right in the browser.
+[Learn more](anvil/)
 
 ---
 
-### [Spark](/en/plattform/spark/)
+### Bellows
 
-The spark that leaps across. Spark is the Zenoh tunnel for network
-bridging between edge and cloud — live monitoring, variable forcing,
-and zero-config discovery across site boundaries.
+**OPC UA Gateway** -- In Development
 
----
+Standardized machine-to-machine communication conforming to the OPC UA
+standard. Seamless integration of automation systems into existing IT
+infrastructure.
 
-### [Tongs](/en/plattform/tongs/)
-
-The tongs reach into the fire. Tongs are the fieldbus bridges for
-Modbus TCP/RTU, EtherCAT, and Profibus — each running as an independent
-process, monitored and automatically restarted when needed.
+[Learn more](bellows/)
 
 ---
 
-### [Ledger](/en/plattform/ledger/) — *In Development*
+### Hearth
 
-The ledger keeps the books. Ledger is the order management module
-for production planning, recipe management, and MES integration —
-the bridge between manufacturing and business operations.
+**SCADA/HMI** -- In Development
+
+Process visualization and human-machine interface for industrial supervision.
+Real-time dashboards, data history, alarm management.
+
+[Learn more](hearth/)
+
+---
+
+### Spark
+
+**Zenoh Tunnel**
+
+Edge-to-Cloud network bridge based on the Zenoh protocol. Secure connection
+between on-site PLCs and cloud services, without VPN, without complex
+configuration.
+
+[Learn more](spark/)
+
+---
+
+### Tongs
+
+**Fieldbus Bridges**
+
+Protocol bridges for Modbus TCP/RTU, EtherCAT and Profibus DP. Each bridge
+runs as an independent process, monitored and automatically restarted by the
+runtime.
+
+[Learn more](tongs/)
+
+---
+
+### Ledger
+
+**Manufacturing Order Management** -- In Development
+
+MES integration for manufacturing order management, production tracking and
+traceability. Bridge between automation and production planning.
+
+[Learn more](ledger/)
 
 ---
 
 <div style="text-align:center; padding: 2rem;">
 
-**Built on OpenPLC** — ForgeIEC is based on the
+**Built on OpenPLC** -- ForgeIEC is based on the
 [OpenPLC](https://autonomylogic.com/) project and is fully compatible with
 its file architecture. Existing OpenPLC projects can be opened and developed
 directly.
 
-**All tools. One platform. Open Source.**
+**All components are Open Source. No license fees. No vendor lock-in.**
 
 blacksmith@forgeiec.io
 

@@ -1,7 +1,7 @@
 ---
 title: "المنصة"
 description: "منصة ForgeIEC -- جميع المكونات للأتمتة الصناعية"
-weight: 3
+weight: 10
 ---
 
 ## منصة ForgeIEC

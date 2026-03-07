@@ -1,7 +1,7 @@
 ---
 title: "Plataforma"
 description: "La plataforma ForgeIEC -- todos los componentes para la automatizacion industrial"
-weight: 3
+weight: 10
 ---
 
 ## La plataforma ForgeIEC

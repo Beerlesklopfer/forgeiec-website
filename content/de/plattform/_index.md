@@ -1,85 +1,109 @@
 ---
 title: "Plattform"
-description: "Die ForgeIEC Plattform — sieben Werkzeuge fuer die industrielle Automatisierung"
+description: "Die ForgeIEC Plattform -- alle Komponenten fuer die industrielle Automatisierung"
 weight: 10
 ---
 
-## Die ForgeIEC Schmiede
+## Die ForgeIEC Plattform
 
-Jede Schmiede braucht das richtige Werkzeug. ForgeIEC ist keine einzelne
-Anwendung, sondern eine vollstaendige Plattform fuer die industrielle
-Automatisierung — vom Entwurf am Bildschirm bis zur Steuerung an der Maschine.
-
-Sieben Werkzeuge, jedes fuer seinen Zweck geschmiedet:
-
----
-
-### [Forge Studio](/de/plattform/forge-studio/)
-
-Die Entwicklungsumgebung. Hier entsteht das SPS-Programm — in allen fuenf
-IEC 61131-3 Sprachen, mit nativer Qt6-Oberflaeche und intelligenter
-Code-Vervollstaendigung. Forge Studio ist die Werkbank, an der Ideen
-Gestalt annehmen.
+ForgeIEC ist eine vollstaendige Plattform fuer die industrielle
+Automatisierung -- von der Entwicklungsumgebung bis zum Leitsystem. Jede
+Komponente traegt den Namen eines Schmiedewerkzeugs, denn ForgeIEC ist
+fuer die Industrie geschmiedet.
 
 ---
 
-### [Anvil](/de/plattform/anvil/)
+### Forge Studio
 
-Die Laufzeitumgebung. Auf dem Amboss wird aus Quellcode ein laufendes
-Echtzeit-Programm. Anvil verwaltet den Scan-Zyklus, die Prozessabbilder
-und den Zero-Copy Datenaustausch mit den Feldbus-Bridges. Hier wird
-geschmiedet.
+**IEC 61131-3 Entwicklungsumgebung**
 
----
+Die professionelle IDE fuer SPS-Programmierung. Alle fuenf IEC-Sprachen,
+grafische und textuelle Editierung, lokale Kompilierung, Remote-Deployment.
+Gebaut mit C++17 und Qt6.
 
-### [Bellows](/de/plattform/bellows/) — *In Entwicklung*
-
-Der Blasebalg haelt das Feuer am Laufen. Bellows ist das OPC-UA-Gateway
-fuer standardisierte Maschine-zu-Maschine-Kommunikation — die Verbindung
-zwischen Werkstatt und Leitstand.
+[Mehr erfahren](forge-studio/)
 
 ---
 
-### [Hearth](/de/plattform/hearth/) — *In Entwicklung*
+### Anvil
 
-Die Feuerstelle der Schmiede. Hearth ist die SCADA/HMI-Loesung fuer
-Prozessvisualisierung und Anlagenbedienung — Dashboards, Alarmmanagement
-und Trendaufzeichnung direkt im Browser.
+**Echtzeit-SPS-Laufzeitumgebung**
 
----
+Der Runtime-Daemon, der IEC-Programme auf dem Zielsystem ausfuehrt.
+Zero-Copy-Kommunikation zwischen Runtime und Protokoll-Bridges ueber
+die Anvil Shared-Memory-Technologie.
 
-### [Spark](/de/plattform/spark/)
-
-Der Funke, der ueberspringt. Spark ist der Zenoh-Tunnel fuer
-Netzwerk-Bridging zwischen Edge und Cloud — Live-Monitoring, Variable
-Forcing und Zero-Config Discovery ueber Standortgrenzen hinweg.
+[Mehr erfahren](anvil/)
 
 ---
 
-### [Tongs](/de/plattform/tongs/)
+### Bellows
 
-Die Zange greift ins Feuer. Tongs sind die Feldbus-Bridges fuer
-Modbus TCP/RTU, EtherCAT und Profibus — jeweils als eigenstaendiger
-Prozess, ueberwacht und bei Bedarf automatisch neu gestartet.
+**OPC-UA-Gateway** -- In Entwicklung
+
+Standardisierte Maschine-zu-Maschine-Kommunikation nach OPC-UA-Standard.
+Transparente Integration von Automatisierungssystemen in die bestehende
+IT-Infrastruktur.
+
+[Mehr erfahren](bellows/)
 
 ---
 
-### [Ledger](/de/plattform/ledger/) — *In Entwicklung*
+### Hearth
 
-Das Schmiedebuch fuehrt Buch. Ledger ist das Auftragsmanagement-Modul
-fuer Produktionsplanung, Rezeptverwaltung und MES-Integration —
-die Bruecke zwischen Fertigung und Betriebswirtschaft.
+**SCADA/HMI** -- In Entwicklung
+
+Prozessvisualisierung und Mensch-Maschine-Schnittstelle fuer die industrielle
+Ueberwachung. Echtzeit-Dashboards, Datenhistorie, Alarmmanagement.
+
+[Mehr erfahren](hearth/)
+
+---
+
+### Spark
+
+**Zenoh-Tunnel**
+
+Netzwerk-Bridge von Edge zu Cloud auf Basis des Zenoh-Protokolls. Sichere
+Verbindung zwischen lokalen SPS-Systemen und Cloud-Diensten, ohne VPN,
+ohne komplexe Konfiguration.
+
+[Mehr erfahren](spark/)
+
+---
+
+### Tongs
+
+**Feldbus-Bridges**
+
+Protokoll-Bridges fuer Modbus TCP/RTU, EtherCAT und Profibus DP. Jede Bridge
+laeuft als eigenstaendiger Prozess, ueberwacht und automatisch neu gestartet
+durch den Runtime.
+
+[Mehr erfahren](tongs/)
+
+---
+
+### Ledger
+
+**Auftragsmanagement** -- In Entwicklung
+
+MES-Integration fuer die Verwaltung von Produktionsauftraegen,
+Produktionsverfolgung und Rueckverfolgbarkeit. Bruecke zwischen
+Automatisierung und Produktionsplanung.
+
+[Mehr erfahren](ledger/)
 
 ---
 
 <div style="text-align:center; padding: 2rem;">
 
-**Aufbauend auf OpenPLC** — ForgeIEC basiert auf dem
+**Aufbauend auf OpenPLC** -- ForgeIEC basiert auf dem
 [OpenPLC](https://autonomylogic.com/)-Projekt und ist vollstaendig kompatibel
 mit dessen Dateiarchitektur. Bestehende OpenPLC-Projekte koennen direkt
 geoeffnet und weiterentwickelt werden.
 
-**Alle Werkzeuge. Eine Plattform. Open Source.**
+**Alle Komponenten sind Open Source. Keine Lizenzkosten. Keine Herstellerbindung.**
 
 blacksmith@forgeiec.io
 
