@@ -24,7 +24,7 @@ eine Bewegung, die Wissen befreit und Innovation demokratisiert.
 ForgeIEC besteht aus zwei Komponenten:
 
 1. **ForgeIEC Editor** (`forgeiec`) — Die Entwicklungsumgebung auf Ihrer Workstation
-2. **ForgeIEC Daemon** (`forgeiecd`) — Das Laufzeitsystem auf der Ziel-SPS
+2. **ForgeIEC Daemon** (`anvild`) — Das Laufzeitsystem auf der Ziel-SPS
 
 ### Installation
 
@@ -35,7 +35,7 @@ ForgeIEC wird als Debian-Paket ausgeliefert:
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # Daemon (Ziel-SPS)
-sudo dpkg -i forgeiecd_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_armhf.deb
 ```
 
 ### Unterstuetzte Plattformen

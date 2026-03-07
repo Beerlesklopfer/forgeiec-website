@@ -20,7 +20,7 @@ Anvil يستخدم داخلياً طبقة نقل ذاكرة مشتركة ممل
 ```
 ┌──────────────┐         ┌────────────┐         ┌──────────────────┐
 │              │         │            │         │                  │
-│ برنامج PLC  │◄───────►│  forgeiecd  │◄───────►│  جسر Modbus      │──► أجهزة حقلية
+│ برنامج PLC  │◄───────►│  anvild  │◄───────►│  جسر Modbus      │──► أجهزة حقلية
 │  (كود IEC)   │  gRPC   │  (خادم)    │  Anvil  │  جسر EtherCAT    │──► محركات
 │              │         │            │ Anvil   │  جسر Profibus     │──► حساسات
 └──────────────┘         └────────────┘         │  جسر OPC-UA      │──► SCADA
@@ -31,7 +31,7 @@ Anvil يستخدم داخلياً طبقة نقل ذاكرة مشتركة ممل
                          ذاكرة مشتركة
 ```
 
-يتم تبادل البيانات بين `forgeiecd` وجسور البروتوكول عبر **Anvil Technology\u00ae** —
+يتم تبادل البيانات بين `anvild` وجسور البروتوكول عبر **Anvil Technology\u00ae** —
 قناة IPC عالية الأداء مبنية على ذاكرة مشتركة بدون نسخ.
 كل قطاع يحصل على قناة اتصال خاصة به.
 
@@ -78,13 +78,13 @@ END_VAR
 
 | البروتوكول | الجسر | الحالة |
 |-----------|-------|--------|
-| **Modbus TCP** | `forgeiec-modbustcp` | متوفر |
-| **Modbus RTU** | `forgeiec-modbusrtu` | متوفر |
-| **EtherCAT** | `forgeiec-ethercat` | قيد التطوير |
-| **Profibus DP** | `forgeiec-profibus` | قيد التطوير |
-| **OPC-UA** | `forgeiec-opcua` | مخطط |
+| **Modbus TCP** | `tongs-modbustcp` | متوفر |
+| **Modbus RTU** | `tongs-modbusrtu` | متوفر |
+| **EtherCAT** | `tongs-ethercat` | قيد التطوير |
+| **Profibus DP** | `tongs-profibus` | قيد التطوير |
+| **OPC-UA** | `tongs-opcua` | مخطط |
 
-كل جسر يعمل كعملية مستقلة. `forgeiecd` يبدأ ويراقب ويعيد تشغيل
+كل جسر يعمل كعملية مستقلة. `anvild` يبدأ ويراقب ويعيد تشغيل
 الجسور تلقائياً.
 
 ---

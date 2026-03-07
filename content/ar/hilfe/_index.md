@@ -24,7 +24,7 @@ summary: "وثائق وموارد ForgeIEC"
 يتكون ForgeIEC من مكونين:
 
 1. **محرر ForgeIEC** (`forgeiec`) — بيئة التطوير على محطة العمل
-2. **خادم ForgeIEC** (`forgeiecd`) — نظام التشغيل على PLC الهدف
+2. **خادم ForgeIEC** (`anvild`) — نظام التشغيل على PLC الهدف
 
 ### التثبيت
 
@@ -35,7 +35,7 @@ summary: "وثائق وموارد ForgeIEC"
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # الخادم (PLC الهدف)
-sudo dpkg -i forgeiecd_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_armhf.deb
 ```
 
 ### اتصل بنا

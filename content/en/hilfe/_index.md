@@ -24,7 +24,7 @@ that liberates knowledge and democratizes innovation.
 ForgeIEC consists of two components:
 
 1. **ForgeIEC Editor** (`forgeiec`) — The development environment on your workstation
-2. **ForgeIEC Daemon** (`forgeiecd`) — The runtime system on the target PLC
+2. **ForgeIEC Daemon** (`anvild`) — The runtime system on the target PLC
 
 ### Installation
 
@@ -35,7 +35,7 @@ ForgeIEC is distributed as Debian packages:
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # Daemon (Target PLC)
-sudo dpkg -i forgeiecd_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_armhf.deb
 ```
 
 ### Supported Platforms

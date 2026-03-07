@@ -24,7 +24,7 @@ ForgeIECヘルプセクションへようこそ。ここではプロジェクト
 ForgeIECは2つのコンポーネントで構成されています：
 
 1. **ForgeIECエディタ** (`forgeiec`) — ワークステーション上の開発環境
-2. **ForgeIECデーモン** (`forgeiecd`) — ターゲットPLC上のランタイムシステム
+2. **ForgeIECデーモン** (`anvild`) — ターゲットPLC上のランタイムシステム
 
 ### インストール
 
@@ -35,7 +35,7 @@ ForgeIECはDebianパッケージとして配布されます：
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # デーモン（ターゲットPLC）
-sudo dpkg -i forgeiecd_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_armhf.deb
 ```
 
 ### お問い合わせ

@@ -21,7 +21,7 @@ kopyalama yok, taviz yok.
 ```
 ┌──────────────┐         ┌────────────┐         ┌──────────────────┐
 │              │         │            │         │                  │
-│ PLC Programi │◄───────►│  forgeiecd  │◄───────►│  Modbus Koeprue  │──► Saha Cihazlari
+│ PLC Programi │◄───────►│  anvild  │◄───────►│  Modbus Koeprue  │──► Saha Cihazlari
 │  (IEC Kodu)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT Koeprue│──► Sueruecueler
 │              │         │            │ Anvil   │  Profibus Koeprue │──► Sensörler
 └──────────────┘         └────────────┘         │  OPC-UA Koeprue  │──► SCADA
@@ -32,7 +32,7 @@ kopyalama yok, taviz yok.
                          Paylasimli Bellek
 ```
 
-`forgeiecd` ile protokol koepruelerinin arasindaki veri degisimi **Anvil Technology\u00ae**
+`anvild` ile protokol koepruelerinin arasindaki veri degisimi **Anvil Technology\u00ae**
 uezerinden gerceklesir — sifir-kopyali paylasimli bellek tabanli yuesek
 performansli bir IPC kanali.
 
@@ -79,13 +79,13 @@ END_VAR
 
 | Protokol | Koeprue | Durum |
 |----------|---------|-------|
-| **Modbus TCP** | `forgeiec-modbustcp` | Mevcut |
-| **Modbus RTU** | `forgeiec-modbusrtu` | Mevcut |
-| **EtherCAT** | `forgeiec-ethercat` | Gelistirme asamasinda |
-| **Profibus DP** | `forgeiec-profibus` | Gelistirme asamasinda |
-| **OPC-UA** | `forgeiec-opcua` | Planli |
+| **Modbus TCP** | `tongs-modbustcp` | Mevcut |
+| **Modbus RTU** | `tongs-modbusrtu` | Mevcut |
+| **EtherCAT** | `tongs-ethercat` | Gelistirme asamasinda |
+| **Profibus DP** | `tongs-profibus` | Gelistirme asamasinda |
+| **OPC-UA** | `tongs-opcua` | Planli |
 
-Her koeprue bagimsiz bir suerec olarak calisir. `forgeiecd` koepruelerini
+Her koeprue bagimsiz bir suerec olarak calisir. `anvild` koepruelerini
 otomatik olarak baslatir, izler ve yeniden baslatir.
 
 ---

@@ -22,7 +22,7 @@ serializacion, sin copias, sin compromisos.
 ```
 ┌──────────────┐         ┌────────────┐         ┌──────────────────┐
 │              │         │            │         │                  │
-│ Programa PLC │◄───────►│  forgeiecd  │◄───────►│  Bridge Modbus   │──► Dispositivos
+│ Programa PLC │◄───────►│  anvild  │◄───────►│  Bridge Modbus   │──► Dispositivos
 │  (Codigo IEC)│  gRPC   │  (Daemon)  │  Anvil  │  Bridge EtherCAT │──► Accionamientos
 │              │         │            │ Anvil   │  Bridge Profibus  │──► Sensores
 └──────────────┘         └────────────┘         │  Bridge OPC-UA   │──► SCADA
@@ -33,7 +33,7 @@ serializacion, sin copias, sin compromisos.
                          Memoria compartida
 ```
 
-El intercambio de datos entre `forgeiecd` y los bridges de protocolo se
+El intercambio de datos entre `anvild` y los bridges de protocolo se
 realiza a traves de **Anvil Technology\u00ae** — un canal IPC de alto rendimiento basado
 en memoria compartida zero-copy.
 
@@ -80,13 +80,13 @@ END_VAR
 
 | Protocolo | Bridge | Estado |
 |-----------|--------|--------|
-| **Modbus TCP** | `forgeiec-modbustcp` | Disponible |
-| **Modbus RTU** | `forgeiec-modbusrtu` | Disponible |
-| **EtherCAT** | `forgeiec-ethercat` | En desarrollo |
-| **Profibus DP** | `forgeiec-profibus` | En desarrollo |
-| **OPC-UA** | `forgeiec-opcua` | Planificado |
+| **Modbus TCP** | `tongs-modbustcp` | Disponible |
+| **Modbus RTU** | `tongs-modbusrtu` | Disponible |
+| **EtherCAT** | `tongs-ethercat` | En desarrollo |
+| **Profibus DP** | `tongs-profibus` | En desarrollo |
+| **OPC-UA** | `tongs-opcua` | Planificado |
 
-Cada bridge funciona como un proceso independiente. `forgeiecd` inicia,
+Cada bridge funciona como un proceso independiente. `anvild` inicia,
 supervisa y reinicia los bridges automaticamente.
 
 ---

@@ -24,7 +24,7 @@ mouvement qui libere le savoir et democratise l'innovation.
 ForgeIEC se compose de deux composants :
 
 1. **Editeur ForgeIEC** (`forgeiec`) — L'environnement de developpement sur votre poste de travail
-2. **Daemon ForgeIEC** (`forgeiecd`) — Le systeme d'execution sur l'automate cible
+2. **Daemon ForgeIEC** (`anvild`) — Le systeme d'execution sur l'automate cible
 
 ### Installation
 
@@ -35,7 +35,7 @@ ForgeIEC est distribue sous forme de paquets Debian :
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # Daemon (automate cible)
-sudo dpkg -i forgeiecd_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_armhf.deb
 ```
 
 ### Contact

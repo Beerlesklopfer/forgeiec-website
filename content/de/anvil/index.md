@@ -21,7 +21,7 @@ keine Kompromisse.
 ```
 ┌──────────────┐         ┌────────────┐         ┌──────────────────┐
 │              │         │            │         │                  │
-│ SPS-Programm │◄───────►│  forgeiecd  │◄───────►│  Modbus-Bridge   │──► Feldgeräte
+│ SPS-Programm │◄───────►│  anvild  │◄───────►│  Modbus-Bridge   │──► Feldgeräte
 │  (IEC Code)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT-Bridge │──► Antriebe
 │              │         │            │ Anvil   │  Profibus-Bridge  │──► Sensoren
 └──────────────┘         └────────────┘         │  OPC-UA-Bridge   │──► SCADA
@@ -32,7 +32,7 @@ keine Kompromisse.
                          Shared Memory
 ```
 
-Der Datenaustausch zwischen `forgeiecd` und den Protocol-Bridges erfolgt
+Der Datenaustausch zwischen `anvild` und den Protocol-Bridges erfolgt
 über **Anvil Technology\u00ae** — einen hochperformanten IPC-Kanal auf Basis von Zero-Copy
 Shared Memory. Jedes Segment erhält seinen eigenen Kommunikationskanal.
 
@@ -86,13 +86,13 @@ Anvil Technology\u00ae verbindet das SPS-Programm mit allen industriellen Feldbu
 
 | Protokoll | Bridge | Status |
 |-----------|--------|--------|
-| **Modbus TCP** | `forgeiec-modbustcp` | Verfügbar |
-| **Modbus RTU** | `forgeiec-modbusrtu` | Verfügbar |
-| **EtherCAT** | `forgeiec-ethercat` | In Entwicklung |
-| **Profibus DP** | `forgeiec-profibus` | In Entwicklung |
-| **OPC-UA** | `forgeiec-opcua` | Geplant |
+| **Modbus TCP** | `tongs-modbustcp` | Verfügbar |
+| **Modbus RTU** | `tongs-modbusrtu` | Verfügbar |
+| **EtherCAT** | `tongs-ethercat` | In Entwicklung |
+| **Profibus DP** | `tongs-profibus` | In Entwicklung |
+| **OPC-UA** | `tongs-opcua` | Geplant |
 
-Jede Bridge läuft als eigenständiger Prozess. `forgeiecd` startet, überwacht
+Jede Bridge läuft als eigenständiger Prozess. `anvild` startet, überwacht
 und restartet Bridges automatisch. Ein Absturz einer Bridge beeinträchtigt
 weder die SPS noch andere Bridges.
 

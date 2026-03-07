@@ -24,7 +24,7 @@ oezgueruestiren ve inovasyonu demokratiklestiren bir harekettir.
 ForgeIEC iki bilesenden olusur:
 
 1. **ForgeIEC Editoer** (`forgeiec`) — Is istasyonunuzdaki gelistirme ortami
-2. **ForgeIEC Daemon** (`forgeiecd`) — Hedef PLC uzerindeki calisma zamani sistemi
+2. **ForgeIEC Daemon** (`anvild`) — Hedef PLC uzerindeki calisma zamani sistemi
 
 ### Kurulum
 
@@ -35,7 +35,7 @@ ForgeIEC Debian paketleri olarak dagitilir:
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # Daemon (hedef PLC)
-sudo dpkg -i forgeiecd_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_armhf.deb
 ```
 
 ### Iletisim

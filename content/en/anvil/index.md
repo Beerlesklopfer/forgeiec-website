@@ -20,7 +20,7 @@ for inter-process communication. No serialization, no copies, no compromises.
 ```
 ┌──────────────┐         ┌────────────┐         ┌──────────────────┐
 │              │         │            │         │                  │
-│ PLC Program  │◄───────►│  forgeiecd  │◄───────►│  Modbus Bridge   │──► Field Devices
+│ PLC Program  │◄───────►│  anvild  │◄───────►│  Modbus Bridge   │──► Field Devices
 │  (IEC Code)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT Bridge │──► Drives
 │              │         │            │ Anvil   │  Profibus Bridge  │──► Sensors
 └──────────────┘         └────────────┘         │  OPC-UA Bridge   │──► SCADA
@@ -31,7 +31,7 @@ for inter-process communication. No serialization, no copies, no compromises.
                          Shared Memory
 ```
 
-Data exchange between `forgeiecd` and the protocol bridges runs through
+Data exchange between `anvild` and the protocol bridges runs through
 **Anvil Technology\u00ae** — a high-performance IPC channel based on zero-copy shared memory.
 Each segment gets its own communication channel.
 
@@ -85,13 +85,13 @@ Anvil Technology\u00ae connects the PLC program to all industrial fieldbuses:
 
 | Protocol | Bridge | Status |
 |----------|--------|--------|
-| **Modbus TCP** | `forgeiec-modbustcp` | Available |
-| **Modbus RTU** | `forgeiec-modbusrtu` | Available |
-| **EtherCAT** | `forgeiec-ethercat` | In Development |
-| **Profibus DP** | `forgeiec-profibus` | In Development |
-| **OPC-UA** | `forgeiec-opcua` | Planned |
+| **Modbus TCP** | `tongs-modbustcp` | Available |
+| **Modbus RTU** | `tongs-modbusrtu` | Available |
+| **EtherCAT** | `tongs-ethercat` | In Development |
+| **Profibus DP** | `tongs-profibus` | In Development |
+| **OPC-UA** | `tongs-opcua` | Planned |
 
-Each bridge runs as an independent process. `forgeiecd` starts, monitors
+Each bridge runs as an independent process. `anvild` starts, monitors
 and restarts bridges automatically. A bridge crash affects neither the PLC
 nor other bridges.
 

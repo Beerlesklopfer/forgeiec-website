@@ -24,7 +24,7 @@ summary: "ForgeIEC 文档和资源"
 ForgeIEC 由两个组件组成：
 
 1. **ForgeIEC 编辑器** (`forgeiec`) — 工作站上的开发环境
-2. **ForgeIEC 守护进程** (`forgeiecd`) — 目标 PLC 上的运行时系统
+2. **ForgeIEC 守护进程** (`anvild`) — 目标 PLC 上的运行时系统
 
 ### 安装
 
@@ -35,7 +35,7 @@ ForgeIEC 以 Debian 包形式发布：
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # 守护进程（目标 PLC）
-sudo dpkg -i forgeiecd_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_armhf.deb
 ```
 
 ### 联系

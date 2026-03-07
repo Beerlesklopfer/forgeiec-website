@@ -19,7 +19,7 @@ Anvil 内部采用专有的零拷贝共享内存传输层，
 ```
 ┌──────────────┐         ┌────────────┐         ┌──────────────────┐
 │              │         │            │         │                  │
-│  PLC 程序    │◄───────►│  forgeiecd  │◄───────►│  Modbus 桥接     │──► 现场设备
+│  PLC 程序    │◄───────►│  anvild  │◄───────►│  Modbus 桥接     │──► 现场设备
 │  (IEC 代码)  │  gRPC   │  (守护进程) │  Anvil  │  EtherCAT 桥接   │──► 驱动器
 │              │         │            │ Anvil   │  Profibus 桥接    │──► 传感器
 └──────────────┘         └────────────┘         │  OPC-UA 桥接     │──► SCADA
@@ -30,7 +30,7 @@ Anvil 内部采用专有的零拷贝共享内存传输层，
                           共享内存
 ```
 
-`forgeiecd` 与协议桥接器之间的数据交换通过 **Anvil Technology\u00ae** 进行——
+`anvild` 与协议桥接器之间的数据交换通过 **Anvil Technology\u00ae** 进行——
 一个基于零拷贝共享内存的高性能 IPC 通道。
 每个段拥有独立的通信通道。
 
@@ -79,13 +79,13 @@ PUBLISH/SUBSCRIBE 关键字是 ForgeIEC 对 IEC 61131-3 标准的扩展。
 
 | 协议 | 桥接器 | 状态 |
 |------|--------|------|
-| **Modbus TCP** | `forgeiec-modbustcp` | 可用 |
-| **Modbus RTU** | `forgeiec-modbusrtu` | 可用 |
-| **EtherCAT** | `forgeiec-ethercat` | 开发中 |
-| **Profibus DP** | `forgeiec-profibus` | 开发中 |
-| **OPC-UA** | `forgeiec-opcua` | 计划中 |
+| **Modbus TCP** | `tongs-modbustcp` | 可用 |
+| **Modbus RTU** | `tongs-modbusrtu` | 可用 |
+| **EtherCAT** | `tongs-ethercat` | 开发中 |
+| **Profibus DP** | `tongs-profibus` | 开发中 |
+| **OPC-UA** | `tongs-opcua` | 计划中 |
 
-每个桥接器作为独立进程运行。`forgeiecd` 自动启动、监控和重启桥接器。
+每个桥接器作为独立进程运行。`anvild` 自动启动、监控和重启桥接器。
 
 ---
 
