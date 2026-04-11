@@ -61,8 +61,9 @@ Entwicklungsumgebung integriert:
 
 Forge Studio kommuniziert ueber gRPC mit der Anvil-Laufzeitumgebung:
 
-- **Kompilierung auf der Workstation** — der IEC-Compiler (iec2c) laeuft
-  lokal, nur der erzeugte C-Code wird an die SPS uebertragen
+- **Kompilierung auf der Workstation** — Forge Studio erzeugt C-Code
+  direkt aus dem Projektmodell und uebertraegt nur das Ergebnis an
+  die SPS (kein externer Compiler in der Toolchain)
 - **Verschluesselter Upload** — AES-256-GCM-verschluesselte Uebertragung
   auf das Zielsystem
 - **Live-Debugging** — Variablen in Echtzeit beobachten und forcieren

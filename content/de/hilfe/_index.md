@@ -26,24 +26,54 @@ ForgeIEC besteht aus zwei Komponenten:
 1. **ForgeIEC Editor** (`forgeiec`) — Die Entwicklungsumgebung auf Ihrer Workstation
 2. **ForgeIEC Daemon** (`anvild`) — Das Laufzeitsystem auf der Ziel-SPS
 
-### Installation
+### Installation aus dem ForgeIEC APT-Repository
 
-ForgeIEC wird als Debian-Paket ausgeliefert:
+ForgeIEC wird als signiertes Debian-Repository unter
+`apt.forgeiec.io` bereitgestellt. Die Einrichtung erfolgt einmalig
+auf jeder Workstation bzw. Ziel-SPS:
+
+```bash
+# Signier-Schluessel hinterlegen
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# Repository-Quelle eintragen
+# (Debian 12 "bookworm" bzw. Debian 13 "trixie" — passend zum System)
+echo "deb [signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+sudo apt update
+```
+
+Anschliessend kann jedes ForgeIEC-Paket mit dem Standard-Paket-
+Manager installiert werden:
 
 ```bash
 # Editor (Workstation)
-sudo dpkg -i forgeiec_0.1.0_amd64.deb
+sudo apt install forgeiec
 
 # Daemon (Ziel-SPS)
-sudo dpkg -i anvild_0.1.0_armhf.deb
+sudo apt install anvild
 ```
+
+Updates folgen automatisch dem normalen `apt update && apt upgrade`
+Lebenszyklus — es ist keine manuelle `.deb`-Datei noetig.
 
 ### Unterstuetzte Plattformen
 
-| Komponente | Architekturen |
-|-----------|---------------|
-| Editor | x86_64, ARM64 |
-| Daemon | x86_64, ARM64, ARMv7 |
+| Komponente | Architekturen          | Debian-Codenamen      |
+|------------|------------------------|------------------------|
+| Editor     | amd64, arm64           | bookworm, trixie       |
+| Daemon     | amd64, arm64, armhf    | bookworm, trixie       |
+| Bridges    | amd64, arm64, armhf    | bookworm, trixie       |
+
+Fuer Systeme ohne direkten Internet-Zugriff koennen die einzelnen
+`.deb`-Dateien auch aus
+[apt.forgeiec.io/pool/](https://apt.forgeiec.io/pool/) manuell
+heruntergeladen und mit `sudo dpkg -i <datei>.deb` installiert
+werden.
 
 ### Kontakt
 

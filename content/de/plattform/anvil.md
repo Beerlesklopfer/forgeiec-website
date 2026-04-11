@@ -108,13 +108,15 @@ Subprozesse:
 
 Die Kompilierung folgt einem zweistufigen Modell:
 
-1. **Workstation**: Forge Studio fuehrt `iec2c` aus (IEC 61131-3 nach C)
+1. **Workstation**: Forge Studio erzeugt den C-Quellcode direkt aus
+   dem Projektmodell — ohne externen IEC-Compiler
 2. **Zielsystem**: `anvild` generiert ein plattformspezifisches Makefile
    und ruft `make` (g++) auf
 
-Der IEC-Compiler (`iec2c`) laeuft nur auf der Workstation. Auf dem
-Zielsystem werden `make`, `g++`, `libstdc++` und `librt` benoetigt,
-um den generierten C-Code zur Laufzeit zu kompilieren.
+Auf dem Zielsystem werden lediglich `make`, `g++`, `libstdc++` und
+`librt` benoetigt, um den generierten C-Code zur Laufzeit zu
+kompilieren. Es wird bewusst kein zusaetzlicher IEC-Compiler auf der
+Ziel-SPS installiert.
 
 ---
 
