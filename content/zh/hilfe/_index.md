@@ -35,7 +35,7 @@ ForgeIEC 以 Debian 包形式发布：
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # 守护进程（目标 PLC）
-sudo dpkg -i anvild_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_arm64.deb
 ```
 
 ### 联系

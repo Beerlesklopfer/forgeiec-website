@@ -35,7 +35,7 @@ summary: "وثائق وموارد ForgeIEC"
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # الخادم (PLC الهدف)
-sudo dpkg -i anvild_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_arm64.deb
 ```
 
 ### اتصل بنا

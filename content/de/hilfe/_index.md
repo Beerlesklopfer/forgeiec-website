@@ -63,11 +63,12 @@ Lebenszyklus — es ist keine manuelle `.deb`-Datei noetig.
 
 ### Unterstuetzte Plattformen
 
-| Komponente | Architekturen          | Debian-Codenamen      |
-|------------|------------------------|------------------------|
-| Editor     | amd64, arm64           | bookworm, trixie       |
-| Daemon     | amd64, arm64, armhf    | bookworm, trixie       |
-| Bridges    | amd64, arm64, armhf    | bookworm, trixie       |
+| Komponente | Architekturen | Debian-Codenamen |
+|------------|---------------|------------------|
+| Editor     | amd64, arm64  | bookworm, trixie |
+| Daemon     | amd64, arm64  | bookworm, trixie |
+| Bridges    | amd64, arm64  | bookworm, trixie |
+| Hearth     | amd64, arm64  | bookworm, trixie |
 
 Fuer Systeme ohne direkten Internet-Zugriff koennen die einzelnen
 `.deb`-Dateien auch aus

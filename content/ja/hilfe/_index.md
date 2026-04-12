@@ -35,7 +35,7 @@ ForgeIECはDebianパッケージとして配布されます：
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # デーモン（ターゲットPLC）
-sudo dpkg -i anvild_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_arm64.deb
 ```
 
 ### お問い合わせ

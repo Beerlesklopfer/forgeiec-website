@@ -35,7 +35,7 @@ ForgeIEC se distribuye como paquetes Debian:
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # Daemon (PLC destino)
-sudo dpkg -i anvild_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_arm64.deb
 ```
 
 ### Contacto

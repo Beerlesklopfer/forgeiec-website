@@ -35,7 +35,7 @@ ForgeIEC Debian paketleri olarak dagitilir:
 sudo dpkg -i forgeiec_0.1.0_amd64.deb
 
 # Daemon (hedef PLC)
-sudo dpkg -i anvild_0.1.0_armhf.deb
+sudo dpkg -i anvild_0.1.0_arm64.deb
 ```
 
 ### Iletisim
