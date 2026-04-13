@@ -12,6 +12,16 @@ zu den Grundlagen unseres Projekts und unserer Philosophie.
 
 ## Themen
 
+### [Bus-Konfiguration](/hilfe/bus-config/)
+
+PLCopen-XML-Schema fuer die industrielle Feldbus-Konfiguration im `.forge`-Projekt.
+Segmente, Devices, Variablen-Binding und IEC-Adressvergabe.
+
+### [Testabdeckung](/hilfe/tests/)
+
+117 automatisierte Tests pruefen den vollstaendigen IEC 61131-3 Sprachvorrat,
+alle 132 Standard-Bausteine und das Multi-Task-Threading-System.
+
 ### [Open Source Philosophie](/hilfe/open-source/)
 
 Der Gedanke hinter Open Source geht weit ueber Software hinaus — es ist
@@ -40,7 +50,7 @@ curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
 
 # Repository-Quelle eintragen
 # (Debian 12 "bookworm" bzw. Debian 13 "trixie" — passend zum System)
-echo "deb [signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
 https://apt.forgeiec.io/trixie trixie main" \
   | sudo tee /etc/apt/sources.list.d/forgeiec.list
 
@@ -69,12 +79,6 @@ Lebenszyklus — es ist keine manuelle `.deb`-Datei noetig.
 | Daemon     | amd64, arm64  | bookworm, trixie |
 | Bridges    | amd64, arm64  | bookworm, trixie |
 | Hearth     | amd64, arm64  | bookworm, trixie |
-
-Fuer Systeme ohne direkten Internet-Zugriff koennen die einzelnen
-`.deb`-Dateien auch aus
-[apt.forgeiec.io/pool/](https://apt.forgeiec.io/pool/) manuell
-heruntergeladen und mit `sudo dpkg -i <datei>.deb` installiert
-werden.
 
 ### Kontakt
 
