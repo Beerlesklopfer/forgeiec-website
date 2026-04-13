@@ -28,7 +28,14 @@ jobs:
 
       - name: Deploy
         run: |
+          KEYFILE="$HOME/.ssh/forgeiec_website_deploy"
+          if [ ! -r "$KEYFILE" ]; then
+            echo "ERROR: SSH key $KEYFILE not readable"
+            exit 1
+          fi
+          SSH_OPTS="-i $KEYFILE -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -o BatchMode=yes"
           rsync -avz --delete \
+            -e "ssh $SSH_OPTS" \
             public/ \
             root@forgeiec.io:/var/www/forgeiec.io/public/
           echo "Deployed to https://forgeiec.io/"
