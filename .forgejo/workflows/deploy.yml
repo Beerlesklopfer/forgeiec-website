@@ -1,0 +1,34 @@
+# =============================================================================
+# ForgeIEC Website — Build & Deploy
+#
+# Triggers on push to main. Builds the Hugo site and deploys via rsync
+# to forgeiec.io. Runs directly on the self-hosted runner (Hugo is
+# installed system-wide, no container needed).
+# =============================================================================
+name: Deploy Website
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: [self-hosted, Linux, X64]
+
+    steps:
+      - name: Checkout (with submodules for theme)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        run: |
+          rsync -avz --delete \
+            public/ \
+            root@forgeiec.io:/var/www/forgeiec.io/public/
+          echo "Deployed to https://forgeiec.io/"
