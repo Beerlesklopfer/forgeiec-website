@@ -42,20 +42,7 @@ ForgeIEC, `apt.forgeiec.io` adresinde imzali bir Debian deposu olarak
 sunulmaktadir. Kurulum her is istasyonu veya hedef PLC'de bir kez
 yapilir:
 
-```bash
-# Imza anahtarini iceri aktar
-sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
-  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
-
-# Depo kaynagini ekle
-# (Debian 12 "bookworm" veya Debian 13 "trixie" — sisteminize uygun olani)
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
-https://apt.forgeiec.io/trixie trixie main" \
-  | sudo tee /etc/apt/sources.list.d/forgeiec.list
-
-sudo apt update
-```
+{{< distro-install >}}
 
 Ardindan standart paket yoeneticisi ile herhangi bir ForgeIEC paketini
 kurabilirsiniz:

@@ -41,20 +41,7 @@ ForgeIEC 由两个组件组成：
 ForgeIEC 以签名的 Debian 仓库形式在 `apt.forgeiec.io` 上提供。
 每个工作站或目标 PLC 只需设置一次：
 
-```bash
-# 导入签名密钥
-sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
-  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
-
-# 添加仓库源
-# （Debian 12 "bookworm" 或 Debian 13 "trixie" — 根据您的系统选择）
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
-https://apt.forgeiec.io/trixie trixie main" \
-  | sudo tee /etc/apt/sources.list.d/forgeiec.list
-
-sudo apt update
-```
+{{< distro-install >}}
 
 然后使用标准包管理器安装任何 ForgeIEC 软件包：
 

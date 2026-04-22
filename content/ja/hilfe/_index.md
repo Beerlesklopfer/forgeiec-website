@@ -43,20 +43,7 @@ ForgeIECは`apt.forgeiec.io`で署名済みDebianリポジトリとして
 提供されています。各ワークステーションまたはターゲットPLCでの
 セットアップは一度だけ必要です：
 
-```bash
-# 署名鍵をインポート
-sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
-  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
-
-# リポジトリソースを追加
-# （Debian 12 "bookworm" または Debian 13 "trixie" — システムに合わせて）
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
-https://apt.forgeiec.io/trixie trixie main" \
-  | sudo tee /etc/apt/sources.list.d/forgeiec.list
-
-sudo apt update
-```
+{{< distro-install >}}
 
 標準パッケージマネージャでForgeIECパッケージをインストールできます：
 

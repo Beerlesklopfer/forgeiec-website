@@ -43,20 +43,7 @@ ForgeIEC est fourni sous forme de depot Debian signe a l'adresse
 `apt.forgeiec.io`. La configuration s'effectue une seule fois sur
 chaque poste de travail ou automate cible :
 
-```bash
-# Importer la cle de signature
-sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
-  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
-
-# Ajouter la source du depot
-# (Debian 12 "bookworm" ou Debian 13 "trixie" — selon votre systeme)
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
-https://apt.forgeiec.io/trixie trixie main" \
-  | sudo tee /etc/apt/sources.list.d/forgeiec.list
-
-sudo apt update
-```
+{{< distro-install >}}
 
 Ensuite, installez n'importe quel paquet ForgeIEC avec le gestionnaire
 de paquets standard :

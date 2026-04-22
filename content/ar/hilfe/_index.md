@@ -42,20 +42,7 @@ summary: "وثائق وموارد ForgeIEC"
 `apt.forgeiec.io`. يتم الإعداد مرة واحدة فقط على كل
 محطة عمل أو PLC هدف:
 
-```bash
-# استيراد مفتاح التوقيع
-sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
-  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
-
-# إضافة مصدر المستودع
-# (Debian 12 "bookworm" أو Debian 13 "trixie" — حسب نظامك)
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
-https://apt.forgeiec.io/trixie trixie main" \
-  | sudo tee /etc/apt/sources.list.d/forgeiec.list
-
-sudo apt update
-```
+{{< distro-install >}}
 
 ثم قم بتثبيت أي حزمة ForgeIEC باستخدام مدير الحزم القياسي:
 
