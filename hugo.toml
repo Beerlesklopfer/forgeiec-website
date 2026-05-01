@@ -30,7 +30,7 @@ unsafe = true
       weight = 20
     [[languages.de.menu.main]]
       name = "Hilfe"
-      pageRef = "/hilfe/"
+      pageRef = "/help/"
       weight = 30
     [[languages.de.menu.main]]
       name = "Kontakt"
@@ -54,7 +54,7 @@ unsafe = true
       weight = 20
     [[languages.en.menu.main]]
       name = "Help"
-      pageRef = "/hilfe/"
+      pageRef = "/help/"
       weight = 30
     [[languages.en.menu.main]]
       name = "Contact"
@@ -78,7 +78,7 @@ unsafe = true
       weight = 20
     [[languages.fr.menu.main]]
       name = "Aide"
-      pageRef = "/hilfe/"
+      pageRef = "/help/"
       weight = 30
     [[languages.fr.menu.main]]
       name = "Contact"
@@ -102,7 +102,7 @@ unsafe = true
       weight = 20
     [[languages.es.menu.main]]
       name = "Ayuda"
-      pageRef = "/hilfe/"
+      pageRef = "/help/"
       weight = 30
     [[languages.es.menu.main]]
       name = "Contacto"
@@ -126,7 +126,7 @@ unsafe = true
       weight = 20
     [[languages.zh.menu.main]]
       name = "帮助"
-      pageRef = "/hilfe/"
+      pageRef = "/help/"
       weight = 30
     [[languages.zh.menu.main]]
       name = "联系"
@@ -150,7 +150,7 @@ unsafe = true
       weight = 20
     [[languages.ja.menu.main]]
       name = "ヘルプ"
-      pageRef = "/hilfe/"
+      pageRef = "/help/"
       weight = 30
     [[languages.ja.menu.main]]
       name = "お問い合わせ"
@@ -174,7 +174,7 @@ unsafe = true
       weight = 20
     [[languages.tr.menu.main]]
       name = "Yardım"
-      pageRef = "/hilfe/"
+      pageRef = "/help/"
       weight = 30
     [[languages.tr.menu.main]]
       name = "İletişim"
@@ -199,7 +199,7 @@ unsafe = true
       weight = 20
     [[languages.ar.menu.main]]
       name = "المساعدة"
-      pageRef = "/hilfe/"
+      pageRef = "/help/"
       weight = 30
     [[languages.ar.menu.main]]
       name = "اتصل بنا"

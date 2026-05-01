@@ -12,17 +12,17 @@ summary: "ForgeIEC 文档和资源"
 
 ## 主题
 
-### [总线配置](/hilfe/bus-config/)
+### [总线配置](/help/bus-config/)
 
 用于 `.forge` 项目中工业现场总线配置的 PLCopen XML 架构。
 段、设备、变量绑定和 IEC 地址分配。
 
-### [测试覆盖](/hilfe/tests/)
+### [测试覆盖](/help/tests/)
 
 117 项自动化测试验证了完整的 IEC 61131-3 语言特性集、
 全部 132 个标准库模块以及多任务线程系统。
 
-### [开源哲学](/hilfe/open-source/)
+### [开源哲学](/help/open-source/)
 
 开源背后的理念远超软件本身——它是一场解放知识、
 民主化创新的运动。

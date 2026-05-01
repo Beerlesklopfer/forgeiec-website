@@ -12,17 +12,17 @@ about the fundamentals of our project and our philosophy.
 
 ## Topics
 
-### [Bus Configuration](/hilfe/bus-config/)
+### [Bus Configuration](/help/bus-config/)
 
 PLCopen XML schema for industrial fieldbus configuration in `.forge` projects.
 Segments, devices, variable binding and IEC address assignment.
 
-### [Test Coverage](/hilfe/tests/)
+### [Test Coverage](/help/tests/)
 
 117 automated tests verify the complete IEC 61131-3 language feature set,
 all 132 standard library blocks and the multi-task threading system.
 
-### [Open Source Philosophy](/hilfe/open-source/)
+### [Open Source Philosophy](/help/open-source/)
 
 The idea behind open source goes far beyond software — it is a movement
 that liberates knowledge and democratizes innovation.

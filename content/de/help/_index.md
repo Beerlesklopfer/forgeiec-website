@@ -12,17 +12,23 @@ zu den Grundlagen unseres Projekts und unserer Philosophie.
 
 ## Themen
 
-### [Bus-Konfiguration](/hilfe/bus-config/)
+### [Projekt-Dateiformat (.forge)](/help/file-format/)
+
+Aufbau einer ForgeIEC-Projektdatei: PLCopen-XML-Wurzel, POU-Typen,
+Adress-Pool, ForgeIEC-Erweiterungen ueber `<addData>` und ST-Sprach-
+zusaetze (Bit-Zugriff, 3-Level-Qualifikation).
+
+### [Bus-Konfiguration](/help/bus-config/)
 
 PLCopen-XML-Schema fuer die industrielle Feldbus-Konfiguration im `.forge`-Projekt.
 Segmente, Devices, Variablen-Binding und IEC-Adressvergabe.
 
-### [Testabdeckung](/hilfe/tests/)
+### [Testabdeckung](/help/tests/)
 
 117 automatisierte Tests pruefen den vollstaendigen IEC 61131-3 Sprachvorrat,
 alle 132 Standard-Bausteine und das Multi-Task-Threading-System.
 
-### [Open Source Philosophie](/hilfe/open-source/)
+### [Open Source Philosophie](/help/open-source/)
 
 Der Gedanke hinter Open Source geht weit ueber Software hinaus — es ist
 eine Bewegung, die Wissen befreit und Innovation demokratisiert.

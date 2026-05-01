@@ -12,17 +12,17 @@ felsefemiz hakkinda bilgi bulabilirsiniz.
 
 ## Konular
 
-### [Bus Yapilandirmasi](/hilfe/bus-config/)
+### [Bus Yapilandirmasi](/help/bus-config/)
 
 `.forge` projelerinde endustriyel saha bus yapilandirmasi icin PLCopen XML
 semasi. Segmentler, cihazlar, degisken baglama ve IEC adres atamasi.
 
-### [Test Kapsami](/hilfe/tests/)
+### [Test Kapsami](/help/tests/)
 
 117 otomatik test, tam IEC 61131-3 dil ozellik setini, tum 132 standart
 kutuphane blogunu ve coklu gorev is parcacigi sistemini dogrular.
 
-### [Acik Kaynak Felsefesi](/hilfe/open-source/)
+### [Acik Kaynak Felsefesi](/help/open-source/)
 
 Acik kaynagin arkasindaki fikir yazilimin cok oetesine gider — bilgiyi
 oezgueruestiren ve inovasyonu demokratiklestiren bir harekettir.
