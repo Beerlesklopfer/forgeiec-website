@@ -12,18 +12,18 @@ informations sur les fondements de notre projet et de notre philosophie.
 
 ## Sujets
 
-### [Configuration Bus](/hilfe/bus-config/)
+### [Configuration Bus](/help/bus-config/)
 
 Schema XML PLCopen pour la configuration des bus de terrain industriels
 dans les projets `.forge`. Segments, appareils, liaison de variables et
 attribution d'adresses IEC.
 
-### [Couverture de tests](/hilfe/tests/)
+### [Couverture de tests](/help/tests/)
 
 117 tests automatises verifient l'ensemble complet du langage IEC 61131-3,
 les 132 blocs de la bibliotheque standard et le systeme de threading multi-tache.
 
-### [Philosophie Open Source](/hilfe/open-source/)
+### [Philosophie Open Source](/help/open-source/)
 
 L'idee derriere l'open source va bien au-dela du logiciel — c'est un
 mouvement qui libere le savoir et democratise l'innovation.
@@ -43,7 +43,20 @@ ForgeIEC est fourni sous forme de depot Debian signe a l'adresse
 `apt.forgeiec.io`. La configuration s'effectue une seule fois sur
 chaque poste de travail ou automate cible :
 
-{{< distro-install >}}
+```bash
+# Importer la cle de signature
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# Ajouter la source du depot
+# (Debian 12 "bookworm" ou Debian 13 "trixie" — selon votre systeme)
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+sudo apt update
+```
 
 Ensuite, installez n'importe quel paquet ForgeIEC avec le gestionnaire
 de paquets standard :

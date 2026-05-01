@@ -12,18 +12,18 @@ ForgeIECヘルプセクションへようこそ。ここではプロジェクト
 
 ## トピック
 
-### [バス設定](/hilfe/bus-config/)
+### [バス設定](/help/bus-config/)
 
 `.forge` プロジェクトにおける産業用フィールドバス設定のための
 PLCopen XML スキーマ。セグメント、デバイス、変数バインディング、
 IEC アドレス割り当て。
 
-### [テストカバレッジ](/hilfe/tests/)
+### [テストカバレッジ](/help/tests/)
 
 117 の自動テストが IEC 61131-3 の完全な言語機能、
 132 の標準ライブラリブロック、マルチタスクスレッドシステムを検証します。
 
-### [オープンソース哲学](/hilfe/open-source/)
+### [オープンソース哲学](/help/open-source/)
 
 オープンソースの背後にある考え方はソフトウェアをはるかに超えています——
 知識を解放し、イノベーションを民主化する運動です。
@@ -43,7 +43,20 @@ ForgeIECは`apt.forgeiec.io`で署名済みDebianリポジトリとして
 提供されています。各ワークステーションまたはターゲットPLCでの
 セットアップは一度だけ必要です：
 
-{{< distro-install >}}
+```bash
+# 署名鍵をインポート
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# リポジトリソースを追加
+# （Debian 12 "bookworm" または Debian 13 "trixie" — システムに合わせて）
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+sudo apt update
+```
 
 標準パッケージマネージャでForgeIECパッケージをインストールできます：
 

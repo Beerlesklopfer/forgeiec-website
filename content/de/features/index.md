@@ -37,6 +37,30 @@ externen Systemen. PUBLISH/SUBSCRIBE direkt im IEC-Programm.
 - Werte forcieren ohne Produktionsstillstand
 - Monitoring-Panel mit Filterfunktion
 
+## Sicherheits-Schalter pro Variable
+
+Drei sicherheitskritische Datenpfade verlassen die SPS — HMI-Export,
+Live-Monitoring und Force. Jeder Pfad ist nicht implizit erlaubt: jede
+einzelne Variable muss explizit dafuer freigegeben werden, und der
+ST-Compiler validiert das vor dem Generieren von Code.
+
+- **HMI-Export** — nur Variablen, die explizit als HMI-exportiert
+  markiert sind, gelangen ueber die OPC UA Bridge zu remote SCADA/HMI-
+  Systemen. Eine Referenz auf eine nicht-exportierte Variable im ST-
+  Code wird vom Compiler als harter Fehler abgewiesen.
+- **Live-Monitoring** — nur explizit als monitorbar markierte
+  Variablen werden ueber den Watch-Stream live mitgeschnitten.
+  Die Monitor-Spalte im Variablen-Panel ist ausgeblendet, wenn der
+  globale Monitoring-Schalter aus ist.
+- **Forcing** — nur explizit als forcierbar markierte Variablen
+  koennen vom Editor ueberschrieben werden. Force-Spalte ebenfalls
+  vom globalen Force-Schalter abhaengig sichtbar.
+
+Globale Schalter sind eine zweite Sicherheitsstufe ("nichts in
+Production" bzw. "Force-Privilegien nur in der Inbetriebnahme"); die
+Per-Variable-Markierungen sind die unverzichtbare erste Stufe — Daten
+verlassen die SPS nur dort, wo der Engineer es bewusst freigegeben hat.
+
 ## Remote-Betrieb
 
 - IEC-Kompilierung auf der Workstation — SPS benoetigt make, g++, libstdc++ und librt

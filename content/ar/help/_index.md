@@ -12,17 +12,17 @@ summary: "وثائق وموارد ForgeIEC"
 
 ## المواضيع
 
-### [تكوين الباص](/hilfe/bus-config/)
+### [تكوين الباص](/help/bus-config/)
 
 مخطط PLCopen XML لتكوين الباص الميداني الصناعي في مشاريع `.forge`.
 المقاطع والأجهزة وربط المتغيرات وتعيين عناوين IEC.
 
-### [تغطية الاختبارات](/hilfe/tests/)
+### [تغطية الاختبارات](/help/tests/)
 
 117 اختبارا آليا يتحقق من مجموعة ميزات لغة IEC 61131-3 الكاملة
 وجميع كتل المكتبة القياسية البالغ عددها 132 ونظام تعدد المهام.
 
-### [فلسفة المصدر المفتوح](/hilfe/open-source/)
+### [فلسفة المصدر المفتوح](/help/open-source/)
 
 الفكرة وراء المصدر المفتوح تتجاوز البرمجيات بكثير — إنها حركة
 تحرر المعرفة وتُديمقرط الابتكار.
@@ -42,7 +42,20 @@ summary: "وثائق وموارد ForgeIEC"
 `apt.forgeiec.io`. يتم الإعداد مرة واحدة فقط على كل
 محطة عمل أو PLC هدف:
 
-{{< distro-install >}}
+```bash
+# استيراد مفتاح التوقيع
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# إضافة مصدر المستودع
+# (Debian 12 "bookworm" أو Debian 13 "trixie" — حسب نظامك)
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+sudo apt update
+```
 
 ثم قم بتثبيت أي حزمة ForgeIEC باستخدام مدير الحزم القياسي:
 

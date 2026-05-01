@@ -37,6 +37,29 @@ external systems. PUBLISH/SUBSCRIBE directly in the IEC program.
 - Force values without production downtime
 - Monitoring panel with filter function
 
+## Per-variable safety switches
+
+Three security-sensitive data paths leave the PLC — HMI export,
+live monitoring and forcing. None of them is granted implicitly: every
+single variable must be opted in explicitly, and the ST compiler
+verifies the gate before emitting code.
+
+- **HMI export** — only variables explicitly tagged as HMI-exported
+  reach remote SCADA/HMI systems through the OPC UA bridge. A
+  reference to a non-exported variable from ST code is rejected by
+  the compiler with a hard error.
+- **Live monitoring** — only variables explicitly marked as monitorable
+  appear on the watch stream. The Monitor column in the variables
+  panel is hidden when the global monitoring switch is off.
+- **Forcing** — only variables explicitly marked as forceable can be
+  overwritten from the editor. The Force column likewise follows the
+  global force switch.
+
+Global switches are a second safety layer ("nothing in Production",
+"force privileges only during commissioning"); the per-variable marks
+are the indispensable first layer — data leaves the PLC only where the
+engineer has knowingly authorised it.
+
 ## Remote Operation
 
 - IEC compilation on the workstation — PLC requires make, g++, libstdc++ and librt

@@ -12,17 +12,17 @@ about the fundamentals of our project and our philosophy.
 
 ## Topics
 
-### [Bus Configuration](/hilfe/bus-config/)
+### [Bus Configuration](/help/bus-config/)
 
 PLCopen XML schema for industrial fieldbus configuration in `.forge` projects.
 Segments, devices, variable binding and IEC address assignment.
 
-### [Test Coverage](/hilfe/tests/)
+### [Test Coverage](/help/tests/)
 
 117 automated tests verify the complete IEC 61131-3 language feature set,
 all 132 standard library blocks and the multi-task threading system.
 
-### [Open Source Philosophy](/hilfe/open-source/)
+### [Open Source Philosophy](/help/open-source/)
 
 The idea behind open source goes far beyond software — it is a movement
 that liberates knowledge and democratizes innovation.
@@ -42,7 +42,20 @@ ForgeIEC is provided as a signed Debian repository at
 `apt.forgeiec.io`. Setup is a one-time step on each workstation
 or target PLC:
 
-{{< distro-install >}}
+```bash
+# Import signing key
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# Add repository source
+# (Debian 12 "bookworm" or Debian 13 "trixie" — match your system)
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+sudo apt update
+```
 
 Then install any ForgeIEC package using the standard package manager:
 

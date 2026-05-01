@@ -12,17 +12,17 @@ summary: "ForgeIEC 文档和资源"
 
 ## 主题
 
-### [总线配置](/hilfe/bus-config/)
+### [总线配置](/help/bus-config/)
 
 用于 `.forge` 项目中工业现场总线配置的 PLCopen XML 架构。
 段、设备、变量绑定和 IEC 地址分配。
 
-### [测试覆盖](/hilfe/tests/)
+### [测试覆盖](/help/tests/)
 
 117 项自动化测试验证了完整的 IEC 61131-3 语言特性集、
 全部 132 个标准库模块以及多任务线程系统。
 
-### [开源哲学](/hilfe/open-source/)
+### [开源哲学](/help/open-source/)
 
 开源背后的理念远超软件本身——它是一场解放知识、
 民主化创新的运动。
@@ -41,7 +41,20 @@ ForgeIEC 由两个组件组成：
 ForgeIEC 以签名的 Debian 仓库形式在 `apt.forgeiec.io` 上提供。
 每个工作站或目标 PLC 只需设置一次：
 
-{{< distro-install >}}
+```bash
+# 导入签名密钥
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# 添加仓库源
+# （Debian 12 "bookworm" 或 Debian 13 "trixie" — 根据您的系统选择）
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+sudo apt update
+```
 
 然后使用标准包管理器安装任何 ForgeIEC 软件包：
 
