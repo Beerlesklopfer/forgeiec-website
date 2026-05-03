@@ -12,6 +12,12 @@ about the fundamentals of our project and our philosophy.
 
 ## Topics
 
+### [Online Help](/help/online/)
+
+Entry point for the editor's context-sensitive help. F1 in the editor
+opens exactly the matching page on this site. URL scheme and topic
+slugs are described there.
+
 ### [Bus Configuration](/help/bus-config/)
 
 PLCopen XML schema for industrial fieldbus configuration in `.forge` projects.

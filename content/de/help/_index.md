@@ -12,6 +12,12 @@ zu den Grundlagen unseres Projekts und unserer Philosophie.
 
 ## Themen
 
+### [Online-Hilfe](/help/online/)
+
+Einstiegspunkt fuer die kontext-sensitive Hilfe aus dem Editor.
+F1 oeffnet aus dem Editor heraus genau die passende Seite hier
+auf der Website. URL-Schema und Themen-Slugs sind dort beschrieben.
+
 ### [Projekt-Dateiformat (.forge)](/help/file-format/)
 
 Aufbau einer ForgeIEC-Projektdatei: PLCopen-XML-Wurzel, POU-Typen,

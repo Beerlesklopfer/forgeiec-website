@@ -12,6 +12,11 @@ summary: "ForgeIEC 文档和资源"
 
 ## 主题
 
+### [在线帮助](/help/online/)
+
+编辑器上下文相关帮助的入口。在编辑器中按 F1 会打开本站上相应的页面。
+URL 方案和主题标识符在那里描述。
+
 ### [总线配置](/help/bus-config/)
 
 用于 `.forge` 项目中工业现场总线配置的 PLCopen XML 架构。

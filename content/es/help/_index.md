@@ -12,6 +12,12 @@ sobre los fundamentos de nuestro proyecto y nuestra filosofia.
 
 ## Temas
 
+### [Ayuda en linea](/help/online/)
+
+Punto de entrada para la ayuda contextual del editor. F1 en el editor
+abre exactamente la pagina correspondiente en este sitio. El esquema
+de URL y los slugs de temas se describen alli.
+
 ### [Configuracion de Bus](/help/bus-config/)
 
 Esquema XML PLCopen para la configuracion de buses de campo industriales

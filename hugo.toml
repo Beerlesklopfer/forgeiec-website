@@ -2,6 +2,7 @@ baseURL = 'https://forgeiec.io/'
 title = 'ForgeIEC'
 theme = 'ananke'
 defaultContentLanguage = 'de'
+defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
 
 [params]

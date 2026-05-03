@@ -12,6 +12,12 @@ informations sur les fondements de notre projet et de notre philosophie.
 
 ## Sujets
 
+### [Aide en ligne](/help/online/)
+
+Point d'entree pour l'aide contextuelle de l'editeur. F1 dans l'editeur
+ouvre exactement la page correspondante sur ce site. Le schema d'URL
+et les slugs de sujets y sont decrits.
+
 ### [Configuration Bus](/help/bus-config/)
 
 Schema XML PLCopen pour la configuration des bus de terrain industriels
