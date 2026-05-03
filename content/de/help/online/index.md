@@ -27,7 +27,33 @@ Editor zu starten.
 
 ## Verfuegbare Themen
 
-Die wichtigsten Themen finden Sie auf der [Hilfe-Uebersicht](/help/).
+### Editor & Sprachen
+
+- [Structured Text (ST)](/de/help/st/) — ST-Editor + Sprachfundamente, Bit-Zugriff, qualifizierte Pool-Referenzen
+- [Instruction List (IL)](/de/help/il/) — Akkumulator-basierte IEC-Sprache mit CR-Register
+- [Function Block Diagram (FBD)](/de/help/fbd/) — Grafische Verschaltung von Funktionen, Funktionsbloecken und Variablen
+- [Ladder Diagram (LD)](/de/help/ld/) — Stromlaufplan-Metapher: Power-Rails, Kontakte, Spulen
+- [Sequential Function Chart (SFC)](/de/help/sfc/) — Schritt-Uebergangs-Modell fuer Ablaufsteuerungen und Modi-Maschinen
+
+### Modell & Variablen
+
+- [Variablen-Verwaltung](/de/help/variables/) — Variables-Panel als zentrale Sicht auf den FAddressPool: Spalten, Filter, Bulk-Operationen, Sicherheits-Schalter
+- [Bibliothek](/de/help/library/) — IEC 61131-3 Standard-Bibliothek + ForgeIEC-Erweiterungen + benutzerdefinierte Bloecke
+- [Properties-Panel](/de/help/properties-panel/) — Inline-Editor fuer das im Project-Tree selektierte Bus-Element
+- [Einstellungen (Preferences)](/de/help/preferences/) — Zentraler Konfigurationsdialog: Editor, Runtime, PLC, AI Assistant
+
+### Bus & Hardware
+
+- [Bus-Konfiguration](/de/help/bus-config/) — PLCopen-XML-Schema fuer die industrielle Feldbus-Konfiguration
+
+### Projekt
+
+- [Projekt-Dateiformat (.forge)](/de/help/file-format/) — Aufbau einer ForgeIEC-Projektdatei: PLCopen-XML mit ForgeIEC-Erweiterungen
+
+### Allgemein
+
+- [Testabdeckung](/de/help/tests/) — 117 automatisierte Tests fuer den IEC-Sprachvorrat, Standard-Bausteine und Multi-Task-Threading
+- [Open Source Philosophie](/de/help/open-source/) — Hintergrund: mehr als Software, ein gesellschaftlicher Gedanke
 
 ## Im Editor
 

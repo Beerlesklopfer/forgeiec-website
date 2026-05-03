@@ -25,7 +25,29 @@ https://forgeiec.io/<语言>/help/<主题>/
 
 ## 可用主题
 
-主要主题列在[帮助概览](/help/)中。
+### 编辑器与语言
+
+- [Structured Text (ST)](/zh/help/st/) — ST 编辑器与语言基础
+- [Instruction List (IL)](/zh/help/il/) — 基于累加器的 IEC 语言
+- [Function Block Diagram (FBD)](/zh/help/fbd/) — 函数与功能块的图形化连接
+- [Ladder Diagram (LD)](/zh/help/ld/) — 电路图比喻：电源线、触点、线圈
+- [Sequential Function Chart (SFC)](/zh/help/sfc/) — 用于顺序控制的步骤-转移模型
+
+### 模型与变量
+
+- [变量管理](/zh/help/variables/) — Variables 面板作为 FAddressPool 的中心视图
+- [库](/zh/help/library/) — IEC 61131-3 标准库 + ForgeIEC 扩展 + 用户自定义块
+- [属性面板](/zh/help/properties-panel/) — 用于所选总线元素的内联编辑器
+- [首选项](/zh/help/preferences/) — 中心配置对话框：编辑器、运行时、PLC、AI 助手
+
+### 总线与硬件
+
+- [总线配置](/zh/help/bus-config/) — 工业现场总线配置的 PLCopen XML 模式
+
+### 通用
+
+- [测试覆盖率](/zh/help/tests/) — 117 项 IEC 语言特性、标准块和多任务的自动化测试
+- [开源理念](/zh/help/open-source/) — 背景
 
 ## 在编辑器中
 

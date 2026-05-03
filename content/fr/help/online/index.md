@@ -27,7 +27,29 @@ navigateur sans demarrer l'editeur.
 
 ## Sujets disponibles
 
-Les principaux sujets sont listes dans l'[apercu de l'aide](/help/).
+### Editeur & langages
+
+- [Structured Text (ST)](/fr/help/st/) — Editeur ST + fondamentaux du langage
+- [Instruction List (IL)](/fr/help/il/) — langage IEC base sur accumulateur
+- [Function Block Diagram (FBD)](/fr/help/fbd/) — cablage graphique de fonctions et blocs fonctionnels
+- [Ladder Diagram (LD)](/fr/help/ld/) — metaphore du schema electrique : contacts, bobines
+- [Sequential Function Chart (SFC)](/fr/help/sfc/) — modele etape-transition pour sequenceurs
+
+### Modele & variables
+
+- [Gestion des variables](/fr/help/variables/) — panneau Variables comme vue centrale du FAddressPool
+- [Bibliotheque](/fr/help/library/) — bibliotheque standard IEC + extensions ForgeIEC + blocs definis par l'utilisateur
+- [Panneau des proprietes](/fr/help/properties-panel/) — editeur inline pour l'element bus selectionne
+- [Preferences](/fr/help/preferences/) — dialogue de configuration central : editeur, runtime, automate, assistant IA
+
+### Bus & materiel
+
+- [Configuration du bus](/fr/help/bus-config/) — schema XML PLCopen pour la configuration des bus de terrain industriels
+
+### General
+
+- [Couverture des tests](/fr/help/tests/) — 117 tests automatises pour le jeu de fonctionnalites IEC, les blocs standard et le multi-tasking
+- [Philosophie Open Source](/fr/help/open-source/) — contexte
 
 ## Dans l'editeur
 
