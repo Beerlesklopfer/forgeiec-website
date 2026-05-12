@@ -16,8 +16,9 @@ gleichzeitig eine eingebaute Settings-UI fuer die Geraete-
 Konfiguration (Netz, WireGuard, Zeitzone, Sprache).
 
 Geschrieben in **Rust** mit dem **Chromium Embedded Framework
-(CEF)** und **winit** als Window-Manager. Laeuft auf Linux amd64
-und arm64.
+(CEF)** und **winit** als Window-Manager. Laeuft unter **X11**,
+**Wayland** und **Windows** — auf Linux amd64 + arm64 und auf
+Windows x64.
 
 ---
 
@@ -101,7 +102,8 @@ auslesbar fuer Backup / Provisioning.
 | **D-Bus-Stack** | zbus (NetworkManager + timedated + localed) |
 | **Datenbank** | SQLite |
 | **i18n** | Project Fluent, 80+ Sprachen inkl. RTL |
-| **Plattformen** | Linux amd64, arm64 |
+| **Display-Server** | X11, Wayland, Windows (Win32) |
+| **Plattformen** | Linux amd64 + arm64, Windows x64 |
 | **Lizenz** | AGPL-3.0 |
 
 ---

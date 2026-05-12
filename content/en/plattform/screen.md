@@ -15,7 +15,8 @@ it runs fullscreen, opens any HMI URL (`bellowsd` / `Hearth` /
 device configuration (network, WireGuard, time zone, language).
 
 Written in **Rust** with the **Chromium Embedded Framework (CEF)**
-and **winit** as window manager. Runs on Linux amd64 and arm64.
+and **winit** as window manager. Runs on **X11**, **Wayland** and
+**Windows** — on Linux amd64 + arm64 and on Windows x64.
 
 ---
 
@@ -97,7 +98,8 @@ provisioning.
 | **D-Bus stack** | zbus (NetworkManager + timedated + localed) |
 | **Database** | SQLite |
 | **i18n** | Project Fluent, 80+ languages incl. RTL |
-| **Platforms** | Linux amd64, arm64 |
+| **Display servers** | X11, Wayland, Windows (Win32) |
+| **Platforms** | Linux amd64 + arm64, Windows x64 |
 | **License** | AGPL-3.0 |
 
 ---

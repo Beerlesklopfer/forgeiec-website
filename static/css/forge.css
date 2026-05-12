@@ -817,3 +817,51 @@ img.component-badge-icon,
     text-align: center;
   }
 }
+
+/* ===== MERMAID DIAGRAMS ===== */
+pre.mermaid {
+  background: transparent;
+  border: none;
+  padding: 1rem 0;
+  margin: 1.5rem 0;
+  text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  overflow-x: auto;
+}
+
+pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+pre.mermaid:not([data-processed="true"]) {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: var(--slate-400);
+  text-align: left;
+  white-space: pre-wrap;
+  padding: 1rem;
+  border: 1px dashed var(--slate-700);
+  border-radius: 0.5rem;
+  opacity: 0.6;
+}
+
+/* Mermaid diagram container */
+pre.mermaid {
+  background: transparent;
+  border: none;
+  padding: 1rem 0;
+  margin: 1.5rem 0;
+  text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  overflow-x: auto;
+}
+
+pre.mermaid svg {
+  max-width: 100

@@ -19,5 +19,29 @@
     {{- block "main" . }}{{ end -}}
   </main>
   {{- partial "footer.html" . -}}
+  {{- if .Store.Get "hasMermaid" }}
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#F59E0B',
+        primaryTextColor: '#0F1115',
+        primaryBorderColor: '#F59E0B',
+        lineColor: '#94A3B8',
+        secondaryColor: '#1E293B',
+        tertiaryColor: '#0F1115',
+        background: '#0F1115',
+        mainBkg: '#1E293B',
+        secondBkg: '#334155',
+        textColor: '#E2E8F0'
+      },
+      flowchart: { curve: 'basis', useMaxWidth: true },
+      sequence: { useMaxWidth: true },
+      gantt: { useMaxWidth: true }
+    });
+  </script>
+  {{- end }}
 </body>
 </html>
