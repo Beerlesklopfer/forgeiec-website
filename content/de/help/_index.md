@@ -26,11 +26,16 @@ Deploy) und waechst mit jedem neu beobachteten Fall.
 
 ### [KI-Integration](/help/ai/)
 
-Wie Sie den eingebauten KI-Helfer nutzen: Personas, Provider
-(ChatGPT / Claude / lokal), Bedienung im Alltag, Sicherheits-Modell,
-Team-Mode fuer mehrere Workstations. Plus eine Architektur-Tiefe
-fuer Security-Auditoren — warum die KI-Schicht industriell tragfaehig
-ist und nicht ein Spielzeug.
+Wie Sie den eingebauten KI-Helfer in ForgeIEC Studio nutzen:
+Personas, Provider (ChatGPT / Claude / lokal), Bedienung im Alltag,
+Sicherheits-Modell, Team-Mode fuer mehrere Workstations. Plus eine
+Architektur-Tiefe fuer Security-Auditoren.
+
+### [MCP-Protokoll](/help/mcp/)
+
+Die Protokoll-Schicht unter dem KI-Helfer — fuer Applikations-
+ingenieure die eigene Skripte/Werkzeuge anbinden, und fuer
+IT/Betrieb die deployen, monitoren und troubleshooten.
 
 ### [Projekt-Dateiformat (.forge)](/help/file-format/)
 

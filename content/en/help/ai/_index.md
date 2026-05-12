@@ -1,13 +1,14 @@
 ---
-title: "The AI Assistant in the Editor"
+title: "The AI assistant in ForgeIEC Studio"
 summary: "How to use the built-in AI assistant for programming, diagnostics and commissioning"
 ---
 
 ## What is it?
 
-ForgeIEC ships with a built-in **AI assistant** — directly in the
-editor, in the right-side tab `AI Assistant`. You can talk to it in
-plain English (or German), and it can **operate the editor itself**:
+ForgeIEC Studio ships with a built-in **AI assistant** — directly
+in the main window, in the right-side tab `AI Assistant`. You can
+talk to it in plain English (or German), and it can **operate
+ForgeIEC Studio itself**:
 
 - Create variables and assign addresses
 - Write or modify POU code (Structured Text)
@@ -48,11 +49,11 @@ Three layers protect you:
    from the APT repository, the AI can **only read**. Creating
    variables, compiling, and deploying are all **switched off**.
 2. **Enabling has to be deliberate.** To allow write actions, you
-   have to install a special version of the editor — that is a
-   real hardware-like separation, not a checkbox someone clicks by
-   accident.
+   have to install a special version of ForgeIEC Studio — that is
+   a real hardware-like separation, not a checkbox someone clicks
+   by accident.
 3. **The operator decides every action.** Even in the enabled
-   version, the editor asks a question for **every** change:
+   version, ForgeIEC Studio asks a question for **every** change:
    > "Add `Position` variable with address `%MD100`? (yes / cancel)"
    Only with your confirmation does it actually happen.
 
@@ -62,8 +63,8 @@ More: [Security model](/help/ai/security/).
 
 ## Getting started
 
-1. **Start the editor** and select the `AI Assistant` tab in the
-   right-side dock.
+1. **Start ForgeIEC Studio** and select the `AI Assistant` tab in
+   the right-side dock.
 2. **Enter the server address** — where is your AI program running?
    - Locally on the same machine: usually
      `http://localhost:1234/v1` (LM Studio default).

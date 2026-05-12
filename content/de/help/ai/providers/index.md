@@ -35,7 +35,7 @@ nicht pauschal.
    Mal** angezeigt — kopieren Sie ihn sofort in einen sicheren Ort
    (Passwort-Manager).
 
-**Schritt 2 — im Editor eintragen**
+**Schritt 2 — in ForgeIEC Studio eintragen**
 
 Im AI-Reiter, in der Profil-Konfiguration:
 
@@ -73,7 +73,7 @@ OpenAI ist die API getrennt vom claude.ai-Web-Abo.
 3. Schluessel beginnt mit `sk-ant-...` — kopieren in den Passwort-
    Manager.
 
-**Schritt 2 — im Editor eintragen**
+**Schritt 2 — in ForgeIEC Studio eintragen**
 
 | Feld | Wert |
 |---|---|
@@ -110,7 +110,7 @@ laengeren Aufgaben oft schneller fertig.
    `qwen3-coder-30b-a3b-instruct` fuer Coding-Aufgaben.
 3. Im Tab `Developer` einen lokalen Server starten — standardmaessig
    auf `http://localhost:1234`.
-4. Im ForgeIEC-Editor:
+4. In ForgeIEC Studio:
 
    | Feld | Wert |
    |---|---|
@@ -178,8 +178,8 @@ bleiben pro Persona gespeichert.
   ihn).
 
 **In allen Faellen:**
-- Der ForgeIEC-Editor selbst speichert keine Anfragen oder Antworten
-  in der Cloud.
+- ForgeIEC Studio selbst speichert keine Anfragen oder Antworten in
+  der Cloud.
 - Chat-Historie wird lokal in
   `~/.config/ForgeIEC/Chats/<persona>.jsonl` gespeichert.
 - Das Audit-Log unter `~/.config/ForgeIEC/mcp_audit.log` protokolliert

@@ -1,100 +1,69 @@
 ---
-title: "Architecture + Security Engineering (for experts)"
-summary: "Technical depth — why ForgeIEC's AI layer is industrially viable, not a toy"
+title: "Architecture + security"
+summary: "Technical details of the AI layer — protocol, transport, trust, implementation"
 ---
 
-## Target audience
+## Specification
 
-This page is for **security officers, IT architects, CISOs,
-compliance officers + technical leads** evaluating whether
-ForgeIEC's AI layer is qualified for industrial use. If you are
-looking for pure user manuals, [start here](/help/ai/).
+Source document: `documentation/architecture/mcp-platform-v1.md` in
+the source tree. Normative per RFC 2119 (`MUST` / `SHOULD` /
+`MAY`). Version: `v1`. Size: ~2300 LOC.
 
-We show concrete architecture decisions, the rationale behind them,
-the normative specifications we implement, and honestly also what
-is **not yet** implemented.
-
----
-
-## Formal specification as single source of truth
-
-The AI layer is not emergent code behaviour — it follows an
-**explicitly written architecture specification**:
-
-- Document: `documentation/architecture/mcp-platform-v1.md` (in
-  the source tree, approx. 2300 LOC)
-- Normative level: **RFC-2119** — `MUST` / `SHOULD` / `MAY`
-- Reviewable: every change to the spec goes through code review
-  like any other change
-- Version-tagged: `v1` is the current major version; all completed
-  sprints (MCP-1 to MCP-9, MCP-4a, MCP-4b) reference their spec
-  sections
-
-This means: the implementation is not "the code is the spec",
-but rather "the spec is the requirement, the code is measured
-against it".
+The implementation references spec sections (e.g. `§7.4.2` for the
+Caretaker model). Spec changes go through the same review process
+as code.
 
 ---
 
-## Protocol conformance: MCP 2025-03-26
+## Protocol
 
-ForgeIEC implements the **Model Context Protocol** (Anthropic-
-published open protocol for LLM tool integration) in version
-`2025-03-26`:
-
-- Transport: **HTTP + SSE** (Server-Sent Events) — no custom
-  protocol, no WebSocket sprawl
-- Wire format: **JSON-RPC 2.0** — strictly per spec, `id` +
-  `method` + `params`/`result`/`error`
-- `initialize` → `tools/list` → `tools/call` lifecycle: spec-
-  conformant, testable with the official MCP inspector
-- `capabilities.tools.listChanged: true` — we signal to the client
-  that the tool list can change (editor restart, project switch)
-- `notifications/tools/list_changed` is **not yet** emitted
-  (backlog) — currently the client must re-list on reconnect
-
-This allows **third-party clients** to connect (e.g. Claude Code,
-OpenAI ChatGPT with MCP connector, mcp-inspector) without
-ForgeIEC-specific code.
+| Field | Value |
+|---|---|
+| Protocol | Model Context Protocol (MCP) |
+| Version | 2025-03-26 |
+| Transport | HTTP + Server-Sent Events |
+| Wire format | JSON-RPC 2.0 |
+| Lifecycle | `initialize` → `tools/list` → `tools/call` |
+| Capabilities | `tools.listChanged: true` |
+| `notifications/tools/list_changed` | not implemented (backlog) |
+| Conformance test | mcp-inspector |
 
 ---
 
-## Transport security: TLS + optional mTLS
+## Transport security
 
-### TLS 1.3 (always active for remote bind)
+### TLS
 
-- Implementation: **Qt6 QSslSocket** with system OpenSSL (TLS
-  1.3 + 1.2 supported)
-- Server certificate: RSA-4096, SAN-bound, 10-year validity,
-  auto-regenerated on bind address change (RFC 6125 SAN
-  validation compatible)
-- Cipher suites: system defaults (Debian OpenSSL hardening
-  follows distribution policy)
-- No self-implemented crypto — everything goes through OpenSSL
-  CLI shell-out or the Qt6 SSL stack
+| Field | Value |
+|---|---|
+| Stack | Qt6 QSslSocket + system OpenSSL |
+| Versions | TLS 1.3, 1.2 |
+| Server cert | RSA-4096, SAN-bound, 10 years |
+| Cert regeneration | on bind address change |
+| SAN validation | RFC 6125 |
+| Cipher suites | OpenSSL defaults (distribution-hardened) |
+| Self-implemented crypto | none |
 
-### mTLS (mutual TLS, optional for federation)
+### mTLS (optional)
 
-- Activated as soon as `~/.config/ForgeIEC/mcp/trust/*.pem`
-  contains one or more CA certs
-- `peerVerifyMode = QueryPeer` — client cert is **requested** but
-  not strictly required (falls back to bearer auth), allowing
-  gradual roll-out
-- Chain validation against the trust store happens in the Qt SSL
-  stack
-- Self-implemented check of certificate subjects against the
-  `peers.toml` list — see next section
+Active as soon as `~/.config/ForgeIEC/mcp/trust/*.pem` contains at
+least one CA cert.
+
+| Field | Value |
+|---|---|
+| peerVerifyMode | QueryPeer |
+| Fallback without client cert | bearer auth |
+| Chain validation | Qt SSL stack |
+| Subject check | against peers.toml (own implementation) |
 
 ---
 
-## Federation roster with replay protection
+## Federation roster
 
-Where other LLM tool platforms practise "first-connection-trust"
-(every cert is accepted on first sight), ForgeIEC enforces
-**signed rosters**:
+### File layout
 
 ```toml
-# peers.toml — signed by the Team-CA
+# peers.toml
 [meta]
 sequence_number = 17
 signed_ts = "2026-05-12T18:00:00Z"
@@ -109,306 +78,286 @@ role = "author"
 endpoint = "https://alice-ws.factory:7531"
 ```
 
-**Properties:**
+Analogously `revoked.toml` for the revocation list.
 
-- **Signature:** Ed25519 (preferred, small + fast) or RSA-PSS-
-  SHA256 (interop with hardware tokens). Shelled out via openssl
-  CLI, not self-implemented.
-- **Replay protection:** monotonic `sequence_number` per file.
-  Stored via QSettings, every reload with `seq <= last_seen`
-  is **refused**.
-- **Canonical payload:** the signature covers the TOML file
-  without the `signature_b64` line — line-oriented, reproducible
-  with `grep -v '^signature_b64'`.
-- **Distribution:** arbitrary — Git, S3, HTTP, USB. The container
-  is irrelevant; mathematical verification happens at reception.
+### Signature
 
-**Implemented** in `FMcpPeerRoster::verifySignature` with openssl
-shell-out for Ed25519+RSA-PSS verification. Reload via
-QFileSystemWatcher with 200 ms debounce. The stale-roster reload
-loop bug is fixed — see the FAQ entry on stale SHM, same kind of
-defensive mechanism.
+| Field | Value |
+|---|---|
+| Algorithm | Ed25519 (preferred) or RSA-PSS-SHA256 |
+| Implementation | openssl pkeyutl shell-out |
+| Signature payload | file without `signature_b64` line (line-oriented) |
+| Replay protection | monotonic `sequence_number`, persisted in QSettings |
+| Distribution channel | arbitrary (Git, S3, HTTP, USB) |
+
+### Code path
+
+`FMcpPeerRoster::verifySignature` (Studio),
+`FMcpCaretaker::signCsr` for the signing inverse. Reload via
+QFileSystemWatcher with 200 ms debounce.
 
 ---
 
-## Confirmation State Machine — no silent automation
+## Confirmation State Machine
 
-Every writing MCP operation goes through a **Confirmation State
-Machine** (Spec §9.5):
+Source file: `FConfirmationStateMachine`. Spec: §9.5.
 
-1. Tool call arrives
-2. Handler decides: is operator approval needed (state-changing,
-   destructive, side-effect-bearing)?
-3. If yes: tool returns `FORGE_ERR_CONFIRMATION_REQUIRED` with
-   pending ID + question + options + context
-4. LLM client replies via `editor.confirm(id, choice)`
-5. State machine resumes the original tool call with the operator's
-   choice
+### Flow
 
-Implementation: `FConfirmationStateMachine` (UUIDv4-keyed, default
-5-minute timeout, append-only audit trail).
+```mermaid
+sequenceDiagram
+    participant Client as LLM client
+    participant Server as MCP server
+    participant FSM as State Machine
+    participant Op as Operator
 
-**Guarantees:**
+    Client->>Server: tools/call (project.write.add_variable)
+    Server->>FSM: suspend(question, options, context)
+    FSM-->>Server: pending_id
+    Server-->>Client: FORGE_ERR_CONFIRMATION_REQUIRED + pending_id
+    Note over Client,Op: Question appears in chat
+    Op->>Client: "yes"
+    Client->>Server: tools/call (editor.confirm, id, "yes")
+    Server->>FSM: resume(id, "yes")
+    FSM->>Server: original handler with force=true
+    Server-->>Client: result of the original tool
+```
 
-- **No state-changing tool can run without confirm** — the call
-  path goes through the state machine; bypass is only via the
-  explicit `force=true` parameter that ONLY the state machine
-  itself sets on resume
-- **Operator visibility:** every pending confirmation is shown
-  in the chat as a visual element, and is queryable via the
-  `editor.pending_confirmations` MCP tool
-- **Timeout behaviour:** expired confirmations set `choice =
-  "timeout"`; the tool resume callback decides what that means
-  (typically FORGE_ERR_USER_CANCELED)
-- **Audit log:** all confirmations + choices are recorded in
-  `~/.config/ForgeIEC/mcp_audit.log` (JSONL), append-only
+### Properties
+
+| Field | Value |
+|---|---|
+| Pending ID | UUIDv4 |
+| Timeout | 5 min default, per-tool override |
+| Bypass | only via `force=true`, set by the state machine itself |
+| Audit | append-only JSONL in `~/.config/ForgeIEC/mcp_audit.log` |
+| Read API | `editor.pending_confirmations` |
 
 ---
 
-## Three-layer defence against unintended effects
+## Write access: three checks
 
-### Layer 1 — Build-time gate
+### Check 1 — Build-time
 
 ```cmake
 option(MCP_OVERRIDE_SECURITIES "Unlock MCP write tools" OFF)
 ```
 
-Default OFF. Write tools (`project.write.*`, `codegen.deploy`,
-`runtime.stop`, `editor.quit`, `oscilloscope_set_channels`) return
-`FORGE_ERR_PERMISSION_DENIED` when not set.
+Default OFF. Preprocessor-conditional — disabled code paths are
+**not present** in the default binary. No runtime switch.
 
-**Important:** this is **not a runtime flag**. The check is
-preprocessor-conditional — the disabled code path is **not even
-present in the binary** at default build. An operator cannot turn
-it on via a config file.
+### Check 2 — State Machine
 
-### Layer 2 — Runtime State Machine
+Every write tool goes through §9.5 (see above).
 
-As above — every write action requires operator approval.
+### Check 3 — Visibility
 
-### Layer 3 — Operator visibility
-
-- Chat log shows every tool call as a visible element
-- Audit log (JSONL) records everything with timestamp
-- Build with MCP_OVERRIDE_SECURITIES shows a **security override
-  banner** in the initialize output:
-
-  ```
-  !!! SECURITY OVERRIDE ACTIVE !!!
-  This build MUST NOT run on a productive PLC.
-  ```
-
-  The banner also appears in every `warnings[]` list in write
-  responses — tooling can act on it.
+| Channel | Content |
+|---|---|
+| Chat log | every tool call visible |
+| `~/.config/ForgeIEC/mcp_audit.log` | JSONL, append-only, timestamp + tool + args + choice |
+| `initialize.instructions` | security override banner when the build-time flag is active |
+| `warnings[]` in responses | override banner repeated |
 
 ---
 
-## Force path: explicitly out of MCP
+## Force path
 
-Variable forcing — manually setting a value independent of the
-program logic — is the **most side-effect-laden** operation in
-the PLC editor. It can move real hardware (start a motor, open a
-valve).
+Force settings (pinning a value independent of the program) are
+**not** accessible via MCP — no `force.*` tool, neither in default
+nor override build.
 
-**Decision:** force is explicitly **not** accessible via MCP.
-There is **no** `force.set` tool, neither in the default build
-nor in the override build.
+### Defence layers
 
-**Rationale:** an AI agent cannot be held accountable for hardware
-side effects of a force setting. That responsibility remains
-**explicitly with the operator** who manually sets the GUI force
-checkbox. The AI layer can read whether a value is forced
-(`monitor.snapshot` returns `forced=true`), but cannot force on
-its own.
+| Layer | Mechanism |
+|---|---|
+| 1 — codegen TOML | `-DFORCING_ENABLED` cmake option of the PLC runtime |
+| 2 — anvild RPC | ForceVariable endpoint checks PLC build mode |
+| 3 — Studio UI | F checkbox greyed out when PLC build has no force |
+| 4 — MCP | no tool registered |
 
-Defence in depth:
-
-- **Layer 1 (codegen TOML):** force bridge is compiled in only
-  when `-DFORCING_ENABLED` is set (development builds)
-- **Layer 2 (anvild RPC):** ForceVariable gRPC endpoint checks the
-  build mode of the PLC binary
-- **Layer 3 (Editor UI):** force checkbox is greyed out when the
-  PLC build does not support forcing
-- **Layer 4 (MCP):** no tool for force; Phase-3 perhaps a
-  `force.*` family behind a double state-machine gate
+MCP read side: `monitor.snapshot` returns `forced=true|false` per
+variable (Anvil gRPC `is_forced` field).
 
 ---
 
-## Human identification — Memorable ID + Randomart
+## Human identification
 
-Instead of comparing 64-char hex fingerprints (not practical),
-ForgeIEC provides **two deterministically derivable
-visualisations** of the same fingerprint:
+Source class: `FMcpFingerprintArt`. Spec: §7.6.
 
-### Memorable ID (BIP-39 wordlist)
+### Memorable ID
 
-- 44 bits from the SHA-256 fingerprint
-- 4 indices of 11 bits each
-- Wordlist: canonical **BIP-39 English** (2048 words, deduplicated
-  by first 4 letters, pronounceable)
-- Format: `word-word-word-word`
-- On a bit flip in the first 44 bits: **all 4 words change**
-- Verbally verifiable ("Read me your Memorable ID over the phone")
+| Field | Value |
+|---|---|
+| Input | SHA-256 fingerprint (32 bytes) |
+| Bit slice | first 44 bits, sliced into 4 × 11 bits |
+| Wordlist | BIP-39 English (2048 entries) |
+| Format | `word-word-word-word` |
+| Bit-flip sensitivity (first 44 bits) | 4 of 4 words change |
 
-### Randomart (OpenSSH drunken bishop)
+### Randomart
 
-- Algorithm: identical to `ssh-keygen -lv -E sha256`
-- 17×9 grid, bishop walk by 2-bit move per fingerprint byte
-- Augmentation string `" .o+=*BOX@%&#/^SE"` maps counter to
-  characters
-- Start and end markers (S/E) at the bishop path endpoints
-- Visually distinctive: a different cert **looks different**;
-  human pattern recognition picks up "their" peer
+| Field | Value |
+|---|---|
+| Algorithm | OpenSSH drunken bishop (`ssh-keygen -lv -E sha256`) |
+| Grid | 17 × 9 |
+| Augmentation string | `" .o+=*BOX@%&#/^SE"` |
+| Markers | S = start, E = bishop end position |
 
-Both implemented in `FMcpFingerprintArt` (two static methods,
-pure, deterministic, thread-safe, no heap allocation for the
-wordlist).
+### Surfaced in
 
-Surfaced in:
-
-- `server_info.trust_store_cas[]` — per trust-store CA cert
-- `team.list_peers` — per peer
-- `team.request_cert` — for the freshly issued cert
-- Peer-confirm dialog (UI implementation comes with MCP-5)
+| Endpoint | Content |
+|---|---|
+| `server_info.trust_store_cas[]` | per trust-store CA |
+| `team.list_peers` | per peer |
+| `team.request_cert` | for freshly issued cert |
 
 ---
 
-## Caretaker model — cert lifecycle
+## Caretaker model
 
-Spec §7.4 defines:
+Source class: `FMcpCaretaker`. Spec: §7.4.
 
-- **Caretaker role:** one workstation in the team holds the Team-
-  CA private key and issues member certs
-- Activated via QSettings `mcp/caretaker_enabled` PLUS a
-  confirmation modal containing the literal phrase **"I accept
-  Team-CA responsibility"** PLUS `MCP_OVERRIDE_SECURITIES=ON`
-- Data: `~/.config/ForgeIEC/mcp/ca-team/{ca.key, ca.crt}` (RSA-
-  4096, 10 years, CA:TRUE basicConstraint, keyCertSign+cRLSign+
-  digitalSignature keyUsage)
-- Operations: `team.request_cert` (sign CSR), `team.revoke_peer`
-  (revoke + re-sign roster), `team.export_setup` (onboarding
-  bundle)
-- **Every** operation goes through the State Machine — no
-  automatic renewal, no silent issuance
-- Multi-Caretaker setup possible (HA) — conflict resolution via
-  monotonic sequence_number in the roster
+### File layout
 
-Implementation status 2026-05:
+```
+~/.config/ForgeIEC/mcp/ca-team/
+  ca.key   RSA-4096, 600 permissions
+  ca.crt   X.509, CA:TRUE, 10 years
+                keyCertSign + cRLSign + digitalSignature
+```
 
-- `FMcpCaretaker` class + `team.request_cert` tool: **done**
-- `team.list_peers`: **done**
-- `team.revoke_peer`: **stub** (revoked.toml mutation +
-  re-signing in backlog)
-- `team.rotate_cert`, `team.export_setup`: **backlog**
-- Caretaker toggle UI in Preferences: **backlog**
+### Activation
 
----
+| Requirement | Form |
+|---|---|
+| Build-time | `MCP_OVERRIDE_SECURITIES=ON` |
+| Runtime flag | QSettings `mcp/caretaker_enabled` |
+| Modal confirmation | literal "I accept Team-CA responsibility" |
+| File presence | ca.key + ca.crt parse-valid |
 
-## Implementation language + memory safety
+`FMcpCaretaker::isCaretaker()` returns true only if all four are
+satisfied.
 
-ForgeIEC editor is **C++17 + Qt6**. The AI layer (`FMcpServer`,
-`FMcpCaretaker`, `FMcpTrustStore`, `FMcpPeerRoster`,
-`FMcpFingerprintArt`) uses throughout:
+### Operations
 
-- **RAII** for lifetime management (QObject parent chain)
-- **PIMPL** where opaque types are more practical
-- **No raw pointers** across class boundaries — `QPointer`,
-  `unique_ptr`, `shared_ptr` depending on ownership semantics
-- **Implicit-shared QObjects** (`QSslCertificate`, `QString`,
-  `QByteArray`) — safe for cross-thread snapshots
-- **No global mutable state** — every module is object-owned
+| Tool | Status |
+|---|---|
+| `team.list_peers` (Member + Caretaker) | done |
+| `team.request_cert` (Caretaker) | done |
+| `team.revoke_peer` (Caretaker) | stub (revoked.toml mutation in backlog) |
+| `team.rotate_cert` (Member) | backlog |
+| `team.export_setup` (Caretaker) | backlog |
 
-The runtime server (`anvild`) is **Rust + Tokio + tonic**.
-Memory-safe by borrow checker, async runtime for concurrency. The
-gRPC layer between editor and anvild is proto-specified.
+All mutations through the state machine.
 
-iceoryx2 (shared-memory IPC) is **Rust + C-FFI**. We use it
-behind our own ABI probe (`anvil-shared@50cb29f`) that detects
-type-hash drift before connect — three defence layers against
-mismatched versions in production.
+### Multi-Caretaker (HA)
+
+Multiple Caretakers possible. Conflict resolution via monotonic
+`sequence_number` in the signed roster.
 
 ---
 
-## Test coverage + reproducibility
+## Audit + reproducibility
 
-- **117+ automated tests** cover the IEC 61131-3 language, all
-  132 standard library blocks, the multi-task threading system,
-  the persistence path, the force path
-- **Test data committed** in the repo (`tests/data/`),
-  reproducible
-- **Jitter tests** with physical measurement against baseline
-- **Codegen** is deterministic — the same `.forge` project
-  produces byte-identical `POUS.c` outputs (matiec)
-- **Audit log** for LLM activity is append-only JSONL — no entry
-  is ever removed, every entry has a timestamp + tool name +
-  args + confirm choice
+| Aspect | Status |
+|---|---|
+| Audit log | append-only JSONL, no delete path |
+| Audit fields | timestamp, tool, args, choice, called_by |
+| Codegen determinism | byte-identical POUS.c per `.forge` |
+| Test coverage | 117+ tests, IEC language + 132 library blocks + multi-task + persist + force |
+| Jitter test | physical measurement against baseline |
 
 ---
 
-## What is honestly not yet there
+## Implementation languages
 
-We are transparent about what is missing:
+### ForgeIEC Studio
 
-- **`team.revoke_peer`** is a stub (revoked.toml mutation +
-  re-signing follows)
-- **`team.rotate_cert` + `team.export_setup`**: backlog
-- **OCSP / CRL handling:** not yet implemented (revocation
-  currently via signed roster, not via standard PKI path)
-- **Memorable-ID typing confirmation** (Spec §7.4.2 specifies
-  "operator MUST type peer's Memorable ID to confirm"): today
-  still yes/cancel
-- **`notifications/tools/list_changed`** SSE: not yet emitted
-- **Hardware token (PKCS#11 / FIDO2)** for the Team-CA key:
-  roadmap, today a file on disk with 600 permissions
-- **Force tools family** (`force.*`): Phase-3 backlog
-- **Bulk mode + extended permissions** for >10 tool-turn
-  operations (Spec MCP-10): backlog
+C++17 + Qt6. RAII via QObject parent chain. Implicit-shared QObjects
+for cross-thread snapshots. No global mutable state.
 
-These items are listed in the internal sprint board
-(`project_open_backlog.md`) with priorities.
+MCP-layer modules:
+
+| Class | File |
+|---|---|
+| FMcpServer | editor/src/runtime/FMcpServer.cpp |
+| FMcpCertManager | editor/src/runtime/FMcpCertManager.cpp |
+| FMcpTrustStore | editor/src/runtime/FMcpTrustStore.cpp |
+| FMcpPeerRoster | editor/src/runtime/FMcpPeerRoster.cpp |
+| FMcpCaretaker | editor/src/runtime/FMcpCaretaker.cpp |
+| FMcpFingerprintArt | editor/src/runtime/FMcpFingerprintArt.cpp |
+| FConfirmationStateMachine | editor/src/runtime/FConfirmationStateMachine.cpp |
+| FMcpAuditLog | editor/src/runtime/FMcpAuditLog.cpp |
+
+### Runtime server
+
+`anvild`: Rust + Tokio + tonic. Memory-safe by borrow checker.
+gRPC proto: `anvil-server/proto/plc_service.proto`.
+
+### IPC
+
+iceoryx2 (Rust + C-FFI). ABI probe against type-hash drift:
+`anvil-shared@50cb29f`. Three defence layers against mismatched
+versions.
 
 ---
 
-## Standards + cross-references
-
-What we implement and what we lean on:
+## Standards
 
 | Standard | Use |
 |---|---|
-| IEC 61131-3 (ST/IL/FBD/LD/SFC) | Programming language + compile path via matiec |
+| IEC 61131-3 | Programming language + compile path (matiec) |
 | PLCopen XML | Project file format |
-| RFC 6125 (SAN validation) | TLS server cert |
-| Ed25519 (RFC 8032) | Roster signature (preferred) |
-| RSA-PSS (RFC 8017) | Roster signature (HW token interop) |
-| BIP-39 (Bitcoin) | Wordlist for Memorable ID |
+| RFC 6125 | TLS server cert SAN validation |
+| RFC 8032 (Ed25519) | Roster signature (preferred) |
+| RFC 8017 (RSA-PSS) | Roster signature (HW token interop) |
+| BIP-39 (English) | Memorable-ID wordlist |
 | SSH ssh-keygen | Randomart algorithm |
-| MCP 2025-03-26 (Anthropic) | Protocol lifecycle |
+| MCP 2025-03-26 | Protocol |
 | JSON-RPC 2.0 | Wire format |
 | RFC 2119 | Spec normative language |
-| TOML 1.0 | Configuration files |
+| TOML 1.0 | Configuration |
+
+---
+
+## Open items (as of 2026-05-12)
+
+| Item | Status |
+|---|---|
+| `team.revoke_peer` full implementation | stub |
+| `team.rotate_cert` | backlog |
+| `team.export_setup` | backlog |
+| OCSP / CRL handling | not implemented |
+| Memorable-ID typing confirmation (§7.4.2) | currently yes/cancel |
+| `notifications/tools/list_changed` SSE | not emitted |
+| Hardware token (PKCS#11 / FIDO2) for CA key | roadmap |
+| `force.*` tool family | Phase-3 backlog |
+| Bulk mode (MCP-10) | backlog |
+| Caretaker toggle UI in Preferences | backlog |
+
+Full list: `project_open_backlog.md` (internal).
 
 ---
 
 ## License
 
-ForgeIEC + all subprojects (anvild, bellowsd, tongs-modbustcp, …):
-**AGPL-3.0-or-later**. Source repository inspectable; build
-reproducibility via Debian CPack + signed APT repository.
+AGPL-3.0-or-later for all subprojects. Source inspectable.
+Reproducible build via Debian CPack + signed APT repository.
 
 ---
 
-## Contact for security review
+## Contact
 
-For questions, audit requests, or vulnerability reports:
-blacksmith@forgeiec.io
-
-We prefer responsible disclosure — please give us a reasonable
-window to fix issues before publishing.
+Security reports + audit inquiries: blacksmith@forgeiec.io —
+responsible disclosure preferred.
 
 ---
 
 ## Next
 
 - [Security model (user view)](/help/ai/security/)
-- [Team mode + trust](/help/ai/team/)
+- [Team mode](/help/ai/team/)
+- [MCP protocol for application engineers](/help/mcp/programmers/)
+- [MCP for IT operations](/help/mcp/it/)
 - [Back to the AI overview](/help/ai/)

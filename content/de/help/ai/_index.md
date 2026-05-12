@@ -1,13 +1,14 @@
 ---
-title: "Der KI-Helfer im Editor"
+title: "Der KI-Helfer in ForgeIEC Studio"
 summary: "Wie Sie den eingebauten KI-Assistenten zum Programmieren, Diagnostizieren und Inbetriebnehmen nutzen"
 ---
 
 ## Was ist das?
 
-ForgeIEC hat einen **KI-Helfer eingebaut** — direkt im Editor, im
-rechten Reiter `AI Assistant`. Sie koennen mit ihm in normalem Deutsch
-oder Englisch reden, und er kann **selbst im Editor arbeiten**:
+ForgeIEC Studio hat einen **KI-Helfer eingebaut** — direkt im
+Hauptfenster, im rechten Reiter `AI Assistant`. Sie koennen mit ihm
+in normalem Deutsch oder Englisch reden, und er kann **selbst im
+ForgeIEC Studio arbeiten**:
 
 - Variablen anlegen und Adressen vergeben
 - POU-Code (ST) schreiben oder aendern

@@ -1,6 +1,6 @@
 ---
 title: "Connecting multiple workstations"
-summary: "Team mode: how two or more ForgeIEC editors can trust each other"
+summary: "Team mode: how two or more ForgeIEC Studio instances can trust each other"
 ---
 
 ## What do I need this for?
@@ -93,10 +93,26 @@ encounters. A changed fingerprint **looks visibly different**.
 
 ## A new colleague is admitted to the team
 
+```mermaid
+sequenceDiagram
+    participant New as New colleague<br/>(Member)
+    participant Care as Caretaker
+    participant Team as Team roster<br/>(peers.toml)
+
+    New->>New: Generate key pair + request (CSR)
+    New->>Care: CSR by mail / USB stick / chat
+    Care->>Care: See request in ForgeIEC Studio<br/>(name, Memorable ID, randomart)
+    Care->>Care: Verify + confirm
+    Care->>New: Signed ID (.crt)
+    New->>New: Install ID in ForgeIEC Studio
+    Care->>Team: Update peers.toml + sign + publish
+    Team-->>New: Roster pull confirms Member status
+```
+
 Here is the flow — from your perspective as the operator:
 
 **1. The new colleague prepares an ID request.**
-Their editor generates a key pair and a request (CSR). They send
+Their ForgeIEC Studio generates a key pair and a request (CSR). They send
 the request to you (Caretaker) by mail / USB stick / chat.
 
 **2. As Caretaker, you see the request in your editor.**
@@ -115,7 +131,7 @@ then on a Member.
 all team members are listed with their ID fingerprints.
 Distribution by Git, shared drive, USB, shared SharePoint —
 whatever, because the file is **digitally signed**. A copy
-modified in transit is **refused** by the editor.
+modified in transit is **refused** by ForgeIEC Studio.
 
 ---
 
@@ -123,22 +139,22 @@ modified in transit is **refused** by the editor.
 
 When a colleague leaves, loses a laptop, or an ID is compromised:
 
-1. You as Caretaker **revoke** the ID — the editor adds it to a
-   `revoked.toml` list, signs the list, publishes it.
+1. You as Caretaker **revoke** the ID — ForgeIEC Studio adds it
+   to a `revoked.toml` list, signs the list, publishes it.
 2. All other team members pull the list every few minutes and
    from then on **immediately** reject the revoked ID.
 
 **Note (as of 2026-05):** the actual writing of the `revoked.toml`
 list is the last open sub-task — until then you do it manually:
 
-- Stop the editor
+- Stop ForgeIEC Studio
 - Edit `revoked.toml`, append a new line with the fingerprint +
   reason, increment `sequence_number` by 1
 - Re-sign with the Caretaker key (the command will be added in
   later docs once the tool is ready)
 
-Once `team.revoke_peer` is available in the editor, this runs
-fully through the UI.
+Once `team.revoke_peer` is available in ForgeIEC Studio, this
+runs fully through the UI.
 
 ---
 

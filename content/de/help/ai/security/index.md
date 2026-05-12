@@ -37,13 +37,14 @@ Das ist nicht ein Hakchen das man umstellt — das ist eine **andere
 Editor-Version**. Die Standard-Version aus dem Internet hat die
 Schreib-Funktionen **gar nicht erst eingebaut**.
 
-Um schreibende Aktionen zu erlauben, muss der Editor neu **mit der
-Option `-DMCP_OVERRIDE_SECURITIES=ON`** gebaut werden — oder Sie
+Um schreibende Aktionen zu erlauben, muss ForgeIEC Studio neu **mit
+der Option `-DMCP_OVERRIDE_SECURITIES=ON`** gebaut werden — oder Sie
 installieren das mitgelieferte Dev-Paket. **Auf einer produktiven
 SPS-Workstation sollte das nicht laufen.**
 
-Erkennen Sie es daran: wenn der Editor mit Schreib-Freigabe gestartet
-ist, zeigt der KI-Helfer beim Start einen **Sicherheits-Banner**:
+Erkennen Sie es daran: wenn ForgeIEC Studio mit Schreib-Freigabe
+gestartet ist, zeigt der KI-Helfer beim Start einen **Sicherheits-
+Banner**:
 
 ```
 !!! SECURITY OVERRIDE ACTIVE !!!
@@ -56,8 +57,8 @@ This build MUST NOT run on a productive PLC.
 
 ## Schicht 2 — Rueckfrage bei jeder Aenderung
 
-Selbst in der freigeschalteten Version stellt der Editor bei **jeder**
-schreibenden Aktion eine Rueckfrage.
+Selbst in der freigeschalteten Version stellt ForgeIEC Studio bei
+**jeder** schreibenden Aktion eine Rueckfrage.
 
 Beispiel: Die KI will eine Variable anlegen.
 
@@ -79,7 +80,7 @@ Diese Rueckfragen erscheinen **sichtbar im Chat-Verlauf** — der KI-
 Helfer kann Sie nicht „heimlich" umgehen.
 
 **Im Geschwindigkeits-Modus** (siehe
-[Bedienung](/help/ai/chat/)) beantwortet der Editor diese Rueckfragen
+[Bedienung](/help/ai/chat/)) beantwortet ForgeIEC Studio diese Rueckfragen
 **selbst mit „yes"**. Das ist bequem fuer Test-Setups aber **nicht
 empfohlen fuer Produktion** — gilt nur fuer die aktuelle Anfrage und
 muss bewusst eingeschaltet werden.

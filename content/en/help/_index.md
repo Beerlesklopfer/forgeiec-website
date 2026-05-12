@@ -26,10 +26,16 @@ grows with every new observed case.
 
 ### [AI integration](/help/ai/)
 
-How to use the built-in AI assistant: personas, providers (ChatGPT /
-Claude / local), daily operation, security model, team mode for
-multiple workstations. Plus an architecture deep-dive for security
-auditors — why the AI layer is industrially viable, not a toy.
+How to use the built-in AI assistant in ForgeIEC Studio: personas,
+providers (ChatGPT / Claude / local), daily operation, security
+model, team mode for multiple workstations. Plus an architecture
+deep-dive for security auditors.
+
+### [MCP protocol](/help/mcp/)
+
+The protocol layer under the AI assistant — for application
+engineers connecting their own scripts/tools, and for IT/operations
+deploying, monitoring, and troubleshooting.
 
 ### [Bus Configuration](/help/bus-config/)
 

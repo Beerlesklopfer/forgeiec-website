@@ -61,11 +61,11 @@ large, red, easy to hit, always reachable.
 
 ## Fast mode (Danger Mode)
 
-By default, the editor asks a question at **every** AI write action.
+By default, ForgeIEC Studio asks a question at **every** AI write action.
 That is safe but slow — if the AI is supposed to create 50 variables,
 you click through 50 confirmations.
 
-**In Fast mode** the editor answers these questions **automatically
+**In Fast mode** ForgeIEC Studio answers these questions **automatically
 with "yes"**. The LLM loop can then run through without human
 interruption. Recommended only for **test setups** or **experimental
 iteration** — in production you should **leave it off**.

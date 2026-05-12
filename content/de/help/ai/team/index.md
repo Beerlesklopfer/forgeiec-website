@@ -1,6 +1,6 @@
 ---
 title: "Mehrere Workstations verbinden"
-summary: "Team-Mode: wie zwei oder mehr ForgeIEC-Editoren sich gegenseitig vertrauen koennen"
+summary: "Team-Mode: wie zwei oder mehr ForgeIEC-Studio-Instanzen sich gegenseitig vertrauen koennen"
 ---
 
 ## Wofuer brauche ich das?
@@ -17,8 +17,8 @@ ihren eigenen KI-Helfer. Es waere praktisch wenn:
   vorab compilieren bevor er auf die echte SPS geht.
 
 Das nennen wir hier ein **Team**. Damit das funktioniert, braucht es
-**Vertrauen** zwischen den Maschinen — kein wildfremder Editor soll
-auf Ihren zugreifen koennen, nur die Kollegen Ihrer Wahl.
+**Vertrauen** zwischen den Maschinen — kein wildfremdes Studio
+soll auf Ihres zugreifen koennen, nur die Kollegen Ihrer Wahl.
 
 ---
 
@@ -95,12 +95,28 @@ anders aus**.
 
 ## Ein neuer Kollege wird ins Team aufgenommen
 
+```mermaid
+sequenceDiagram
+    participant Neu as Neuer Kollege<br/>(Member)
+    participant Care as Caretaker
+    participant Team as Team-Roster<br/>(peers.toml)
+
+    Neu->>Neu: Schluesselpaar + Antrag (CSR) erzeugen
+    Neu->>Care: CSR per Mail / USB-Stick / Chat
+    Care->>Care: Antrag in ForgeIEC Studio sehen<br/>(Name, Memorable-ID, Randomart)
+    Care->>Care: Pruefen + Bestaetigen
+    Care->>Neu: Signierter Ausweis (.crt)
+    Neu->>Neu: Ausweis in ForgeIEC Studio installieren
+    Care->>Team: peers.toml updaten + signieren + veroeffentlichen
+    Team-->>Neu: Roster-Pull bestaetigt Member-Status
+```
+
 So laeuft das ab — aus Ihrer Sicht als Operator:
 
 **1. Der neue Kollege bereitet einen Ausweis-Antrag vor.**
-Sein Editor erzeugt ein Schluesselpaar und einen Antrag (CSR).
-Den Antrag schickt er Ihnen (Caretaker) per Mail / USB-Stick /
-Chat.
+Sein ForgeIEC Studio erzeugt ein Schluesselpaar und einen
+Antrag (CSR). Den Antrag schickt er Ihnen (Caretaker) per
+Mail / USB-Stick / Chat.
 
 **2. Sie als Caretaker sehen den Antrag in Ihrem Editor.**
 Ihr Editor zeigt:
@@ -143,7 +159,7 @@ machen Sie das per Hand:
 - Re-signieren mit dem Caretaker-Schluessel (Befehl wird in einer
   spaeteren Doku ergaenzt sobald das Werkzeug fertig ist)
 
-Sobald `team.revoke_peer` im Editor verfuegbar ist, laeuft das vollstaendig ueber die UI.
+Sobald `team.revoke_peer` in ForgeIEC Studio verfuegbar ist, laeuft das vollstaendig ueber die UI.
 
 ---
 

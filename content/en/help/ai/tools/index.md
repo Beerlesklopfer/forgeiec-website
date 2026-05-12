@@ -1,6 +1,6 @@
 ---
 title: "What the AI can do"
-summary: "Which actions the AI assistant can perform in the editor — overview in plain terms"
+summary: "Which actions the AI assistant can perform in ForgeIEC Studio — overview in plain terms"
 ---
 
 ## Reading and understanding — always allowed
@@ -126,8 +126,8 @@ from the PLC.
 
 A handful of editor actions are also reachable via the AI:
 
-- **Quit the editor** — clean stop without kill -9
-- **Recent editor logs** — what the editor itself logged
+- **Quit ForgeIEC Studio** — clean stop without kill -9
+- **Recent ForgeIEC Studio logs** — what ForgeIEC Studio itself logged
 - **Fetch / answer confirmations**
 - **List pending confirmations**
 

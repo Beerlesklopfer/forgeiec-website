@@ -15,7 +15,7 @@ You can freely choose:
 | **Local** | LM Studio / llama.cpp / Ollama | Data stays in-house, free, slower than cloud |
 | **Local** | Self-hosted vLLM / Together-API-compatible | If you run cloud-grade models behind your own firewall |
 
-The editor automatically detects whether an endpoint speaks
+ForgeIEC Studio automatically detects whether an endpoint speaks
 **OpenAI or Anthropic format** — you don't have to configure that.
 
 ---
@@ -34,7 +34,7 @@ used, not a flat fee.
 3. The key starts with `sk-...` and is shown **only once** — copy
    it immediately into a secure place (password manager).
 
-**Step 2 — Enter it in the editor**
+**Step 2 — Enter it in Studio**
 
 In the AI panel, in the profile configuration:
 
@@ -71,7 +71,7 @@ OpenAI, the API is separate from the claude.ai web subscription.
 3. The key starts with `sk-ant-...` — copy it to the password
    manager.
 
-**Step 2 — Enter it in the editor**
+**Step 2 — Enter it in Studio**
 
 | Field | Value |
 |---|---|
@@ -79,8 +79,9 @@ OpenAI, the API is separate from the claude.ai web subscription.
 | API Key | `sk-ant-...` |
 | Model | e.g. `claude-opus-4-7`, `claude-sonnet-4-6`, `claude-haiku-4-5-20251001` |
 
-The editor automatically detects from the hostname `api.anthropic.com`
-that Anthropic format applies — no extra setting needed.
+ForgeIEC Studio automatically detects from the hostname
+`api.anthropic.com` that Anthropic format applies — no extra
+setting needed.
 
 **Step 3 — Test query**
 

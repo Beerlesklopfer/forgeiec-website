@@ -1,6 +1,6 @@
 ---
 title: "Was die KI kann"
-summary: "Welche Aktionen kann der KI-Helfer im Editor ausfuehren — Uebersicht in Klartext"
+summary: "Welche Aktionen kann der KI-Helfer in ForgeIEC Studio ausfuehren — Uebersicht in Klartext"
 ---
 
 ## Lesen und Verstehen — immer erlaubt
@@ -129,7 +129,7 @@ SPS.
 Ein paar Editor-Aktionen sind ebenfalls ueber die KI ansprechbar:
 
 - **Editor beenden** — sauberer Stop ohne kill -9
-- **Letzte Editor-Logs** ansehen — was hat der Editor selbst geloggt
+- **Letzte Studio-Logs** ansehen — was hat ForgeIEC Studio selbst geloggt
 - **Confirm-Antworten** abrufen / beantworten
 - **Pending Confirmations** auflisten
 

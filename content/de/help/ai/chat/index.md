@@ -62,11 +62,11 @@ Taster: gross, rot, leicht zu treffen, immer erreichbar.
 
 ## Der Geschwindigkeits-Modus (Danger-Mode)
 
-Standardmaessig stellt der Editor bei **jeder** schreibenden Aktion
-der KI eine Rueckfrage. Das ist sicher, aber langsam — wenn die KI
+Standardmaessig stellt ForgeIEC Studio bei **jeder** schreibenden
+Aktion der KI eine Rueckfrage. Das ist sicher, aber langsam — wenn die KI
 50 Variablen anlegen soll, klickt man sich 50× durch.
 
-**Im Geschwindigkeits-Modus** beantwortet der Editor diese Rueckfragen
+**Im Geschwindigkeits-Modus** beantwortet ForgeIEC Studio diese Rueckfragen
 **automatisch mit „yes"**. Der LLM-Loop kann dann ohne menschliche
 Unterbrechung durchlaufen. Empfohlen nur fuer **Test-Setups** oder
 **experimentelle Iteration** — in Produktion sollten Sie ihn

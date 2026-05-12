@@ -35,12 +35,12 @@ This is not a checkbox you flip — it is a **different editor
 version**. The default version from the internet **simply does
 not include** the write functions.
 
-To allow write actions, the editor must be freshly built with the
-option `-DMCP_OVERRIDE_SECURITIES=ON` — or you install the bundled
-dev package. **On a productive PLC workstation, that should not
-run.**
+To allow write actions, ForgeIEC Studio must be freshly built with
+the option `-DMCP_OVERRIDE_SECURITIES=ON` — or you install the
+bundled dev package. **On a productive PLC workstation, that should
+not run.**
 
-You can recognise it: when the editor is started with write
+You can recognise it: when ForgeIEC Studio is started with write
 permission, the AI assistant shows a **security banner** at
 startup:
 
@@ -55,7 +55,7 @@ This build MUST NOT run on a productive PLC.
 
 ## Layer 2 — A question for every change
 
-Even in the unlocked version, the editor asks a question for
+Even in the unlocked version, ForgeIEC Studio asks a question for
 **every** writing action.
 
 Example: the AI wants to create a variable.
@@ -76,8 +76,8 @@ refused — it can then go a different way or ask.
 These questions appear **visibly in the chat log** — the AI
 assistant cannot bypass you "in secret".
 
-**In Fast mode** (see [Daily operation](/help/ai/chat/)) the editor
-answers these questions **itself with "yes"**. Convenient for test
+**In Fast mode** (see [Daily operation](/help/ai/chat/)) ForgeIEC
+Studio answers these questions **itself with "yes"**. Convenient for test
 setups but **not recommended for production** — applies only to
 the current request and must be deliberately turned on.
 
