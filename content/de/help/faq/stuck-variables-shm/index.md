@@ -47,14 +47,13 @@ auf demselben Topic cyclen normal.
 
 ---
 
-## Loesung: SHM-Reset
+## Loesung: anvild neu starten
 
-Stoppen Sie alle Beteiligten und loeschen Sie die iceoryx2-SHM-Dateien:
+Seit anvild **v0.1.0+** raeumt der Daemon stale SHM-Segmente
+automatisch beim Start auf. Ein einfacher Restart genuegt:
 
 ```bash
-sudo systemctl stop bellowsd anvild
-sudo rm -rf /tmp/iceoryx2/* /dev/shm/iox2_*
-sudo systemctl start anvild bellowsd
+sudo systemctl restart anvild
 ```
 
 Anschliessend im Editor: `Build -> Compile and Upload` (oder MCP-Tool
@@ -63,6 +62,12 @@ Payload.
 
 Nach dem naechsten Scan-Zyklus zeigt der Live-Monitor den korrekten,
 von Ihrer Programm-Logik berechneten Wert.
+
+> **Hinweis fuer aeltere anvild-Versionen** (vor Auto-Cleanup): falls
+> ein Restart nicht hilft, muessen die SHM-Dateien manuell entfernt
+> werden — `sudo systemctl stop bellowsd anvild && sudo rm -rf
+> /tmp/iceoryx2/* /dev/shm/iox2_* && sudo systemctl start anvild
+> bellowsd`.
 
 ---
 

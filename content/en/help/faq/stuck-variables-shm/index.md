@@ -47,14 +47,13 @@ same topic cycle normally.
 
 ---
 
-## Solution: SHM reset
+## Solution: restart anvild
 
-Stop all participants and delete the iceoryx2 SHM files:
+Since anvild **v0.1.0+** the daemon cleans stale SHM segments
+automatically on startup. A simple restart is enough:
 
 ```bash
-sudo systemctl stop bellowsd anvild
-sudo rm -rf /tmp/iceoryx2/* /dev/shm/iox2_*
-sudo systemctl start anvild bellowsd
+sudo systemctl restart anvild
 ```
 
 Then in the editor: `Build -> Compile and Upload` (or the MCP tool
@@ -63,6 +62,11 @@ payload.
 
 After the next scan cycle, the live monitor shows the correct value
 computed by your program logic.
+
+> **Note for older anvild versions** (before auto-cleanup): if a
+> restart does not help, the SHM files must be removed manually —
+> `sudo systemctl stop bellowsd anvild && sudo rm -rf /tmp/iceoryx2/*
+> /dev/shm/iox2_* && sudo systemctl start anvild bellowsd`.
 
 ---
 
