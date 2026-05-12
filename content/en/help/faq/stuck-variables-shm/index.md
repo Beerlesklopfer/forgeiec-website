@@ -3,22 +3,24 @@ title: "Variable 'sticks' despite a fresh deploy"
 summary: "BOOL/INT value holds against the program logic — usually caused by stale iceoryx2 shared memory"
 ---
 
-## Symptom
-
-A ForgeIEC pool variable (typically a `BOOL` on an HMI/Bellows
-address such as `%MX1.6`) shows a value in the live monitor — or on
-the connected device — that does not match the program logic.
+{{< callout type="symptom" title="Symptom" >}}
+A BOOL or INT pool variable holds a value (TRUE/FALSE or numeric)
+that doesn't match the program logic. `monitor.snapshot` reports
+`forced=false`, the ST code clearly writes a different value — and
+still the value stays "glued". **Cause: stale iceoryx2 shared
+memory.**
+{{< /callout >}}
 
 Classic picture:
 
-- The Variables tab shows `TRUE` (value)
+- The Variables tab shows `TRUE` as the value
 - The F checkbox is **not** set (`forced = false`)
 - The ST code clearly writes a different value
   (e.g. `Bellows.LED_14 := (Position = 14);` and Position is never 14)
 - A fresh compile + deploy report "Compilation finished successfully" —
   but the behaviour does not change
 
-You restart the editor, anvild, bellowsd — and the value stays.
+You restart ForgeIEC Studio, anvild, bellowsd — and the value stays.
 
 ---
 
@@ -47,26 +49,31 @@ same topic cycle normally.
 
 ---
 
-## Solution: restart anvild
-
+{{< callout type="solution" title="Solution — restart anvild" >}}
 Since anvild **v0.1.0+** the daemon cleans stale SHM segments
-automatically on startup. A simple restart is enough:
+automatically on startup. A restart is enough:
 
 ```bash
 sudo systemctl restart anvild
 ```
 
-Then in the editor: `Build -> Compile and Upload` (or the MCP tool
-`codegen.deploy`) — the SHM topics are created fresh without a stale
-payload.
+Then in ForgeIEC Studio: `Build → Compile and Upload`. The SHM
+topics are created fresh without a stale payload.
+{{< /callout >}}
 
 After the next scan cycle, the live monitor shows the correct value
 computed by your program logic.
 
-> **Note for older anvild versions** (before auto-cleanup): if a
-> restart does not help, the SHM files must be removed manually —
-> `sudo systemctl stop bellowsd anvild && sudo rm -rf /tmp/iceoryx2/*
-> /dev/shm/iox2_* && sudo systemctl start anvild bellowsd`.
+{{< callout type="note" title="Older anvild versions" >}}
+If a restart does not help (before auto-cleanup), the SHM files
+must be removed manually:
+
+```bash
+sudo systemctl stop bellowsd anvild
+sudo rm -rf /tmp/iceoryx2/* /dev/shm/iox2_*
+sudo systemctl start anvild bellowsd
+```
+{{< /callout >}}
 
 ---
 

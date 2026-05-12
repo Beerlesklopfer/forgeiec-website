@@ -37,6 +37,13 @@ Die Protokoll-Schicht unter dem KI-Helfer — fuer Applikations-
 ingenieure die eigene Skripte/Werkzeuge anbinden, und fuer
 IT/Betrieb die deployen, monitoren und troubleshooten.
 
+---
+
+## Weitere Bereiche
+
+- [Download](/download/) — alle Komponenten + APT-Setup
+- [News](/news/) — Release-Notes + technische Updates
+
 ### [Projekt-Dateiformat (.forge)](/help/file-format/)
 
 Aufbau einer ForgeIEC-Projektdatei: PLCopen-XML-Wurzel, POU-Typen,

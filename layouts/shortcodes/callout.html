@@ -1,0 +1,33 @@
+{{- /*
+  Colored notice block. Used for symptom / solution / note / warning
+  styles in FAQ + how-to pages. Industrial colour code:
+    symptom  → red    (alarm)
+    solution → green  (ok)
+    note     → blue   (info)
+    warning  → orange (caution)
+  Usage:
+    {{< callout type="symptom" title="Symptom" >}}
+    ...markdown content...
+    {{< /callout >}}
+*/ -}}
+{{- $type    := .Get "type"  | default "note" -}}
+{{- $title   := .Get "title" | default "" -}}
+{{- $palette := dict
+    "symptom"  (dict "border" "#c0392b" "bg" "#fdecea" "label" "#a93226")
+    "solution" (dict "border" "#1e8449" "bg" "#eafaf1" "label" "#196f3d")
+    "note"     (dict "border" "#2874a6" "bg" "#ebf5fb" "label" "#1f618d")
+    "warning"  (dict "border" "#d68910" "bg" "#fdf3e7" "label" "#9c640c")
+-}}
+{{- $c := index $palette $type | default (index $palette "note") -}}
+<div style="border-left:.4em solid {{ $c.border }};
+            background:{{ $c.bg }};
+            padding:.75em 1em .75em 1em;
+            margin:1em 0;
+            border-radius:.2em;">
+{{- if $title }}
+<p style="margin:0 0 .4em 0; color:{{ $c.label }};
+          font-weight:600; letter-spacing:.04em;
+          text-transform:uppercase; font-size:.9em;">{{ $title }}</p>
+{{- end }}
+{{ .Inner | $.Page.RenderString }}
+</div>

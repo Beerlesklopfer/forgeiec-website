@@ -3,22 +3,24 @@ title: "Variable bleibt 'haengen' trotz frischem Deploy"
 summary: "BOOL/INT-Wert haftet entgegen der Programm-Logik — Ursache ist meist stale iceoryx2 Shared-Memory"
 ---
 
-## Symptom
-
-Eine ForgeIEC-Pool-Variable (typischerweise ein `BOOL` auf einer
-HMI-/Bellows-Adresse wie `%MX1.6`) zeigt im Live-Monitor oder am
-angeschlossenen Geraet einen Wert, der nicht zur Programm-Logik passt.
+{{< callout type="symptom" title="Symptom" >}}
+Eine BOOL- oder INT-Pool-Variable behaelt einen Wert (TRUE/FALSE oder
+Zahlenwert) der nicht zur Programm-Logik passt. `monitor.snapshot`
+meldet `forced=false`, der ST-Code schreibt offensichtlich einen
+anderen Wert — und trotzdem bleibt der Wert "kleben". **Ursache:
+stale iceoryx2 Shared-Memory.**
+{{< /callout >}}
 
 Klassisches Bild:
 
-- Im Variables-Tab steht `TRUE` (Wert)
+- Im Variables-Tab steht `TRUE` als Wert
 - Die F-Checkbox ist **nicht** gesetzt (`forced = false`)
 - Der ST-Code schreibt offensichtlich einen anderen Wert
   (z.B. `Bellows.LED_14 := (Position = 14);` und Position ist nirgends 14)
 - Neue Compile + Deploy zeigen "Compilation finished successfully" —
   aendert aber nichts am Verhalten
 
-Sie restarten Editor, anvild, bellowsd — der Wert bleibt.
+Sie restarten ForgeIEC Studio, anvild, bellowsd — der Wert bleibt.
 
 ---
 
@@ -47,27 +49,31 @@ auf demselben Topic cyclen normal.
 
 ---
 
-## Loesung: anvild neu starten
-
+{{< callout type="solution" title="Loesung — anvild neu starten" >}}
 Seit anvild **v0.1.0+** raeumt der Daemon stale SHM-Segmente
-automatisch beim Start auf. Ein einfacher Restart genuegt:
+automatisch beim Startup auf. Ein Restart genuegt:
 
 ```bash
 sudo systemctl restart anvild
 ```
 
-Anschliessend im Editor: `Build -> Compile and Upload` (oder MCP-Tool
-`codegen.deploy`) — die SHM-Topics werden frisch angelegt, ohne stale
-Payload.
+Anschliessend in ForgeIEC Studio: `Build → Compile and Upload`. Die
+SHM-Topics werden frisch angelegt, ohne stale Payload.
+{{< /callout >}}
 
 Nach dem naechsten Scan-Zyklus zeigt der Live-Monitor den korrekten,
 von Ihrer Programm-Logik berechneten Wert.
 
-> **Hinweis fuer aeltere anvild-Versionen** (vor Auto-Cleanup): falls
-> ein Restart nicht hilft, muessen die SHM-Dateien manuell entfernt
-> werden — `sudo systemctl stop bellowsd anvild && sudo rm -rf
-> /tmp/iceoryx2/* /dev/shm/iox2_* && sudo systemctl start anvild
-> bellowsd`.
+{{< callout type="note" title="Aeltere anvild-Versionen" >}}
+Falls ein Restart nicht hilft (vor dem Auto-Cleanup), muessen die
+SHM-Dateien manuell entfernt werden:
+
+```bash
+sudo systemctl stop bellowsd anvild
+sudo rm -rf /tmp/iceoryx2/* /dev/shm/iox2_*
+sudo systemctl start anvild bellowsd
+```
+{{< /callout >}}
 
 ---
 

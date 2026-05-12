@@ -37,6 +37,13 @@ The protocol layer under the AI assistant — for application
 engineers connecting their own scripts/tools, and for IT/operations
 deploying, monitoring, and troubleshooting.
 
+---
+
+## Other sections
+
+- [Download](/download/) — all components + APT setup
+- [News](/news/) — release notes + technical updates
+
 ### [Bus Configuration](/help/bus-config/)
 
 PLCopen XML schema for industrial fieldbus configuration in `.forge` projects.
