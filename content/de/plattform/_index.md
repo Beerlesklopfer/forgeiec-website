@@ -1,109 +1,165 @@
 ---
 title: "Plattform"
-description: "Die ForgeIEC Plattform -- alle Komponenten fuer die industrielle Automatisierung"
+description: "Die ForgeIEC-Plattform — die Werkzeuge der Schmiede, jedes mit klarem Auftrag"
 weight: 10
 ---
 
-## Die ForgeIEC Plattform
+## Was die Plattform leistet
 
-ForgeIEC ist eine vollstaendige Plattform fuer die industrielle
-Automatisierung -- von der Entwicklungsumgebung bis zum Leitsystem. Jede
-Komponente traegt den Namen eines Schmiedewerkzeugs, denn ForgeIEC ist
-fuer die Industrie geschmiedet.
+ForgeIEC ist eine vollstaendige Plattform fuer industrielle
+Automatisierung — von der Programmierung bis zum Leitsystem. Jede
+Komponente traegt den Namen eines Schmiedewerkzeugs und hat einen
+klar umrissenen Auftrag. Komponenten sind eigenstaendige Daemonen
+bzw. Anwendungen, gemeinsam laufen sie ueber Zero-Copy-IPC und
+gRPC.
+
+| # | Komponente | Auftrag | Stand |
+|---|---|---|---|
+| 1 | **ForgeIEC Studio** | IEC-61131-3-IDE + Bus-Konfig + KI-Helfer | produktiv |
+| 2 | **anvild** | PLC-Runtime auf dem Ziel, multi-task, deterministisch | produktiv |
+| 3 | **Anvil (IPC)** | Zero-Copy-Shared-Memory zwischen Subsystemen | produktiv |
+| 4 | **bellowsd** | OPC-UA / HMI-Gateway | produktiv |
+| 5 | **tongs-*** | Feldbus-Bridges (Modbus / EtherCAT / Profibus / EthernetIP) | gemischt |
+| 6 | **Screen** | Industrieller Kiosk-Browser (Bedienpanel) | in Arbeit |
+| 7 | **Hearth** | IIoT-Subscriber / SCADA-Schicht | in Planung |
+| 8 | **Ledger** | Auftragsverwaltung / MES-Integration | in Planung |
 
 ---
 
-### Forge Studio
+## Die Komponenten
 
-**IEC 61131-3 Entwicklungsumgebung**
+### 🛠️ ForgeIEC Studio — die Werkbank
 
-Die professionelle IDE fuer SPS-Programmierung. Alle fuenf IEC-Sprachen,
-grafische und textuelle Editierung, lokale Kompilierung, Remote-Deployment.
-Gebaut mit C++17 und Qt6.
+{{< components "studio" >}}
+
+Native C++/Qt6-IDE auf der Workstation. Alle fuenf IEC-Sprachen
+(ST + IL + FBD + LD + SFC), Bus-Konfiguration, Live-Monitor,
+Oszilloskop, KI-Helfer eingebaut. Tree-sitter-basierte Syntax,
+gRPC-Anbindung an anvild, MCP-Server fuer LLM-Tooling.
 
 [Mehr erfahren](forge-studio/)
 
----
+### 🔥 anvild — die Runtime
 
-### Anvil
+{{< components "anvild" >}}
 
-**Echtzeit-SPS-Laufzeitumgebung**
-
-Der Runtime-Daemon, der IEC-Programme auf dem Zielsystem ausfuehrt.
-Zero-Copy-Kommunikation zwischen Runtime und Protokoll-Bridges ueber
-die Anvil Shared-Memory-Technologie.
+Rust/Tokio-Daemon auf der Ziel-SPS. Multi-Task-Scheduler mit
+pthread-Parallelitaet, deterministische Scan-Cycles, gRPC-Listener
+fuer das Studio, Subprozess-Manager fuer die Bus-Bridges. Stale-SHM-
+Auto-Cleanup beim Start.
 
 [Mehr erfahren](anvil/)
 
----
+### 📡 Anvil (IPC) — die Schmiedeesse
 
-### Bellows
+Zero-Copy-Shared-Memory-Schicht zwischen Runtime, Bridges und
+externen Subscribern. Basiert auf iceoryx2 mit ABI-Probe gegen
+Type-Hash-Drift. Wire-Protokoll fuer Status, I/O, Diagnostik.
 
-**OPC-UA-Gateway** -- In Entwicklung
+(Transport-Schicht von anvild — siehe oben fuer den Daemon)
 
-Standardisierte Maschine-zu-Maschine-Kommunikation nach OPC-UA-Standard.
-Transparente Integration von Automatisierungssystemen in die bestehende
-IT-Infrastruktur.
+### 🌬️ bellowsd — der Blasebalg
+
+{{< components "bellowsd" >}}
+
+OPC-UA-Server + Modbus-TCP-Server fuer HMI-Anbindung. Exportiert
+Pool-Variablen mit `bellows_export`-Flag als OPC-UA-Knoten +
+Modbus-Coils. Pro Variable einzeln gegated.
 
 [Mehr erfahren](bellows/)
 
----
+### 🔧 tongs-* — die Feldbus-Zangen
 
-### Hearth
+{{< components "tongs,anvild" >}}
 
-**SCADA/HMI** -- In Entwicklung
-
-Prozessvisualisierung und Mensch-Maschine-Schnittstelle fuer die industrielle
-Ueberwachung. Echtzeit-Dashboards, Datenhistorie, Alarmmanagement.
-
-[Mehr erfahren](hearth/)
-
----
-
-### Spark
-
-**Zenoh-Tunnel**
-
-Netzwerk-Bridge von Edge zu Cloud auf Basis des Zenoh-Protokolls. Sichere
-Verbindung zwischen lokalen SPS-Systemen und Cloud-Diensten, ohne VPN,
-ohne komplexe Konfiguration.
-
-[Mehr erfahren](spark/)
-
----
-
-### Tongs
-
-**Feldbus-Bridges**
-
-Protokoll-Bridges fuer Modbus TCP/RTU, EtherCAT und Profibus DP. Jede Bridge
-laeuft als eigenstaendiger Prozess, ueberwacht und automatisch neu gestartet
-durch den Runtime.
+Pro Protokoll ein eigener Daemon. Einheitliches Fault-Modell
+(`OK/WARN/FAULT/OFFLINE/UNKNOWN`), FDD-getriebene Diagnose-Bits,
+Anvil-Zero-Copy-IPC zur Runtime. Modbus-TCP produktiv, EtherCAT in
+Arbeit, Profibus + EtherNet/IP geplant.
 
 [Mehr erfahren](tongs/)
 
----
+### 🖥️ Screen — der Kiosk-Browser
 
-### Ledger
+{{< components "screen" >}}
 
-**Auftragsmanagement** -- In Entwicklung
+CEF-basierter Industrie-Kiosk-Browser (Chromium Embedded Framework
++ Rust + winit). Laeuft fullscreen auf Bedienpanels, oeffnet eine
+beliebige Web-HMI (Bellows / Hearth / 3rd-party). Integrierter
+Rocket-Web-Server fuer Settings (Netz, WireGuard, Zeitzone,
+80+ Sprachen), D-Bus-Backend fuer NetworkManager / timedated /
+localed.
 
-MES-Integration fuer die Verwaltung von Produktionsauftraegen,
-Produktionsverfolgung und Rueckverfolgbarkeit. Bruecke zwischen
-Automatisierung und Produktionsplanung.
+[Mehr erfahren](screen/)
+
+### 🏠 Hearth — der Herd
+
+{{< components "hearth" >}}
+
+IIoT-Subscriber + SCADA-Schicht. Plant: Subscribe von Anvil-Topics,
+Time-Series-DB-Anbindung (InfluxDB, TimescaleDB), Mosquitto-MQTT-
+Bridge, Alarm-Management, Grafana-Dashboards. In Planung —
+Architektur-Spec in Vorbereitung.
+
+[Mehr erfahren](hearth/)
+
+### 📒 Ledger — das Auftragsbuch
+
+{{< components "ledger" >}}
+
+Auftragsverwaltung + MES-Integration. Plant: Produktionsauftraege,
+Stueckzahl-Tracking, Rueckverfolgbarkeit (Material → Charge →
+Produkt), Schichtbuch, Bruecke zu ERP-Systemen. In Planung — kommt
+nach Hearth.
 
 [Mehr erfahren](ledger/)
 
 ---
 
+## Wie die Komponenten zusammenspielen
+
+```mermaid
+flowchart LR
+    Studio[ForgeIEC Studio<br/>IDE + KI]
+    Anvild[anvild<br/>Runtime]
+    Bridges["tongs-*<br/>Feldbus-Bridges"]
+    Bellows[bellowsd<br/>HMI Gateway]
+    Screen[Screen<br/>Kiosk-Browser]
+    Hearth[Hearth<br/>IIoT / SCADA]
+    Ledger[Ledger<br/>MES]
+
+    Studio -.->|gRPC| Anvild
+    Anvild -->|Anvil IPC| Bridges
+    Anvild -->|Anvil IPC| Bellows
+    Bellows -->|OPC-UA / HTTP| Screen
+    Anvild -->|Anvil IPC| Hearth
+    Hearth -.->|REST| Ledger
+```
+
+Studio sitzt auf der Workstation, alles andere auf den Ziel-
+Systemen. Workstations + Ziel-Systeme koennen ueber das
+[Team-Federation-Modell](/news/federation-team-trust/) miteinander
+verbunden werden — mehrere Workstations sehen ihre Anlagen.
+
+---
+
+## Open Source + Aufbauend auf Vorgaengern
+
+Alle Komponenten sind **AGPL-3.0**. Source einsehbar auf GitHub +
+Forgejo. Build reproduzierbar ueber Debian-CPack + signiertes
+APT-Repository.
+
+ForgeIEC steht auf den Schultern von **OpenPLC** (Thiago Alves,
+seit 2018) und behaelt Datei-Kompatibilitaet zu OpenPLC-Projekten.
+Lesen Sie die [Founding-Story](/news/die-forgeiec-geschichte/) fuer
+den vollen Werdegang vom OpenPLC-Fork zur eigenstaendigen
+Plattform.
+
+---
+
 <div style="text-align:center; padding: 2rem;">
 
-**Aufbauend auf OpenPLC** -- ForgeIEC basiert auf dem
-[OpenPLC](https://autonomylogic.com/)-Projekt und ist vollstaendig kompatibel
-mit dessen Dateiarchitektur. Bestehende OpenPLC-Projekte koennen direkt
-geoeffnet und weiterentwickelt werden.
-
-**Alle Komponenten sind Open Source. Keine Lizenzkosten. Keine Herstellerbindung.**
+**Die Werkzeuge der Schmiede. Open by default.**
 
 blacksmith@forgeiec.io
 

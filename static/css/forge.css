@@ -600,6 +600,8 @@ html[dir="rtl"] .content-wrap th {
 .component-badge--bellowsd { border-color: var(--cyan); }
 .component-badge--tongs    { border-color: var(--gold-dark); }
 .component-badge--hearth   { border-color: #8e44ad; }
+.component-badge--screen   { border-color: var(--cyan); }
+.component-badge--ledger   { border-color: var(--slate-400); }
 .component-badge--anvil    { border-color: var(--amber-light); }
 
 .component-badge img.component-badge-icon,

@@ -1,107 +1,161 @@
 ---
 title: "Platform"
-description: "The ForgeIEC Platform -- all components for industrial automation"
+description: "The ForgeIEC platform — the tools of the forge, each with a clear remit"
 weight: 10
 ---
 
-## The ForgeIEC Platform
+## What the platform delivers
 
-ForgeIEC is a complete industrial automation platform -- from the development
-environment to the supervisory system. Each component bears the name of a
-blacksmith's tool, because ForgeIEC is forged for industry.
+ForgeIEC is a complete platform for industrial automation — from
+programming to control system. Every component carries the name
+of a blacksmith's tool and has a clearly defined remit. Components
+are standalone daemons or applications, jointly running over
+zero-copy IPC and gRPC.
+
+| # | Component | Remit | Status |
+|---|---|---|---|
+| 1 | **ForgeIEC Studio** | IEC 61131-3 IDE + bus config + AI assistant | productive |
+| 2 | **anvild** | PLC runtime on target, multi-task, deterministic | productive |
+| 3 | **Anvil (IPC)** | Zero-copy shared memory between subsystems | productive |
+| 4 | **bellowsd** | OPC-UA / HMI gateway | productive |
+| 5 | **tongs-*** | Fieldbus bridges (Modbus / EtherCAT / Profibus / EthernetIP) | mixed |
+| 6 | **Screen** | Industrial kiosk browser (HMI panel) | in progress |
+| 7 | **Hearth** | IIoT subscriber / SCADA layer | planned |
+| 8 | **Ledger** | Order management / MES integration | planned |
 
 ---
 
-### Forge Studio
+## The components
 
-**IEC 61131-3 Development Environment**
+### 🛠️ ForgeIEC Studio — the workbench
 
-The professional IDE for PLC programming. All five IEC languages, graphical
-and textual editing, local compilation, remote deployment. Built with C++17
-and Qt6.
+{{< components "studio" >}}
+
+Native C++/Qt6 IDE on the workstation. All five IEC languages
+(ST + IL + FBD + LD + SFC), bus configuration, live monitor,
+oscilloscope, AI assistant built in. Tree-sitter syntax, gRPC link
+to anvild, MCP server for LLM tooling.
 
 [Learn more](forge-studio/)
 
----
+### 🔥 anvild — the runtime
 
-### Anvil
+{{< components "anvild" >}}
 
-**Real-Time PLC Runtime**
-
-The runtime daemon that executes IEC programs on the target system. Zero-Copy
-communication between the runtime and protocol bridges via Anvil shared memory
-technology.
+Rust/Tokio daemon on the target PLC. Multi-task scheduler with
+pthread parallelism, deterministic scan cycles, gRPC listener for
+Studio, subprocess manager for the bus bridges. Stale-SHM auto-
+cleanup at startup.
 
 [Learn more](anvil/)
 
----
+### 📡 Anvil (IPC) — the forge fire
 
-### Bellows
+Zero-copy shared-memory layer between runtime, bridges and
+external subscribers. Based on iceoryx2 with ABI probe against
+type-hash drift. Wire protocol for status, I/O, diagnostics.
 
-**OPC UA Gateway** -- In Development
+(Transport layer of anvild — see above for the daemon)
 
-Standardized machine-to-machine communication conforming to the OPC UA
-standard. Seamless integration of automation systems into existing IT
-infrastructure.
+### 🌬️ bellowsd — the bellows
+
+{{< components "bellowsd" >}}
+
+OPC-UA server + Modbus TCP server for HMI integration. Exports
+pool variables with the `bellows_export` flag as OPC-UA nodes +
+Modbus coils. Gated individually per variable.
 
 [Learn more](bellows/)
 
----
+### 🔧 tongs-* — the fieldbus tongs
 
-### Hearth
+{{< components "tongs,anvild" >}}
 
-**SCADA/HMI** -- In Development
-
-Process visualization and human-machine interface for industrial supervision.
-Real-time dashboards, data history, alarm management.
-
-[Learn more](hearth/)
-
----
-
-### Spark
-
-**Zenoh Tunnel**
-
-Edge-to-Cloud network bridge based on the Zenoh protocol. Secure connection
-between on-site PLCs and cloud services, without VPN, without complex
-configuration.
-
-[Learn more](spark/)
-
----
-
-### Tongs
-
-**Fieldbus Bridges**
-
-Protocol bridges for Modbus TCP/RTU, EtherCAT and Profibus DP. Each bridge
-runs as an independent process, monitored and automatically restarted by the
-runtime.
+One daemon per protocol. Uniform fault model
+(`OK/WARN/FAULT/OFFLINE/UNKNOWN`), FDD-driven diagnostic bits,
+Anvil zero-copy IPC to the runtime. Modbus TCP productive,
+EtherCAT in progress, Profibus + EtherNet/IP planned.
 
 [Learn more](tongs/)
 
----
+### 🖥️ Screen — the kiosk browser
 
-### Ledger
+{{< components "screen" >}}
 
-**Manufacturing Order Management** -- In Development
+CEF-based industrial kiosk browser (Chromium Embedded Framework
++ Rust + winit). Runs fullscreen on HMI panels, opens any web HMI
+(Bellows / Hearth / 3rd-party). Integrated Rocket web server for
+settings (network, WireGuard, time zone, 80+ languages), D-Bus
+backend for NetworkManager / timedated / localed.
 
-MES integration for manufacturing order management, production tracking and
-traceability. Bridge between automation and production planning.
+[Learn more](screen/)
+
+### 🏠 Hearth — the forge hearth
+
+{{< components "hearth" >}}
+
+IIoT subscriber + SCADA layer. Plans: subscribe to Anvil topics,
+time-series-DB integration (InfluxDB, TimescaleDB), Mosquitto MQTT
+bridge, alarm management, Grafana dashboards. Planned —
+architecture spec in preparation.
+
+[Learn more](hearth/)
+
+### 📒 Ledger — the order book
+
+{{< components "ledger" >}}
+
+Order management + MES integration. Plans: production orders,
+piece-count tracking, traceability (material → batch → product),
+shift log, bridge to ERP systems. Planned — comes after Hearth.
 
 [Learn more](ledger/)
 
 ---
 
+## How the components fit together
+
+```mermaid
+flowchart LR
+    Studio[ForgeIEC Studio<br/>IDE + AI]
+    Anvild[anvild<br/>Runtime]
+    Bridges["tongs-*<br/>Fieldbus bridges"]
+    Bellows[bellowsd<br/>HMI Gateway]
+    Screen[Screen<br/>Kiosk browser]
+    Hearth[Hearth<br/>IIoT / SCADA]
+    Ledger[Ledger<br/>MES]
+
+    Studio -.->|gRPC| Anvild
+    Anvild -->|Anvil IPC| Bridges
+    Anvild -->|Anvil IPC| Bellows
+    Bellows -->|OPC-UA / HTTP| Screen
+    Anvild -->|Anvil IPC| Hearth
+    Hearth -.->|REST| Ledger
+```
+
+Studio lives on the workstation, everything else on the target
+systems. Workstations + target systems can be linked together via
+the [team federation model](/news/federation-team-trust/) — multiple
+workstations see their machines.
+
+---
+
+## Open source + standing on predecessors
+
+All components are **AGPL-3.0**. Source visible on GitHub +
+Forgejo. Build reproducible via Debian CPack + signed APT
+repository.
+
+ForgeIEC stands on the shoulders of **OpenPLC** (Thiago Alves,
+since 2018) and keeps file compatibility with OpenPLC projects.
+Read the [founding story](/news/die-forgeiec-geschichte/) for the
+full path from OpenPLC fork to standalone platform.
+
+---
+
 <div style="text-align:center; padding: 2rem;">
 
-**Built on OpenPLC** -- ForgeIEC is based on the
-[OpenPLC](https://autonomylogic.com/) project and is fully compatible with
-its file architecture. Existing OpenPLC projects can be opened and developed
-directly.
-
-**All components are Open Source. No license fees. No vendor lock-in.**
+**The tools of the forge. Open by default.**
 
 blacksmith@forgeiec.io
 
