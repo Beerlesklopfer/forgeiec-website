@@ -31,6 +31,14 @@ unsafe = true
       pageRef = "/plattform/"
       weight = 10
     [[languages.de.menu.main]]
+      name = "Download"
+      pageRef = "/download/"
+      weight = 15
+    [[languages.de.menu.main]]
+      name = "News"
+      pageRef = "/news/"
+      weight = 18
+    [[languages.de.menu.main]]
       name = "Partner"
       pageRef = "/partner/"
       weight = 20
@@ -54,6 +62,14 @@ unsafe = true
       name = "Platform"
       pageRef = "/plattform/"
       weight = 10
+    [[languages.en.menu.main]]
+      name = "Download"
+      pageRef = "/download/"
+      weight = 15
+    [[languages.en.menu.main]]
+      name = "News"
+      pageRef = "/news/"
+      weight = 18
     [[languages.en.menu.main]]
       name = "Partners"
       pageRef = "/partner/"
@@ -79,6 +95,14 @@ unsafe = true
       pageRef = "/plattform/"
       weight = 10
     [[languages.fr.menu.main]]
+      name = "Telechargement"
+      pageRef = "/download/"
+      weight = 15
+    [[languages.fr.menu.main]]
+      name = "Actualites"
+      pageRef = "/news/"
+      weight = 18
+    [[languages.fr.menu.main]]
       name = "Partenaires"
       pageRef = "/partner/"
       weight = 20
@@ -102,6 +126,14 @@ unsafe = true
       name = "Plataforma"
       pageRef = "/plattform/"
       weight = 10
+    [[languages.es.menu.main]]
+      name = "Descargas"
+      pageRef = "/download/"
+      weight = 15
+    [[languages.es.menu.main]]
+      name = "Noticias"
+      pageRef = "/news/"
+      weight = 18
     [[languages.es.menu.main]]
       name = "Socios"
       pageRef = "/partner/"
@@ -127,6 +159,14 @@ unsafe = true
       pageRef = "/plattform/"
       weight = 10
     [[languages.zh.menu.main]]
+      name = "下载"
+      pageRef = "/download/"
+      weight = 15
+    [[languages.zh.menu.main]]
+      name = "新闻"
+      pageRef = "/news/"
+      weight = 18
+    [[languages.zh.menu.main]]
       name = "合作伙伴"
       pageRef = "/partner/"
       weight = 20
@@ -150,6 +190,14 @@ unsafe = true
       name = "プラットフォーム"
       pageRef = "/plattform/"
       weight = 10
+    [[languages.ja.menu.main]]
+      name = "ダウンロード"
+      pageRef = "/download/"
+      weight = 15
+    [[languages.ja.menu.main]]
+      name = "ニュース"
+      pageRef = "/news/"
+      weight = 18
     [[languages.ja.menu.main]]
       name = "パートナー"
       pageRef = "/partner/"
@@ -175,6 +223,14 @@ unsafe = true
       pageRef = "/plattform/"
       weight = 10
     [[languages.tr.menu.main]]
+      name = "İndir"
+      pageRef = "/download/"
+      weight = 15
+    [[languages.tr.menu.main]]
+      name = "Haberler"
+      pageRef = "/news/"
+      weight = 18
+    [[languages.tr.menu.main]]
       name = "Ortaklar"
       pageRef = "/partner/"
       weight = 20
@@ -199,6 +255,14 @@ unsafe = true
       name = "المنصة"
       pageRef = "/plattform/"
       weight = 10
+    [[languages.ar.menu.main]]
+      name = "التنزيل"
+      pageRef = "/download/"
+      weight = 15
+    [[languages.ar.menu.main]]
+      name = "الأخبار"
+      pageRef = "/news/"
+      weight = 18
     [[languages.ar.menu.main]]
       name = "الشركاء"
       pageRef = "/partner/"

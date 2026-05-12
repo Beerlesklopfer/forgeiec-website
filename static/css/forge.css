@@ -566,6 +566,80 @@ html[dir="rtl"] .content-wrap th {
   text-align: right;
 }
 
+/* ===== DISTRO-INSTALL POPUP ===== */
+.distro-install {
+  background: rgba(15, 23, 42, 0.6);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+  margin: 1.6rem 0;
+}
+
+.distro-install p {
+  margin: 0 0 0.8rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.distro-install label {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.distro-install select {
+  background: var(--iron);
+  color: var(--text);
+  border: 1px solid var(--slate-600);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.7rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.distro-install select:hover,
+.distro-install select:focus {
+  border-color: var(--amber);
+  outline: none;
+}
+
+.distro-install select option {
+  background: var(--iron);
+  color: var(--text);
+}
+
+.distro-install em {
+  color: var(--text-muted);
+  font-style: normal;
+  font-size: 0.85rem;
+}
+
+.distro-install pre {
+  margin: 0;
+  background: var(--iron);
+  color: var(--text);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius);
+  border-left: 3px solid var(--cyan);
+  overflow-x: auto;
+}
+
+.distro-install pre code {
+  background: transparent;
+  color: inherit;
+  font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.distro-install pre code span[id^="forgeiec-suite"] {
+  color: var(--amber);
+  font-weight: 600;
+}
+
 /* ===== NEWS / POST LIST ===== */
 .post-list-section {
   background: var(--steel);
