@@ -18,6 +18,12 @@ Einstiegspunkt fuer die kontext-sensitive Hilfe aus dem Editor.
 F1 oeffnet aus dem Editor heraus genau die passende Seite hier
 auf der Website. URL-Schema und Themen-Slugs sind dort beschrieben.
 
+### [FAQ](/help/faq/)
+
+Wachsende Sammlung haeufiger Fragen + Loesungen aus der Praxis.
+Beginnt mit einem klassischen Symptom (Variable haengt trotz frischem
+Deploy) und waechst mit jedem neu beobachteten Fall.
+
 ### [Projekt-Dateiformat (.forge)](/help/file-format/)
 
 Aufbau einer ForgeIEC-Projektdatei: PLCopen-XML-Wurzel, POU-Typen,

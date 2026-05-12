@@ -18,6 +18,12 @@ Entry point for the editor's context-sensitive help. F1 in the editor
 opens exactly the matching page on this site. URL scheme and topic
 slugs are described there.
 
+### [FAQ](/help/faq/)
+
+Growing collection of common questions + practical solutions. Starts
+with one classic symptom (variable sticks despite a fresh deploy) and
+grows with every new observed case.
+
 ### [Bus Configuration](/help/bus-config/)
 
 PLCopen XML schema for industrial fieldbus configuration in `.forge` projects.
