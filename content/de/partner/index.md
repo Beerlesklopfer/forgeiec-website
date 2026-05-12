@@ -1,103 +1,140 @@
 ---
 title: "Partner"
-summary: "Gemeinsam die Zukunft der Automatisierung schmieden"
+summary: "Wer mitbaut — und in welchen Bereichen wir Unterstuetzung suchen"
 ---
 
-## Partnerschaft bei ForgeIEC
+## Wer fuer eine Partnerschaft passt
 
-ForgeIEC ist ein Open-Source-Projekt, das von der Ueberzeugung lebt, dass
-industrielle Automatisierung fuer alle zugaenglich sein muss. Wir suchen
-Partner, die diese Vision teilen und bereit sind, die Zukunft der
-Automatisierung aktiv mitzugestalten.
+ForgeIEC waechst nicht durch Marketing-Vereinbarungen, sondern durch
+Leute die **Code, Hardware oder Praxiswissen einbringen**. Wir suchen
+Partner mit nachweisbarem Open-Source-Engagement und konkretem
+Beitrag zu einem der Subsysteme.
 
----
+| Kriterium | Was wir sehen wollen |
+|---|---|
+| **Nachweisbare OSS-Beitraege** | Commits / PRs / Bug-Reports in bestehenden Projekten — nicht nur Nutzung |
+| **Oeffentliches Profil** | GitHub, GitLab, Codeberg, Forgejo — egal welches Hosting |
+| **Domain-Expertise** | Industrielle Automatisierung, Feldbusse, IEC 61131-3, Embedded-Systeme oder verwandtes |
+| **Langfristige Perspektive** | Plattform-Aufbau ist Marathon — wir suchen keine Kurz-Engagements |
 
-## Voraussetzungen
-
-### Nachgewiesenes Open-Source-Engagement
-
-Bewerber muessen bereits bewiesen haben, dass sie den Gedanken von Open Source
-unterstuetzen. Das bedeutet:
-
-- **Nachweisbare Beitraege** zu bestehenden Open-Source-Projekten (Commits,
-  Pull Requests, Bug Reports, Dokumentation)
-- **Oeffentliches Profil** auf Plattformen wie GitHub, GitLab oder Codeberg
-- **Aktive Teilnahme** an Open-Source-Communities — nicht nur Nutzung,
-  sondern Mitgestaltung
-
-Wir glauben, dass Taten mehr sagen als Worte. Wer Open Source nur als
-Marketinginstrument betrachtet, ohne selbst beizutragen, passt nicht
-zu unserer Philosophie.
-
-### Gemeinsame Werte
-
-- **Transparenz** — Offene Kommunikation, nachvollziehbare Entscheidungen
-- **Zusammenarbeit** — Code Reviews, gemeinsame Architektur-Diskussionen,
-  geteiltes Wissen
-- **Qualitaet** — Dokumentierte Tests, sauberer Code, industrietaugliche
-  Zuverlaessigkeit
-- **Langfristigkeit** — Partnerschaft ist kein Sprint, sondern ein Marathon
+Open Source als Marketing-Etikett ohne Code-Beitrag passt **nicht**
+zu unserem Modell.
 
 ---
 
-## Was wir bieten
+## Bereiche in denen wir konkret Unterstuetzung suchen
 
-### Zugang zur ForgeIEC-Plattform
+### 🔧 Bus-Bridges (tongs-*)
 
-- Fruehzeitiger Zugriff auf neue Features und Entwicklungszweige
-- Direkter Draht zum Kernteam
-- Moeglichkeit, die Roadmap aktiv mitzugestalten
+{{< components "tongs,anvild" >}}
 
-### Gemeinsame Entwicklung
+- **tongs-ethercat** — DC-Sync, Slave-State-Machine, ENI-XML-Import
+- **tongs-profibus** — DP-Master, GSD-Import-Toolchain
+- **tongs-ethernetip** — CIP-Connections, EDS-Import
+- **tongs-can** — CANopen + J1939
 
-- Gemeinsame Arbeit an industriellen Bussystem-Treibern
-- Integration herstellerspezifischer Hardware
-- Entwicklung branchenspezifischer Erweiterungen
+Wer einen Stack fuer eines dieser Protokolle gut kennt — ideale
+Stelle. Skeleton + Fault-Model + IPC-Wire-Format stehen, der
+Protokoll-spezifische Teil fehlt.
 
-### Technischer Support
+### 🛠️ Studio-Editor-Features
 
-- Priorisierte Fehlerbehebung
-- Architektur-Beratung fuer eigene Erweiterungen
-- Unterstuetzung bei der Integration in bestehende Systeme
+{{< components "studio" >}}
+
+- **FBD/LD/SFC-Editoren** — heute liegt der Fokus auf ST. Grafische
+  Sprachen brauchen eigene Tree-sitter-Grammatik + Canvas-Renderer.
+- **Vendor-Catalog-Pflege** — FDDs fuer weitere Hersteller (heute:
+  Weidmueller). Wer mit GSDML/EDS/ESI-Konvertern arbeiten kann ist
+  hilfreich.
+- **Internationalisierung** — Studio + Website werden aktuell nach
+  EN/DE/FR/ES/ZH/JA/TR/AR uebersetzt; manche Sprachen sind nur
+  maschinell vorbefuellt.
+
+### 🌬️ HMI-Anbindung (bellowsd)
+
+{{< components "bellowsd" >}}
+
+- **OPC-UA-Companion-Specs** — bellowsd unterstuetzt heute generische
+  OPC-UA-Knoten. Companion-Spec-Adapter (z.B. PackML, OPC-UA-Robotics)
+  sind willkommen.
+- **HMI-Frameworks** — `Hearth` ist als IIoT-Subscriber-Layer in
+  Planung. Wer mit MQTT, Time-Series-DBs (InfluxDB, TimescaleDB)
+  oder Grafana-Pipelines arbeitet, kann hier Architektur mitgestalten.
+
+### 🔥 Runtime + Determinismus (anvild)
+
+{{< components "anvild" >}}
+
+- **Real-Time-Linux-Tuning** — PREEMPT_RT-Kernel, CPU-Pinning,
+  Cache-Locality fuer Sub-Millisekunden-Cycle-Times
+- **Rust+LLVM-Codegen (rusty)** — geplante Migration der Layer-1-
+  Codegen weg von matiec/C-Output hin zu Rust+LLVM. Determinismus-
+  Garantien + Online-Change-Vorbereitung.
+- **Hardware-Targets** — Raspberry Pi, BeagleBone, industrielle x86,
+  ARM-SBCs. Testing + Performance-Profiling auf echter Hardware.
+
+### 📚 Bildung + Dokumentation
+
+{{< components "studio" >}}
+
+- **Tutorials** — von „erstes Knight-Rider in 5 Minuten" bis „komplette
+  Maschinensteuerung mit OPC-UA + EtherCAT"
+- **Beispiel-Projekte** — heute liegen nur 2 Demos im Tree. Mehr
+  ist immer besser.
+- **Lehr-Curriculum** — Hochschulen die ForgeIEC als Lehr-IDE
+  einsetzen wollen. Wir liefern Studio kostenlos, Dozenten bringen
+  IEC-Curriculum.
 
 ---
 
-## Formen der Partnerschaft
+## Was Partner zurueck bekommen
 
-### Technologie-Partner
+| Leistung | Konkret |
+|---|---|
+| **Source-Zugang** | Alles ist OSS — Source liegt auf GitHub + Forgejo |
+| **Frueher Zugriff** | Development-Branch ist auf Feature-Status-Niveau (siehe [News](/news/)) — Partner sehen Aenderungen am Tag des Pushes |
+| **Code-Review-Zugang** | PRs werden vom Kernteam reviewt, Feedback in Stunden statt Wochen |
+| **Roadmap-Mitsprache** | Sprint-Planung passiert offen ueber GitHub-Issues + Architektur-Specs |
+| **Technische Beratung** | Architektur-Diskussion via Issues, Mail, oder direkter Draht |
+| **Branding** | Partner werden auf dieser Seite aufgefuehrt (sobald die ersten da sind) |
 
-Hersteller von Automatisierungskomponenten, die ihre Hardware in ForgeIEC
-integrieren moechten. Gemeinsame Treiberentwicklung, Geraetekonfigurationen
-und Testverfahren.
+Wir verkaufen **keine** Premium-Lizenzen und versprechen **keine**
+Service-Vertrags-Privilegien — alle Funktionen sind Teil der
+AGPL-3.0-Distribution. Partnerschaft heisst **enger Kontakt + frueher
+Einblick + Mitarbeit**, nicht „bezahltes Sondermenue".
 
-### Integrations-Partner
+---
 
-Systemintegratoren und Ingenieursbueros, die ForgeIEC in Kundenprojekten
-einsetzen. Praxiswissen fliesst zurueck in die Entwicklung.
+## Aktuell registrierte Partner
 
-### Bildungs-Partner
+Stand 2026-05: noch keine externen Partner — die Plattform ist im
+Aufbau-Sprint, Partner-Onboarding kommt sobald die ersten Subsystem-
+APIs (Bridge-SDK, FDD-Format) stabilisiert sind.
 
-Hochschulen und Ausbildungsstaetten, die ForgeIEC in der Lehre verwenden.
-Freier Zugang fuer den Bildungsbereich — die naechste Generation von
-Automatisierungstechnikern sollte mit offenen Werkzeugen lernen.
+Wenn Sie zu den ersten gehoeren wollen: kommen Sie auf uns zu (siehe
+unten).
 
 ---
 
 ## Bewerbung
 
-Sie moechten Partner werden? Schreiben Sie uns mit:
+Schicken Sie uns:
 
-- Beschreibung Ihrer Organisation
-- Links zu Ihren Open-Source-Beitraegen
-- Ihre Motivation fuer eine Partnerschaft
-- Konkreter Bereich, in dem Sie beitragen moechten
+1. **Wer sind Sie?** — Person / Organisation, Hintergrund
+2. **Wo haben Sie schon beigetragen?** — Links zu OSS-Projekten,
+   konkrete Commits / PRs / Issues
+3. **Welcher Bereich?** — siehe Liste oben (Bus-Bridges /
+   Editor / HMI / Runtime / Bildung) — bitte konkret
+4. **Was waere Ihr erster Schritt?** — kein Plan-Dokument noetig,
+   ein Absatz reicht
+
+Antwort: blacksmith@forgeiec.io.
 
 ---
 
-<div style="text-align:center; padding: 2rem;">
+## Verwandte Themen
 
-**Gemeinsam schmieden wir die Werkzeuge der Zukunft.**
-
-blacksmith@forgeiec.io
-
-</div>
+- [News](/news/) — was die letzten Sprints geliefert haben
+- [Architektur + Sicherheit](/help/ai/architecture/) — Spec-Tiefe
+  fuer Sicherheits-Reviewer
+- [Download](/download/) — alle Komponenten + Source-Tree
