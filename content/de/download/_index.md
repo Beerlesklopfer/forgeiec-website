@@ -22,22 +22,9 @@ haengt von Ihrer Rolle:
 
 ForgeIEC wird als signiertes Debian-Repository unter
 `apt.forgeiec.io` bereitgestellt. Einrichtung ist einmalig pro
-Workstation bzw. Ziel-SPS:
+Workstation bzw. Ziel-SPS — waehlen Sie Ihre Distribution aus:
 
-```bash
-# Signier-Schluessel hinterlegen
-sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
-  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
-
-# Repository-Quelle eintragen
-# (Debian 12 "bookworm" bzw. Debian 13 "trixie" — passend zum System)
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
-https://apt.forgeiec.io/trixie trixie main" \
-  | sudo tee /etc/apt/sources.list.d/forgeiec.list
-
-sudo apt update
-```
+{{< distro-install >}}
 
 Danach Komponenten einzeln installieren:
 

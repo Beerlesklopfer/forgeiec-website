@@ -11,4 +11,37 @@
   </div>
 </section>
 
+{{/*
+  For the /news/ section, render a card list of child pages sorted by
+  Weight (asc) then Date (desc). Pinned posts (weight set) bubble to
+  the top, others by date newest-first. Other sections (/help/,
+  /download/) keep curated _index.md links and don't auto-list.
+*/}}
+{{ if eq .Section "news" }}
+{{ $posts := where .Pages "Kind" "page" }}
+{{ if $posts }}
+<section class="post-list-section">
+  <div class="container">
+    <div class="post-list">
+    {{ range $posts.ByWeight.ByDate.Reverse }}
+      <a href="{{ .RelPermalink }}" class="post-card">
+        <div class="post-card-header">
+          <h3 class="post-card-title{{ if .Params.weight }} post-card-pinned{{ end }}">
+            {{ .Title }}
+          </h3>
+          <time class="post-card-date" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "2006-01-02" }}
+          </time>
+        </div>
+        {{ with .Params.summary }}
+        <p class="post-card-summary">{{ . }}</p>
+        {{ end }}
+      </a>
+    {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+
 {{ end }}

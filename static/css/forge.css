@@ -566,6 +566,76 @@ html[dir="rtl"] .content-wrap th {
   text-align: right;
 }
 
+/* ===== NEWS / POST LIST ===== */
+.post-list-section {
+  background: var(--steel);
+  padding: 3rem 0 5rem;
+  border-top: 2px solid var(--slate-700);
+}
+
+.post-list {
+  display: grid;
+  gap: 1.2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.post-card {
+  display: block;
+  padding: 1.4rem 1.6rem;
+  background: rgba(15, 23, 42, 0.6);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.post-card:hover {
+  background: rgba(245, 158, 11, 0.08);
+  border-left-color: var(--amber);
+  transform: translateX(2px);
+  box-shadow: var(--shadow);
+  color: inherit;
+}
+
+.post-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.post-card-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: -0.01em;
+}
+
+.post-card-date {
+  color: var(--slate-400);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.post-card-summary {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.post-card-pinned::before {
+  content: "★ ";
+  color: var(--amber-light);
+  font-size: 0.9em;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .header-inner {

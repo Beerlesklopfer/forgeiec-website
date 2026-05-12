@@ -5,6 +5,11 @@ defaultContentLanguage = 'de'
 defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
 
+# News-Posts duerfen mit einem Datum am aktuellen Tag publiziert
+# werden, auch wenn die UTC-Zeit noch vor dem Mitternacht-Anker
+# liegt (Hugo wertet Datum ohne Uhrzeit als 00:00 UTC).
+buildFuture = true
+
 [params]
 description = "IEC 61131-3 SPS-Entwicklungsumgebung"
 
