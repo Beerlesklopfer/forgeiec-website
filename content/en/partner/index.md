@@ -1,41 +1,64 @@
 ---
 title: "Partners"
-summary: "Who's helping build — and which areas we are looking for contributors"
+summary: "Forging the future of automation together"
 ---
 
-## Who fits a partnership
+## Partnership at ForgeIEC
 
-ForgeIEC does not grow through marketing agreements but through
-people who bring **code, hardware, or practical knowledge**. We
-look for partners with demonstrable open-source engagement and
-concrete contributions to one of the subsystems.
+ForgeIEC is an open-source project built on the conviction that
+industrial automation must be accessible to everyone. We are
+looking for partners who share this vision and are ready to
+actively shape the future of automation.
 
-| Criterion | What we want to see |
-|---|---|
-| **Demonstrable OSS contributions** | Commits / PRs / bug reports in existing projects — not just usage |
-| **Public profile** | GitHub, GitLab, Codeberg, Forgejo — any hosting |
-| **Domain expertise** | Industrial automation, fieldbuses, IEC 61131-3, embedded systems, or related |
-| **Long-term perspective** | Platform building is a marathon — we are not looking for short engagements |
+---
 
-Open source as a marketing label without code contribution does
-**not** fit our model.
+## Requirements
+
+### Proven open-source engagement
+
+Applicants must already have demonstrated that they support the
+idea of open source. That means:
+
+- **Demonstrable contributions** to existing open-source projects
+  (commits, pull requests, bug reports, documentation)
+- **Public profile** on platforms such as GitHub, GitLab, or
+  Codeberg
+- **Active participation** in open-source communities — not just
+  use but co-creation
+
+We believe actions speak louder than words. Whoever sees open
+source merely as a marketing instrument without contributing
+themselves does not fit our philosophy.
+
+### Shared values
+
+- **Transparency** — open communication, traceable decisions
+- **Collaboration** — code reviews, shared architecture
+  discussions, knowledge sharing
+- **Quality** — documented tests, clean code, industrial-grade
+  reliability
+- **Long-term thinking** — partnership is not a sprint but a
+  marathon
 
 ---
 
 ## Areas where we are looking for contributors
 
+If the requirements above fit you — these are the subsystems
+where we are particularly looking for fellow builders:
+
 ### 🔧 Bus bridges (tongs-*)
 
 {{< components "tongs,anvild" >}}
 
-- **tongs-ethercat** — DC sync, slave state machine, ENI XML import
+- **tongs-ethercat** — DC sync, slave state machine, ENI XML
+  import
 - **tongs-profibus** — DP master, GSD import toolchain
 - **tongs-ethernetip** — CIP connections, EDS import
 - **tongs-can** — CANopen + J1939
 
-If you know one of these stacks well — ideal spot. Skeleton +
-fault model + IPC wire format are in place; the protocol-specific
-part is missing.
+Skeleton + fault model + IPC wire format are in place — the
+protocol-specific part is missing.
 
 ### 🛠️ Studio editor features
 
@@ -44,10 +67,10 @@ part is missing.
 - **FBD/LD/SFC editors** — today the focus is on ST. Graphical
   languages need their own tree-sitter grammars + canvas renderers.
 - **Vendor catalog** — FDDs for more manufacturers (today:
-  Weidmueller). If you work with GSDML/EDS/ESI converters — useful.
-- **Internationalisation** — Studio + website are currently
-  translated to EN/DE/FR/ES/ZH/JA/TR/AR; some languages are only
-  machine-pre-filled.
+  Weidmueller). GSDML/EDS/ESI converters welcome.
+- **Internationalisation** — Studio + website are translated into
+  EN/DE/FR/ES/ZH/JA/TR/AR; some languages are only machine
+  pre-filled.
 
 ### 🌬️ HMI integration (bellowsd)
 
@@ -55,11 +78,11 @@ part is missing.
 
 - **OPC-UA companion specs** — bellowsd today supports generic
   OPC-UA nodes. Companion-spec adapters (e.g. PackML, OPC-UA
-  Robotics) are welcome.
+  Robotics) welcome.
 - **HMI frameworks** — `Hearth` is planned as the IIoT subscriber
   layer. If you work with MQTT, time-series DBs (InfluxDB,
-  TimescaleDB) or Grafana pipelines, you can shape the architecture
-  here.
+  TimescaleDB) or Grafana pipelines, you can help shape the
+  architecture here.
 
 ### 🔥 Runtime + determinism (anvild)
 
@@ -70,8 +93,8 @@ part is missing.
 - **Rust+LLVM codegen (rusty)** — planned migration of the layer-1
   codegen away from matiec/C output to Rust+LLVM. Determinism
   guarantees + online-change preparation.
-- **Hardware targets** — Raspberry Pi, BeagleBone, industrial x86,
-  ARM SBCs. Testing + performance profiling on real hardware.
+- **Hardware targets** — Raspberry Pi, BeagleBone, industrial
+  x86, ARM SBCs.
 
 ### 📚 Education + documentation
 
@@ -79,61 +102,82 @@ part is missing.
 
 - **Tutorials** — from "first Knight Rider in 5 minutes" to
   "complete machine control with OPC-UA + EtherCAT"
-- **Example projects** — today only 2 demos live in the tree.
-  More is always better.
+- **Example projects** — today only 2 demos live in the tree
 - **Teaching curriculum** — universities wanting to use ForgeIEC
   as a teaching IDE. We deliver Studio for free; lecturers bring
   the IEC curriculum.
 
 ---
 
-## What partners get back
+## What we offer
 
-| Offer | Concretely |
-|---|---|
-| **Source access** | Everything is OSS — source on GitHub + Forgejo |
-| **Early access** | Development branch is at feature-status level (see [News](/news/)) — partners see changes on push day |
-| **Code-review access** | PRs are reviewed by the core team, feedback in hours instead of weeks |
-| **Roadmap input** | Sprint planning happens openly via GitHub issues + architecture specs |
-| **Technical advice** | Architecture discussion via issues, mail, or direct contact |
-| **Branding** | Partners listed on this page (once the first ones arrive) |
+### Access to the ForgeIEC platform
 
-We do **not** sell premium licences and we promise **no** service-
-contract privileges — every feature is part of the AGPL-3.0
-distribution. Partnership means **close contact + early access +
-participation**, not "paid special menu".
+- Early access to new features and development branches
+- Direct line to the core team
+- Possibility to actively shape the roadmap
+
+### Joint development
+
+- Shared work on industrial fieldbus drivers
+- Integration of vendor-specific hardware
+- Development of industry-specific extensions
+
+### Technical support
+
+- Prioritised bug fixing
+- Architecture advice for own extensions
+- Help integrating into existing systems
+
+---
+
+## Forms of partnership
+
+### Technology partner
+
+Manufacturers of automation components who want to integrate
+their hardware in ForgeIEC. Joint driver development, device
+configurations, and test procedures.
+
+### Integration partner
+
+Systems integrators and engineering offices that use ForgeIEC in
+customer projects. Practical knowledge flows back into the
+development.
+
+### Education partner
+
+Universities and training institutions that use ForgeIEC in
+teaching. Free access for the education sector — the next
+generation of automation engineers should learn with open tools.
 
 ---
 
 ## Currently registered partners
 
-As of 2026-05: no external partners yet — the platform is in the
-build-up sprint, partner onboarding starts once the first subsystem
-APIs (bridge SDK, FDD format) stabilise.
+As of 2026-05: no external partners yet — the platform is in
+build-up sprint, partner onboarding begins once the first
+subsystem APIs (bridge SDK, FDD format) stabilise.
 
-If you want to be among the first: get in touch (see below).
+If you want to be among the first: see "How to apply" below.
 
 ---
 
 ## How to apply
 
-Send us:
+You would like to become a partner? Write to us with:
 
-1. **Who are you?** — person / organisation, background
-2. **Where have you contributed?** — links to OSS projects,
-   concrete commits / PRs / issues
-3. **Which area?** — see the list above (bus bridges / editor /
-   HMI / runtime / education) — please be specific
-4. **What would your first step be?** — no plan document needed,
-   a paragraph is enough
-
-Reply: blacksmith@forgeiec.io.
+- Description of your organisation
+- Links to your open-source contributions
+- Your motivation for a partnership
+- Specific area where you would like to contribute
 
 ---
 
-## See also
+<div style="text-align:center; padding: 2rem;">
 
-- [News](/news/) — what the last sprints delivered
-- [Architecture + Security](/help/ai/architecture/) — spec depth
-  for security reviewers
-- [Download](/download/) — all components + source tree
+**Together we forge the tools of the future.**
+
+blacksmith@forgeiec.io
+
+</div>
