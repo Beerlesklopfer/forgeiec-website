@@ -24,6 +24,13 @@ Growing collection of common questions + practical solutions. Starts
 with one classic symptom (variable sticks despite a fresh deploy) and
 grows with every new observed case.
 
+### [AI integration](/help/ai/)
+
+How to use the built-in AI assistant: personas, providers (ChatGPT /
+Claude / local), daily operation, security model, team mode for
+multiple workstations. Plus an architecture deep-dive for security
+auditors — why the AI layer is industrially viable, not a toy.
+
 ### [Bus Configuration](/help/bus-config/)
 
 PLCopen XML schema for industrial fieldbus configuration in `.forge` projects.

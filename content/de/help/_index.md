@@ -24,6 +24,14 @@ Wachsende Sammlung haeufiger Fragen + Loesungen aus der Praxis.
 Beginnt mit einem klassischen Symptom (Variable haengt trotz frischem
 Deploy) und waechst mit jedem neu beobachteten Fall.
 
+### [KI-Integration](/help/ai/)
+
+Wie Sie den eingebauten KI-Helfer nutzen: Personas, Provider
+(ChatGPT / Claude / lokal), Bedienung im Alltag, Sicherheits-Modell,
+Team-Mode fuer mehrere Workstations. Plus eine Architektur-Tiefe
+fuer Security-Auditoren — warum die KI-Schicht industriell tragfaehig
+ist und nicht ein Spielzeug.
+
 ### [Projekt-Dateiformat (.forge)](/help/file-format/)
 
 Aufbau einer ForgeIEC-Projektdatei: PLCopen-XML-Wurzel, POU-Typen,
