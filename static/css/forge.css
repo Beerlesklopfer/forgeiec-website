@@ -822,10 +822,10 @@ img.component-badge-icon,
 .comp-icon-inline,
 img.comp-icon-inline {
   display: inline-block !important;
-  width: 1.75rem !important;
-  height: 1.75rem !important;
-  min-width: 1.75rem !important;
-  max-width: 1.75rem !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  min-width: 1.2rem !important;
+  max-width: 1.2rem !important;
   vertical-align: middle;
   object-fit: contain;
   margin: 0;
@@ -836,9 +836,9 @@ img.comp-icon-inline {
 }
 
 .comp-icon-inline-emoji {
-  font-size: 1.4rem;
+  font-size: 1rem;
   text-align: center;
-  line-height: 1.75rem;
+  line-height: 1.2rem;
 }
 
 /* ===== MERMAID DIAGRAMS ===== */
