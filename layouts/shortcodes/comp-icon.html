@@ -1,0 +1,25 @@
+{{- /*
+  Single inline component icon (avatar SVG or emoji fallback).
+  Same catalog as the components shortcode, but renders just the
+  icon — suitable for table cells.
+  Usage: {{< comp-icon "studio" >}}
+*/ -}}
+{{- $key := trim (.Get 0) " " -}}
+{{- $catalog := dict
+    "studio"   (dict "label" "ForgeIEC Studio" "svg" "/img/components/studio.svg"   "icon" "")
+    "anvild"   (dict "label" "anvild"          "svg" "/img/components/anvild.svg"   "icon" "")
+    "bellowsd" (dict "label" "bellowsd"        "svg" "/img/components/bellowsd.svg" "icon" "")
+    "tongs"    (dict "label" "tongs-*"         "svg" ""                              "icon" "🔧")
+    "hearth"   (dict "label" "Hearth"          "svg" ""                              "icon" "🏠")
+    "screen"   (dict "label" "Screen"          "svg" ""                              "icon" "🖥️")
+    "ledger"   (dict "label" "Ledger"          "svg" ""                              "icon" "📒")
+    "anvil"    (dict "label" "Anvil (IPC)"     "svg" ""                              "icon" "📡")
+-}}
+{{- $c := index $catalog $key -}}
+{{- if $c -}}
+{{- if $c.svg -}}
+<img src="{{ $c.svg }}" alt="{{ $c.label }}" title="{{ $c.label }}" class="comp-icon-inline" />
+{{- else -}}
+<span class="comp-icon-inline comp-icon-inline-emoji" title="{{ $c.label }}" aria-label="{{ $c.label }}">{{ $c.icon }}</span>
+{{- end -}}
+{{- end -}}

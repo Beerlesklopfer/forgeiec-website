@@ -13,16 +13,15 @@ klar umrissenen Auftrag. Komponenten sind eigenstaendige Daemonen
 bzw. Anwendungen, gemeinsam laufen sie ueber Zero-Copy-IPC und
 gRPC.
 
-| # | Komponente | Auftrag | Stand |
-|---|---|---|---|
-| 1 | **ForgeIEC Studio** | IEC-61131-3-IDE + Bus-Konfig + KI-Helfer | produktiv |
-| 2 | **anvild** | PLC-Runtime auf dem Ziel, multi-task, deterministisch | produktiv |
-| 3 | **Anvil (IPC)** | Zero-Copy-Shared-Memory zwischen Subsystemen | produktiv |
-| 4 | **bellowsd** | OPC-UA / HMI-Gateway | produktiv |
-| 5 | **tongs-*** | Feldbus-Bridges (Modbus / EtherCAT / Profibus / EthernetIP) | gemischt |
-| 6 | **Screen** | Industrieller Kiosk-Browser (Bedienpanel) | in Arbeit |
-| 7 | **Hearth** | IIoT-Subscriber / SCADA-Schicht | in Planung |
-| 8 | **Ledger** | Auftragsverwaltung / MES-Integration | in Planung |
+| | Komponente | Auftrag | Stand |
+|:---:|---|---|---|
+| {{< comp-icon "studio" >}}   | **ForgeIEC Studio** | IEC-61131-3-IDE + Bus-Konfig + KI-Helfer | produktiv |
+| {{< comp-icon "anvild" >}}   | **anvild**          | PLC-Runtime + Anvil-Zero-Copy-IPC zwischen Subsystemen | produktiv |
+| {{< comp-icon "bellowsd" >}} | **bellowsd**        | OPC-UA / HMI-Gateway | in Arbeit |
+| {{< comp-icon "tongs" >}}    | **tongs-***         | Feldbus-Bridges (Modbus / EtherCAT / Profibus / EthernetIP) | gemischt |
+| {{< comp-icon "screen" >}}   | **Screen**          | Industrieller Kiosk-Browser (Bedienpanel) | produktiv |
+| {{< comp-icon "hearth" >}}   | **Hearth**          | IIoT-Subscriber / SCADA-Schicht | in Planung |
+| {{< comp-icon "ledger" >}}   | **Ledger**          | Auftragsverwaltung / MES-Integration | in Planung |
 
 ---
 
@@ -39,7 +38,7 @@ gRPC-Anbindung an anvild, MCP-Server fuer LLM-Tooling.
 
 [Mehr erfahren](forge-studio/)
 
-### 🔥 anvild — die Runtime
+### 🔥 anvild — die Runtime + Anvil-IPC
 
 {{< components "anvild" >}}
 
@@ -48,15 +47,12 @@ pthread-Parallelitaet, deterministische Scan-Cycles, gRPC-Listener
 fuer das Studio, Subprozess-Manager fuer die Bus-Bridges. Stale-SHM-
 Auto-Cleanup beim Start.
 
+Eingebaut ist **Anvil** — die Zero-Copy-Shared-Memory-Schicht
+zwischen Runtime, Bridges und externen Subscribern. Basiert auf
+iceoryx2 mit ABI-Probe gegen Type-Hash-Drift. Wire-Protokoll fuer
+Status, I/O, Diagnostik.
+
 [Mehr erfahren](anvil/)
-
-### 📡 Anvil (IPC) — die Schmiedeesse
-
-Zero-Copy-Shared-Memory-Schicht zwischen Runtime, Bridges und
-externen Subscribern. Basiert auf iceoryx2 mit ABI-Probe gegen
-Type-Hash-Drift. Wire-Protokoll fuer Status, I/O, Diagnostik.
-
-(Transport-Schicht von anvild — siehe oben fuer den Daemon)
 
 ### 🌬️ bellowsd — der Blasebalg
 

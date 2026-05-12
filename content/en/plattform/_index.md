@@ -12,16 +12,15 @@ of a blacksmith's tool and has a clearly defined remit. Components
 are standalone daemons or applications, jointly running over
 zero-copy IPC and gRPC.
 
-| # | Component | Remit | Status |
-|---|---|---|---|
-| 1 | **ForgeIEC Studio** | IEC 61131-3 IDE + bus config + AI assistant | productive |
-| 2 | **anvild** | PLC runtime on target, multi-task, deterministic | productive |
-| 3 | **Anvil (IPC)** | Zero-copy shared memory between subsystems | productive |
-| 4 | **bellowsd** | OPC-UA / HMI gateway | productive |
-| 5 | **tongs-*** | Fieldbus bridges (Modbus / EtherCAT / Profibus / EthernetIP) | mixed |
-| 6 | **Screen** | Industrial kiosk browser (HMI panel) | in progress |
-| 7 | **Hearth** | IIoT subscriber / SCADA layer | planned |
-| 8 | **Ledger** | Order management / MES integration | planned |
+| | Component | Remit | Status |
+|:---:|---|---|---|
+| {{< comp-icon "studio" >}}   | **ForgeIEC Studio** | IEC 61131-3 IDE + bus config + AI assistant | productive |
+| {{< comp-icon "anvild" >}}   | **anvild**          | PLC runtime + Anvil zero-copy IPC between subsystems | productive |
+| {{< comp-icon "bellowsd" >}} | **bellowsd**        | OPC-UA / HMI gateway | in progress |
+| {{< comp-icon "tongs" >}}    | **tongs-***         | Fieldbus bridges (Modbus / EtherCAT / Profibus / EthernetIP) | mixed |
+| {{< comp-icon "screen" >}}   | **Screen**          | Industrial kiosk browser (HMI panel) | productive |
+| {{< comp-icon "hearth" >}}   | **Hearth**          | IIoT subscriber / SCADA layer | planned |
+| {{< comp-icon "ledger" >}}   | **Ledger**          | Order management / MES integration | planned |
 
 ---
 
@@ -38,7 +37,7 @@ to anvild, MCP server for LLM tooling.
 
 [Learn more](forge-studio/)
 
-### 🔥 anvild — the runtime
+### 🔥 anvild — the runtime + Anvil IPC
 
 {{< components "anvild" >}}
 
@@ -47,15 +46,12 @@ pthread parallelism, deterministic scan cycles, gRPC listener for
 Studio, subprocess manager for the bus bridges. Stale-SHM auto-
 cleanup at startup.
 
+Built in is **Anvil** — the zero-copy shared-memory layer between
+runtime, bridges and external subscribers. Based on iceoryx2 with
+ABI probe against type-hash drift. Wire protocol for status, I/O,
+diagnostics.
+
 [Learn more](anvil/)
-
-### 📡 Anvil (IPC) — the forge fire
-
-Zero-copy shared-memory layer between runtime, bridges and
-external subscribers. Based on iceoryx2 with ABI probe against
-type-hash drift. Wire protocol for status, I/O, diagnostics.
-
-(Transport layer of anvild — see above for the daemon)
 
 ### 🌬️ bellowsd — the bellows
 

@@ -818,6 +818,29 @@ img.component-badge-icon,
   }
 }
 
+/* ===== INLINE COMPONENT ICON (for table cells) ===== */
+.comp-icon-inline,
+img.comp-icon-inline {
+  display: inline-block !important;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  min-width: 1.75rem !important;
+  max-width: 1.75rem !important;
+  vertical-align: middle;
+  object-fit: contain;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  line-height: 1;
+}
+
+.comp-icon-inline-emoji {
+  font-size: 1.4rem;
+  text-align: center;
+  line-height: 1.75rem;
+}
+
 /* ===== MERMAID DIAGRAMS ===== */
 pre.mermaid {
   background: transparent;
