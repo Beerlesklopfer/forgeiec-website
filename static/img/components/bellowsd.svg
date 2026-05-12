@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <!-- Wood paddle gradient (top) -->
+    <linearGradient id="bl-wood-t" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C49A3C"/>
+      <stop offset="50%" stop-color="#A67C2E"/>
+      <stop offset="100%" stop-color="#8B6914"/>
+    </linearGradient>
+    <!-- Wood paddle gradient (bottom) -->
+    <linearGradient id="bl-wood-b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B6914"/>
+      <stop offset="50%" stop-color="#A67C2E"/>
+      <stop offset="100%" stop-color="#C49A3C"/>
+    </linearGradient>
+    <!-- Leather gradient -->
+    <linearGradient id="bl-leather" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6B4226"/>
+      <stop offset="50%" stop-color="#5C3D0E"/>
+      <stop offset="100%" stop-color="#4A3008"/>
+    </linearGradient>
+    <!-- Metal nozzle gradient -->
+    <linearGradient id="bl-metal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5a5a5a"/>
+      <stop offset="50%" stop-color="#3d3d3d"/>
+      <stop offset="100%" stop-color="#4a4a4a"/>
+    </linearGradient>
+    <!-- Air glow -->
+    <radialGradient id="bl-airglow" cx="0.2" cy="0.5" r="0.8">
+      <stop offset="0%" stop-color="#3CB371" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#50C878" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#2E8B57" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Glow filter -->
+    <filter id="bl-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ==================== BELLOWS BODY ==================== -->
+
+  <!-- Top paddle (teardrop/fan shape) -->
+  <path d="M50,80 Q50,60 80,52 L160,52 Q180,52 186,64 L190,72 Q192,78 186,82
+           L80,100 Q56,104 50,96 Z"
+        fill="url(#bl-wood-t)" stroke="#5C3D0E" stroke-width="1.5"/>
+  <!-- Wood grain lines on top paddle -->
+  <line x1="70" y1="62" x2="170" y2="58" stroke="#7A5C10" stroke-width="0.5" opacity="0.4"/>
+  <line x1="65" y1="72" x2="175" y2="66" stroke="#7A5C10" stroke-width="0.5" opacity="0.3"/>
+  <line x1="60" y1="82" x2="178" y2="76" stroke="#7A5C10" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Leather accordion folds (connecting the paddles) -->
+  <path d="M54,100 L58,112 L50,124 L58,136 L50,148 L58,160 L54,170"
+        fill="none" stroke="#4A3008" stroke-width="2"/>
+  <path d="M186,84 L188,112 L184,124 L188,136 L184,148 L188,160 L186,186"
+        fill="none" stroke="#4A3008" stroke-width="2"/>
+  <!-- Leather panels between folds -->
+  <path d="M54,100 L186,84 L188,112 L58,112 Z"
+        fill="#5C3D0E" stroke="#4A3008" stroke-width="1" opacity="0.9"/>
+  <path d="M58,112 L188,112 L184,124 L50,124 Z"
+        fill="#6B4226" stroke="#4A3008" stroke-width="1" opacity="0.85"/>
+  <path d="M50,124 L184,124 L188,136 L58,136 Z"
+        fill="#5C3D0E" stroke="#4A3008" stroke-width="1" opacity="0.9"/>
+  <path d="M58,136 L188,136 L184,148 L50,148 Z"
+        fill="#6B4226" stroke="#4A3008" stroke-width="1" opacity="0.85"/>
+  <path d="M50,148 L184,148 L188,160 L58,160 Z"
+        fill="#5C3D0E" stroke="#4A3008" stroke-width="1" opacity="0.9"/>
+  <path d="M58,160 L188,160 L186,170 L54,170 Z"
+        fill="#6B4226" stroke="#4A3008" stroke-width="1" opacity="0.85"/>
+
+  <!-- Bottom paddle (teardrop/fan shape, mirrored) -->
+  <path d="M50,170 Q56,166 80,170 L186,170 Q192,172 190,180 L186,190
+           Q180,202 160,206 L80,206 Q50,206 50,190 Z"
+        fill="url(#bl-wood-b)" stroke="#5C3D0E" stroke-width="1.5"/>
+  <!-- Wood grain lines on bottom paddle -->
+  <line x1="65" y1="180" x2="175" y2="178" stroke="#7A5C10" stroke-width="0.5" opacity="0.4"/>
+  <line x1="60" y1="190" x2="170" y2="190" stroke="#7A5C10" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- ==================== HANDLE ==================== -->
+  <!-- Top handle -->
+  <path d="M44,52 Q36,42 40,32 L52,32 Q56,42 50,52"
+        fill="#5C3D0E" stroke="#4A3008" stroke-width="1.5"/>
+  <!-- Handle grip -->
+  <rect x="38" y="26" width="16" height="8" rx="3" fill="#3d3d3d" stroke="#2a2a2a" stroke-width="1"/>
+
+  <!-- ==================== NOZZLE ==================== -->
+  <!-- Metal nozzle pointing right -->
+  <path d="M190,118 L228,126 Q236,128 236,132 L236,136 Q236,140 228,142 L190,150"
+        fill="url(#bl-metal)" stroke="#2a2a2a" stroke-width="1.5"/>
+  <!-- Nozzle opening -->
+  <ellipse cx="234" cy="134" rx="4" ry="8" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
+  <!-- Nozzle highlight -->
+  <line x1="194" y1="122" x2="226" y2="128" stroke="#6e6e6e" stroke-width="1" opacity="0.4"/>
+
+  <!-- ==================== AIR WHOOSH ==================== -->
+  <!-- Air blast from nozzle -->
+  <ellipse cx="248" cy="134" rx="12" ry="18" fill="url(#bl-airglow)"/>
+
+  <!-- Whoosh lines -->
+  <g stroke="#3CB371" stroke-width="1.5" stroke-linecap="round" opacity="0.6">
+    <line x1="238" y1="126" x2="252" y2="122"/>
+    <line x1="240" y1="134" x2="256" y2="134"/>
+    <line x1="238" y1="142" x2="252" y2="146"/>
+  </g>
+  <g stroke="#50C878" stroke-width="1" stroke-linecap="round" opacity="0.4">
+    <line x1="242" y1="120" x2="254" y2="116"/>
+    <line x1="242" y1="148" x2="254" y2="152"/>
+  </g>
+
+  <!-- ==================== RIVET DETAILS ==================== -->
+  <circle cx="60" cy="100" r="2.5" fill="#4a4a4a" stroke="#333" stroke-width="0.5"/>
+  <circle cx="60" cy="170" r="2.5" fill="#4a4a4a" stroke="#333" stroke-width="0.5"/>
+  <circle cx="186" cy="84" r="2.5" fill="#4a4a4a" stroke="#333" stroke-width="0.5"/>
+  <circle cx="186" cy="170" r="2.5" fill="#4a4a4a" stroke="#333" stroke-width="0.5"/>
+
+  <!-- ==================== SPARK DOTS ==================== -->
+  <g filter="url(#bl-glow)">
+    <circle cx="248" cy="118" r="1.8" fill="#50C878" opacity="0.7"/>
+    <circle cx="252" cy="150" r="1.5" fill="#3CB371" opacity="0.6"/>
+    <circle cx="244" cy="110" r="1.2" fill="#50C878" opacity="0.5"/>
+  </g>
+
+  <!-- ==================== CODE FRAGMENTS ==================== -->
+  <g font-family="'Consolas','Monaco','Courier New',monospace" font-weight="bold" filter="url(#bl-glow)">
+    <text x="10" y="230" font-size="14" fill="#3CB371" opacity="0.9"
+          transform="rotate(-8, 10, 230)">OPC</text>
+    <text x="80" y="238" font-size="13" fill="#50C878" opacity="0.85">UA</text>
+    <text x="150" y="234" font-size="12" fill="#3CB371" opacity="0.8"
+          transform="rotate(5, 150, 234)">PUB</text>
+    <text x="200" y="108" font-size="10" fill="#50C878" opacity="0.7"
+          transform="rotate(15, 200, 108)">SUB</text>
+  </g>
+
+</svg>

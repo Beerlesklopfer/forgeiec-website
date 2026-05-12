@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <!-- Anvil body gradient -->
+    <linearGradient id="av-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a5a5a"/>
+      <stop offset="50%" stop-color="#3d3d3d"/>
+      <stop offset="100%" stop-color="#2a2a2a"/>
+    </linearGradient>
+    <!-- Anvil top face gradient -->
+    <linearGradient id="av-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6e6e6e"/>
+      <stop offset="100%" stop-color="#555555"/>
+    </linearGradient>
+    <!-- Orange glow on working face -->
+    <radialGradient id="av-hotface" cx="0.45" cy="0.3" r="0.6">
+      <stop offset="0%" stop-color="#FF8C00" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#FF6600" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FF4500" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Glow filter -->
+    <filter id="av-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Heat shimmer filter -->
+    <filter id="av-shimmer" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/>
+    </filter>
+  </defs>
+
+  <!-- ==================== MASSIVE ANVIL (fills ~70%) ==================== -->
+
+  <!-- Anvil base / pedestal - wider -->
+  <path d="M62,218 L194,218 L186,246 Q184,252 174,252 L82,252 Q72,252 70,246 Z"
+        fill="#2a2a2a" stroke="#222" stroke-width="1.5"/>
+
+  <!-- Anvil body - the waist -->
+  <path d="M74,182 L182,182 L190,218 L66,218 Z"
+        fill="url(#av-body)" stroke="#222" stroke-width="1.5"/>
+
+  <!-- Anvil face - wide top working surface -->
+  <path d="M22,148 L234,148 L234,182 Q234,188 228,188 L198,188
+           L182,182 L74,182 L58,188 L28,188 Q22,188 22,182 Z"
+        fill="url(#av-body)" stroke="#222" stroke-width="1.5"/>
+
+  <!-- Anvil top face (flat working surface) -->
+  <rect x="22" y="138" width="212" height="14" rx="2" ry="2"
+        fill="url(#av-top)" stroke="#222" stroke-width="1.5"/>
+
+  <!-- Anvil horn (left, longer) -->
+  <path d="M22,148 L22,160 L-2,168 Q-10,170 -10,164 L-10,156 Q-10,150 -2,148 Z"
+        fill="url(#av-body)" stroke="#222" stroke-width="1.5"/>
+
+  <!-- Anvil tail / heel (right, squared) -->
+  <path d="M234,148 L234,160 L248,160 Q252,160 252,156 L252,150 Q252,146 248,146 L234,142 Z"
+        fill="url(#av-body)" stroke="#222" stroke-width="1.5"/>
+
+  <!-- Hardy hole -->
+  <rect x="192" y="138" width="10" height="8" rx="1" fill="#1a1a1a"/>
+
+  <!-- Pritchel hole -->
+  <circle cx="216" cy="144" r="4" fill="#1a1a1a"/>
+
+  <!-- Highlight on face -->
+  <rect x="30" y="139" width="195" height="2.5" rx="1" fill="#777" opacity="0.4"/>
+
+  <!-- ==================== ORANGE HOT GLOW ON FACE ==================== -->
+  <ellipse cx="128" cy="142" rx="80" ry="16" fill="url(#av-hotface)"/>
+
+  <!-- ==================== HEAT SHIMMER LINES ==================== -->
+  <g filter="url(#av-shimmer)" opacity="0.35">
+    <path d="M90,132 Q95,120 100,132 Q105,120 110,130" fill="none"
+          stroke="#FF8C00" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M120,128 Q126,114 132,128 Q138,114 144,126" fill="none"
+          stroke="#FF7700" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M152,130 Q158,118 164,132" fill="none"
+          stroke="#FF8C00" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M106,122 Q112,108 118,120" fill="none"
+          stroke="#FF6600" stroke-width="1" stroke-linecap="round"/>
+    <path d="M140,118 Q145,106 150,120" fill="none"
+          stroke="#FF6600" stroke-width="1" stroke-linecap="round"/>
+  </g>
+
+  <!-- More subtle upper shimmer -->
+  <g filter="url(#av-shimmer)" opacity="0.2">
+    <path d="M100,108 Q106,94 112,108" fill="none"
+          stroke="#FF8C00" stroke-width="1" stroke-linecap="round"/>
+    <path d="M130,104 Q136,90 142,104" fill="none"
+          stroke="#FF7700" stroke-width="1" stroke-linecap="round"/>
+  </g>
+
+  <!-- ==================== SPARK DOTS ==================== -->
+  <g filter="url(#av-glow)">
+    <circle cx="80" cy="110" r="2.5" fill="#FFB020" opacity="0.9"/>
+    <circle cx="62" cy="98" r="2" fill="#FFCC44" opacity="0.8"/>
+    <circle cx="178" cy="108" r="2.5" fill="#FFB020" opacity="0.9"/>
+    <circle cx="196" cy="96" r="2" fill="#FFCC44" opacity="0.8"/>
+    <circle cx="128" cy="90" r="1.8" fill="#FF9500" opacity="0.7"/>
+    <circle cx="100" cy="96" r="1.5" fill="#FFD060" opacity="0.65"/>
+    <circle cx="158" cy="94" r="1.5" fill="#FFD060" opacity="0.65"/>
+  </g>
+
+  <!-- Spark trails -->
+  <g stroke="#FF9500" stroke-width="1.5" stroke-linecap="round" opacity="0.45">
+    <line x1="82" y1="112" x2="76" y2="106"/>
+    <line x1="64" y1="100" x2="56" y2="92"/>
+    <line x1="176" y1="110" x2="182" y2="104"/>
+    <line x1="194" y1="98" x2="202" y2="90"/>
+  </g>
+
+  <!-- ==================== CODE FRAGMENTS ==================== -->
+  <g font-family="'Consolas','Monaco','Courier New',monospace" font-weight="bold" filter="url(#av-glow)">
+    <text x="38" y="88" font-size="15" fill="#FFA030" opacity="0.95"
+          transform="rotate(-20, 38, 88)">gRPC</text>
+    <text x="186" y="80" font-size="14" fill="#FFA030" opacity="0.95"
+          transform="rotate(18, 186, 80)">PLC</text>
+    <text x="118" y="72" font-size="13" fill="#FFB848" opacity="0.85"
+          transform="rotate(-5, 118, 72)">RT</text>
+    <text x="70" y="78" font-size="11" fill="#FFCC55" opacity="0.75"
+          transform="rotate(-12, 70, 78)">::</text>
+    <text x="164" y="70" font-size="11" fill="#FFCC55" opacity="0.75"
+          transform="rotate(10, 164, 70)">50051</text>
+  </g>
+
+</svg>
