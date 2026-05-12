@@ -2,7 +2,10 @@
 title: "Federation + team trust: multiple workstations, controllable trust"
 date: 2026-05-13
 summary: "ForgeIEC now connects multiple workstations into a team — with verifiable identities and a clear role model"
+components: [studio]
 ---
+
+{{< components "studio" >}}
 
 ## Why this matters
 

@@ -1,0 +1,33 @@
+{{- /*
+  Component-affiliation badges. Used at top of news posts to signal
+  which ForgeIEC sub-products the topic touches.
+  Usage:
+    {{< components studio,anvild,bellowsd >}}
+*/ -}}
+{{- $names := split (.Get 0) "," -}}
+{{- $catalog := dict
+    "studio"   (dict "label" "ForgeIEC Studio" "icon" "🛠️"  "bg" "#e8f4fd" "border" "#3498db")
+    "anvild"   (dict "label" "anvild"          "icon" "🔥"  "bg" "#fdecea" "border" "#e74c3c")
+    "bellowsd" (dict "label" "bellowsd"        "icon" "🌬️" "bg" "#eafaf1" "border" "#27ae60")
+    "tongs"    (dict "label" "tongs-*"         "icon" "🔧"  "bg" "#fdf3e7" "border" "#e67e22")
+    "hearth"   (dict "label" "Hearth"          "icon" "🏠"  "bg" "#f4ecf7" "border" "#8e44ad")
+    "anvil"    (dict "label" "Anvil (IPC)"     "icon" "📡"  "bg" "#fef9e7" "border" "#f39c12")
+-}}
+<div style="display:flex; flex-wrap:wrap; gap:.4em;
+            margin:.4em 0 1.6em 0; align-items:center;">
+<span style="color:#666; font-size:.85em; margin-right:.3em;">Betrifft:</span>
+{{- range $name := $names -}}
+{{- $key := trim $name " " -}}
+{{- $c := index $catalog $key -}}
+{{- if $c }}
+<span style="display:inline-flex; align-items:center; gap:.3em;
+              padding:.2em .6em; border-radius:1em;
+              background:{{ $c.bg }};
+              border:1px solid {{ $c.border }};
+              font-size:.85em; color:#333; line-height:1.4;">
+  <span aria-hidden="true">{{ $c.icon }}</span>
+  <span>{{ $c.label }}</span>
+</span>
+{{- end -}}
+{{- end -}}
+</div>

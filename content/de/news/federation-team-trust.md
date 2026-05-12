@@ -2,7 +2,10 @@
 title: "Federation + Team-Trust: Mehrere Workstations, kontrollierbares Vertrauen"
 date: 2026-05-13
 summary: "ForgeIEC verbindet jetzt mehrere Workstations zu einem Team — mit verifizierbaren Identitaeten und einem klaren Rollenmodell"
+components: [studio]
 ---
+
+{{< components "studio" >}}
 
 ## Warum das wichtig ist
 
