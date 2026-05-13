@@ -51,6 +51,58 @@ ALL MCP security gates are OPEN
 This build MUST NOT run on a productive PLC.
 ```
 
+### What happens when the AI calls a gated write tool
+
+In the default install, the AI gets a clear error with a
+**human-operator instruction**. Example: the AI tries to add a
+variable while the editor is in production mode:
+
+```
+{ "ok": false,
+  "error": "FORGE_ERR_PERMISSION_DENIED",
+  "message": "This tool requires the editor to be built with MCP_OVERRIDE_SECURITIES=ON. ...",
+  "remediation": {
+    "rule": "editor_override_required",
+    "requires_human_action": true,
+    "user_prompt": "ForgeIEC's editor is running in production mode...\n  ./deploy.sh --override-securities forgeiec\n...",
+    "next_steps": [
+      "Surface the user_prompt above to the human operator verbatim. Wait for them to confirm the redeploy.",
+      "DO NOT attempt to execute the deploy command yourself — it requires sudo and must be authorized by the human operator."
+    ]
+  }
+}
+```
+
+This tells the AI three things at once:
+
+1. **What went wrong** — production build, tool is gated off.
+2. **What you, the operator, would have to do** — run
+   `./deploy.sh --override-securities forgeiec` (with sudo).
+3. **What the AI must NOT do** — the AI is explicitly
+   instructed NOT to run the deploy script itself. It is told
+   to surface the operator prompt to you and wait for your
+   decision.
+
+The same pattern applies to the **PLC runtime** (anvild) when
+it is running in production mode — e.g. live monitoring
+(`monitor.*`, `oscilloscope.*`) requires anvild's
+override-build:
+
+```
+{ "ok": false,
+  "error": "FORGE_ERR_RUNTIME_FEATURE_UNAVAILABLE",
+  "feature": "monitor",
+  "remediation": {
+    "user_prompt": "The PLC runtime (anvild) is running in production mode...\n  ./deploy.sh --override-securities anvild\n..."
+  }
+}
+```
+
+You'll notice: before the AI does anything "behind your back"
+or runs into a silent dead end, it tells you explicitly "to do
+this I need you to run the following" + shows the exact
+command. The decision is yours.
+
 ---
 
 ## Layer 2 — A question for every change

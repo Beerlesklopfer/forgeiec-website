@@ -53,6 +53,57 @@ ALL MCP security gates are OPEN
 This build MUST NOT run on a productive PLC.
 ```
 
+### Wenn die KI ein Schreib-Werkzeug aufruft das gesperrt ist
+
+In der Standard-Version bekommt die KI einen klaren Fehler mit
+einer **Operator-Anweisung**. Beispiel: die KI versucht eine
+Variable anzulegen, der Editor laeuft im Produktiv-Modus:
+
+```
+{ "ok": false,
+  "error": "FORGE_ERR_PERMISSION_DENIED",
+  "message": "This tool requires the editor to be built with MCP_OVERRIDE_SECURITIES=ON. ...",
+  "remediation": {
+    "rule": "editor_override_required",
+    "requires_human_action": true,
+    "user_prompt": "ForgeIEC's editor is running in production mode...\n  ./deploy.sh --override-securities forgeiec\n...",
+    "next_steps": [
+      "Surface the user_prompt above to the human operator verbatim. Wait for them to confirm the redeploy.",
+      "DO NOT attempt to execute the deploy command yourself — it requires sudo and must be authorized by the human operator."
+    ]
+  }
+}
+```
+
+Die KI weiss dadurch sofort:
+
+1. **Was schief lief** — Production-Build, Tool ist gesperrt.
+2. **Was Sie als Operator tun muessten** — `./deploy.sh
+   --override-securities forgeiec` (mit sudo).
+3. **Was die KI _nicht_ tun darf** — die KI darf das Deploy-
+   Skript NICHT selber anstossen. Sie ist explizit angewiesen,
+   den Operator-Prompt an Sie weiterzureichen und auf Ihre
+   Entscheidung zu warten.
+
+Das gleiche Pattern gilt fuer den **PLC-Runtime** (anvild) wenn
+der im Produktiv-Modus laeuft — z.B. Live-Monitoring (`monitor.*`,
+`oscilloscope.*`) braucht anvild's Override-Build:
+
+```
+{ "ok": false,
+  "error": "FORGE_ERR_RUNTIME_FEATURE_UNAVAILABLE",
+  "feature": "monitor",
+  "remediation": {
+    "user_prompt": "The PLC runtime (anvild) is running in production mode...\n  ./deploy.sh --override-securities anvild\n..."
+  }
+}
+```
+
+Sie merken: bevor die KI etwas „heimlich" macht oder ins Leere
+laeuft, sagt sie Ihnen explizit „dazu brauche ich dass Du das
+hier ausfuehrst" + zeigt den genauen Befehl. Die Entscheidung
+liegt bei Ihnen.
+
 ---
 
 ## Schicht 2 — Rueckfrage bei jeder Aenderung
