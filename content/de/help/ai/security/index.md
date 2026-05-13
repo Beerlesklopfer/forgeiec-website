@@ -55,22 +55,23 @@ This build MUST NOT run on a productive PLC.
 
 ### Wenn die KI ein Schreib-Werkzeug aufruft das gesperrt ist
 
-In der Standard-Version bekommt die KI einen klaren Fehler mit
-einer **Operator-Anweisung**. Beispiel: die KI versucht eine
-Variable anzulegen, der Editor laeuft im Produktiv-Modus:
+In der Standard-Version bekommt die KI einen klaren Fehler — und
+einen **konkreten Menue-Pfad**, den sie Ihnen zeigen kann. Die KI
+versucht **nicht**, das System aufzuweichen; sie zeigt Ihnen
+stattdessen wo Sie den entsprechenden Knopf im Editor selbst
+finden. Beispiel: die KI moechte eine Variable anlegen:
 
 ```
 { "ok": false,
   "error": "FORGE_ERR_PERMISSION_DENIED",
-  "message": "This tool requires the editor to be built with MCP_OVERRIDE_SECURITIES=ON. ...",
   "remediation": {
     "rule": "editor_override_required",
     "requires_human_action": true,
-    "user_prompt": "ForgeIEC's editor is running in production mode...\n  ./deploy.sh --override-securities forgeiec\n...",
-    "next_steps": [
-      "Surface the user_prompt above to the human operator verbatim. Wait for them to confirm the redeploy.",
-      "DO NOT attempt to execute the deploy command yourself — it requires sudo and must be authorized by the human operator."
-    ]
+    "gui_path": "Variables panel → Add Variable button (top of the table)",
+    "user_prompt": "Ich kann den Schritt in dieser Installation nicht
+      selber ausfuehren. Um es manuell zu tun, gehe zu:
+      → Variables panel → Add Variable button
+      Sag mir Bescheid wenn Du fertig bist."
   }
 }
 ```
@@ -78,31 +79,35 @@ Variable anzulegen, der Editor laeuft im Produktiv-Modus:
 Die KI weiss dadurch sofort:
 
 1. **Was schief lief** — Production-Build, Tool ist gesperrt.
-2. **Was Sie als Operator tun muessten** — `./deploy.sh
-   --override-securities forgeiec` (mit sudo).
-3. **Was die KI _nicht_ tun darf** — die KI darf das Deploy-
-   Skript NICHT selber anstossen. Sie ist explizit angewiesen,
-   den Operator-Prompt an Sie weiterzureichen und auf Ihre
-   Entscheidung zu warten.
+2. **Welchen Knopf Sie als Operator druecken muessen** — den
+   konkreten Menue-/Dialog-/Tree-Context-Pfad zur passenden GUI-
+   Aktion. Jede MCP-Schreibaktion hat ein hand-klickbares
+   Aequivalent.
+3. **Was die KI _nicht_ tun darf** — Sie zu Shell-Befehlen, einem
+   Rebuild oder einem Anruf beim Administrator anzustiften. Der
+   GUI-Pfad ist die einzige Operator-Aktion.
 
 Das gleiche Pattern gilt fuer den **PLC-Runtime** (anvild) wenn
-der im Produktiv-Modus laeuft — z.B. Live-Monitoring (`monitor.*`,
-`oscilloscope.*`) braucht anvild's Override-Build:
+der ohne Live-Monitoring laeuft — `monitor.*` / `oscilloscope.*`
+verweisen dann auf den Menue-Toggle:
 
 ```
 { "ok": false,
   "error": "FORGE_ERR_RUNTIME_FEATURE_UNAVAILABLE",
   "feature": "monitor",
   "remediation": {
-    "user_prompt": "The PLC runtime (anvild) is running in production mode...\n  ./deploy.sh --override-securities anvild\n..."
+    "gui_path": "Runtime → Live-Monitoring",
+    "user_prompt": "Bitte oeffne das **Runtime**-Menue in ForgeIEC
+      Studio und klick **Live-Monitoring**. Das Menue-Item ist
+      eine Checkbox — anklicken schaltet ein."
   }
 }
 ```
 
 Sie merken: bevor die KI etwas „heimlich" macht oder ins Leere
-laeuft, sagt sie Ihnen explizit „dazu brauche ich dass Du das
-hier ausfuehrst" + zeigt den genauen Befehl. Die Entscheidung
-liegt bei Ihnen.
+laeuft, sagt sie Ihnen explizit „bitte klick **hier**" + zeigt
+den konkreten Pfad. Die Entscheidung — und der Klick — liegen
+bei Ihnen.
 
 ---
 
