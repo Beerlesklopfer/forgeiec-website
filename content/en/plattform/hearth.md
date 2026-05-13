@@ -59,6 +59,8 @@ Browser  --->  Hearth (Web Server)  --->  anvild / Bellows
                                           PLC Core
 ```
 
+**License:** AGPL-3.0
+
 ---
 
 <div style="text-align:center; padding: 2rem;">

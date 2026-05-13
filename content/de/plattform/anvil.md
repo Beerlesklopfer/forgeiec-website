@@ -130,6 +130,7 @@ Ziel-SPS installiert.
 | **Konfiguration** | TOML |
 | **Plattformen** | x86_64, ARM64, ARMv7 (Linux) |
 | **Prozessmodell** | systemd-Daemon + Subprozesse |
+| **Lizenz** | AGPL-3.0 |
 
 ---
 

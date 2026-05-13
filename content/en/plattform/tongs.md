@@ -128,6 +128,7 @@ slave_id = 1
 | **IPC** | Anvil Technology (Zero-Copy Shared Memory) |
 | **Process Model** | One daemon per active segment |
 | **Platforms** | x86_64, ARM64, ARMv7 (Linux) |
+| **License** | AGPL-3.0 |
 
 ---
 

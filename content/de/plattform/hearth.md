@@ -59,6 +59,8 @@ Browser  --->  Hearth (Web-Server)  --->  anvild / Bellows
                                           SPS-Kern
 ```
 
+**Lizenz:** AGPL-3.0
+
 ---
 
 <div style="text-align:center; padding: 2rem;">

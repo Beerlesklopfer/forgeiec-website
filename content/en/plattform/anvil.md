@@ -126,6 +126,7 @@ generated C code at deployment time.
 | **Configuration** | TOML |
 | **Platforms** | x86_64, ARM64, ARMv7 (Linux) |
 | **Process Model** | systemd daemon + subprocesses |
+| **License** | AGPL-3.0 |
 
 ---
 

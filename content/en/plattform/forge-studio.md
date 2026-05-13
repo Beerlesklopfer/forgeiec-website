@@ -94,7 +94,7 @@ Complete IEC standard library in a SQLite database:
 | **Syntax Engine** | Tree-sitter |
 | **Communication** | gRPC (protobuf) |
 | **Platforms** | Linux x86_64, ARM64 |
-| **License** | Open Source |
+| **License** | AGPL-3.0 |
 
 ---
 

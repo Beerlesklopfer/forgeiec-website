@@ -61,6 +61,8 @@ Forge Studio  --->  anvild  --->  Bellows (OPC UA)  --->  SCADA/MES/Cloud
                     Anvil SHM
 ```
 
+**Lizenz:** AGPL-3.0
+
 ---
 
 <div style="text-align:center; padding: 2rem;">

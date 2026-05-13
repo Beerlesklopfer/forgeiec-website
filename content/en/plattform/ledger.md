@@ -63,6 +63,8 @@ ERP / MES
   Tongs (Fieldbus Bridges) --> Machines
 ```
 
+**License:** AGPL-3.0
+
 ---
 
 <div style="text-align:center; padding: 2rem;">
