@@ -127,9 +127,9 @@ flowchart LR
     Studio -.->|gRPC| Anvild
     Anvild -->|Anvil IPC| Bridges
     Anvild -->|Anvil IPC| Bellows
-    Bellows -->|OPC-UA / HTTP| Screen
     Anvild -->|Anvil IPC| Hearth
     Bellows -->|OPC-UA / Modbus| Hearth
+    Hearth -->|HTTP| Screen
     Hearth -.->|REST| Ledger
 ```
 

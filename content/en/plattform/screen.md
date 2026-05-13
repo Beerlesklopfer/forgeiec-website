@@ -4,15 +4,16 @@ description: "Industrial kiosk browser for HMI panels — CEF + Rust + winit, wi
 weight: 6
 ---
 
-{{< components "screen,bellowsd" >}}
+{{< components "screen,hearth,bellowsd" >}}
 
 ## The kiosk browser
 
 **Screen** is the industrial HMI-panel browser of ForgeIEC. A lean
 application that sits between the hardware display and the web HMI:
-it runs fullscreen, opens any HMI URL (`bellowsd` / `Hearth` /
-3rd-party) and at the same time offers a built-in settings UI for
-device configuration (network, WireGuard, time zone, language).
+it runs fullscreen, opens any HTTP HMI URL (typically `Hearth`,
+alternatively 3rd-party HMIs) and at the same time offers a
+built-in settings UI for device configuration (network, WireGuard,
+time zone, language).
 
 Written in **Rust** with the **Chromium Embedded Framework (CEF)**
 and **winit** as window manager. Runs on **X11**, **Wayland** and
@@ -42,18 +43,22 @@ and **winit** as window manager. Runs on **X11**, **Wayland** and
 flowchart LR
     Panel["HMI panel<br/>(Touch-PC at the cabinet)"]
     Screen["Screen<br/>(CEF kiosk)"]
-    Bellows["bellowsd<br/>(HMI backend)"]
+    Hearth["Hearth<br/>(HMI renderer)"]
+    Bellows["bellowsd<br/>(OPC-UA / Modbus)"]
     Anvild["anvild<br/>(PLC runtime)"]
 
     Panel ---|"runs on"| Screen
-    Screen ---|"HTTP/OPC-UA"| Bellows
+    Screen ---|"HTTP"| Hearth
+    Hearth ---|"OPC-UA / Modbus"| Bellows
     Bellows ---|"Anvil IPC"| Anvild
 ```
 
-You have an HMI panel at the cabinet: Screen runs on it, displays
-the HMI that lives in bellowsd, which in turn pulls live values
-from anvild. The operator sees only the application — **no** Linux
-desktop, **no** accidentally-startable browser functions.
+You have an HMI panel at the cabinet: Screen runs on it and is
+pure display (Chromium kiosk). The HMI is rendered by **Hearth**
+as an HTTP UI, fed via OPC-UA / Modbus from **bellowsd**, whose
+live values in turn come from **anvild**. The operator sees only
+the application — **no** Linux desktop, **no** accidentally-
+startable browser functions.
 
 ---
 

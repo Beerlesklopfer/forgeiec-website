@@ -4,16 +4,16 @@ description: "Industrieller Kiosk-Browser fuer Bedienpanels — CEF + Rust + win
 weight: 6
 ---
 
-{{< components "screen,bellowsd" >}}
+{{< components "screen,hearth,bellowsd" >}}
 
 ## Der Kiosk-Browser
 
 **Screen** ist der industrielle Bedienpanel-Browser von ForgeIEC.
 Eine schlanke Anwendung die in der Schicht zwischen Hardware-
 Display und Web-HMI sitzt: sie laeuft fullscreen, oeffnet eine
-beliebige HMI-URL (`bellowsd` / `Hearth` / 3rd-party) und bietet
-gleichzeitig eine eingebaute Settings-UI fuer die Geraete-
-Konfiguration (Netz, WireGuard, Zeitzone, Sprache).
+beliebige HTTP-HMI-URL (typisch `Hearth`, alternativ 3rd-party-
+HMIs) und bietet gleichzeitig eine eingebaute Settings-UI fuer
+die Geraete-Konfiguration (Netz, WireGuard, Zeitzone, Sprache).
 
 Geschrieben in **Rust** mit dem **Chromium Embedded Framework
 (CEF)** und **winit** als Window-Manager. Laeuft unter **X11**,
@@ -44,19 +44,22 @@ Windows x64.
 flowchart LR
     Panel["Bedienpanel<br/>(Touch-PC am Schaltschrank)"]
     Screen["Screen<br/>(CEF-Kiosk)"]
-    Bellows["bellowsd<br/>(HMI-Backend)"]
+    Hearth["Hearth<br/>(HMI-Renderer)"]
+    Bellows["bellowsd<br/>(OPC-UA / Modbus)"]
     Anvild["anvild<br/>(PLC-Runtime)"]
 
     Panel ---|"laeuft auf"| Screen
-    Screen ---|"HTTP/OPC-UA"| Bellows
+    Screen ---|"HTTP"| Hearth
+    Hearth ---|"OPC-UA / Modbus"| Bellows
     Bellows ---|"Anvil IPC"| Anvild
 ```
 
-Sie haben ein Bedienpanel am Schaltschrank: Screen laeuft drauf,
-zeigt die HMI die in bellowsd lebt, die wiederum Live-Werte aus
-anvild bezieht. Der Operator sieht nur die Anwendung —
-**keine** Linux-Oberflaeche, **keine** versehentlich-startbaren
-Browser-Funktionen.
+Sie haben ein Bedienpanel am Schaltschrank: Screen laeuft drauf
+und ist reine Anzeige (Chromium-Kiosk). Die HMI rendert **Hearth**
+als HTTP-UI, gespeist aus OPC-UA / Modbus von **bellowsd**, dessen
+Live-Werte wiederum aus **anvild** stammen. Der Operator sieht nur
+die Anwendung — **keine** Linux-Oberflaeche, **keine** versehentlich-
+startbaren Browser-Funktionen.
 
 ---
 
