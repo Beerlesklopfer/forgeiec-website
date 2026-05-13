@@ -126,6 +126,7 @@ flowchart LR
     Anvild -->|Anvil IPC| Bellows
     Bellows -->|OPC-UA / HTTP| Screen
     Anvild -->|Anvil IPC| Hearth
+    Bellows -->|OPC-UA / Modbus| Hearth
     Hearth -.->|REST| Ledger
 ```
 
