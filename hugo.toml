@@ -75,6 +75,10 @@ unsafe = true
       pageRef = "/partner/"
       weight = 20
     [[languages.en.menu.main]]
+      name = "Reference"
+      pageRef = "/reference/"
+      weight = 25
+    [[languages.en.menu.main]]
       name = "Help"
       pageRef = "/help/"
       weight = 30
