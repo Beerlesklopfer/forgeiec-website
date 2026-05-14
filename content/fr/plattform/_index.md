@@ -60,18 +60,6 @@ gestion des alarmes.
 
 ---
 
-### Spark
-
-**Tunnel Zenoh**
-
-Pont reseau Edge-to-Cloud base sur le protocole Zenoh. Connexion securisee
-entre les automates sur site et les services cloud, sans VPN, sans
-configuration complexe.
-
-[En savoir plus](spark/)
-
----
-
 ### Tongs
 
 **Bridges Fieldbus**

@@ -57,18 +57,6 @@ Gercek zamanli panolar, veri gecmisi, alarm yonetimi.
 
 ---
 
-### Spark
-
-**Zenoh Tuneli**
-
-Zenoh protokolune dayali Edge-to-Cloud ag kooprusu. Sahadaki PLC'ler ile
-bulut hizmetleri arasinda guvenli baglanti -- VPN gerektirmez, karmasik
-yapilandirma gerektirmez.
-
-[Daha fazla bilgi](spark/)
-
----
-
 ### Tongs
 
 **Saha Veri Yolu Kopruleri**

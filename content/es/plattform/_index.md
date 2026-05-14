@@ -60,18 +60,6 @@ industrial. Paneles en tiempo real, historico de datos, gestion de alarmas.
 
 ---
 
-### Spark
-
-**Tunel Zenoh**
-
-Puente de red Edge-to-Cloud basado en el protocolo Zenoh. Conexion segura
-entre los PLCs en planta y los servicios en la nube, sin VPN, sin
-configuracion compleja.
-
-[Mas informacion](spark/)
-
----
-
 ### Tongs
 
 **Bridges Fieldbus**
