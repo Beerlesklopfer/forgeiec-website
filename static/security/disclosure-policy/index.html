@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Coordinated Vulnerability Disclosure Policy — ForgeIEC</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:780px;margin:2rem auto;padding:0 1.2rem;color:#222;line-height:1.6}
+h1,h2{color:#0aadff}
+code{background:#f4f4f4;padding:0.1em 0.4em;border-radius:3px}
+table{border-collapse:collapse;margin:1em 0}td,th{border:1px solid #ddd;padding:0.4em 0.8em;text-align:left}
+</style>
+</head>
+<body>
+<h1>Coordinated Vulnerability Disclosure (CVD) Policy</h1>
+<p><em>Stand: 2026-05-19 · ForgeIEC</em></p>
+
+<h2>Geltungsbereich</h2>
+<p>Diese Policy gilt für alle von ForgeIEC veröffentlichten Software-Produkte,
+insbesondere <strong>ForgeIEC Screen</strong>, <strong>Anvil PLC Runtime</strong>
+und die zugehörigen Komponenten unter <code>*.forgeiec.io</code>.</p>
+
+<h2>Kontakt</h2>
+<table>
+<tr><th>E-Mail</th><td><a href="mailto:security@forgeiec.io">security@forgeiec.io</a></td></tr>
+<tr><th>OpenPGP-Schlüssel</th><td><a href="https://apt.forgeiec.io/forgeiec.gpg">apt.forgeiec.io/forgeiec.gpg</a></td></tr>
+<tr><th>Bevorzugte Sprachen</th><td>Deutsch, Englisch</td></tr>
+</table>
+
+<h2>Prozess</h2>
+<ol>
+<li><strong>Eingangsbestätigung</strong> binnen 72 Stunden ab Meldung.</li>
+<li><strong>Erstanalyse</strong> mit Priorisierung (CVSS-basiert) binnen 7 Werktagen.</li>
+<li><strong>Embargoperiode</strong> in Abstimmung mit dem Meldenden — Default 90 Tage,
+verkürzbar bei aktiver Ausnutzung, verlängerbar bei besonders komplexen Issues.</li>
+<li><strong>Patch-Release</strong> über <code>apt.forgeiec.io</code> mit Security-Advisory.</li>
+<li><strong>CVE-Vergabe</strong> in Abstimmung mit MITRE/ENISA, sobald Patch verfügbar.</li>
+<li><strong>Public Disclosure</strong> nach Ablauf des Embargos — Coordinated.</li>
+</ol>
+
+<h2>Safe Harbour</h2>
+<p>ForgeIEC verzichtet auf rechtliche Schritte gegen Sicherheitsforscher, die im
+guten Glauben Schwachstellen melden und dabei:</p>
+<ul>
+<li>keine Nutzerdaten exfiltrieren, modifizieren oder zerstören,</li>
+<li>keine Denial-of-Service-Angriffe auf Produktivsysteme durchführen,</li>
+<li>diese Policy einhalten und mit ForgeIEC vor jeder Veröffentlichung koordinieren.</li>
+</ul>
+
+<h2>Aus dem Scope</h2>
+<ul>
+<li>Reine Konfigurationsfehler einzelner Betreiber-Installationen.</li>
+<li>Social-Engineering-Angriffe gegen ForgeIEC-Mitarbeiter.</li>
+<li>Schwachstellen in Open-Source-Komponenten Dritter, ohne dass ForgeIEC sie
+selbst eingebracht oder modifiziert hat — bitte direkt an den Upstream melden.</li>
+</ul>
+
+<h2>Verweise</h2>
+<ul>
+<li><a href="/.well-known/security.txt">/.well-known/security.txt</a> — RFC 9116</li>
+<li><a href="/security/hall-of-fame">Hall of Fame</a></li>
+<li>CRA-Konformitätsinformation in jedem ForgeIEC-Paket unter
+<code>/usr/share/doc/&lt;paket&gt;/CRA_INFORMATION.md</code></li>
+</ul>
+</body>
+</html>

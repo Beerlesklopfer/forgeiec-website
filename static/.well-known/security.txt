@@ -1,0 +1,11 @@
+# ForgeIEC Security Contact (RFC 9116)
+# Canonical location, published at https://forgeiec.io/.well-known/security.txt
+# Mirrored in distributed packages: /usr/share/doc/forgeiec-screen-*/security.txt
+
+Contact: mailto:security@forgeiec.io
+Expires: 2027-12-31T23:59:59.000Z
+Encryption: https://apt.forgeiec.io/forgeiec.gpg
+Preferred-Languages: de, en
+Canonical: https://forgeiec.io/.well-known/security.txt
+Policy: https://forgeiec.io/security/disclosure-policy
+Acknowledgments: https://forgeiec.io/security/hall-of-fame
