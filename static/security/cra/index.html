@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>CRA-Konformität — ForgeIEC</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:880px;margin:2rem auto;padding:0 1.2rem;color:#222;line-height:1.6}
+h1,h2{color:#0aadff}
+table{border-collapse:collapse;margin:1em 0;width:100%}
+td,th{border:1px solid #ddd;padding:0.5em 0.8em;text-align:left;vertical-align:top}
+th{background:#f4f8fb}
+.status-done{color:#20a020;font-weight:600}
+.status-todo{color:#cc7700;font-weight:600}
+code{background:#f4f4f4;padding:0.1em 0.4em;border-radius:3px}
+.note{background:#f4f8fb;border-left:4px solid #0aadff;padding:0.8rem 1rem;margin:1.5rem 0;border-radius:3px}
+</style>
+</head>
+<body>
+<h1>CRA-Konformitätsinformationen — ForgeIEC-Produktfamilie</h1>
+<p><em>Cyber Resilience Act (EU 2024/2847) · Stand: 2026-05-19</em></p>
+
+<p>Diese Seite gibt einen Überblick über die Konformitäts­informationen der
+ForgeIEC-Produktfamilie nach der Verordnung (EU) 2024/2847 — dem
+<strong>Cyber Resilience Act</strong>.</p>
+
+<p>Vollständige Konformitätsinformation jedes Produkts liegt
+<strong>im jeweiligen Paket bei</strong> unter
+<code>/usr/share/doc/&lt;paket&gt;/CRA_INFORMATION.md</code>.
+Diese Übersicht verweist und fasst die Eckdaten zusammen.</p>
+
+<div class="note">
+<strong>Hersteller-Kontakt für Schwachstellen-Meldungen
+(Coordinated Vulnerability Disclosure):</strong><br>
+✉ <a href="mailto:security@forgeiec.io">security@forgeiec.io</a> ·
+<a href="/.well-known/security.txt">security.txt (RFC 9116)</a> ·
+<a href="/security/disclosure-policy">CVD-Policy</a>
+</div>
+
+<h2>Komponentenübersicht</h2>
+
+<table>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Paket-Name</th>
+<th>Klassifikation</th>
+<th>Stand der CRA-Info</th>
+<th>Support-Periode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ForgeIEC Screen</strong><br><small>Industrie-Kiosk-Browser (CEF-basiert)</small></td>
+<td><code>forgeiec-screen-xorg</code><br><code>forgeiec-screen-wayland</code></td>
+<td>Standard</td>
+<td class="status-done">✓ verfügbar</td>
+<td>5 Jahre</td>
+</tr>
+<tr>
+<td><strong>Anvil PLC Runtime</strong><br><small>IEC-61131-3-Laufzeitumgebung</small></td>
+<td><code>anvil-server</code></td>
+<td>Standard</td>
+<td class="status-todo">in Vorbereitung</td>
+<td>5 Jahre</td>
+</tr>
+<tr>
+<td><strong>Bellows Server</strong><br><small>Industrial-Bus-Bridge</small></td>
+<td><code>bellows-server</code></td>
+<td>Standard</td>
+<td class="status-todo">in Vorbereitung</td>
+<td>5 Jahre</td>
+</tr>
+<tr>
+<td><strong>Hearth Server</strong><br><small>Datenverteilung / Pub-Sub</small></td>
+<td><code>hearth-server</code></td>
+<td>Standard</td>
+<td class="status-todo">in Vorbereitung</td>
+<td>5 Jahre</td>
+</tr>
+<tr>
+<td><strong>Ledger</strong><br><small>Historian / Time-Series</small></td>
+<td><code>forgeiec-ledger</code></td>
+<td>Standard</td>
+<td class="status-todo">in Vorbereitung</td>
+<td>5 Jahre</td>
+</tr>
+<tr>
+<td><strong>Tongs</strong><br><small>Konfigurations-Werkzeug</small></td>
+<td><code>forgeiec-tongs</code></td>
+<td>Standard</td>
+<td class="status-todo">in Vorbereitung</td>
+<td>5 Jahre</td>
+</tr>
+<tr>
+<td><strong>Forge Studio</strong><br><small>IEC-61131-3-IDE</small></td>
+<td><code>forgeiec-studio</code></td>
+<td>Standard</td>
+<td class="status-todo">in Vorbereitung</td>
+<td>5 Jahre</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Klassifikation</h2>
+<p>Keine der ForgeIEC-Komponenten ist nach derzeitiger Bewertung als
+"wichtiges Produkt" der Klasse I oder Klasse II nach CRA Anhang III
+einzustufen. Alle Komponenten unterliegen daher dem internen
+Konformitätsbewertungsverfahren (Art. 32 i.V.m. Modul A nach
+Beschluss Nr. 768/2008/EG).</p>
+
+<h2>Update-Mechanismus</h2>
+<p>Sicherheitsrelevante Updates werden über das öffentliche apt-Repository
+<a href="https://apt.forgeiec.io">apt.forgeiec.io</a> bereitgestellt,
+signiert mit dem ForgeIEC-OpenPGP-Schlüssel
+(<a href="https://apt.forgeiec.io/forgeiec.gpg">forgeiec.gpg</a>).
+Die Pakete richten den entsprechenden APT-Source-Eintrag bei der
+Installation automatisch ein.</p>
+
+<h2>Anwender-Pflichten</h2>
+<p>Die Konformität dieser Software ersetzt nicht die Pflichten des
+Anlagenbetreibers nach <strong>NIS-2-Richtlinie</strong> (EU 2022/2555)
+oder nach der <strong>IEC 62443</strong>-Normenfamilie für industrielle
+Automatisierungssicherheit. Diese Pflichten trägt der Betreiber selbst.</p>
+
+<h2>Weiterführende Verweise</h2>
+<ul>
+<li><a href="/.well-known/security.txt">/.well-known/security.txt</a> — RFC 9116</li>
+<li><a href="/security/disclosure-policy">Coordinated Vulnerability Disclosure Policy</a></li>
+<li><a href="/security/hall-of-fame">Security Hall of Fame</a></li>
+<li><a href="https://eur-lex.europa.eu/eli/reg/2024/2847/oj">Verordnung (EU) 2024/2847 (CRA) im Volltext</a></li>
+</ul>
+</body>
+</html>
