@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ===========================================================================
+  ForgeIEC v2 / variable - Per-Variable Extension
+                           (https://forgeiec.io/v2/variable)
+  ===========================================================================
+
+  Copyright (c) ForgeIEC contributors. Licensed under AGPL-3.0-or-later.
+
+  Sprint-Spec: documentation/sprints/plcopen-import-export.md §4.6a + §4.6b.
+  Pattern-Konvention: XSD-targetNamespace = <data name="URI">-URI
+  (User-Vorgabe 2026-05-21).
+
+  Block-Form im .forge-File:
+
+      <variable name="xT_1">
+        <type><BOOL/></type>
+        <addData>
+          <data name="https://forgeiec.io/v2/variable" handleUnknown="discard">
+            <ForgeIecVar xmlns="https://forgeiec.io/v2/variable"
+                         monitorEnabled="true"
+                         createdMs="1779350554724"
+                         accessedMs="1779350554724"
+                         modifiedMs="1779350554724"/>
+          </data>
+        </addData>
+      </variable>
+
+  Quelle: editor/src/model/FPlcopenXml.cpp ~Z. 290-322.
+  ===========================================================================
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:fv="https://forgeiec.io/v2/variable"
+           targetNamespace="https://forgeiec.io/v2/variable"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:simpleType name="BooleanString">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="true"/>
+      <xs:enumeration value="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="UnixTimestampMs">
+    <xs:restriction base="xs:long">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="ForgeIecVar">
+    <xs:annotation>
+      <xs:documentation>
+        Per-variable ForgeIEC-Metadata: Security-Flags
+        (monitor/bellows/crossTask/force/addressLocked) plus
+        Lifecycle-Timestamps. Element wird nur emittiert wenn
+        mindestens ein Flag/Timestamp non-default ist. Reader
+        behandelt fehlende Attribute als Default (false / 0).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="monitorEnabled"   type="fv:BooleanString"   use="optional"/>
+      <xs:attribute name="bellowsExport"    type="fv:BooleanString"   use="optional"/>
+      <xs:attribute name="crossTaskExport"  type="fv:BooleanString"   use="optional"/>
+      <xs:attribute name="force"            type="fv:BooleanString"   use="optional"/>
+      <xs:attribute name="addressLocked"    type="fv:BooleanString"   use="optional"/>
+      <xs:attribute name="createdMs"        type="fv:UnixTimestampMs" use="optional"/>
+      <xs:attribute name="accessedMs"       type="fv:UnixTimestampMs" use="optional"/>
+      <xs:attribute name="modifiedMs"       type="fv:UnixTimestampMs" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ===========================================================================
+  ForgeIEC v2 / task - Per-Task Extension
+                        (https://forgeiec.io/v2/task)
+  ===========================================================================
+
+  Copyright (c) ForgeIEC contributors. Licensed under AGPL-3.0-or-later.
+
+  Sprint-Spec: documentation/sprints/plcopen-import-export.md §4.6a + §4.6b.
+  Pattern-Konvention: XSD-targetNamespace = <data name="URI">-URI.
+
+  Block-Form im .forge-File:
+
+      <task name="MainTask" interval="T#20ms">
+        <addData>
+          <data name="https://forgeiec.io/v2/task" handleUnknown="discard">
+            <ForgeIecTask xmlns="https://forgeiec.io/v2/task"
+                          rtScheduling="true"
+                          watchdogMs="100"/>
+          </data>
+        </addData>
+      </task>
+
+  Quelle: editor/src/model/FPlcopenXml.cpp ~Z. 922.
+  ===========================================================================
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ft="https://forgeiec.io/v2/task"
+           targetNamespace="https://forgeiec.io/v2/task"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:simpleType name="BooleanString">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="true"/>
+      <xs:enumeration value="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="ForgeIecTask">
+    <xs:annotation>
+      <xs:documentation>
+        Per-task ForgeIEC-Metadata: Realtime-Scheduling-Flag und
+        Watchdog-Timeout in Millisekunden. Bei rtScheduling=true
+        wird die Task im SCHED_FIFO/RT-Modus gefahren (CAP_SYS_NICE
+        Permission noetig).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="rtScheduling" type="ft:BooleanString"      use="optional"/>
+      <xs:attribute name="watchdogMs"   type="xs:nonNegativeInteger" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

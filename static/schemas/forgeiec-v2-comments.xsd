@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ===========================================================================
+  ForgeIEC v2 / comments - Free-Text-Comment-Nodes in Variablen-Listen
+                            (https://forgeiec.io/v2/comments)
+  ===========================================================================
+
+  Copyright (c) ForgeIEC contributors. Licensed under AGPL-3.0-or-later.
+
+  Sprint-Spec: documentation/sprints/plcopen-import-export.md §4.6a + §4.6b.
+  Pattern-Konvention: XSD-targetNamespace = <data name="URI">-URI.
+
+  Block-Form im .forge-File:
+
+      <interface>
+        <localVars>
+          ... variables ...
+        </localVars>
+        <addData>
+          <data name="https://forgeiec.io/v2/comments" handleUnknown="discard">
+            <comments xmlns="https://forgeiec.io/v2/comments">
+              <comment name="Section: Inputs" orderHint="0">
+                <doc>Hier folgen alle digitalen Eingaenge</doc>
+              </comment>
+              <comment name="Section: Outputs" orderHint="10"/>
+            </comments>
+          </data>
+        </addData>
+      </interface>
+
+  Reader: editor/src/model/FPlcopenXml.cpp ~Z. 2908-2950.
+  ===========================================================================
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:fc="https://forgeiec.io/v2/comments"
+           targetNamespace="https://forgeiec.io/v2/comments"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:element name="comments">
+    <xs:annotation>
+      <xs:documentation>
+        Container fuer Free-Text-Kommentar-Knoten innerhalb einer
+        Variablen-Liste. orderHint bestimmt die Position relativ zu
+        Variablen und anderen Kommentaren (Default 0). Comments
+        haben keinen Address-Slot und keine Type-Info — sie sind
+        rein dokumentativ und dienen der UI-Gruppierung.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="comment" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="doc" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>
+                    Multi-Line-Doc-Text des Kommentars
+                    (XML-escaped, kein xhtml).
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name"      type="xs:string"  use="required"/>
+            <xs:attribute name="orderHint" type="xs:integer" use="optional" default="0"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ===========================================================================
+  ForgeIEC v2 / bus-config - Bus-System-Topologie
+                              (https://forgeiec.io/v2/bus-config)
+  ===========================================================================
+
+  Copyright (c) ForgeIEC contributors. Licensed under AGPL-3.0-or-later.
+
+  Sprint-Spec: documentation/sprints/plcopen-import-export.md §4.6a + §4.6b.
+  Pattern-Konvention: XSD-targetNamespace = <data name="URI">-URI.
+
+  Block-Form im .forge-File:
+
+      <addData>
+        <data name="https://forgeiec.io/v2/bus-config" handleUnknown="discard">
+          <busConfig xmlns="https://forgeiec.io/v2/bus-config">
+            <segment id="modbus-tcp-01" protocol="modbus-tcp"
+                     name="Modbus" enabled="true">
+              <setting key="port" value="502"/>
+              <device hostname="Pfirsich" id="...">
+                <module slot="0" name="DI module"/>
+              </device>
+            </segment>
+          </busConfig>
+        </data>
+      </addData>
+
+  Quelle: editor/src/model/FPlcopenXml.cpp ~Z. 1660-1830,
+  docs/design/bus-panel-merge.md §2.2.
+  ===========================================================================
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:fb="https://forgeiec.io/v2/bus-config"
+           targetNamespace="https://forgeiec.io/v2/bus-config"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:simpleType name="BooleanString">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="true"/>
+      <xs:enumeration value="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Setting">
+    <xs:annotation>
+      <xs:documentation>
+        Key/Value-Paar fuer Protocol-/Modul-/Device-spezifische
+        Einstellungen (z.B. port, timeout_ms, baud_rate, log_path).
+        Mehrfach vorkommend in segment, device, module.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="key"   type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Module">
+    <xs:sequence>
+      <xs:element name="setting" type="fb:Setting" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="slot"        type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="catalogRef"  type="xs:string"             use="optional"/>
+    <xs:attribute name="name"        type="xs:string"             use="optional"/>
+    <xs:attribute name="baseAddress" type="xs:integer"            use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="Device">
+    <xs:sequence>
+      <xs:element name="setting" type="fb:Setting" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="module"  type="fb:Module"  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="hostname"       type="xs:string"             use="required"/>
+    <xs:attribute name="id"             type="xs:string"             use="optional"/>
+    <xs:attribute name="ipAddress"      type="xs:string"             use="optional"/>
+    <xs:attribute name="port"           type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="slaveId"        type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="anvilGroup"     type="xs:string"             use="optional"/>
+    <xs:attribute name="catalogRef"     type="xs:string"             use="optional"/>
+    <xs:attribute name="mac"            type="xs:string"             use="optional"/>
+    <xs:attribute name="timeoutMs"      type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="retryCount"     type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="endianness"     type="xs:string"             use="optional"/>
+    <xs:attribute name="connectionMode" type="xs:string"             use="optional"/>
+    <xs:attribute name="description"    type="xs:string"             use="optional"/>
+    <xs:attribute name="gateway"        type="xs:string"             use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="Segment">
+    <xs:annotation>
+      <xs:documentation>
+        Bus-Segment = Protokoll + Network-Adresse + Liste von Devices.
+        Ein Segment = ein Tongs-Daemon-Prozess auf der PLC. `protocol`
+        z.B. "modbus-tcp", "ethercat", "profibus", "ethernet-ip".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="setting" type="fb:Setting" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="device"  type="fb:Device"  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id"                    type="xs:string"             use="required"/>
+    <xs:attribute name="protocol"              type="xs:string"             use="required"/>
+    <xs:attribute name="name"                  type="xs:string"             use="required"/>
+    <xs:attribute name="enabled"               type="fb:BooleanString"      use="required"/>
+    <xs:attribute name="interface"             type="xs:string"             use="optional"/>
+    <xs:attribute name="bindAddress"           type="xs:string"             use="optional"/>
+    <xs:attribute name="gateway"               type="xs:string"             use="optional"/>
+    <xs:attribute name="pollIntervalMs"        type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="subnetCidr"            type="xs:string"             use="optional"/>
+    <xs:attribute name="sourcePortRange"       type="xs:string"             use="optional"/>
+    <xs:attribute name="keepAliveIdleSec"      type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="keepAliveIntervalSec"  type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="keepAliveCount"        type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="maxConnections"        type="xs:nonNegativeInteger" use="optional"/>
+    <xs:attribute name="vlanId"                type="xs:nonNegativeInteger" use="optional"/>
+  </xs:complexType>
+
+  <xs:element name="busConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Wurzel-Element des Bus-Konfigurations-Subtrees. Eingebettet
+        in `data name=...bus-config` auf project-Ebene. Listet alle
+        Segmente eines Projekts.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="segment" type="fb:Segment" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -61,7 +61,24 @@ clean:
 sync-schemas:
 	@echo "Syncing schemas from $(STUDIO_SCHEMAS_DIR)/ -> static/schemas/"
 	@mkdir -p static/schemas
-	@for f in tc6_0201.xsd forgeiec-v2.xsd forgeiec-v2-sanitize-map.xsd README.md; do \
+	@# Drop any stale .xsd that no longer exists upstream (the per-NS
+	@# split in 2026-05-21 dropped the monolithic forgeiec-v2.xsd).
+	@for stale in static/schemas/*.xsd; do \
+	  [ -f "$$stale" ] || continue; \
+	  base=$$(basename "$$stale"); \
+	  if [ ! -f "$(STUDIO_SCHEMAS_DIR)/$$base" ]; then \
+	    rm -f "$$stale"; \
+	    echo "  rm stale $$base"; \
+	  fi; \
+	done
+	@# Pull the current upstream set
+	@for f in tc6_0201.xsd \
+	          forgeiec-v2-variable.xsd \
+	          forgeiec-v2-task.xsd \
+	          forgeiec-v2-bus-config.xsd \
+	          forgeiec-v2-comments.xsd \
+	          forgeiec-v2-sanitize-map.xsd \
+	          README.md; do \
 	  if [ -f "$(STUDIO_SCHEMAS_DIR)/$$f" ]; then \
 	    cp "$(STUDIO_SCHEMAS_DIR)/$$f" static/schemas/$$f; \
 	    echo "  cp $$f"; \

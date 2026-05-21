@@ -49,40 +49,44 @@ Datei selbst für Provenance + SHA-256). Bei Fragen zur Re-Distribution:
 <a href="mailto:blacksmith@forgeiec.io">blacksmith@forgeiec.io</a>.
 </div>
 
-<h2>2. ForgeIEC v2 — Extension-Schemas</h2>
+<h2>2. ForgeIEC v2 — Extension-Schemas (5 Per-URI-XSDs)</h2>
 
 <p>ForgeIEC schreibt eigene Metadaten in
 <code>&lt;addData name="https://forgeiec.io/v2/<em>NAME</em>"&gt;</code>-
-Container. Dieses XSD validiert deren Inhalt.</p>
+Container. <strong>Konvention:</strong> jeder Extension-URI hat ihr
+eigenes XSD mit passendem <code>targetNamespace</code>; das Inner-
+Element trägt <code>xmlns="<em>URI</em>"</code> matching.</p>
 
 <table>
-<tr><th>Datei</th><td><a class="dl" href="forgeiec-v2.xsd">forgeiec-v2.xsd</a> &nbsp; (~13 KB)</td></tr>
-<tr><th>Namespace</th><td><code>https://forgeiec.io/v2</code></td></tr>
-<tr><th>Lizenz</th><td>AGPL-3.0-or-later</td></tr>
-<tr><th>Element-Coverage</th><td>
-  <ul>
-    <li><code>&lt;ForgeIecVar&gt;</code> — Variable Security-Flags + Lifecycle-Timestamps</li>
-    <li><code>&lt;ForgeIecTask&gt;</code> — Per-Task RT-Scheduling + Watchdog-Timeout</li>
-    <li><code>&lt;busConfig&gt;</code> — Bus-System-Topologie (segment → device → module → setting)</li>
-    <li><code>&lt;comments&gt;</code> — Free-Text-Comment-Nodes in Variablen-Listen</li>
-  </ul>
-</td></tr>
+<tr><th>XSD</th><th>Namespace / <code>&lt;data name=...&gt;</code></th><th>Inner-Element</th></tr>
+<tr>
+  <td><a class="dl" href="forgeiec-v2-variable.xsd">v2-variable.xsd</a></td>
+  <td><code>https://forgeiec.io/v2/variable</code></td>
+  <td><code>&lt;ForgeIecVar&gt;</code> — Variable Security-Flags + Lifecycle-Timestamps</td>
+</tr>
+<tr>
+  <td><a class="dl" href="forgeiec-v2-task.xsd">v2-task.xsd</a></td>
+  <td><code>https://forgeiec.io/v2/task</code></td>
+  <td><code>&lt;ForgeIecTask&gt;</code> — RT-Scheduling + Watchdog-Timeout</td>
+</tr>
+<tr>
+  <td><a class="dl" href="forgeiec-v2-bus-config.xsd">v2-bus-config.xsd</a></td>
+  <td><code>https://forgeiec.io/v2/bus-config</code></td>
+  <td><code>&lt;busConfig&gt;</code> + nested segment/device/module/setting</td>
+</tr>
+<tr>
+  <td><a class="dl" href="forgeiec-v2-comments.xsd">v2-comments.xsd</a></td>
+  <td><code>https://forgeiec.io/v2/comments</code></td>
+  <td><code>&lt;comments&gt;</code> + comment/doc</td>
+</tr>
+<tr>
+  <td><a class="dl" href="forgeiec-v2-sanitize-map.xsd">v2-sanitize-map.xsd</a></td>
+  <td><code>https://forgeiec.io/v2/sanitize-map</code></td>
+  <td><code>&lt;renameMap&gt;</code> + rename[original, sanitized, reason] (Identifier-Sanitize beim Import)</td>
+</tr>
 </table>
 
-<h2>3. ForgeIEC v2 / sanitize-map (Eigenes Namespace)</h2>
-
-<p>Cross-Format-Import-Tool sanitisiert beim Importieren fremder
-PLCopen-Files (z.B. GX Works3) Identifier, die der IEC 61131-3 Spec
-nicht entsprechen (Leading-Digit, Sonderzeichen, Reserved-Keywords).
-Die Rename-Map persistiert die durchgeführten Umbenennungen für
-einen späteren Roundtrip-Export.</p>
-
-<table>
-<tr><th>Datei</th><td><a class="dl" href="forgeiec-v2-sanitize-map.xsd">forgeiec-v2-sanitize-map.xsd</a> &nbsp; (~4 KB)</td></tr>
-<tr><th>Namespace</th><td><code>https://forgeiec.io/v2/sanitize-map</code></td></tr>
-<tr><th>Lizenz</th><td>AGPL-3.0-or-later</td></tr>
-<tr><th>Element-Coverage</th><td><code>&lt;renameMap&gt;</code> mit <code>&lt;rename original sanitized reason/&gt;</code>-Children. <code>reason</code> ∈ {leading-digit, invalid-char, reserved-keyword, collision-suffix, empty-name, other}.</td></tr>
-</table>
+<p><strong>Lizenz:</strong> alle ForgeIEC-v2-XSDs unter AGPL-3.0-or-later.</p>
 
 <h2>Layered Validation</h2>
 
@@ -92,9 +96,14 @@ zwei Pässen validiert:</p>
 <pre><code>Pass A (Whole-doc):  tc6_0201.xsd  validate  &lt;project&gt;-Tree
                      → strukturelle PLCopen-Korrektheit
 
-Pass B (Extension): pro &lt;addData name="https://forgeiec.io/v2/..."&gt;
-                     forgeiec-v2.xsd  /  forgeiec-v2-sanitize-map.xsd
-                     → ForgeIEC-spezifische Attribute korrekt typisiert
+Pass B (Extension):  pro &lt;addData name="URI"&gt;
+                     URI → XSD-Lookup:
+                       v2/variable      → forgeiec-v2-variable.xsd
+                       v2/task          → forgeiec-v2-task.xsd
+                       v2/bus-config    → forgeiec-v2-bus-config.xsd
+                       v2/comments      → forgeiec-v2-comments.xsd
+                       v2/sanitize-map  → forgeiec-v2-sanitize-map.xsd
+                     Validate Inner-Element gegen das passende XSD.
 </code></pre>
 
 <p>Implementiert in ForgeIEC's <code>FXsdValidator</code> (libxml2 FFI).

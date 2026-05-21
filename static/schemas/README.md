@@ -1,12 +1,20 @@
 # XML-Schemas für ForgeIEC
 
 Dieses Verzeichnis bündelt die XSD-Schemas, gegen die ForgeIEC seine
-PLCopen-XML-Dateien validiert. Zwei Schemas, gemeinsam genutzt:
+PLCopen-XML-Dateien validiert. Schema-Layout:
 
-| Datei                | Owner    | Lizenz             | Zweck                                                    |
-|----------------------|----------|--------------------|----------------------------------------------------------|
-| `tc6_0201.xsd`       | PLCopen e.V. | (siehe XML-Header) | Offizielles PLCopen-XML-Standard-Schema (TC6 v2.01).      |
-| `forgeiec-v2.xsd`    | ForgeIEC | AGPL-3.0-or-later  | Schema unserer `<addData name="forgeiec.io/v2/*">`-Erweiterungen. |
+| Datei                              | Owner    | Lizenz             | Zweck                                                         |
+|------------------------------------|----------|--------------------|---------------------------------------------------------------|
+| `tc6_0201.xsd`                     | PLCopen e.V. | (siehe XML-Header) | Offizielles PLCopen-XML-Standard-Schema (TC6 v2.01).           |
+| `forgeiec-v2-variable.xsd`         | ForgeIEC | AGPL-3.0-or-later  | `<ForgeIecVar>` (per-Variable-Security-Flags + Lifecycle-TS).  |
+| `forgeiec-v2-task.xsd`             | ForgeIEC | AGPL-3.0-or-later  | `<ForgeIecTask>` (per-Task-RT-Scheduling + Watchdog-Timeout).  |
+| `forgeiec-v2-bus-config.xsd`       | ForgeIEC | AGPL-3.0-or-later  | `<busConfig>` (Segment → Device → Module → Setting).           |
+| `forgeiec-v2-comments.xsd`         | ForgeIEC | AGPL-3.0-or-later  | `<comments>` (Free-Text-Comment-Nodes in Variablen-Listen).    |
+| `forgeiec-v2-sanitize-map.xsd`     | ForgeIEC | AGPL-3.0-or-later  | `<renameMap>` (Identifier-Sanitize beim Foreign-Import).       |
+
+**Konvention** (2026-05-21, durchgezogen): jeder `<data name="URI">`
+hat ein Inner-Element mit `xmlns="URI"`. XSD-`targetNamespace`
+matched die `<data>`-URI 1:1. Ein XSD = ein Extension-URI.
 
 ## Validierungs-Pipeline
 
@@ -16,9 +24,14 @@ Für eine `.forge`-Datei läuft die Validierung in zwei Pässen:
 Pass 1 (Whole-doc):
     tc6_0201.xsd  validate  <project>-Root → strukturelle PLCopen-Korrektheit
 
-Pass 2 (Extension):
-    forgeiec-v2.xsd  validate  each <addData name="https://forgeiec.io/v2/..."/*
-                              → ForgeIEC-spezifische Attribute korrekt typisiert
+Pass 2 (Extension):  pro <addData name="URI">
+    URI → XSD-Lookup:
+      forgeiec.io/v2/variable      → forgeiec-v2-variable.xsd
+      forgeiec.io/v2/task          → forgeiec-v2-task.xsd
+      forgeiec.io/v2/bus-config    → forgeiec-v2-bus-config.xsd
+      forgeiec.io/v2/comments      → forgeiec-v2-comments.xsd
+      forgeiec.io/v2/sanitize-map  → forgeiec-v2-sanitize-map.xsd
+    Validiere Inner-Element gegen das passende XSD.
 ```
 
 Implementiert in `editor/src/runtime/FXsdValidator.cpp` (libxml2-FFI),
