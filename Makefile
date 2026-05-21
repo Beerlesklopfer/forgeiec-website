@@ -8,7 +8,12 @@ DEPLOY_PATH ?= /var/www/forgeiec.io/public/
 DEPLOY_SSH  ?= $(DEPLOY_USER)@$(DEPLOY_HOST)
 
 .DEFAULT_GOAL := help
-.PHONY: help build serve deploy clean
+.PHONY: help build serve deploy clean sync-schemas
+
+# Studio-Repo Root, in dem die Quell-XSDs liegen. Wird beim
+# sync-schemas-Target aus dem Submodule-Verzeichnis raus auf
+# documentation/schemas/ resolved.
+STUDIO_SCHEMAS_DIR ?= ../schemas
 
 # Default target: show usage
 help:
@@ -19,6 +24,7 @@ help:
 	@echo "  make serve    Lokaler Dev-Server mit Live-Reload"
 	@echo "                  (lauscht auf 0.0.0.0, Drafts inkludiert)"
 	@echo "  make deploy   Build + rsync nach $(DEPLOY_SSH):$(DEPLOY_PATH)"
+	@echo "  make sync-schemas   XSDs aus ../schemas/ in static/schemas/ syncen"
 	@echo "  make clean    Loescht public/ und resources/_gen/"
 	@echo ""
 	@echo "Variablen (per make VAR=value oder Environment ueberschreibbar):"
@@ -44,3 +50,23 @@ deploy: build
 # Remove generated files
 clean:
 	rm -rf public/ resources/_gen/
+
+# Sync the canonical XSD-Quellen aus documentation/schemas/ ins
+# static/schemas/ Verzeichnis dieser Website. Studio-Repo ist die
+# single source of truth fuer die Schema-Files; Website re-published
+# sie 1:1 unter https://forgeiec.io/schemas/.
+#
+# Aufruf:    make sync-schemas
+# Override:  make sync-schemas STUDIO_SCHEMAS_DIR=/path/to/schemas
+sync-schemas:
+	@echo "Syncing schemas from $(STUDIO_SCHEMAS_DIR)/ -> static/schemas/"
+	@mkdir -p static/schemas
+	@for f in tc6_0201.xsd forgeiec-v2.xsd forgeiec-v2-sanitize-map.xsd README.md; do \
+	  if [ -f "$(STUDIO_SCHEMAS_DIR)/$$f" ]; then \
+	    cp "$(STUDIO_SCHEMAS_DIR)/$$f" static/schemas/$$f; \
+	    echo "  cp $$f"; \
+	  else \
+	    echo "  WARN: $$f missing in $(STUDIO_SCHEMAS_DIR)/"; \
+	  fi; \
+	done
+	@echo "Sync done. Review with: git diff static/schemas/"
