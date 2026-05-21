@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>XML Schemas — ForgeIEC</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:880px;margin:2rem auto;padding:0 1.2rem;color:#222;line-height:1.6}
+h1,h2{color:#0aadff}
+table{border-collapse:collapse;margin:1em 0;width:100%}
+td,th{border:1px solid #ddd;padding:0.5em 0.8em;text-align:left;vertical-align:top}
+th{background:#f4f8fb}
+code{background:#f4f4f4;padding:0.1em 0.4em;border-radius:3px;font-size:0.92em}
+.note{background:#f4f8fb;border-left:4px solid #0aadff;padding:0.8rem 1rem;margin:1.5rem 0;border-radius:3px}
+.dl{display:inline-block;background:#0aadff;color:#fff;padding:0.3em 0.8em;border-radius:4px;text-decoration:none;font-weight:600;font-size:0.9em}
+.dl:hover{background:#0890d6}
+.lang{color:#888;font-size:0.85em}
+</style>
+</head>
+<body>
+
+<h1>XML-Schemas für ForgeIEC</h1>
+<p><em>Direkt-Download + Dokumentation der XSDs · Stand: 2026-05-21</em></p>
+
+<p>ForgeIEC arbeitet mit dem PLCopen-XML-Format
+(<code>tc6_0201</code>) als nativem Projekt-Format. Zusätzlich definiert
+ForgeIEC eine Reihe von Extensions in eigenen XML-Namespaces, die in
+PLCopen-konformen <code>&lt;addData&gt;</code>-Containern eingebettet werden.</p>
+
+<p>Diese Seite stellt die zwei dafür benötigten XSD-Schemas zum direkten
+Download bereit:</p>
+
+<h2>1. PLCopen TC6 XML v2.01 (Standard)</h2>
+
+<table>
+<tr><th>Datei</th><td><a class="dl" href="tc6_0201.xsd">tc6_0201.xsd</a> &nbsp; (~85 KB)</td></tr>
+<tr><th>Namespace</th><td><code>http://www.plcopen.org/xml/tc6_0201</code></td></tr>
+<tr><th>Owner</th><td>PLCopen e.V. · <a href="https://plcopen.org/legal/">Legal terms</a></td></tr>
+<tr><th>Quelle</th><td><a href="https://plcopen.org/standards/xml-echange/">plcopen.org/standards/xml-echange/</a></td></tr>
+<tr><th>Verwendung</th><td>Strukturelle Validierung von <code>&lt;project&gt;</code>-Wurzelelement und allen Standard-PLCopen-Elementen (POUs, Variablen, Bus-Topologie, Konfiguration).</td></tr>
+</table>
+
+<div class="note">
+<strong>Lizenz-Hinweis:</strong> Die <code>tc6_0201.xsd</code> ist
+geistiges Eigentum von PLCopen e.V. ForgeIEC bietet diese Datei hier
+zur einfachen Erreichbarkeit für Werkzeug-Entwickler an, behält aber
+die unveränderte Original-Struktur (siehe XML-Header-Kommentar in der
+Datei selbst für Provenance + SHA-256). Bei Fragen zur Re-Distribution:
+<a href="mailto:blacksmith@forgeiec.io">blacksmith@forgeiec.io</a>.
+</div>
+
+<h2>2. ForgeIEC v2 — Extension-Schemas</h2>
+
+<p>ForgeIEC schreibt eigene Metadaten in
+<code>&lt;addData name="https://forgeiec.io/v2/<em>NAME</em>"&gt;</code>-
+Container. Dieses XSD validiert deren Inhalt.</p>
+
+<table>
+<tr><th>Datei</th><td><a class="dl" href="forgeiec-v2.xsd">forgeiec-v2.xsd</a> &nbsp; (~13 KB)</td></tr>
+<tr><th>Namespace</th><td><code>https://forgeiec.io/v2</code></td></tr>
+<tr><th>Lizenz</th><td>AGPL-3.0-or-later</td></tr>
+<tr><th>Element-Coverage</th><td>
+  <ul>
+    <li><code>&lt;ForgeIecVar&gt;</code> — Variable Security-Flags + Lifecycle-Timestamps</li>
+    <li><code>&lt;ForgeIecTask&gt;</code> — Per-Task RT-Scheduling + Watchdog-Timeout</li>
+    <li><code>&lt;busConfig&gt;</code> — Bus-System-Topologie (segment → device → module → setting)</li>
+    <li><code>&lt;comments&gt;</code> — Free-Text-Comment-Nodes in Variablen-Listen</li>
+  </ul>
+</td></tr>
+</table>
+
+<h2>3. ForgeIEC v2 / sanitize-map (Eigenes Namespace)</h2>
+
+<p>Cross-Format-Import-Tool sanitisiert beim Importieren fremder
+PLCopen-Files (z.B. GX Works3) Identifier, die der IEC 61131-3 Spec
+nicht entsprechen (Leading-Digit, Sonderzeichen, Reserved-Keywords).
+Die Rename-Map persistiert die durchgeführten Umbenennungen für
+einen späteren Roundtrip-Export.</p>
+
+<table>
+<tr><th>Datei</th><td><a class="dl" href="forgeiec-v2-sanitize-map.xsd">forgeiec-v2-sanitize-map.xsd</a> &nbsp; (~4 KB)</td></tr>
+<tr><th>Namespace</th><td><code>https://forgeiec.io/v2/sanitize-map</code></td></tr>
+<tr><th>Lizenz</th><td>AGPL-3.0-or-later</td></tr>
+<tr><th>Element-Coverage</th><td><code>&lt;renameMap&gt;</code> mit <code>&lt;rename original sanitized reason/&gt;</code>-Children. <code>reason</code> ∈ {leading-digit, invalid-char, reserved-keyword, collision-suffix, empty-name, other}.</td></tr>
+</table>
+
+<h2>Layered Validation</h2>
+
+<p>Eine <code>.forge</code>-Datei (oder eine fremde PLCopen-XML) wird in
+zwei Pässen validiert:</p>
+
+<pre><code>Pass A (Whole-doc):  tc6_0201.xsd  validate  &lt;project&gt;-Tree
+                     → strukturelle PLCopen-Korrektheit
+
+Pass B (Extension): pro &lt;addData name="https://forgeiec.io/v2/..."&gt;
+                     forgeiec-v2.xsd  /  forgeiec-v2-sanitize-map.xsd
+                     → ForgeIEC-spezifische Attribute korrekt typisiert
+</code></pre>
+
+<p>Implementiert in ForgeIEC's <code>FXsdValidator</code> (libxml2 FFI).
+Spec: <a href="https://forgeiec.io/de/news/plcopen-import-export/">PLCopen-IE-1 Sprint-Spec</a>.</p>
+
+<h2>Bekannte Non-Konformanz von <code>.forge</code>-Dateien</h2>
+
+<p>ForgeIEC's eigenes <code>.forge</code>-Format ist heute noch nicht
+strikt zu <code>tc6_0201.xsd</code> konform — wir setzen einige Extension-
+Felder als direkte Attribute auf <code>&lt;pou&gt;</code> / <code>&lt;variable&gt;</code>
+statt sie in <code>&lt;addData&gt;</code> zu packen:</p>
+
+<table>
+<tr><th>Verletzung</th><th>Datei-Stelle</th><th>Plan</th></tr>
+<tr><td><code>pouType="anvilVarList"</code></td><td>POUs</td><td>Phase D: Vanilla-Export repackt auf <code>globalVarList</code> + <code>&lt;addData&gt;</code>-Marker</td></tr>
+<tr><td><code>busDirection</code>, <code>deviceId</code></td><td>Per-Variable</td><td>Phase D: Attribute in <code>&lt;addData&gt;</code></td></tr>
+<tr><td><code>&lt;returnType&gt;</code>-Position</td><td>Function-POUs</td><td>Phase D: korrekte XSD-Position</td></tr>
+<tr><td>Fehlende <code>&lt;coordinateInfo&gt;</code></td><td>Header</td><td>Phase D: leeres Element immer schreiben</td></tr>
+</table>
+
+<p>Phase D der Sprint-Roadmap adressiert diese systematisch.
+Vanilla-Export aus ForgeIEC erzeugt sauberes <code>tc6_0201</code>-
+konformes PLCopen für fremde IDEs (GX Works3, CoDeSys, etc.);
+intern bleibt die effiziente Direkt-Attribut-Codierung erhalten.</p>
+
+<h2>Kontakt</h2>
+
+<p>Bei Fragen zu den Schemas, Re-Distribution oder Cross-Format-
+Validierung: <a href="mailto:blacksmith@forgeiec.io">blacksmith@forgeiec.io</a>.</p>
+
+<hr>
+<p class="lang">© ForgeIEC contributors. Schemas dieser Seite sind unter AGPL-3.0-or-later
+(forgeiec-v2*) bzw. PLCopen-Terms (tc6_0201) verfügbar.</p>
+
+</body>
+</html>

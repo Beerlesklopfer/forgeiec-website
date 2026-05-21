@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ===========================================================================
+  ForgeIEC v2 / sanitize-map - Schema fuer die Identifier-Sanitize-Map
+                               (https://forgeiec.io/v2/sanitize-map)
+  ===========================================================================
+
+  Copyright (c) ForgeIEC contributors. Licensed under AGPL-3.0-or-later.
+
+  Sprint-Spec: documentation/sprints/plcopen-import-export.md §4.6a.
+
+  Beim Import einer fremden PLCopen-XML repariert ForgeIEC ungueltige
+  IEC-61131-3-Identifier (z.B. GX-Works3 erlaubt "2FiFo" mit
+  Leading-Digit; matiec rejected das). Die Rename-Map persistiert die
+  durchgefuehrten Renames damit ein roundtrip:<vendor>-Export die
+  Original-Identifier wieder rueckwaerts mappen kann.
+
+  Beispiel-Block in einem .forge-File:
+
+      <addData>
+        <data name="https://forgeiec.io/v2/sanitize-map" handleUnknown="discard">
+          <renameMap xmlns="https://forgeiec.io/v2/sanitize-map">
+            <rename original="2FiFo"   sanitized="_2FiFo"  reason="leading-digit"/>
+            <rename original="Foo-Bar" sanitized="Foo_Bar" reason="invalid-char"/>
+            <rename original="TYPE"    sanitized="TYPE_id" reason="reserved-keyword"/>
+          </renameMap>
+        </data>
+      </addData>
+
+  Konvention: dieser XSD-Namespace ist GLEICH dem <data name="...">-URI
+  (User-Vorgabe 2026-05-21). Neue ForgeIEC-Extensions folgen ab jetzt
+  diesem Pattern; Legacy-Extensions (variable/task/bus-config/comments)
+  liegen aus historischen Gruenden in der Basis-NS forgeiec.io/v2 und
+  werden separat in documentation/schemas/forgeiec-v2.xsd validiert.
+  ===========================================================================
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:sm="https://forgeiec.io/v2/sanitize-map"
+           targetNamespace="https://forgeiec.io/v2/sanitize-map"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:simpleType name="SanitizeReason">
+    <xs:annotation>
+      <xs:documentation>
+        Kategorisierter Grund fuer den Identifier-Rename. Deckt die
+        sechs Sanitize-Regeln aus Spec §4.6a ab. Wird in der UI als
+        Audit-Hint angezeigt + im MCP-Tool-Return als
+        audit.renames[].reason geliefert.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="leading-digit"/>
+      <xs:enumeration value="invalid-char"/>
+      <xs:enumeration value="reserved-keyword"/>
+      <xs:enumeration value="collision-suffix"/>
+      <xs:enumeration value="empty-name"/>
+      <xs:enumeration value="other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="renameMap">
+    <xs:annotation>
+      <xs:documentation>
+        Container fuer alle Identifier-Renames die beim Import-Pass
+        durchgefuehrt wurden. Reihenfolge ist signifikant -
+        chronologisch in Reihenfolge der Anwendung. Sequenzielle
+        Verarbeitung erlaubt Kollisions-Suffix (Rename N kann auf
+        ein bereits umgenanntes Identifier-Pair aus Rename N-1
+        verweisen).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="rename" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="original"  type="xs:string"        use="required"/>
+            <xs:attribute name="sanitized" type="xs:string"        use="required"/>
+            <xs:attribute name="reason"    type="sm:SanitizeReason" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
