@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ with site.LanguageCode }}{{ . }}{{ else }}en{{ end }}">
+<head>
+<meta charset="utf-8">
+<title>{{ site.Title }} — IEC 61131-3 PLC Development Environment</title>
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="description" content="{{ with site.Params.description }}{{ . }}{{ else }}IEC 61131-3 PLC development environment — ST/IL/FBD/LD/SFC editor with AI integration{{ end }}">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{{/* Crawler/LLM-fetcher-friendly: noindex weglassen damit der Body
+     gelesen wird. Canonical zeigt auf die echte Seite — Search-
+     Engines verlinken nicht das Alias. Meta-Refresh laed Browser
+     direkt um. */}}
+<meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+<style>
+body { font-family: system-ui, sans-serif; max-width: 720px; margin: 4rem auto; padding: 0 1rem; line-height: 1.5; color: #222; }
+h1 { font-size: 2rem; margin-bottom: 0.3rem; }
+.tag { color: #666; font-size: 0.9rem; }
+ul { padding-left: 1.2rem; }
+a { color: #2080F0; }
+</style>
+</head>
+<body>
+<h1>ForgeIEC</h1>
+<p class="tag">Forged for industry. — IEC 61131-3 PLC Development Environment.</p>
+
+<p><strong>Open-source CoDeSys-style PLC IDE</strong> mit allen fünf
+IEC-61131-3-Sprachen (ST, IL, FBD, LD, SFC), Rust-Runtime-Daemon
+(anvild), Bus-System (Modbus TCP, EtherCAT in progress), und
+AI-Integration über MCP-Server (~80 typed tools, 5 Personas).</p>
+
+<p>Topics covered: IEC 61131-3, Structured Text, Function Block Diagram,
+Ladder Logic, Sequential Function Chart, PLCopen XML, EtherCAT, Modbus,
+PROFINET, OPC UA, industrial automation, fieldbus, FDD device catalog,
+AI agent, LLM integration, MCP server.</p>
+
+<p>If your browser doesn't redirect automatically, continue to
+<a href="{{ .Permalink }}">{{ .Permalink }}</a>.</p>
+
+{{- /* Sprach-Wahl: hilfreich für Crawler die alle Lokalisierungen
+       indizieren sollen, und für User die nicht das Default trifft. */ -}}
+<h2>Sprachen / Languages</h2>
+<ul>
+{{- range site.Sites }}
+  <li><a href="{{ .Home.RelPermalink }}">{{ .Language.LanguageName | default .Language.Lang }}</a></li>
+{{- end }}
+</ul>
+</body>
+</html>
