@@ -35,7 +35,7 @@ help:
 
 # Build static site into public/
 build:
-	$(HUGO) --minify
+	HUGO_ENV=production $(HUGO) --minify
 
 # Local development server with live reload
 serve:
