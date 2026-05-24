@@ -28,14 +28,14 @@ ForgeIEC では IL は `FIlEditor` で編集します — レイアウトとツ�
 | (VAR/VAR_INPUT/VAR_OUTPUT)             |
 +========================================+  <- QSplitter (vertical)
 | Code area                              |  <- FStCodeEdit
-| (tree-sitter-instruction-list grammar) |
+| (tree-sitter-il grammar) |
 +----------------------------------------+
 ```
 
 | 領域 | 内容 |
 |---|---|
 | **変数テーブル** (上) | Name、Type、Initial value、Address、Comment による宣言 — `VAR ... END_VAR` ブロックと同期。 |
-| **コード領域** (下) | tree-sitter ハイライトを伴う IL ソース (`tree-sitter-instruction-list` 文法)。 |
+| **コード領域** (下) | tree-sitter ハイライトを伴う IL ソース (`tree-sitter-il` 文法)。 |
 | **検索バー** (Ctrl-F / Ctrl-H) | 検索/置換バー。 |
 
 オンラインモードとインライン値オーバーレイは ST エディタと同様に動作

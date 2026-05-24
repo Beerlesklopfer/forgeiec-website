@@ -29,14 +29,14 @@ herramental son análogos al [editor ST](../st/).
 | (VAR/VAR_INPUT/VAR_OUTPUT)             |
 +========================================+  <- QSplitter (vertical)
 | Code area                              |  <- FStCodeEdit
-| (tree-sitter-instruction-list grammar) |
+| (tree-sitter-il grammar) |
 +----------------------------------------+
 ```
 
 | Área | Contenido |
 |---|---|
 | **Tabla de variables** (arriba) | Declaraciones con Nombre, Tipo, Valor inicial, Dirección, Comentario — sincronizadas con el bloque `VAR ... END_VAR`. |
-| **Área de código** (abajo) | Fuente IL con resaltado tree-sitter (gramática `tree-sitter-instruction-list`). |
+| **Área de código** (abajo) | Fuente IL con resaltado tree-sitter (gramática `tree-sitter-il`). |
 | **Barra de búsqueda** (Ctrl-F / Ctrl-H) | Barra de buscar y reemplazar. |
 
 El modo online y la superposición de valores en línea funcionan de

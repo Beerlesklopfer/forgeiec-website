@@ -27,14 +27,14 @@ summary: "IL 编辑器：基于累加器的 IEC 61131-3 语言，使用 CR 寄�
 | (VAR/VAR_INPUT/VAR_OUTPUT)             |
 +========================================+  <- QSplitter (vertical)
 | Code area                              |  <- FStCodeEdit
-| (tree-sitter-instruction-list grammar) |
+| (tree-sitter-il grammar) |
 +----------------------------------------+
 ```
 
 | 区域 | 内容 |
 |---|---|
 | **变量表**（顶部） | 包含 Name、Type、Initial value、Address、Comment 的声明 —— 与 `VAR ... END_VAR` 块同步。 |
-| **代码区**（底部） | 带 tree-sitter 高亮（`tree-sitter-instruction-list` 语法）的 IL 源代码。 |
+| **代码区**（底部） | 带 tree-sitter 高亮（`tree-sitter-il` 语法）的 IL 源代码。 |
 | **搜索栏**（Ctrl-F / Ctrl-H） | 查找替换栏。 |
 
 在线模式和内联值覆盖与 ST 编辑器工作方式相同。

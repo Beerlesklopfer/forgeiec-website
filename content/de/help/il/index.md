@@ -29,14 +29,14 @@ sind analog zum [ST-Editor](../st/) aufgebaut.
 | (VAR/VAR_INPUT/VAR_OUTPUT)             |
 +========================================+  <- QSplitter (vertikal)
 | Code-Bereich                           |  <- FStCodeEdit
-| (tree-sitter-instruction-list grammar) |
+| (tree-sitter-il grammar) |
 +----------------------------------------+
 ```
 
 | Bereich | Inhalt |
 |---|---|
 | **Variablentabelle** (oben) | Deklarationen mit Name, Typ, Initialwert, Adresse, Kommentar — synchron zum `VAR ... END_VAR`-Block. |
-| **Code-Bereich** (unten) | IL-Quelltext mit Tree-Sitter-Highlighting (`tree-sitter-instruction-list`-Grammatik). |
+| **Code-Bereich** (unten) | IL-Quelltext mit Tree-Sitter-Highlighting (`tree-sitter-il`-Grammatik). |
 | **Search Bar** (Ctrl-F / Ctrl-H) | Such- und Ersetzleiste. |
 
 Online-Mode + Inline-Wert-Overlay funktionieren identisch zum ST-Editor.

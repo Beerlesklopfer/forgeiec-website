@@ -27,14 +27,14 @@ araçlar [ST düzenleyici](../st/) ile benzerdir.
 | (VAR/VAR_INPUT/VAR_OUTPUT)             |
 +========================================+  <- QSplitter (vertical)
 | Code area                              |  <- FStCodeEdit
-| (tree-sitter-instruction-list grammar) |
+| (tree-sitter-il grammar) |
 +----------------------------------------+
 ```
 
 | Alan | İçerik |
 |---|---|
 | **Değişken tablosu** (üst) | Name, Type, Initial value, Address, Comment ile tanımlamalar — `VAR ... END_VAR` bloğu ile senkronize. |
-| **Kod alanı** (alt) | Tree-sitter vurgulamalı IL kaynağı (`tree-sitter-instruction-list` grameri). |
+| **Kod alanı** (alt) | Tree-sitter vurgulamalı IL kaynağı (`tree-sitter-il` grameri). |
 | **Arama çubuğu** (Ctrl-F / Ctrl-H) | Bul-değiştir çubuğu. |
 
 Çevrimiçi mod ve satır içi değer yer paylaşımı, ST düzenleyiciyle aynı

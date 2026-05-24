@@ -29,14 +29,14 @@ analogous to the [ST editor](../st/).
 | (VAR/VAR_INPUT/VAR_OUTPUT)             |
 +========================================+  <- QSplitter (vertical)
 | Code area                              |  <- FStCodeEdit
-| (tree-sitter-instruction-list grammar) |
+| (tree-sitter-il grammar) |
 +----------------------------------------+
 ```
 
 | Area | Content |
 |---|---|
 | **Variable table** (top) | Declarations with Name, Type, Initial value, Address, Comment — in sync with the `VAR ... END_VAR` block. |
-| **Code area** (bottom) | IL source with tree-sitter highlighting (`tree-sitter-instruction-list` grammar). |
+| **Code area** (bottom) | IL source with tree-sitter highlighting (`tree-sitter-il` grammar). |
 | **Search bar** (Ctrl-F / Ctrl-H) | Find-and-replace bar. |
 
 Online mode and the inline-value overlay work identically to the ST
