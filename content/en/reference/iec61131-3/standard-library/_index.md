@@ -27,6 +27,21 @@ Pure functions — no instance, called directly.
 - [Bit](functions/bit/) — `SHL`, `SHR`, `ROL`, `ROR`. **Includes
   the matiec emit-bug warning for `SHL(BYTE#1, …)`.**
 
+### Constants — *not* IEC core
+
+IEC 61131-3 specifies the math *functions* but no constants. PI, E and
+friends are vendor extensions, and the vendors disagree on naming +
+scope. ForgeIEC offers an opt-in `forgeiec_math` library — but the
+portable approach is to declare what you need in a
+`VAR_GLOBAL CONSTANT` block in your project.
+
+- [Mathematical constants](constants/) — `PI`, `E`, `SQRT2`,
+  `GOLDEN_RATIO`, … the cross-vendor table + how to declare them
+  portably.
+- [How to use constants and math](using-math/) — practical recipes
+  (degrees↔radians, polar↔cartesian, dB-scaling, accumulator drift,
+  domain validation before `SQRT`/`LN`).
+
 ### [Function blocks](function-blocks/)
 
 Stateful — declare an instance, then call the instance.
