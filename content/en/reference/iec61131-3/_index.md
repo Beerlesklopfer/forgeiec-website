@@ -44,7 +44,8 @@ needed to round-trip their constructs through the editor.
 ### [Common elements](common/)
 
 Whitespace, identifiers, comments, literals, data types,
-variables, POU model, configuration / resources / tasks.
+variables, POU model, [object-oriented extensions](common/object-oriented/),
+configuration / resources / tasks.
 
 ### Programming languages
 

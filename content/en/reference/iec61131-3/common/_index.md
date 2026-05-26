@@ -29,5 +29,9 @@ Sub-pages:
   `VAR_GLOBAL`, `VAR_EXTERNAL`, modifiers.
 - [POU model](pou-model/) — `PROGRAM`, `FUNCTION_BLOCK`,
   `FUNCTION`: the three POU kinds and when to pick which.
+- [Object-oriented extensions](object-oriented/) —
+  `METHOD`, `INTERFACE`, `EXTENDS`, `IMPLEMENTS` and the rest
+  of the IEC 61131-3 third-edition OOP layer. ForgeIEC parses
+  these constructs, matiec does not.
 - [Configuration](configuration/) — `CONFIGURATION`, `RESOURCE`,
   `TASK`, `PROGRAM`-instance binding. The IEC scheduler model.
