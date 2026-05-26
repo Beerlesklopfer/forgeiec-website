@@ -53,22 +53,50 @@ asks back first:
 ### Project changes
 
 - **Create variable** — new pool variable with address + type
-- **Rename or move variable** — between POU-local, globals,
-  Bellows export
+- **Move variable** — between POU-local, globals, Bellows export
 - **Delete variable** — carefully
 - **Create POU** — new program, function block or function
-- **Rename POU** — Tree-sitter-based (backend refactor follows)
+- **Rename POU** — AST-based via tree-sitter-st (identifier sites
+  + comment mentions; no regex over the code body)
 - **Delete POU** — carefully, task bindings may become dangling
 - **Set POU body** — replace the ST code
 - **Set flag** — Bellows export, retain, constant, monitor-enable
 
+### Refactoring (REF-1)
+
+Tree-sitter-based rename and find-references actions, always with
+a preview + apply workflow:
+
+- **`refactor.find_references`** — find every occurrence of a
+  variable / POU / Anvil group / Bellows group / GVL namespace
+  in the project
+- **`refactor.preview`** — prepare a rename or move; the response
+  carries a `tx_id` + the list of planned changes with
+  before/after + confidence (exact / ambiguous)
+- **`refactor.apply`** — execute the transaction, optionally with
+  individual changes unchecked (each row in the preview has its
+  own checkbox in the output panel)
+- **`refactor.cancel`** — discard an open transaction
+- **`refactor.list_transactions`** — see all open transactions
+
 ### Compile + deploy
 
-- **Pre-compile check** — fast syntax check without g++
-- **Full compile** — like the build button in the toolbar
-- **Generate code** — view the generated C files (without deploy)
-- **Deploy** — compile, upload, restart the PLC binary
-- **Deploy status** — phases + g++ stderr from the last deploy
+- **Pre-compile check** (`codegen.lint`) — fast syntax pass over
+  every ST POU. Returns FStCompiler errors plus tree-sitter
+  `parse_diagnostics[]` (ERROR/MISSING nodes with byte ranges
+  for editor highlighting)
+- **Full compile** — like the build button in the toolbar; since
+  2026-05 it runs through the C++-codegen path
+  (`FCxxProjectEmitter`). The old matiec / C path is deprecated.
+- **Generate code** (`codegen.generate`) — inspect the emitted
+  C++ files (`Gen<POU>.h/.cpp` + `AnvilGen.h` + `BellowsGen.h` +
+  `GvlGen.h` + `runtime_main.cpp` + `CMakeLists.txt`) without
+  deploying. Default target `cxx`; calling with `target='c'`
+  returns `FORGE_ERR_DEPRECATED`.
+- **Deploy** — upload to the PLC, build there via
+  `cmake -B build && cmake --build build`, then start the new
+  binary
+- **Deploy status** — phases + build output of the last deploy
 
 ### PLC control
 

@@ -52,24 +52,50 @@ gibt vorher eine Rueckfrage:
 ### Projekt-Aenderungen
 
 - **Variable anlegen** — neue Pool-Variable mit Adresse + Typ
-- **Variable umbenennen** oder verschieben — zwischen Pou-lokal,
-  Globale, Bellows-Export
+- **Variable verschieben** zwischen Pou-lokal, Globale, Bellows-Export
 - **Variable loeschen** — bitte vorsichtig
 - **POU anlegen** — neues Programm, Function Block oder Function
-- **POU umbenennen** — Tree-sitter-basiert (Backend-Refactor folgt)
+- **POU umbenennen** — AST-basiert via tree-sitter-st (Identifier-
+  Sichten + Comment-Mentions; ohne Code-Body-Regex)
 - **POU loeschen** — vorsichtig, Task-Bindings koennen
   dangling werden
 - **POU-Body setzen** — den ST-Code austauschen
 - **Flag setzen** — Bellows-Export, Retain, Constant, Monitor-Enable
 
+### Refaktorisieren (REF-1)
+
+Tree-sitter-basierte Rename- und Find-References-Aktionen, immer mit
+Preview + Apply-Workflow:
+
+- **`refactor.find_references`** — alle Vorkommen einer Variable /
+  POU / Anvil-Gruppe / Bellows-Gruppe + GVL-Namespace im Projekt
+  finden
+- **`refactor.preview`** — gezielten Rename oder Move vorbereiten;
+  Antwort enthaelt eine `tx_id` + Liste der geplanten Aenderungen mit
+  Before/After + Confidence (exact / ambiguous)
+- **`refactor.apply`** — Transaction ausfuehren, optional mit
+  abgewaehlten Einzel-Aenderungen (jede Zeile in der Preview hat
+  eine eigene Checkbox im Output-Panel)
+- **`refactor.cancel`** — geoeffnete Transaction verwerfen
+- **`refactor.list_transactions`** — offene Transactions sehen
+
 ### Kompilieren + Deployen
 
-- **Pre-Compile-Check** — schnelle Syntax-Pruefung ohne g++
-- **Vollstaendiger Compile** — wie der Build-Knopf in der Toolbar
-- **Code generieren** — die generierten C-Dateien anschauen (ohne
-  Deploy)
-- **Deploy** — kompilieren, hochladen, SPS-Binary neustarten
-- **Deploy-Status** — Phasen + g++ stderr beim letzten Deploy
+- **Pre-Compile-Check** (`codegen.lint`) — schnelle Syntax-Pruefung
+  ueber alle ST-POUs. Liefert FStCompiler-Errors PLUS tree-sitter-
+  `parse_diagnostics[]` (ERROR/MISSING-Nodes mit byte-Range fuer
+  Editor-Highlight)
+- **Vollstaendiger Compile** — wie der Build-Knopf in der Toolbar;
+  laeuft seit 2026-05 ueber den C++-Codegen-Pfad (FCxxProjectEmitter).
+  Der alte matiec-/C-Pfad ist deprecated.
+- **Code generieren** (`codegen.generate`) — die emittierten C++-
+  Files (`Gen<POU>.h/.cpp` + `AnvilGen.h` + `BellowsGen.h` +
+  `GvlGen.h` + `runtime_main.cpp` + `CMakeLists.txt`) anschauen
+  ohne Deploy. Default-Target `cxx`; Aufruf mit `target='c'`
+  liefert `FORGE_ERR_DEPRECATED`.
+- **Deploy** — Files auf die SPS hochladen, dort via `cmake -B
+  build && cmake --build build` bauen und das neue Binary starten
+- **Deploy-Status** — Phasen + Build-Output beim letzten Deploy
 
 ### SPS-Steuerung
 

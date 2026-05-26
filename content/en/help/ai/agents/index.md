@@ -76,17 +76,23 @@ You switch between them as tabs in the AI panel.
 
 ---
 
-## Create your own character
+## Customise personas or create your own
 
-You can customise the shipped personas or create new ones:
+Personas live under **Preferences → AI** → tab **"AI Agent Profiles"**:
 
-- **Right-click on a tab** → `Duplicate Profile`
-- **Preferences → AI** → adjust the system prompt
-  (e.g. "Always reply in German, terse technical style")
+- **`+`** below the profile list — add a new profile.
+- **`-`** — delete the selected profile.
+- **Click an entry** → the right-hand form lets you edit Name,
+  Role, Endpoint, Model, API key, Enabled, and the System prompt.
+- **"Reset to defaults"** — restore all personas to the factory
+  defaults (discards your customisations).
 
 The **system prompt** is the text used to "prime" the AI on every
-request. Here you can set style, language, level of detail, domain
-knowledge.
+request. Set style, language, level of detail, and domain
+knowledge here (e.g. *"Always reply in German, terse technical
+style"*). Each persona also carries a **Role** that determines
+which MCP tool set is available — see
+[Security](/help/ai/security/) and [Tools](/help/ai/tools/).
 
 ---
 

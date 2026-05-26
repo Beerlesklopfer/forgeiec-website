@@ -77,17 +77,24 @@ Sie wechseln im AI-Reiter einfach zwischen den Karteikarten.
 
 ---
 
-## Eigenen Charakter anlegen
+## Personas anpassen oder eigene anlegen
 
-Sie koennen die mitgelieferten Personas anpassen oder neue erstellen:
+Personas verwalten Sie unter **Preferences → AI** → Tab **„AI Agent
+Profiles"**:
 
-- **Rechtsklick auf einen Reiter** → `Duplicate Profile`
-- **Preferences → AI** → System-Prompt anpassen
-  (z.B. „Antworte immer auf Deutsch, technisch knapp")
+- **`+`** unter der Profile-Liste — neues Profil anlegen.
+- **`-`** — markiertes Profil loeschen.
+- **Liste anklicken** → rechts erscheinen Name / Role / Endpoint /
+  Model / API-Key / Enabled / System-Prompt zum Editieren.
+- **„Reset to defaults"** — alle Personas auf die Werks-Defaults
+  zuruecksetzen (loescht User-Anpassungen).
 
 Der **System-Prompt** ist der Text, mit dem die KI bei jeder Anfrage
-„geimpft" wird. Hier koennen Sie Stil, Sprache, Detailgrad,
-Domaenen-Wissen mitgeben.
+„geimpft" wird. Hier geben Sie Stil, Sprache, Detailgrad und
+Domaenen-Wissen mit (z.B. „Antworte immer auf Deutsch, technisch
+knapp"). Jede Persona hat zusaetzlich eine **Role**, die den
+verfuegbaren MCP-Tool-Satz festlegt — siehe
+[Sicherheit](/help/ai/security/) und [Werkzeuge](/help/ai/tools/).
 
 ---
 
