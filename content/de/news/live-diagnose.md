@@ -1,7 +1,7 @@
 ---
 title: "Live-Diagnose: Monitor + Oszilloskop fuer IEC 61131-3"
 date: 2026-05-10
-summary: "Variablen-Live-Werte, FB-Member-Auflösung, Oszilloskop mit Trigger, CSV-Aufnahme, gemessener Jitter — Inbetriebnahme-Werkzeuge auf CoDeSys-Niveau"
+summary: "Variablen-Live-Werte, FB-Member-Auflösung, Oszilloskop mit Trigger, CSV-Aufnahme, gemessener Jitter — Inbetriebnahme-Werkzeuge auf Industrie-Niveau"
 components: [studio, anvild]
 ---
 

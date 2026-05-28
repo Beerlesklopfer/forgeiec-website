@@ -47,7 +47,7 @@ seinen eigenen IPC-Kanal.
 ## Segment-Hierarchie
 
 Tongs organisiert die industrielle Kommunikation in einer
-CoDeSys-kompatiblen Hierarchie:
+aus etablierten SPS-Werkzeugen gewohnten Hierarchie:
 
 ```
 Bussysteme

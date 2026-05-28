@@ -71,14 +71,15 @@ the future. And open foundations cannot be taken away by a single vendor.
 ## Open Source in Industrial Automation
 
 Industrial automation according to IEC 61131-3 has been a domain of proprietary
-systems for decades. CoDeSys, Siemens TIA Portal, Rockwell Studio 5000 —
-powerful tools, but with high license costs, vendor lock-in and closed
-ecosystems.
+systems for decades — powerful vendor tools, but with high license costs,
+vendor-bound device catalogs and closed ecosystems.
 
 ### The Problem
 
-- **License costs**: A CoDeSys workstation costs thousands of euros per year
-- **Vendor lock-in**: A Siemens program does not run on Beckhoff hardware
+- **License costs**: A single engineering workstation typically costs
+  several thousand euros per year
+- **Vendor lock-in**: Programs from one vendor's tool generally do not run
+  on another vendor's hardware
 - **Closed formats**: Project files are proprietary and not portable
 - **Lack of transparency**: The user cannot inspect the compiler
 - **Education barrier**: Students and trainees cannot afford the licenses

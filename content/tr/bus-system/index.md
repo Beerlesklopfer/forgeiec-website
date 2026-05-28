@@ -5,8 +5,8 @@ summary: "ForgeIEC ile endüstriyel iletişim"
 
 ## Hiyerarşik Bus Sistemi Yönetimi
 
-ForgeIEC, endüstriyel iletişimi CoDeSys uyumlu bir segment
-hiyerarşisinde organize eder:
+ForgeIEC, endüstriyel iletişimi endüstri konvansiyonlarına uyan
+tanıdık bir segment hiyerarşisinde organize eder:
 
 ```
 Bus Sistemleri

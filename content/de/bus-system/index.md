@@ -5,8 +5,8 @@ summary: "Industrielle Kommunikation mit ForgeIEC"
 
 ## Hierarchische Bussystem-Verwaltung
 
-ForgeIEC organisiert die industrielle Kommunikation in einer CoDeSys-kompatiblen
-Segment-Hierarchie:
+ForgeIEC organisiert die industrielle Kommunikation in einer
+gewohnten Segment-Hierarchie nach Industriestandard:
 
 ```
 Bussysteme

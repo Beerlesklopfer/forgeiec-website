@@ -46,8 +46,8 @@ Quellcodes. Das bedeutet:
 
 ## Bussystem-Integration
 
-Die CoDeSys-kompatible Bussystem-Verwaltung ist direkt in die
-Entwicklungsumgebung integriert:
+Die an etablierten IEC-61131-3-IDEs orientierte Bussystem-Verwaltung
+ist direkt in die Entwicklungsumgebung integriert:
 
 - Segment-Hierarchie mit Geraeten und Variablen im Projektbaum
 - Automatische IEC-Adressvergabe ohne Kollisionen
@@ -69,7 +69,7 @@ Forge Studio kommuniziert ueber gRPC mit der Anvil-Laufzeitumgebung:
 - **Live-Debugging** — Variablen in Echtzeit beobachten und forcieren
   waehrend die SPS laeuft
 - **Benutzerverwaltung** — Mehrbenutzerbetrieb mit Rechtesystem und
-  CoDeSys-kompatiblem First-Login
+  First-Login-Workflow nach Industrie-Standard
 
 ---
 

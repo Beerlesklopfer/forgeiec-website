@@ -1,3 +1,13 @@
+{{- $lang := site.Language.Lang -}}
+{{- $tmLabel := "Trademark Notice" -}}
+{{- if eq $lang "de" -}}{{- $tmLabel = "Markenrechtshinweis" -}}
+{{- else if eq $lang "fr" -}}{{- $tmLabel = "Mentions sur les marques" -}}
+{{- else if eq $lang "es" -}}{{- $tmLabel = "Aviso de marcas registradas" -}}
+{{- else if eq $lang "zh" -}}{{- $tmLabel = "商标声明" -}}
+{{- else if eq $lang "ja" -}}{{- $tmLabel = "商標に関する注意事項" -}}
+{{- else if eq $lang "tr" -}}{{- $tmLabel = "Marka Bilgilendirmesi" -}}
+{{- else if eq $lang "ar" -}}{{- $tmLabel = "إشعار العلامات التجارية" -}}
+{{- end -}}
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
@@ -7,6 +17,7 @@
     <div class="footer-contact">
       <p><strong>blacksmith@forgeiec.io</strong></p>
       <p>&copy; {{ .Site.Title }} {{ now.Format "2006" }}</p>
+      <p class="footer-legal"><a href="{{ "markenrechtshinweis/" | relLangURL }}">{{ $tmLabel }}</a></p>
     </div>
   </div>
 </footer>

@@ -16,7 +16,7 @@ unified project structure.
 
 ## Industrial Bus Systems
 
-CoDeSys-compatible segment hierarchy with automatic device discovery.
+Familiar segment hierarchy from established IEC-61131-3 IDEs, with automatic device discovery.
 
 - **Modbus TCP** — Ethernet-based communication
 - **Modbus RTU** — Serial RS-485 connection

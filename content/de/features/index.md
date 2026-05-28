@@ -16,7 +16,7 @@ einheitliche Projektstruktur.
 
 ## Industrielle Bussysteme
 
-CoDeSys-kompatible Segment-Hierarchie mit automatischer Geraeteerkennung.
+Aus IEC-61131-3-IDEs gewohnte Segment-Hierarchie mit automatischer Geraeteerkennung.
 
 - **Modbus TCP** — Ethernet-basierte Kommunikation
 - **Modbus RTU** — Serielle RS-485 Anbindung

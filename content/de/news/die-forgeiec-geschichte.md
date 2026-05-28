@@ -18,9 +18,9 @@ Konfigurations-Oberflaeche in Python/Flask.
 
 OpenPLC hat einen klaren Wert: Sie koennen IEC 61131-3-Code
 (Strukturierter Text + die anderen vier Sprachen) auf normaler
-Linux-Hardware ausfuehren, ohne CoDeSys-Lizenz, ohne Hersteller-
-Bindung. Das war revolutionaer. Modbus-Master, GPIO, RaspberryPi-
-Support — alles drin.
+Linux-Hardware ausfuehren, ohne kommerzielle Editor-Lizenz, ohne
+Hersteller-Bindung. Das war revolutionaer. Modbus-Master, GPIO,
+RaspberryPi-Support — alles drin.
 
 Was OpenPLC nicht hat: einen ernsthaften **Editor**. Die Web-UI
 ist gut fuer kleine Projekte, aber bei industrieller Komplexitaet
@@ -119,7 +119,7 @@ Mit dem Datenmodell stabil koennen die big-ticket-Sprints kommen:
   Auth, Trust-Store, mTLS, Caretaker-Modell.
 
 Damit ist der **technische Sprung** komplett: ForgeIEC ist
-nicht mehr ein „besseres CoDeSys", sondern eine **eigene
+nicht mehr nur ein offener IEC-61131-3-Editor, sondern eine **eigene
 Plattform** mit Federation, KI-Integration und nachvollziehbaren
 Sicherheits-Schichten.
 

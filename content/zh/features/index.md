@@ -15,7 +15,7 @@ summary: "ForgeIEC 功能概览"
 
 ## 工业总线系统
 
-兼容 CoDeSys 的分段层次结构，自动设备发现。
+采用成熟 IEC 61131-3 IDE 中常见的分段层次结构，自动设备发现。
 
 - **Modbus TCP/RTU** — 以太网和 RS-485
 - **EtherCAT** — 实时以太网现场总线

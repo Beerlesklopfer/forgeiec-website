@@ -15,7 +15,7 @@ Un editor para todos los lenguajes — cambio transparente, variables compartida
 
 ## Sistemas de bus industriales
 
-Jerarquia de segmentos compatible con CoDeSys con descubrimiento automatico.
+Jerarquia de segmentos familiar de los IDEs IEC 61131-3 establecidos, con descubrimiento automatico.
 
 - **Modbus TCP/RTU** — Ethernet y RS-485
 - **EtherCAT** — Bus de campo en tiempo real

@@ -75,14 +75,16 @@ einzelnen Anbieter entzogen werden.
 ## Open Source in der Industrieautomation
 
 Die industrielle Automatisierung nach IEC 61131-3 ist seit Jahrzehnten eine
-Domaene proprietaerer Systeme. CoDeSys, Siemens TIA Portal, Rockwell Studio 5000 —
-leistungsfaehige Werkzeuge, aber mit hohen Lizenzkosten, Vendor-Lock-In und
-geschlossenen Oekosystemen.
+Domaene proprietaerer Systeme — leistungsfaehiger Hersteller-Werkzeuge mit
+hohen Lizenzkosten, herstellergebundenen Geraetekatalogen und geschlossenen
+Oekosystemen.
 
 ### Das Problem
 
-- **Lizenzkosten**: Ein CoDeSys-Arbeitsplatz kostet tausende Euro pro Jahr
-- **Vendor-Lock-In**: Ein Siemens-Programm laeuft nicht auf Beckhoff-Hardware
+- **Lizenzkosten**: Ein einzelner Engineering-Arbeitsplatz kostet typischerweise
+  mehrere tausend Euro pro Jahr
+- **Vendor-Lock-In**: Programme aus dem Werkzeug eines Herstellers laufen
+  meist nicht auf der Hardware eines anderen
 - **Geschlossene Formate**: Projektdateien sind proprietaer und nicht portabel
 - **Fehlende Transparenz**: Der Anwender kann den Compiler nicht pruefen
 - **Bildungsbarriere**: Studenten und Auszubildende koennen sich die Lizenzen

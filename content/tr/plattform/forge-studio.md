@@ -40,8 +40,8 @@ bir C derleyicisine ihtiyac duyar -- hedef sistemde IEC derleyicisi gerekmez.
 
 ## Endustriyel Veri Yolu Sistemleri
 
-CoDeSys tarzi saha veri yolu yapilandirmasi, segment hiyerarsisi ve otomatik
-cihaz kesfetme.
+Yerlesik IEC 61131-3 IDE'lerinden alisilmis segment hiyerarsisiyle saha
+veri yolu yapilandirmasi ve otomatik cihaz kesfetme.
 
 - **Modbus TCP** -- Ethernet iletisimi
 - **Modbus RTU** -- RS-485 seri baglanti
@@ -73,7 +73,7 @@ saklanir.
 
 - bcrypt sifreleme ile parola kimlik dogrulamasi
 - Oturumlar icin JWT jetonlari
-- CoDeSys tarzi ilk giris
+- Endustri standardina gore ilk giris
 - Role dayali erisim kontrolu
 
 ---

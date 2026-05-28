@@ -15,7 +15,7 @@ Un editeur pour tous les langages — commutation transparente, variables partag
 
 ## Bus de terrain industriels
 
-Hierarchie de segments compatible CoDeSys avec decouverte automatique.
+Hierarchie de segments familiere des IDE IEC 61131-3 etablis, avec decouverte automatique.
 
 - **Modbus TCP/RTU** — Ethernet et RS-485
 - **EtherCAT** — Bus temps reel

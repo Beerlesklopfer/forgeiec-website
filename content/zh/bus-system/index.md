@@ -5,8 +5,8 @@ summary: "Industrial communication with ForgeIEC"
 
 ## Hierarchical Bus System Management
 
-ForgeIEC organizes industrial communication in a CoDeSys-compatible
-segment hierarchy:
+ForgeIEC organizes industrial communication in a familiar segment
+hierarchy following industry conventions:
 
 ```
 Bus Systems

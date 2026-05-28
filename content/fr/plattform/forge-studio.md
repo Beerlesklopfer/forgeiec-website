@@ -42,8 +42,8 @@ requis sur le systeme cible.
 
 ## Systemes de bus industriels
 
-Configuration des bus de terrain dans le style CoDeSys avec hierarchie de
-segments et detection automatique des peripheriques.
+Configuration des bus de terrain dans une hierarchie de segments familiere
+des IDE IEC 61131-3 etablis, avec detection automatique des peripheriques.
 
 - **Modbus TCP** -- Communication Ethernet
 - **Modbus RTU** -- Connexion serie RS-485
@@ -75,7 +75,7 @@ rapide et une recherche performante.
 
 - Authentification par mot de passe avec chiffrement bcrypt
 - Tokens JWT pour les sessions
-- Premier login dans le style CoDeSys
+- Premier login selon le standard industriel
 - Controle d'acces base sur les roles
 
 ---

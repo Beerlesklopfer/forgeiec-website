@@ -1,7 +1,7 @@
 ---
 title: "Live diagnostics: monitor + oscilloscope for IEC 61131-3"
 date: 2026-05-10
-summary: "Live variable values, FB-member resolution, oscilloscope with trigger, CSV recording, measured jitter — commissioning tools at CoDeSys level"
+summary: "Live variable values, FB-member resolution, oscilloscope with trigger, CSV recording, measured jitter — commissioning tools at industry level"
 components: [studio, anvild]
 ---
 

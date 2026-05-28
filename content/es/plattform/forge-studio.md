@@ -42,8 +42,8 @@ en el sistema objetivo.
 
 ## Sistemas de bus industriales
 
-Configuracion de buses de campo al estilo CoDeSys con jerarquia de segmentos
-y deteccion automatica de dispositivos.
+Configuracion de buses de campo en una jerarquia de segmentos familiar
+de los IDEs IEC 61131-3 establecidos, con deteccion automatica de dispositivos.
 
 - **Modbus TCP** -- Comunicacion Ethernet
 - **Modbus RTU** -- Conexion serie RS-485
@@ -75,7 +75,7 @@ rapido y busqueda eficiente.
 
 - Autenticacion por contrasena con cifrado bcrypt
 - Tokens JWT para sesiones
-- Primer inicio de sesion al estilo CoDeSys
+- Primer inicio de sesion segun estandar industrial
 - Control de acceso basado en roles
 
 ---

@@ -16,7 +16,7 @@ birleşik proje yapısı.
 
 ## Endüstriyel Bus Sistemleri
 
-Otomatik cihaz keşfi ile CoDeSys uyumlu segment hiyerarşisi.
+Yerleşik IEC 61131-3 IDE'lerinden alışılmış segment hiyerarşisi, otomatik cihaz keşfi ile.
 
 - **Modbus TCP** — Ethernet tabanlı iletişim
 - **Modbus RTU** — Seri RS-485 bağlantısı

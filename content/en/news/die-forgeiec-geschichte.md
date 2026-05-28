@@ -17,9 +17,9 @@ C/C++ with a web-based configuration UI in Python/Flask.
 
 OpenPLC offers a clear value: you can run IEC 61131-3 code
 (Structured Text + the four other languages) on regular Linux
-hardware, without a CoDeSys licence, without vendor lock-in.
-That was revolutionary. Modbus master, GPIO, Raspberry Pi
-support — all there.
+hardware, without a commercial editor licence, without vendor
+lock-in. That was revolutionary. Modbus master, GPIO, Raspberry
+Pi support — all there.
 
 What OpenPLC does not have: a serious **editor**. The web UI is
 fine for small projects, but at industrial complexity it falls
@@ -115,9 +115,9 @@ With the data model stable, the big-ticket sprints can land:
 - **12 May** — **MCP-4a + 4b phases A–D**: remote bind, bearer
   auth, trust store, mTLS, Caretaker model.
 
-That completes the **technical leap**: ForgeIEC is no longer a
-"better CoDeSys" but a **platform of its own** with federation,
-AI integration and verifiable security layers.
+That completes the **technical leap**: ForgeIEC is no longer just
+an open IEC 61131-3 editor but a **platform of its own** with
+federation, AI integration and verifiable security layers.
 
 ---
 

@@ -45,8 +45,8 @@ Communication between `anvild` and the bridges uses Anvil Technology
 
 ## Segment Hierarchy
 
-Tongs organizes industrial communication in a CoDeSys-compatible
-hierarchy:
+Tongs organizes industrial communication in a hierarchy familiar
+from established PLC tools:
 
 ```
 Bus Systems

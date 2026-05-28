@@ -46,8 +46,8 @@ This means:
 
 ## Bus System Integration
 
-The CoDeSys-compatible bus system management is integrated directly into
-the development environment:
+Bus system management following established IEC-61131-3 IDE conventions
+is integrated directly into the development environment:
 
 - Segment hierarchy with devices and variables in the project tree
 - Automatic IEC address assignment without collisions
@@ -68,7 +68,7 @@ Forge Studio communicates via gRPC with the Anvil runtime environment:
 - **Live debugging** — watch and force variables in real time
   while the PLC is running
 - **User management** — multi-user operation with permission system and
-  CoDeSys-compatible first login
+  industry-standard first-login workflow
 
 ---
 
