@@ -8,7 +8,7 @@ keywords: ["PI", "E", "SQRT2", "SQRT1_2", "LN2", "LN10", "GOLDEN_RATIO", "EULER_
 llm_signals:
   - error_pattern: "PI is not defined"
     where: "matiec"
-    diagnosis: "IEC 61131-3 does not define PI as a built-in constant. The standard ships the *functions* (SIN/COS/LN/EXP) but expects you to provide your own constant. CODESYS Standard.lib, OSCAT, Beckhoff Tc2_Math and ForgeIEC each define it themselves, and the names + scopes differ."
+    diagnosis: "IEC 61131-3 does not define PI as a built-in constant. The standard ships the *functions* (SIN/COS/LN/EXP) but expects you to provide your own constant. Different vendor libraries and open-source IEC extensions each define it themselves, and the names + scopes differ."
     fix_strategy: "Either declare PI in a VAR_GLOBAL CONSTANT block in your project, or load the vendor library that provides it. Don't assume PI exists implicitly."
     fix_example: |
       (* portable — works on any IEC compiler *)
@@ -30,7 +30,7 @@ llm_signals:
 
       (* better — bit-exact pre-computed *)
       rPhase := rPhase + TWO_PI * rFreq * rDt;
-  - error_pattern: "Identical formula gives different result vs CODESYS"
+  - error_pattern: "Identical formula gives different result vs another vendor"
     where: "cross-vendor"
     diagnosis: "Your code uses an implicit PI but the LREAL bit pattern your vendor stores for PI differs from the one another vendor uses. Tiny precision differences propagate through SIN/COS calls and produce different output."
     fix_strategy: "Stop relying on implicit PI. Declare it yourself with the EXACT decimal you want — both targets then converge to the same nearest-LREAL representation."
@@ -43,13 +43,13 @@ IEC 61131-3 §2.5.1 specifies mathematical *functions* — `SIN`, `COS`, `SQRT`,
 that needs `π` or `e` therefore depends on whichever vendor library defines
 them, and the libraries disagree:
 
-| Vendor                 | Where PI comes from   | Notes                                      |
-|------------------------|------------------------|--------------------------------------------|
-| CODESYS Standard.lib   | global `VAR CONSTANT`  | Just `PI` (LREAL). No `E`, no `SQRT2`.    |
-| CODESYS OSCAT          | OSCAT_BASIC library    | `PI`, `EULER`, `GOLDEN_RATIO`, more.       |
-| Beckhoff Tc2_Math      | global constants       | Named `LREAL_PI` and `REAL_PI`.            |
-| matiec / Beremiz       | nothing                | You must declare them yourself.            |
-| **ForgeIEC**           | `forgeiec_math` lib    | All ten constants below; opt-in.           |
+| Source                              | Where PI comes from   | Notes                                      |
+|-------------------------------------|------------------------|--------------------------------------------|
+| Common commercial PLC stdlib        | global `VAR CONSTANT`  | Just `PI` (LREAL). No `E`, no `SQRT2`.    |
+| Open-source IEC extension library   | dedicated `_BASIC` lib | `PI`, `EULER`, `GOLDEN_RATIO`, more.       |
+| Vendor-specific math library        | global constants       | Often two-precision form, e.g. `LREAL_PI` / `REAL_PI`. |
+| Bare IEC 61131-3 (matiec / Beremiz) | nothing                | You must declare them yourself.            |
+| **ForgeIEC**                        | `forgeiec_math` lib    | All ten constants below; opt-in.           |
 
 ST code that should run on more than one of these must be **explicit** about
 where its constants come from.
@@ -146,8 +146,9 @@ pre-computed form.
 
 ## Portability notes
 
-- If your code must also compile under CODESYS Standard.lib, declare
-  the constants you actually use in a `VAR_GLOBAL CONSTANT` block.
+- If your code must also compile under a different vendor's standard
+  library, declare the constants you actually use explicitly in a
+  `VAR_GLOBAL CONSTANT` block.
   Both compilers will then converge on the same LREAL bit pattern (the
   decimal `3.141592653589793` has a unique nearest-LREAL).
 - If your code must also compile under matiec, never write `2.0 * PI`

@@ -55,8 +55,9 @@ wollen. Er unterbricht **sofort**:
 - Alle wartenden Tool-Schritte
 - Eventuell offene Confirm-Rueckfragen werden auf „cancel" gesetzt
 
-Der Knopf ist genauso ausgelegt wie die klassische Industrie-Pilz-
-Taster: gross, rot, leicht zu treffen, immer erreichbar.
+Der Knopf ist genauso ausgelegt wie der klassische rote
+Not-Aus-Pilzkopf-Taster nach DIN EN ISO 13850: gross, rot,
+leicht zu treffen, immer erreichbar.
 
 ---
 

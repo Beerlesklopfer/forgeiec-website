@@ -121,7 +121,7 @@ Beispiel:
 
 Plus konfigurierbare **Tool-Schritte-Grenze** (default 10 Schritte
 pro User-Anfrage) und ein Geschwindigkeits-Modus mit
-**Notbremse-Knopf** (roter Industrie-Pilz-Taster) wenn die KI
+**Notbremse-Knopf** (roter Not-Aus-Knopf mit klassischer Pilzkopf-Form) wenn die KI
 trotzdem aus dem Ruder laeuft.
 
 ---

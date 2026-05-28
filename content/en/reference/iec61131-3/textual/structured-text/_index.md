@@ -35,7 +35,7 @@ strings, character strings, typed literals (`BYTE#1`, `INT#42`,
 
 Arithmetic, bitwise, comparison and assignment operators with
 precedence and operand-type rules. matiec is strict on type
-matching — most ported code from C / Codesys / B&R needs
+matching — most ported code from C or other vendor toolchains needs
 explicit conversion calls inserted.
 
 - [Arithmetic](operators/arithmetic/) — `+`, `-`, `*`, `/`, `MOD`, `**`.

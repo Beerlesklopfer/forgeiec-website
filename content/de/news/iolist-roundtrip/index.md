@@ -49,8 +49,8 @@ mit Headern, die direkt aus den EPLAN-SPS-Eigenschaften (TechTipp
 Die Web-Recherche (EPLAN Help-Portal, TechTipp Plattform 2027)
 zeigt es klar: **EPLAN P8 hat KEIN universelles IO-Listen-CSV-
 Format**. Der primaere Datenaustausch laeuft ueber **AutomationML
-AR APC** (XML); CSV-Schemata variieren je SPS-Hersteller (STEP 7
-Classic, TIA Portal, TwinCAT3, RSLogixArchitect, PLCNext) und je
+AR APC** (XML); CSV-Schemata variieren je SPS-Hersteller (verschiedene Hersteller-Toolchains
+haben jeweils eigene Export-Plug-ins) und je
 Export-Plug-in. Was es gibt, sind die **EPLAN-SPS-Eigenschaften**
 mit eindeutigen Property-IDs — wir nutzen die als Spaltennamen,
 schaffen aber explizit **keine "EPLAN-CSV"-Marke**, sondern ein

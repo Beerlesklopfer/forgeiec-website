@@ -100,8 +100,8 @@ Confirmation required:
 
 Auch in den Geschwindigkeits-Modus (auto-confirm) muss bewusst
 eingeschaltet werden — mit einer extra Sicherheits-Warnung. In
-Produktion: aus lassen. Plus Notbremse als roter Industrie-Pilz-
-Taster.
+Produktion: aus lassen. Plus Notbremse als roter Not-Aus-Pilzkopf-
+Taster nach DIN EN ISO 13850.
 
 ---
 

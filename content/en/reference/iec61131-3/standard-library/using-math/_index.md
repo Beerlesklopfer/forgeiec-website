@@ -13,7 +13,7 @@ Before you write the first line that needs `PI` or `E`, decide:
 | Situation                                                              | What to do                          |
 |-------------------------------------------------------------------------|-------------------------------------|
 | Code only ever runs in ForgeIEC                                         | Load `forgeiec_math` and use `PI`, `E`, … |
-| Code must also build under CODESYS / Beckhoff / matiec                  | Declare `PI` yourself in a `VAR_GLOBAL CONSTANT` |
+| Code must also build under another vendor’s standard library or matiec                  | Declare `PI` yourself in a `VAR_GLOBAL CONSTANT` |
 | You're not sure yet                                                     | Declare yourself — 1 line, zero coupling |
 
 Don't mix the two ways in the same project — pick one and stick with it.
@@ -30,7 +30,7 @@ END_VAR
 ```
 
 Use one decimal that fits LREAL precision (15–17 digits).  Both your
-compiler and CODESYS/Beckhoff will convert to the same nearest-LREAL
+compiler and another vendor’s implementation will convert to the same nearest-LREAL
 bit pattern, so your numerics are identical.
 
 ### Using `forgeiec_math` (ForgeIEC-only)

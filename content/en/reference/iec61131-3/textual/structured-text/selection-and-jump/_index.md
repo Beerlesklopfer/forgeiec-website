@@ -12,7 +12,7 @@ llm_signals:
     fix_strategy: "Replace with RETURN if the goal is to leave the POU. Or restructure the surrounding code so the EXIT is genuinely inside a loop."
   - error_pattern: "GOTO is not standard ST"
     where: "matiec"
-    diagnosis: "matiec does NOT implement GOTO. It was deprecated in IEC 61131-3 second edition and removed from the third edition. Some legacy code from CoDeSys / Step 7 uses it."
+    diagnosis: "matiec does NOT implement GOTO. It was deprecated in IEC 61131-3 second edition and removed from the third edition. Some legacy code from older vendor toolchains still uses it."
     fix_strategy: "Restructure with IF/CASE/loop. Most uses of GOTO map to either EXIT (escape from a loop) or to a step-machine implemented via CASE-of-iStep."
 ---
 
@@ -109,8 +109,8 @@ build does.
 ## GOTO — NOT in IEC 61131-3 third edition
 
 The third edition (2013) **removed** the labelled `GOTO`
-statement. matiec does not accept it. Code from CoDeSys or
-Step 7 that uses GOTO needs restructuring on import.
+statement. matiec does not accept it. Legacy code from older
+vendor toolchains that uses GOTO needs restructuring on import.
 
 Common GOTO → standard-ST migrations:
 

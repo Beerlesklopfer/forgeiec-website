@@ -180,5 +180,5 @@ for `PROGRAM`.
 
 All three POU kinds implemented per the standard. The "no VAR
 in FUNCTION" rule is matiec's most common rejection point for
-code ported from CoDeSys (which sometimes accepts state in
+code ported from other vendor toolchains (which sometimes accept state in
 functions).

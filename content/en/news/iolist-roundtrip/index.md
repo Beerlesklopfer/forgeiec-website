@@ -49,8 +49,8 @@ headers derived directly from EPLAN's PLC properties (TechTipp
 Web research (EPLAN help portal, TechTipp Plattform 2027) makes
 it clear: **EPLAN P8 has NO universal IO-list CSV format**. The
 primary data exchange runs over **AutomationML AR APC** (XML);
-CSV schemas vary per PLC vendor (STEP 7 Classic, TIA Portal,
-TwinCAT3, RSLogixArchitect, PLCNext) and per export plug-in.
+CSV schemas vary per PLC vendor (different vendor toolchains,
+each with its own export plug-in) and per release version.
 What does exist are EPLAN's **PLC properties** with unique
 property IDs — we use those as column names but explicitly do
 NOT brand this as an "EPLAN CSV". It's a **ForgeIEC IO-list

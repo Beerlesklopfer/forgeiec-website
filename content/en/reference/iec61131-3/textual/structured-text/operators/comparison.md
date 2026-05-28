@@ -93,6 +93,6 @@ IEC 61131-3 third edition (2013), clause **6.6.1** Table 55.
 
 matiec implements all six comparison operators correctly. The
 type-strictness rule is enforced more aggressively than some
-other dialects (Codesys, B&R Automation Studio) — code
+other vendor dialects — code
 ported from those tools often needs explicit conversions
 inserted at every comparison site.
