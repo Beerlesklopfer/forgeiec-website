@@ -66,10 +66,10 @@ sudo apt update
 
 ```bash
 # المحرر (محطة العمل)
-sudo apt install forgeiec
+sudo apt install forgeiec-studio
 
 # الخادم (PLC الهدف)
-sudo apt install anvild
+sudo apt install forgeiec-anvil-server
 ```
 
 تتبع التحديثات دورة `apt update && apt upgrade` العادية —

@@ -100,10 +100,10 @@ Manager installiert werden:
 
 ```bash
 # Editor (Workstation)
-sudo apt install forgeiec
+sudo apt install forgeiec-studio
 
 # Daemon (Ziel-SPS)
-sudo apt install anvild
+sudo apt install forgeiec-anvil-server
 ```
 
 Updates folgen automatisch dem normalen `apt update && apt upgrade`

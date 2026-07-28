@@ -207,7 +207,7 @@ einer Produktiv-Workstation: Editor mit Override-Version
 installiert. Sicherheits-Risiko. Korrektur:
 
 ```bash
-sudo apt install --reinstall forgeiec
+sudo apt install --reinstall forgeiec-studio
 sudo systemctl restart anvild
 ```
 

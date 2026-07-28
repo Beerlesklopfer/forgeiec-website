@@ -93,10 +93,10 @@ Then install any ForgeIEC package using the standard package manager:
 
 ```bash
 # Editor (Workstation)
-sudo apt install forgeiec
+sudo apt install forgeiec-studio
 
 # Daemon (Target PLC)
-sudo apt install anvild
+sudo apt install forgeiec-anvil-server
 ```
 
 Updates follow the normal `apt update && apt upgrade` lifecycle —

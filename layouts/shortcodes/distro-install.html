@@ -14,14 +14,21 @@
   <p>
     <label for="distro-install-select"><strong>{{ $t.label }}</strong></label>
     <select id="distro-install-select" onchange="forgeiecDistroSwap(this.value)">
-      <option value="bookworm">Debian 12 (bookworm)</option>
-      <option value="trixie" selected>Debian 13 (trixie)</option>
-      <option value="jammy">Ubuntu 22.04 (jammy)</option>
-      <option value="noble">Ubuntu 24.04 (noble)</option>
+      <optgroup label="Debian / Ubuntu (apt)">
+        <option value="bullseye">Debian 11 (bullseye)</option>
+        <option value="bookworm">Debian 12 (bookworm)</option>
+        <option value="trixie" selected>Debian 13 (trixie)</option>
+        <option value="jammy">Ubuntu 22.04 (jammy)</option>
+        <option value="noble">Ubuntu 24.04 (noble)</option>
+      </optgroup>
+      <optgroup label="Enterprise Linux / Fedora (dnf)">
+        <option value="el9">AlmaLinux 9 / RHEL 9 / Rocky 9</option>
+        <option value="fedora-44">Fedora 44</option>
+      </optgroup>
     </select>
     <em style="margin-left:.5em;color:#666;">{{ $t.hint }}</em>
   </p>
-<pre><code id="forgeiec-install-snippet"># Signier-Schluessel hinterlegen
+<pre id="forgeiec-install-apt"><code># Signier-Schluessel hinterlegen
 sudo install -d -m 0755 /etc/apt/keyrings
 curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
   | sudo tee /etc/apt/keyrings/forgeiec.gpg &gt;/dev/null
@@ -32,12 +39,41 @@ https://apt.forgeiec.io/<span id="forgeiec-suite">trixie</span> <span id="forgei
   | sudo tee /etc/apt/sources.list.d/forgeiec.list
 
 sudo apt update</code></pre>
+<pre id="forgeiec-install-dnf" hidden><code># Signier-Schluessel importieren
+sudo rpm --import https://rpm.forgeiec.io/forgeiec-rpm.asc
+
+# Repository eintragen
+sudo tee /etc/yum.repos.d/forgeiec.repo &gt;/dev/null &lt;&lt;'EOF'
+[forgeiec]
+name=ForgeIEC
+baseurl=https://rpm.forgeiec.io/<span id="forgeiec-rpmdist">el9</span>/$basearch/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://rpm.forgeiec.io/forgeiec-rpm.asc
+EOF
+
+sudo dnf makecache</code></pre>
 </div>
 <script>
-function forgeiecDistroSwap(suite) {
-  var a = document.getElementById('forgeiec-suite');
-  var b = document.getElementById('forgeiec-suite2');
-  if (a) a.textContent = suite;
-  if (b) b.textContent = suite;
+// Der RPM-Schluessel ist ein ANDERER als der apt-Schluessel: RHEL 9 liefert
+// rpm 4.16, dessen interner PGP-Parser kein ed25519 verifizieren kann. Der
+// apt-Schluessel ist ed25519, der RPM-Schluessel RSA-4096.
+var forgeiecRpmDists = { 'el9': 1, 'fedora-44': 1 };
+function forgeiecDistroSwap(value) {
+  var apt = document.getElementById('forgeiec-install-apt');
+  var dnf = document.getElementById('forgeiec-install-dnf');
+  var isRpm = Object.prototype.hasOwnProperty.call(forgeiecRpmDists, value);
+  if (apt) apt.hidden = isRpm;
+  if (dnf) dnf.hidden = !isRpm;
+  if (isRpm) {
+    var d = document.getElementById('forgeiec-rpmdist');
+    if (d) d.textContent = value;
+  } else {
+    var a = document.getElementById('forgeiec-suite');
+    var b = document.getElementById('forgeiec-suite2');
+    if (a) a.textContent = value;
+    if (b) b.textContent = value;
+  }
 }
 </script>

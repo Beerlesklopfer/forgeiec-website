@@ -207,7 +207,7 @@ productive workstation: Studio is installed with the override
 version. Security risk. Fix:
 
 ```bash
-sudo apt install --reinstall forgeiec
+sudo apt install --reinstall forgeiec-studio
 sudo systemctl restart anvild
 ```
 

@@ -68,10 +68,10 @@ sudo apt update
 
 ```bash
 # エディタ（ワークステーション）
-sudo apt install forgeiec
+sudo apt install forgeiec-studio
 
 # デーモン（ターゲットPLC）
-sudo apt install anvild
+sudo apt install forgeiec-anvil-server
 ```
 
 更新は通常の`apt update && apt upgrade`ライフサイクルに従います——

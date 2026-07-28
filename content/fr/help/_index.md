@@ -69,10 +69,10 @@ de paquets standard :
 
 ```bash
 # Editeur (poste de travail)
-sudo apt install forgeiec
+sudo apt install forgeiec-studio
 
 # Daemon (automate cible)
-sudo apt install anvild
+sudo apt install forgeiec-anvil-server
 ```
 
 Les mises a jour suivent le cycle normal `apt update && apt upgrade` —

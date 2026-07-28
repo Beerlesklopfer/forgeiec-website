@@ -79,7 +79,7 @@ OpenPLC fork became an independent platform.
 
 ```bash
 # Editor + runtime from the signed APT repository
-sudo apt install forgeiec anvild
+sudo apt install forgeiec-studio forgeiec-anvil-server
 ```
 
 Complete installation guide: [Download](/download/).

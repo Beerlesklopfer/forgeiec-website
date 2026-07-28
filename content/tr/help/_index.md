@@ -68,10 +68,10 @@ kurabilirsiniz:
 
 ```bash
 # Editoer (is istasyonu)
-sudo apt install forgeiec
+sudo apt install forgeiec-studio
 
 # Daemon (hedef PLC)
-sudo apt install anvild
+sudo apt install forgeiec-anvil-server
 ```
 
 Guecellemeler normal `apt update && apt upgrade` yaşam doengusuenue

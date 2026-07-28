@@ -79,7 +79,7 @@ wie aus einem 2018er OpenPLC-Fork eine eigenstaendige Plattform wurde.
 
 ```bash
 # Editor + Runtime aus signiertem APT-Repository
-sudo apt install forgeiec anvild
+sudo apt install forgeiec-studio forgeiec-anvil-server
 ```
 
 Komplette Installations-Anleitung: [Download](/download/).
