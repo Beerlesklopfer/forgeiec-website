@@ -15,7 +15,10 @@ Zukunft der Automatisierung aktiv mitzugestalten.
 ## Unsere Source-Repositories
 
 Die Code-Basis liegt im **Forgejo** unter `git.forgeiec.io`.
-Bewerber koennen sie vor einer Bewerbung durchsehen.
+Die Repositories sind nicht oeffentlich einsehbar. Zugriff — lesend
+wie schreibend — laeuft ueber SSH: Sie schicken uns Ihren
+SSH-Public-Key, wir schalten ihn frei. Danach koennen Sie den Code
+vor einer Bewerbung durchsehen.
 
 | Repository | Was drin ist | Forgejo |
 |---|---|---|
@@ -191,6 +194,7 @@ Sie moechten Partner werden? Schreiben Sie uns mit:
 - Links zu Ihren Open-Source-Beitraegen
 - Ihre Motivation fuer eine Partnerschaft
 - Konkreter Bereich, in dem Sie beitragen moechten
+- Ihren SSH-Public-Key, wenn Sie den Code vorab durchsehen wollen
 
 ---
 

@@ -45,16 +45,14 @@ Diagnose-Werkzeuge, Hersteller-Daten-Integration.
 
 ## 2026-03-01: Der grosse Umbau beginnt
 
-Mit dem Commit
-[`82780f7`](https://git.forgeiec.io/ForgeIEC/forgeiec-studio/commit/82780f7)
+Mit dem Commit `82780f7`
 am **1. Maerz 2026** kommt der naechste Schritt: ein
 **eigenstaendiger C++/Qt6-Editor** wird ins Repository
 eingefuehrt. Native Desktop-Anwendung, kein Browser, kein
 Python-Flask im UI-Pfad mehr.
 
 Gleichen Tag der naechste Brocken: **gRPC-Client im Editor**, plus
-das Backend wird zu `forgeiecd` umbenannt (commit
-[`93ed9c9`](https://git.forgeiec.io/ForgeIEC/forgeiec-studio/commit/93ed9c9)).
+das Backend wird zu `forgeiecd` umbenannt (commit `93ed9c9`).
 Die alte HTTP-Webserver-Bedienung weicht einer modernen
 **gRPC-Pipeline** mit Streaming + Protokoll-Versionierung.
 
@@ -128,9 +126,8 @@ Sicherheits-Schichten.
 ## Heute, 13. Mai 2026: Wo wir stehen
 
 Die Plattform ist aufgeteilt in vier Subsysteme, jedes mit eigener
-Spec im
-[`documentation/architecture/`](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)-
-Verzeichnis:
+Spec im `documentation/architecture/`-Verzeichnis des
+Source-Trees:
 
 | Subsystem | Spec | Rolle |
 |---|---|---|
@@ -191,7 +188,8 @@ pruefen koennen.
 - [Architektur + Sicherheit](/help/ai/architecture/) — die
   Tiefe-Tour fuer Auditoren
 - [Download](/download/) — alle Komponenten via APT-Repository
-- [Source-Tree](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
+- Source-Tree: `ForgeIEC/forgeiec-studio` im Forgejo — Zugriff
+  nach Freischaltung Ihres SSH-Public-Keys
 - Frueheste Wurzeln:
   [Thiago Alves' OpenPLC v3](https://www.openplcproject.com/) — wo
   alles anfing

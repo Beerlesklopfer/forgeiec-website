@@ -44,15 +44,13 @@ manufacturer-data integration.
 
 ## 2026-03-01: The big rebuild begins
 
-With commit
-[`82780f7`](https://git.forgeiec.io/ForgeIEC/forgeiec-studio/commit/82780f7)
+With commit `82780f7`
 on **1 March 2026** the next step arrives: a **standalone C++/Qt6
 editor** is introduced into the repository. Native desktop
 application, no browser, no Python/Flask in the UI path anymore.
 
 Same day, the next chunk: **gRPC client in the editor**, plus the
-backend is renamed to `forgeiecd` (commit
-[`93ed9c9`](https://git.forgeiec.io/ForgeIEC/forgeiec-studio/commit/93ed9c9)).
+backend is renamed to `forgeiecd` (commit `93ed9c9`).
 The old HTTP web server gives way to a modern **gRPC pipeline**
 with streaming + protocol versioning.
 
@@ -124,9 +122,8 @@ federation, AI integration and verifiable security layers.
 ## Today, 13 May 2026: where we stand
 
 The platform is split into subsystems, each with its own spec
-in the
-[`documentation/architecture/`](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
-directory:
+in the `documentation/architecture/` directory of the source
+tree:
 
 | Subsystem | Spec | Role |
 |---|---|---|
@@ -186,7 +183,8 @@ verifiable in the source.
 - [Architecture + Security](/help/ai/architecture/) — the depth
   tour for auditors
 - [Download](/download/) — all components via the APT repository
-- [Source tree](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
+- Source tree: `ForgeIEC/forgeiec-studio` in the Forgejo — access
+  once your SSH public key is enabled
 - Earliest roots:
   [Thiago Alves' OpenPLC v3](https://www.openplcproject.com/) —
   where it all began

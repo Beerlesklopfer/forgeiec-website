@@ -113,7 +113,7 @@ provisioning.
 
 | Repository | Link |
 |---|---|
-| **Forgejo** | [git.forgeiec.io/ForgeIEC/screen](https://git.forgeiec.io/ForgeIEC/screen) |
+| **Forgejo** | `ssh://git@git.forgeiec.io/ForgeIEC/screen.git` (not publicly browsable — access once your SSH public key is enabled) |
 | **APT** | `sudo apt install forgeiec-screen-wayland` |
 
 ---

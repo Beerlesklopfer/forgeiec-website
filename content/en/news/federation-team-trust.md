@@ -158,8 +158,8 @@ runtime. Current state in the
 - [MCP for application engineers](/help/mcp/programmers/)
 - [MCP for IT + operations](/help/mcp/it/)
 
-Source repositories:
-[Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio).
+Source repository: `ForgeIEC/forgeiec-studio` in the Forgejo at
+`git.forgeiec.io` — access once your SSH public key is enabled.
 
 ---
 

@@ -141,8 +141,10 @@ workstations see their machines.
 
 ## Open source + standing on predecessors
 
-All components are **AGPL-3.0**. Source visible in the Forgejo at
-[git.forgeiec.io](https://git.forgeiec.io/). Build reproducible via
+All components are **AGPL-3.0**. The source lives in the Forgejo at
+`git.forgeiec.io` — the repositories are not publicly browsable;
+access goes through SSH once your SSH public key has been enabled
+(see [Partner](/en/partner/)). Build reproducible via
 CPack — signed APT repository for Debian/Ubuntu, signed RPM
 repository for AlmaLinux 9 and Fedora 44.
 

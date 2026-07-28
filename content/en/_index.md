@@ -61,8 +61,8 @@ systems. ForgeIEC makes the value accessible to everyone.
 
 Three promises we keep:
 
-- **Open source (AGPL-3.0)** — source inspectable, build
-  reproducible, updates via signed APT repository
+- **Open source (AGPL-3.0)** — source available on request (SSH key
+  enablement), build reproducible, updates via signed APT repository
 - **Vendor-neutral** — manufacturer data integrated as FDDs, no
   proprietary device format, migration-capable
 - **Industrial safety** — 4-layer defence for force settings,

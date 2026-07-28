@@ -115,7 +115,7 @@ auslesbar fuer Backup / Provisioning.
 
 | Repository | Link |
 |---|---|
-| **Forgejo** | [git.forgeiec.io/ForgeIEC/screen](https://git.forgeiec.io/ForgeIEC/screen) |
+| **Forgejo** | `ssh://git@git.forgeiec.io/ForgeIEC/screen.git` (nicht oeffentlich einsehbar — Zugriff nach Freischaltung Ihres SSH-Public-Keys) |
 | **APT** | `sudo apt install forgeiec-screen-wayland` |
 
 ---

@@ -371,7 +371,8 @@ Prozess. Wenn Sie eine Aktion brauchen die noch fehlt:
 - **Schreiben Sie ein Issue** mit Use-Case
 - **Fork + Pull-Request** ist explizit willkommen — die Tool-
   Registrierung ist in `editor/src/runtime/FMcpServer.cpp` an einer
-  Stelle pro Familie (z.B. `registerProjectExtraTools`)
+  Stelle pro Familie (z.B. `registerProjectExtraTools`). Fuer den
+  Repo-Zugriff schicken Sie uns vorher Ihren SSH-Public-Key
 - **Alternativ ein zweiter MCP-Server** der ForgeIEC's MCP nutzt
   und seine eigene Tool-Liste anbietet (Aggregator-Pattern)
 
@@ -384,5 +385,6 @@ Sprint.
 
 - [IT-Sicht](/help/mcp/it/) — wie deployen + monitoren
 - [Architektur-Tiefe](/help/ai/architecture/) — Spec-Details + Standards
-- [Source-Repository](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
+- Source-Repository: `ForgeIEC/forgeiec-studio` im Forgejo —
+  Zugriff nach Freischaltung Ihres SSH-Public-Keys
 - [Zurueck zur MCP-Uebersicht](/help/mcp/)

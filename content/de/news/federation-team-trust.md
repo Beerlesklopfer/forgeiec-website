@@ -164,8 +164,9 @@ einfach die PLC-Runtime neu. Aktueller Stand im
 - [MCP fuer Applikationsingenieure](/help/mcp/programmers/)
 - [MCP fuer IT + Betrieb](/help/mcp/it/)
 
-Source-Repository:
-[Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio).
+Source-Repository: `ForgeIEC/forgeiec-studio` im Forgejo unter
+`git.forgeiec.io` — Zugriff nach Freischaltung Ihres
+SSH-Public-Keys.
 
 ---
 

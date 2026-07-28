@@ -15,7 +15,9 @@ actively shape the future of automation.
 ## Our source repositories
 
 The code base lives in the **Forgejo** at `git.forgeiec.io`.
-Applicants can review it before applying.
+The repositories are not publicly browsable. Access — read and
+write alike — goes through SSH: send us your SSH public key and we
+enable it. You can then review the code before applying.
 
 | Repository | What's inside | Forgejo |
 |---|---|---|
@@ -189,6 +191,7 @@ You would like to become a partner? Write to us with:
 - Links to your open-source contributions
 - Your motivation for a partnership
 - Specific area where you would like to contribute
+- Your SSH public key, if you want to review the code beforehand
 
 ---
 

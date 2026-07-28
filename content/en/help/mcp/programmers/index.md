@@ -369,7 +369,8 @@ process. If you need an action that's missing:
 - **Open an issue** with the use case
 - **Fork + pull request** is explicitly welcome — tool registration
   is in `editor/src/runtime/FMcpServer.cpp` in one place per family
-  (e.g. `registerProjectExtraTools`)
+  (e.g. `registerProjectExtraTools`). For repo access, send us your
+  SSH public key first
 - **Alternatively a second MCP server** that uses ForgeIEC's MCP
   and exposes its own tool list (aggregator pattern)
 
@@ -381,5 +382,6 @@ A real plug-in API is on the roadmap but has no sprint yet.
 
 - [IT view](/help/mcp/it/) — how to deploy + monitor
 - [Architecture deep-dive](/help/ai/architecture/) — spec details + standards
-- [Source repository](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
+- Source repository: `ForgeIEC/forgeiec-studio` in the Forgejo —
+  access once your SSH public key is enabled
 - [Back to the MCP overview](/help/mcp/)

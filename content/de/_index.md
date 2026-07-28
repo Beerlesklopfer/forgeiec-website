@@ -63,8 +63,9 @@ fuer jeden zugaenglich.
 
 Drei Versprechen die wir halten:
 
-- **Open Source (AGPL-3.0)** — Source einsehbar, Build reproduzierbar,
-  Updates ueber signiertes APT-Repository
+- **Open Source (AGPL-3.0)** — Source auf Anfrage einsehbar (SSH-Key-
+  Freischaltung), Build reproduzierbar, Updates ueber signiertes
+  APT-Repository
 - **Vendor-neutral** — Hersteller-Daten als FDDs eingebunden, kein
   proprietaeres Geraete-Format, Migration-faehig
 - **Industrie-Sicherheit** — 4-Layer-Defense fuer Force-Setzungen,

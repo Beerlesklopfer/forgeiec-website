@@ -343,7 +343,9 @@ Vollstaendige Liste: `project_open_backlog.md` (intern).
 
 ## Lizenz
 
-AGPL-3.0-or-later fuer alle Subprojekte. Source einsehbar.
+AGPL-3.0-or-later fuer alle Subprojekte. Source auf Anfrage
+einsehbar — die Forgejo-Repositories sind nicht oeffentlich
+zugaenglich, Zugriff nach Freischaltung des SSH-Public-Keys.
 Reproducible-Build via CPack — signiertes APT-Repository fuer
 Debian/Ubuntu, signiertes RPM-Repository fuer AlmaLinux 9 und
 Fedora 44.

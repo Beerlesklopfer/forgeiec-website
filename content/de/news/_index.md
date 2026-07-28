@@ -15,8 +15,9 @@ in chronologischer Reihenfolge (neuestes zuerst). Format:
 
 Wer auf dem Laufenden bleiben will: APT-Update wie gewohnt
 (`sudo apt update && sudo apt upgrade`); oder Source-Tree
-verfolgen ueber
-[Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio).
+verfolgen im Forgejo unter `ForgeIEC/forgeiec-studio` — dafuer
+brauchen Sie einen freigeschalteten SSH-Public-Key, die
+Repositories sind nicht oeffentlich einsehbar.
 
 ---
 

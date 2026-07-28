@@ -100,17 +100,16 @@ Workstations.
 ## Direkt-Downloads (Release-Tarballs)
 
 Wer kein APT-Repository nutzen kann oder mag — z.B. fuer Air-Gap-
-Workstations — kann die einzelnen Releases direkt von der
-Repository-Seite herunterladen:
+Workstations — kann die einzelnen Releases aus dem Forgejo
+beziehen. **Die Repositories sind nicht oeffentlich einsehbar**:
+Schicken Sie uns Ihren SSH-Public-Key an blacksmith@forgeiec.io,
+wir schalten ihn frei. Danach stehen Ihnen diese Repositories
+offen:
 
-- **ForgeIEC-Studio-Quellcode**:
-  [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
-- **anvild + Bridges**:
-  [Forgejo](https://git.forgeiec.io/ForgeIEC/anvil)
-- **bellowsd**:
-  [Forgejo](https://git.forgeiec.io/ForgeIEC/bellows)
-- **Webseiten-Quellcode**:
-  [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-website)
+- **ForgeIEC-Studio-Quellcode**: `ForgeIEC/forgeiec-studio`
+- **anvild + Bridges**: `ForgeIEC/anvil`
+- **bellowsd**: `ForgeIEC/bellows`
+- **Webseiten-Quellcode**: `ForgeIEC/forgeiec-website`
 
 Pro Release sind signierte `.deb`-Pakete + Source-Tarballs am
 Forgejo-Release-Tag angehaengt.
@@ -120,8 +119,9 @@ Forgejo-Release-Tag angehaengt.
 ## Bauen aus dem Quellcode
 
 ```bash
-# Repository klonen (mit Submodules)
-git clone --recurse-submodules https://git.forgeiec.io/ForgeIEC/forgeiec-studio.git
+# Repository klonen (mit Submodules) — nur ueber SSH, nach
+# Freischaltung Ihres SSH-Public-Keys
+git clone --recurse-submodules ssh://git@git.forgeiec.io/ForgeIEC/forgeiec-studio.git
 cd forgeiec-studio
 
 # Studio + alle Daemons bauen
