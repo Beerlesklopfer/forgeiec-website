@@ -228,10 +228,10 @@ Detail-Schema:
 | Protokoll | `protocol`-Wert | Medium | Bridge | Status |
 |---|---|---|---|---|
 | Modbus TCP | `modbustcp` | Ethernet | `tongs-modbustcp` | produktiv |
-| Modbus RTU | `modbusrtu` | RS-485 | `tongs-modbusrtu` | in Arbeit |
+| Modbus RTU | `modbusrtu` | RS-485 | `tongs-modbusrtu` | geplant |
 | EtherCAT | `ethercat` | Ethernet (DC) | `tongs-ethercat` | in Arbeit |
-| Profibus DP | `profibus` | Feldbus | `tongs-profibus` | geplant |
-| EtherNet/IP | `ethernetip` | Ethernet (CIP) | `tongs-ethernetip` | geplant |
+| Profibus DP | `profibus` | Feldbus | `tongs-profibus` | in Arbeit |
+| EtherNet/IP | `ethernetip` | Ethernet (CIP) | `tongs-ethernetip` | in Arbeit |
 
 ---
 

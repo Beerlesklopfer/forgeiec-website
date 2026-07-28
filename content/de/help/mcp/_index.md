@@ -77,13 +77,13 @@ bestehende IT-Landschaft. Inhalte:
 ```mermaid
 flowchart TB
     Client[LLM-Client<br/>Claude / GPT / Custom]
-    Studio["ForgeIEC Studio (MCP-Server)<br/>• Tools (≈80)<br/>• Confirmation State Machine<br/>• Audit-Log<br/>• Trust-Store"]
+    Studio["ForgeIEC Studio (MCP-Server)<br/>• Tools (≈180)<br/>• Confirmation State Machine<br/>• Audit-Log<br/>• Trust-Store"]
     anvild[anvild<br/>PLC-Runtime]
     daemons[bellowsd / tongs-*<br/>HMI + Feldbus]
 
     Client <-->|HTTP+SSE / JSON-RPC| Studio
     Studio -->|gRPC| anvild
-    anvild -->|iceoryx2 SHM| daemons
+    anvild -->|Anvil SHM| daemons
 ```
 
 Der MCP-Server ist **in den ForgeIEC-Studio-Prozess eingebaut** —

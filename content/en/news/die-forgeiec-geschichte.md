@@ -125,7 +125,7 @@ federation, AI integration and verifiable security layers.
 
 The platform is split into subsystems, each with its own spec
 in the
-[`documentation/architecture/`](https://github.com/Beerlesklopfer/ForgeIEC-Studio/tree/development/documentation/architecture)
+[`documentation/architecture/`](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
 directory:
 
 | Subsystem | Spec | Role |
@@ -186,7 +186,7 @@ verifiable in the source.
 - [Architecture + Security](/help/ai/architecture/) — the depth
   tour for auditors
 - [Download](/download/) — all components via the APT repository
-- [Source tree](https://github.com/Beerlesklopfer/ForgeIEC-Studio)
+- [Source tree](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
 - Earliest roots:
   [Thiago Alves' OpenPLC v3](https://www.openplcproject.com/) —
   where it all began

@@ -149,7 +149,7 @@ curl -sk -X POST https://forgeiec-ws.local:7531/mcp/v1/rpc \
   }'
 ```
 
-Die Antwort enthaelt ca. 80 Tools, jedes mit:
+Die Antwort enthaelt ca. 180 Tools, jedes mit:
 
 ```json
 {
@@ -384,5 +384,5 @@ Sprint.
 
 - [IT-Sicht](/help/mcp/it/) — wie deployen + monitoren
 - [Architektur-Tiefe](/help/ai/architecture/) — Spec-Details + Standards
-- [Source-Repository](https://github.com/joergbernau/ForgeIEC)
+- [Source-Repository](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
 - [Zurueck zur MCP-Uebersicht](/help/mcp/)

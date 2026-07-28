@@ -21,12 +21,12 @@ title: "ForgeIEC"
 | **Alle 5 IEC-61131-3-Sprachen** — ST, IL, FBD, LD, SFC | produktiv |
 | **Multi-Task-Scheduler** — echte pthread-Parallelitaet | produktiv |
 | **Live-Diagnose** — Monitor + Oszilloskop mit Trigger, CSV-Aufnahme | produktiv |
-| **Bus-System** — Modbus-TCP produktiv, EtherCAT in Arbeit, Profibus + EthernetIP geplant | gemischt |
+| **Bus-System** — Modbus-TCP produktiv, EtherCAT + Profibus + EtherNet/IP in Arbeit | gemischt |
 | **Hersteller-Daten als First-Class** — FDDs mit eingebetteten PDFs + Diagnose-Bit-Aufloesung | produktiv |
-| **KI-Helfer eingebaut** — ~80 typisierte MCP-Werkzeuge, 5 Personas | produktiv |
+| **KI-Helfer eingebaut** — ~180 typisierte MCP-Werkzeuge, 5 Personas | produktiv |
 | **Team-Federation** — mehrere Workstations mit Caretaker-CA | MVP produktiv |
 | **HMI / OPC-UA-Anbindung** ueber bellowsd | produktiv |
-| **Reproduzierbare Builds** — signiertes APT-Repository, AGPL-3.0 | produktiv |
+| **Reproduzierbare Builds** — signierte APT- + RPM-Repositories, AGPL-3.0 | produktiv |
 
 ---
 
@@ -43,7 +43,8 @@ keine Cloud-Pflicht.
 
 Rust/Tokio-Daemon auf der Ziel-SPS. Multi-Task, deterministische
 Scan-Cycles, gRPC-Anbindung zum Studio, Subprocess-Manager fuer
-die Bus-Bridges, Auto-Cleanup beim Startup.
+die Bus-Bridges, automatischer Watchdog-Neustart abgestuerzter
+Bridges.
 
 ### 🔧 tongs-* — Bus-Bridges
 

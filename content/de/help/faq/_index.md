@@ -24,7 +24,7 @@ Issue.
 Eine BOOL- oder INT-Variable behaelt einen Wert (TRUE/FALSE oder einen
 Zahlenwert) der nicht zur Programm-Logik passt. `monitor.snapshot`
 meldet `forced=false`, der ST-Code schreibt offensichtlich einen anderen
-Wert — und trotzdem bleibt der Wert "kleben". Ursache: stale iceoryx2
+Wert — und trotzdem bleibt der Wert "kleben". Ursache: stale Anvil-
 Shared-Memory.
 
 ---

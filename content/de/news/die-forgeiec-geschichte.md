@@ -129,7 +129,7 @@ Sicherheits-Schichten.
 
 Die Plattform ist aufgeteilt in vier Subsysteme, jedes mit eigener
 Spec im
-[`documentation/architecture/`](https://github.com/Beerlesklopfer/ForgeIEC-Studio/tree/development/documentation/architecture)-
+[`documentation/architecture/`](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)-
 Verzeichnis:
 
 | Subsystem | Spec | Rolle |
@@ -191,7 +191,7 @@ pruefen koennen.
 - [Architektur + Sicherheit](/help/ai/architecture/) — die
   Tiefe-Tour fuer Auditoren
 - [Download](/download/) — alle Komponenten via APT-Repository
-- [Source-Tree](https://github.com/Beerlesklopfer/ForgeIEC-Studio)
+- [Source-Tree](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
 - Frueheste Wurzeln:
   [Thiago Alves' OpenPLC v3](https://www.openplcproject.com/) — wo
   alles anfing

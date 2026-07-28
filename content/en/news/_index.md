@@ -15,8 +15,7 @@ chronological order (newest first). Format:
 
 To stay current: APT update as usual
 (`sudo apt update && sudo apt upgrade`); or follow the source tree
-via [GitHub](https://github.com/Beerlesklopfer/ForgeIEC-Studio) /
-[Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio).
+via [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio).
 
 ---
 

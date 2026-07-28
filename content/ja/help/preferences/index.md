@@ -43,7 +43,7 @@ ST コードエディタおよびその他のすべてのテキスト入力フ�
 | **Host**         | PLC ホスト名または IP。デフォルト `localhost`。 |
 | **Port**         | anvild の gRPC ポート。デフォルト `50051`。 |
 | **User**         | トークン認証用のユーザー名。 |
-| **Anvil Debug**  | IPC 診断レベル (`Off`, `Errors only`, `Verbose`)。anvild ログに追加の統計を加えます — 本番環境での Iceoryx トピックドリフトの追跡に有用です。 |
+| **Anvil Debug**  | IPC 診断レベル (`Off`, `Errors only`, `Verbose`)。anvild ログに追加の統計を加えます — 本番環境での Anvil トピックドリフトの追跡に有用です。 |
 
 加えて: **Auto-Connect on start** はエディタ起動時に最後に成功裏に接続
 された anvild に自動的に接続します。専用のエンジニアリングラップトップ

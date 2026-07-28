@@ -14,17 +14,15 @@ Zukunft der Automatisierung aktiv mitzugestalten.
 
 ## Unsere Source-Repositories
 
-ForgeIEC ist auf **GitHub** und **Forgejo** (`git.forgeiec.io`)
-gespiegelt. Bewerber koennen die Code-Basis vor einer Bewerbung
-durchsehen, und die `★`-Zahl auf GitHub gibt einen ersten Eindruck
-von der Community-Aufmerksamkeit.
+Die Code-Basis liegt im **Forgejo** unter `git.forgeiec.io`.
+Bewerber koennen sie vor einer Bewerbung durchsehen.
 
-| Repository | Was drin ist | GitHub | Forgejo |
-|---|---|---|---|
-| **ForgeIEC-Studio** | C++/Qt6 IDE + Bus-Konfig + MCP-Server | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/ForgeIEC-Studio?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/ForgeIEC-Studio) | [git.forgeiec.io/ForgeIEC/forgeiec-studio](https://git.forgeiec.io/ForgeIEC/forgeiec-studio) |
-| **anvil-server** | Rust/Tokio PLC-Runtime + Bridge-Subprozess-Manager | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/anvil-server?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/anvil-server) | [git.forgeiec.io/ForgeIEC/anvil](https://git.forgeiec.io/ForgeIEC/anvil) |
-| **bellows-server** | OPC-UA/HMI-Gateway | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/bellows-server?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/bellows-server) | [git.forgeiec.io/ForgeIEC/bellows](https://git.forgeiec.io/ForgeIEC/bellows) |
-| **forgeiec-website** | Hugo-Site die Sie gerade lesen | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/forgeiec-website?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/forgeiec-website) | [git.forgeiec.io/ForgeIEC/forgeiec-website](https://git.forgeiec.io/ForgeIEC/forgeiec-website) |
+| Repository | Was drin ist | Forgejo |
+|---|---|---|
+| **forgeiec-studio** | C++/Qt6 IDE + Bus-Konfig + MCP-Server | [git.forgeiec.io/ForgeIEC/forgeiec-studio](https://git.forgeiec.io/ForgeIEC/forgeiec-studio) |
+| **anvil** | Rust/Tokio PLC-Runtime + Bridge-Subprozess-Manager | [git.forgeiec.io/ForgeIEC/anvil](https://git.forgeiec.io/ForgeIEC/anvil) |
+| **bellows** | OPC-UA/HMI-Gateway | [git.forgeiec.io/ForgeIEC/bellows](https://git.forgeiec.io/ForgeIEC/bellows) |
+| **forgeiec-website** | Hugo-Site die Sie gerade lesen | [git.forgeiec.io/ForgeIEC/forgeiec-website](https://git.forgeiec.io/ForgeIEC/forgeiec-website) |
 
 Jedes Repo enthaelt ein eigenes `documentation/architecture/`-
 Unterverzeichnis bzw. eine Spec-Sammlung — wer dort tiefer

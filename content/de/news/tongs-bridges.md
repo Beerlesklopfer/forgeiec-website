@@ -127,7 +127,7 @@ IEC-Zugriff im ST-Code mit klarem 5-Level-Namespace:
 
 ## Plus: Anvil ABI-Probe — kein Versions-Roulette mehr
 
-Tongs-Bridges sprechen mit anvild ueber **iceoryx2-Shared-Memory**.
+Tongs-Bridges sprechen mit anvild ueber **Anvil-Shared-Memory**.
 Bei Versionsmischung zwischen anvild + Bridge konnten frueher
 **still inkonsistente Daten** auftreten — Bridge schreibt eine
 ABI-Variante A, anvild liest Variante B, niemand bemerkt es.

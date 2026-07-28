@@ -196,9 +196,10 @@ Anbindung an Prometheus/Grafana: per Cron-Skript `server_info` +
 
 ### Variable bleibt "haengen"
 
-Siehe [FAQ](/help/faq/stuck-variables-shm/). Stale iceoryx2-SHM.
-Fix: `systemctl restart anvild` (seit v0.1.0+ Auto-Cleanup beim
-Startup).
+Siehe [FAQ](/help/faq/stuck-variables-shm/). Stale Anvil-SHM.
+Fix: PLC-Runtime neu starten (`Stop` + `Start` bzw.
+`Build → Compile and Upload`) — Anvil raeumt die Segmente toter
+Nodes dabei selbst auf. SHM-Dateien nicht von Hand loeschen.
 
 ### Build-Mismatch
 

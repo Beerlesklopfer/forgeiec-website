@@ -111,12 +111,17 @@ Lebenszyklus — es ist keine manuelle `.deb`-Datei noetig.
 
 ### Unterstuetzte Plattformen
 
-| Komponente | Architekturen | Debian-Codenamen |
+| Komponente | Architekturen | Debian-/Ubuntu-Suites |
 |------------|---------------|------------------|
-| Editor     | amd64, arm64  | bookworm, trixie |
-| Daemon     | amd64, arm64  | bookworm, trixie |
-| Bridges    | amd64, arm64  | bookworm, trixie |
-| Hearth     | amd64, arm64  | bookworm, trixie |
+| Editor     | amd64, arm64  | bookworm, trixie, noble |
+| Daemon     | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Bridges    | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Hearth     | amd64, arm64  | bookworm, trixie, jammy, noble |
+
+Das Bedien-Panel (`forgeiec-screen-*`) gibt es zusaetzlich als RPM
+fuer AlmaLinux 9 und Fedora 44 unter `rpm.forgeiec.io`. Die
+vollstaendige Paket-/Plattform-Matrix steht auf der
+[Download-Seite](/download/).
 
 ### Kontakt
 

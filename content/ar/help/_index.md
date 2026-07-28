@@ -77,12 +77,12 @@ sudo apt install forgeiec-anvil-server
 
 ### المنصات المدعومة
 
-| المكون  | المعماريات    | إصدارات Debian   |
+| المكون  | المعماريات    | إصدارات Debian/Ubuntu |
 |---------|---------------|------------------|
-| المحرر  | amd64, arm64  | bookworm, trixie |
-| الخادم  | amd64, arm64  | bookworm, trixie |
-| Bridges | amd64, arm64  | bookworm, trixie |
-| Hearth  | amd64, arm64  | bookworm, trixie |
+| المحرر  | amd64, arm64  | bookworm, trixie, noble |
+| الخادم  | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Bridges | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Hearth  | amd64, arm64  | bookworm, trixie, jammy, noble |
 
 ### اتصل بنا
 

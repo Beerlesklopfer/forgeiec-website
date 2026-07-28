@@ -148,7 +148,7 @@ curl -sk -X POST https://forgeiec-ws.local:7531/mcp/v1/rpc \
   }'
 ```
 
-The response contains ~80 tools, each with:
+The response contains ~180 tools, each with:
 
 ```json
 {
@@ -381,5 +381,5 @@ A real plug-in API is on the roadmap but has no sprint yet.
 
 - [IT view](/help/mcp/it/) — how to deploy + monitor
 - [Architecture deep-dive](/help/ai/architecture/) — spec details + standards
-- [Source repository](https://github.com/joergbernau/ForgeIEC)
+- [Source repository](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
 - [Back to the MCP overview](/help/mcp/)

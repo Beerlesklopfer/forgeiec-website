@@ -19,7 +19,7 @@ zero-copy IPC and gRPC.
 | {{< comp-icon "bellowsd" >}} | **bellowsd**        | OPC-UA / HMI gateway | in progress |
 | {{< comp-icon "tongs" >}}    | **tongs-***         | Fieldbus bridges (Modbus / EtherCAT / Profibus / EthernetIP) | mixed |
 | {{< comp-icon "screen" >}}   | **Screen**          | Industrial kiosk browser (HMI panel) | productive |
-| {{< comp-icon "hearth" >}}   | **Hearth**          | IIoT subscriber / SCADA layer | planned |
+| {{< comp-icon "hearth" >}}   | **Hearth**          | IIoT subscriber / SCADA layer | in progress |
 | {{< comp-icon "ledger" >}}   | **Ledger**          | Order management / MES integration | planned |
 
 ---
@@ -43,12 +43,12 @@ to anvild, MCP server for LLM tooling.
 
 Rust/Tokio daemon on the target PLC. Multi-task scheduler with
 pthread parallelism, deterministic scan cycles, gRPC listener for
-Studio, subprocess manager for the bus bridges. Stale-SHM auto-
-cleanup at startup.
+Studio, subprocess manager for the bus bridges.
 
 Built in is **Anvil** — the zero-copy shared-memory layer between
-runtime, bridges and external subscribers. Based on iceoryx2 with
-ABI probe against type-hash drift. Wire protocol for status, I/O,
+runtime, bridges and external subscribers. ABI probe against
+type-hash drift; segments of crashed peers are reaped automatically,
+without touching live peers. Wire protocol for status, I/O,
 diagnostics.
 
 [Learn more](anvil/)
@@ -69,8 +69,8 @@ Modbus coils. Gated individually per variable.
 
 One daemon per protocol. Uniform fault model
 (`OK/WARN/FAULT/OFFLINE/UNKNOWN`), FDD-driven diagnostic bits,
-Anvil zero-copy IPC to the runtime. Modbus TCP productive,
-EtherCAT in progress, Profibus + EtherNet/IP planned.
+Anvil zero-copy IPC to the runtime. Modbus TCP productive;
+EtherCAT, Profibus and EtherNet/IP in progress.
 
 [Learn more](tongs/)
 
@@ -90,10 +90,12 @@ backend for NetworkManager / timedated / localed.
 
 {{< components "hearth" >}}
 
-IIoT subscriber + SCADA layer. Plans: subscribe to Anvil topics,
+IIoT subscriber + SCADA layer. Subscribes to Anvil topics — anvild
+writes the matching descriptor to
+`/etc/forgeiec/hearth/descriptor.toml`. Available as the
+`hearth-server` package in the APT repository. Planned:
 time-series-DB integration (InfluxDB, TimescaleDB), Mosquitto MQTT
-bridge, alarm management, Grafana dashboards. Planned —
-architecture spec in preparation.
+bridge, alarm management, Grafana dashboards.
 
 [Learn more](hearth/)
 
@@ -139,9 +141,10 @@ workstations see their machines.
 
 ## Open source + standing on predecessors
 
-All components are **AGPL-3.0**. Source visible on GitHub +
-Forgejo. Build reproducible via Debian CPack + signed APT
-repository.
+All components are **AGPL-3.0**. Source visible in the Forgejo at
+[git.forgeiec.io](https://git.forgeiec.io/). Build reproducible via
+CPack — signed APT repository for Debian/Ubuntu, signed RPM
+repository for AlmaLinux 9 and Fedora 44.
 
 ForgeIEC stands on the shoulders of **OpenPLC** (Thiago Alves,
 since 2018) and keeps file compatibility with OpenPLC projects.

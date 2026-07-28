@@ -298,7 +298,7 @@ gRPC-Proto: `anvil-server/proto/plc_service.proto`.
 
 ### IPC
 
-iceoryx2 (Rust + C-FFI). ABI-Probe gegen Type-Hash-Drift:
+Anvil (Rust + C-FFI). ABI-Probe gegen Type-Hash-Drift:
 `anvil-shared@50cb29f`. Drei Defense-Layer gegen mismatched
 Versionen.
 
@@ -344,7 +344,9 @@ Vollstaendige Liste: `project_open_backlog.md` (intern).
 ## Lizenz
 
 AGPL-3.0-or-later fuer alle Subprojekte. Source einsehbar.
-Reproducible-Build via Debian CPack + signed APT-Repository.
+Reproducible-Build via CPack — signiertes APT-Repository fuer
+Debian/Ubuntu, signiertes RPM-Repository fuer AlmaLinux 9 und
+Fedora 44.
 
 ---
 

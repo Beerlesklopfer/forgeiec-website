@@ -197,8 +197,10 @@ Prometheus/Grafana integration: cron-poll `server_info` +
 
 ### Variable "sticks"
 
-See [FAQ](/help/faq/stuck-variables-shm/). Stale iceoryx2 SHM. Fix:
-`systemctl restart anvild` (since v0.1.0+ auto cleanup at startup).
+See [FAQ](/help/faq/stuck-variables-shm/). Stale Anvil SHM. Fix:
+restart the PLC runtime (`Stop` + `Start` or
+`Build → Compile and Upload`) — Anvil reaps the segments of dead
+nodes by itself. Do not delete SHM files by hand.
 
 ### Build mismatch
 

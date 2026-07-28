@@ -43,7 +43,7 @@ Bir **anvild** daemon'una bağlantı ve IPC tanılaması.
 | **Host**         | PLC hostname'i veya IP'si. Varsayılan `localhost`. |
 | **Port**         | anvild gRPC portu. Varsayılan `50051`. |
 | **User**         | Token kimlik doğrulaması için kullanıcı adı. |
-| **Anvil Debug**  | IPC tanılama düzeyi (`Off`, `Errors only`, `Verbose`). anvild loguna ek istatistikler ekler — üretimde Iceoryx topic kaymasını izlemek için yararlıdır. |
+| **Anvil Debug**  | IPC tanılama düzeyi (`Off`, `Errors only`, `Verbose`). anvild loguna ek istatistikler ekler — üretimde Anvil topic kaymasını izlemek için yararlıdır. |
 
 Ayrıca: **Auto-Connect on start**, düzenleyici başlangıcında son
 başarılı şekilde bağlanılan anvild'e otomatik olarak bağlanır — özel

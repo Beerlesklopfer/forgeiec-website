@@ -20,7 +20,7 @@ gRPC.
 | {{< comp-icon "bellowsd" >}} | **bellowsd**        | OPC-UA / HMI-Gateway | in Arbeit |
 | {{< comp-icon "tongs" >}}    | **tongs-***         | Feldbus-Bridges (Modbus / EtherCAT / Profibus / EthernetIP) | gemischt |
 | {{< comp-icon "screen" >}}   | **Screen**          | Industrieller Kiosk-Browser (Bedienpanel) | produktiv |
-| {{< comp-icon "hearth" >}}   | **Hearth**          | IIoT-Subscriber / SCADA-Schicht | in Planung |
+| {{< comp-icon "hearth" >}}   | **Hearth**          | IIoT-Subscriber / SCADA-Schicht | in Arbeit |
 | {{< comp-icon "ledger" >}}   | **Ledger**          | Auftragsverwaltung / MES-Integration | in Planung |
 
 ---
@@ -44,12 +44,12 @@ gRPC-Anbindung an anvild, MCP-Server fuer LLM-Tooling.
 
 Rust/Tokio-Daemon auf der Ziel-SPS. Multi-Task-Scheduler mit
 pthread-Parallelitaet, deterministische Scan-Cycles, gRPC-Listener
-fuer das Studio, Subprozess-Manager fuer die Bus-Bridges. Stale-SHM-
-Auto-Cleanup beim Start.
+fuer das Studio, Subprozess-Manager fuer die Bus-Bridges.
 
 Eingebaut ist **Anvil** — die Zero-Copy-Shared-Memory-Schicht
-zwischen Runtime, Bridges und externen Subscribern. Basiert auf
-iceoryx2 mit ABI-Probe gegen Type-Hash-Drift. Wire-Protokoll fuer
+zwischen Runtime, Bridges und externen Subscribern. ABI-Probe gegen
+Type-Hash-Drift; Segmente abgestuerzter Peers werden automatisch
+zurueckgeholt, ohne lebende Peers anzutasten. Wire-Protokoll fuer
 Status, I/O, Diagnostik.
 
 [Mehr erfahren](anvil/)
@@ -70,8 +70,8 @@ Modbus-Coils. Pro Variable einzeln gegated.
 
 Pro Protokoll ein eigener Daemon. Einheitliches Fault-Modell
 (`OK/WARN/FAULT/OFFLINE/UNKNOWN`), FDD-getriebene Diagnose-Bits,
-Anvil-Zero-Copy-IPC zur Runtime. Modbus-TCP produktiv, EtherCAT in
-Arbeit, Profibus + EtherNet/IP geplant.
+Anvil-Zero-Copy-IPC zur Runtime. Modbus-TCP produktiv; EtherCAT,
+Profibus und EtherNet/IP in Arbeit.
 
 [Mehr erfahren](tongs/)
 
@@ -92,10 +92,12 @@ localed.
 
 {{< components "hearth" >}}
 
-IIoT-Subscriber + SCADA-Schicht. Plant: Subscribe von Anvil-Topics,
+IIoT-Subscriber + SCADA-Schicht. Subscribet Anvil-Topics — anvild
+legt den passenden Descriptor dafuer unter
+`/etc/forgeiec/hearth/descriptor.toml` ab. Als Paket
+`hearth-server` im APT-Repository verfuegbar. Geplant:
 Time-Series-DB-Anbindung (InfluxDB, TimescaleDB), Mosquitto-MQTT-
-Bridge, Alarm-Management, Grafana-Dashboards. In Planung —
-Architektur-Spec in Vorbereitung.
+Bridge, Alarm-Management, Grafana-Dashboards.
 
 [Mehr erfahren](hearth/)
 
@@ -142,9 +144,11 @@ verbunden werden — mehrere Workstations sehen ihre Anlagen.
 
 ## Open Source + Aufbauend auf Vorgaengern
 
-Alle Komponenten sind **AGPL-3.0**. Source einsehbar auf GitHub +
-Forgejo. Build reproduzierbar ueber Debian-CPack + signiertes
-APT-Repository.
+Alle Komponenten sind **AGPL-3.0**. Source einsehbar im Forgejo
+unter [git.forgeiec.io](https://git.forgeiec.io/). Build
+reproduzierbar ueber CPack — signiertes APT-Repository fuer
+Debian/Ubuntu, signiertes RPM-Repository fuer AlmaLinux 9 und
+Fedora 44.
 
 ForgeIEC steht auf den Schultern von **OpenPLC** (Thiago Alves,
 seit 2018) und behaelt Datei-Kompatibilitaet zu OpenPLC-Projekten.

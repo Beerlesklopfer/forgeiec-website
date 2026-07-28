@@ -21,12 +21,12 @@ title: "ForgeIEC"
 | **All 5 IEC 61131-3 languages** — ST, IL, FBD, LD, SFC | productive |
 | **Multi-task scheduler** — real pthread parallelism | productive |
 | **Live diagnostics** — monitor + oscilloscope with trigger, CSV recording | productive |
-| **Bus system** — Modbus TCP productive, EtherCAT in progress, Profibus + EtherNet/IP planned | mixed |
+| **Bus system** — Modbus TCP productive, EtherCAT + Profibus + EtherNet/IP in progress | mixed |
 | **Manufacturer data as first-class** — FDDs with embedded PDFs + diagnostic-bit resolution | productive |
-| **AI assistant built-in** — ~80 typed MCP tools, 5 personas | productive |
+| **AI assistant built-in** — ~180 typed MCP tools, 5 personas | productive |
 | **Team federation** — multiple workstations with Caretaker CA | MVP productive |
 | **HMI / OPC-UA bridge** via bellowsd | productive |
-| **Reproducible builds** — signed APT repository, AGPL-3.0 | productive |
+| **Reproducible builds** — signed APT + RPM repositories, AGPL-3.0 | productive |
 
 ---
 
@@ -43,7 +43,7 @@ No browser UI, no cloud dependency.
 
 Rust/Tokio daemon on the target PLC. Multi-task, deterministic
 scan cycles, gRPC connection to Studio, subprocess manager for
-bus bridges, auto-cleanup on startup.
+bus bridges, automatic watchdog restart of crashed bridges.
 
 ### 🔧 tongs-* — bus bridges
 

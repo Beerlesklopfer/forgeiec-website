@@ -22,7 +22,7 @@ write to blacksmith@forgeiec.io or open an issue.
 A BOOL or INT variable holds a value (TRUE/FALSE or a numeric value)
 that does not match the program logic. `monitor.snapshot` reports
 `forced=false`, the ST code clearly writes a different value — and
-yet the value stays "glued". Cause: stale iceoryx2 shared memory.
+yet the value stays "glued". Cause: stale Anvil shared memory.
 
 ---
 

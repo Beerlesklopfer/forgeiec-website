@@ -104,18 +104,16 @@ Workstations — kann die einzelnen Releases direkt von der
 Repository-Seite herunterladen:
 
 - **ForgeIEC-Studio-Quellcode**:
-  [GitHub](https://github.com/Beerlesklopfer/ForgeIEC-Studio) /
   [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
 - **anvild + Bridges**:
   [Forgejo](https://git.forgeiec.io/ForgeIEC/anvil)
 - **bellowsd**:
   [Forgejo](https://git.forgeiec.io/ForgeIEC/bellows)
 - **Webseiten-Quellcode**:
-  [GitHub](https://github.com/Beerlesklopfer/forgeiec-website) /
   [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-website)
 
 Pro Release sind signierte `.deb`-Pakete + Source-Tarballs am
-GitHub/Forgejo-Release-Tag angehaengt.
+Forgejo-Release-Tag angehaengt.
 
 ---
 
@@ -123,8 +121,8 @@ GitHub/Forgejo-Release-Tag angehaengt.
 
 ```bash
 # Repository klonen (mit Submodules)
-git clone --recurse-submodules https://github.com/Beerlesklopfer/ForgeIEC-Studio.git
-cd ForgeIEC-Studio
+git clone --recurse-submodules https://git.forgeiec.io/ForgeIEC/forgeiec-studio.git
+cd forgeiec-studio
 
 # Studio + alle Daemons bauen
 cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j$(nproc)

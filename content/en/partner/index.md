@@ -14,17 +14,15 @@ actively shape the future of automation.
 
 ## Our source repositories
 
-ForgeIEC is mirrored on **GitHub** and **Forgejo**
-(`git.forgeiec.io`). Applicants can review the code base before
-applying, and the `★` count on GitHub gives a first impression of
-the community attention.
+The code base lives in the **Forgejo** at `git.forgeiec.io`.
+Applicants can review it before applying.
 
-| Repository | What's inside | GitHub | Forgejo |
-|---|---|---|---|
-| **ForgeIEC-Studio** | C++/Qt6 IDE + bus config + MCP server | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/ForgeIEC-Studio?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/ForgeIEC-Studio) | [git.forgeiec.io/ForgeIEC/forgeiec-studio](https://git.forgeiec.io/ForgeIEC/forgeiec-studio) |
-| **anvil-server** | Rust/Tokio PLC runtime + bridge subprocess manager | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/anvil-server?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/anvil-server) | [git.forgeiec.io/ForgeIEC/anvil](https://git.forgeiec.io/ForgeIEC/anvil) |
-| **bellows-server** | OPC-UA / HMI gateway | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/bellows-server?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/bellows-server) | [git.forgeiec.io/ForgeIEC/bellows](https://git.forgeiec.io/ForgeIEC/bellows) |
-| **forgeiec-website** | Hugo site you're reading right now | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/forgeiec-website?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/forgeiec-website) | [git.forgeiec.io/ForgeIEC/forgeiec-website](https://git.forgeiec.io/ForgeIEC/forgeiec-website) |
+| Repository | What's inside | Forgejo |
+|---|---|---|
+| **forgeiec-studio** | C++/Qt6 IDE + bus config + MCP server | [git.forgeiec.io/ForgeIEC/forgeiec-studio](https://git.forgeiec.io/ForgeIEC/forgeiec-studio) |
+| **anvil** | Rust/Tokio PLC runtime + bridge subprocess manager | [git.forgeiec.io/ForgeIEC/anvil](https://git.forgeiec.io/ForgeIEC/anvil) |
+| **bellows** | OPC-UA / HMI gateway | [git.forgeiec.io/ForgeIEC/bellows](https://git.forgeiec.io/ForgeIEC/bellows) |
+| **forgeiec-website** | Hugo site you're reading right now | [git.forgeiec.io/ForgeIEC/forgeiec-website](https://git.forgeiec.io/ForgeIEC/forgeiec-website) |
 
 Each repo contains its own `documentation/architecture/`
 sub-directory or spec collection — anyone wanting to dive deeper

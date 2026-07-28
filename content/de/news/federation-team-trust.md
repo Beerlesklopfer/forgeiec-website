@@ -135,6 +135,15 @@ Daemon raeumt stale Shared-Memory-Segmente beim Start selbst auf.
 
 Hintergrund + Fix dokumentiert: [FAQ-Eintrag](/help/faq/stuck-variables-shm/).
 
+{{< callout type="note" title="Nachtrag" >}}
+Der pauschale Cleanup beim anvild-Start wurde inzwischen wieder
+entfernt: er hat die gemeinsamen Segmente **lebender** Peers
+(bellowsd, hearth, tongs-*) mitgerissen. Das Aufraeumen macht heute
+die Anvil-Schicht gezielt pro totem Node; als Anwender starten Sie
+einfach die PLC-Runtime neu. Aktueller Stand im
+[FAQ-Eintrag](/help/faq/stuck-variables-shm/).
+{{< /callout >}}
+
 ---
 
 ## Wo Sie das nutzen
@@ -156,7 +165,6 @@ Hintergrund + Fix dokumentiert: [FAQ-Eintrag](/help/faq/stuck-variables-shm/).
 - [MCP fuer IT + Betrieb](/help/mcp/it/)
 
 Source-Repository:
-[GitHub](https://github.com/Beerlesklopfer/ForgeIEC-Studio) /
 [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio).
 
 ---

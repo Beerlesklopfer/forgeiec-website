@@ -104,12 +104,16 @@ no manual `.deb` files needed.
 
 ### Supported Platforms
 
-| Component | Architectures | Debian Codenames |
+| Component | Architectures | Debian/Ubuntu suites |
 |-----------|---------------|------------------|
-| Editor    | amd64, arm64  | bookworm, trixie |
-| Daemon    | amd64, arm64  | bookworm, trixie |
-| Bridges   | amd64, arm64  | bookworm, trixie |
-| Hearth    | amd64, arm64  | bookworm, trixie |
+| Editor    | amd64, arm64  | bookworm, trixie, noble |
+| Daemon    | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Bridges   | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Hearth    | amd64, arm64  | bookworm, trixie, jammy, noble |
+
+The HMI panel (`forgeiec-screen-*`) is additionally available as an
+RPM for AlmaLinux 9 and Fedora 44 at `rpm.forgeiec.io`. The full
+package/platform matrix is on the [download page](/download/).
 
 ### Contact
 

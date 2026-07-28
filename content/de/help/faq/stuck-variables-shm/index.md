@@ -1,6 +1,6 @@
 ---
 title: "Variable bleibt 'haengen' trotz frischem Deploy"
-summary: "BOOL/INT-Wert haftet entgegen der Programm-Logik — Ursache ist meist stale iceoryx2 Shared-Memory"
+summary: "BOOL/INT-Wert haftet entgegen der Programm-Logik — Ursache ist meist stale Anvil-Shared-Memory"
 ---
 
 {{< callout type="symptom" title="Symptom" >}}
@@ -8,7 +8,7 @@ Eine BOOL- oder INT-Pool-Variable behaelt einen Wert (TRUE/FALSE oder
 Zahlenwert) der nicht zur Programm-Logik passt. `monitor.snapshot`
 meldet `forced=false`, der ST-Code schreibt offensichtlich einen
 anderen Wert — und trotzdem bleibt der Wert "kleben". **Ursache:
-stale iceoryx2 Shared-Memory.**
+stale Anvil-Shared-Memory.**
 {{< /callout >}}
 
 Klassisches Bild:
@@ -26,10 +26,10 @@ Sie restarten ForgeIEC Studio, anvild, bellowsd — der Wert bleibt.
 
 ## Ursache
 
-ForgeIEC nutzt **iceoryx2 Shared-Memory** (intern "Anvil" genannt) fuer
+ForgeIEC nutzt die **Anvil**-Zero-Copy-Shared-Memory-Schicht fuer
 die Datenuebertragung zwischen PLC-Runtime, Editor und HMI-Bruecken.
-Shared-Memory-Topics werden in `/tmp/iceoryx2/` und `/dev/shm/` als
-Dateien gehalten.
+Die Shared-Memory-Segmente und die gemeinsame Service-Registry
+liegen als Dateien unter `/dev/shm/` bzw. unterhalb von `/tmp/`.
 
 Wenn ein PLC-Prozess hart beendet wird (z.B. abgestuerzter Deploy,
 SIGKILL waehrend laufender Publishes, Watchdog-Reset), kann eine
@@ -49,30 +49,37 @@ auf demselben Topic cyclen normal.
 
 ---
 
-{{< callout type="solution" title="Loesung — anvild neu starten" >}}
-Seit anvild **v0.1.0+** raeumt der Daemon stale SHM-Segmente
-automatisch beim Startup auf. Ein Restart genuegt:
+{{< callout type="solution" title="Loesung — PLC-Runtime neu starten" >}}
+Anvil raeumt die Segmente **abgestuerzter Peers** selbst auf: bei
+jeder Neuerzeugung eines Anvil-Node werden die Ressourcen toter
+Nodes zurueckgeholt — ohne lebende Peers anzutasten. Ein Neustart
+der PLC-Runtime genuegt deshalb:
 
-```bash
-sudo systemctl restart anvild
-```
-
-Anschliessend in ForgeIEC Studio: `Build → Compile and Upload`. Die
-SHM-Topics werden frisch angelegt, ohne stale Payload.
+In ForgeIEC Studio ueber das Runtime-Menue `Stop` + `Start`, oder
+direkt `Build → Compile and Upload`. Die SHM-Topics werden dabei
+frisch angelegt, ohne stale Payload.
 {{< /callout >}}
 
 Nach dem naechsten Scan-Zyklus zeigt der Live-Monitor den korrekten,
 von Ihrer Programm-Logik berechneten Wert.
 
-{{< callout type="note" title="Aeltere anvild-Versionen" >}}
-Falls ein Restart nicht hilft (vor dem Auto-Cleanup), muessen die
-SHM-Dateien manuell entfernt werden:
+{{< callout type="warning" title="SHM-Dateien nicht von Hand loeschen" >}}
+Aeltere Anleitungen empfahlen ein `rm -rf` auf die SHM-Dateien als
+Notloesung. **Tun Sie das nicht im laufenden Betrieb.** Segmente und
+Service-Registry sind die **gemeinsame Ablage aller Anvil-Peers** —
+anvild, bellowsd, hearth und die tongs-Bridges haengen daran. Ein
+pauschaler Wipe reisst den lebenden Peers ihre Segmente weg; der
+Anvil-Bus bricht danach **still** auseinander, ohne Retry und ohne
+Selbstheilung.
 
-```bash
-sudo systemctl stop bellowsd anvild
-sudo rm -rf /tmp/iceoryx2/* /dev/shm/iox2_*
-sudo systemctl start anvild bellowsd
-```
+Aus genau diesem Grund raeumt anvild inzwischen weder beim Start
+noch beim PLC-Stop pauschal auf — das Aufraeumen macht die
+Anvil-Schicht gezielt pro totem Node.
+
+Bleibt im Restfall doch etwas haengen: alle Anvil-Peers gemeinsam
+stoppen (`bellowsd`, `hearth`, `tongs-*`, `anvild`) und danach wieder
+starten. Ohne lebende Nodes werden die Segmente toter Nodes sauber
+zurueckgeholt.
 {{< /callout >}}
 
 ---
@@ -105,11 +112,11 @@ Weitere (seltenere) Ausloeser ohne AI-Beteiligung:
 - Mischbetrieb verschiedener anvild-Versionen auf demselben Host
 
 Wenn Sie ein einmaliges Vorkommen erleben, ist der oben genannte
-SHM-Reset die einfachste Loesung. Bei wiederholtem Auftreten ohne
-AI-Aktivitaet bitte das Vorkommen melden (mit `journalctl -u anvild`
-und `journalctl -u bellowsd` der letzten Stunde) an
-blacksmith@forgeiec.io — die Auto-Cleanup-Logik beim anvild-Start ist
-ein laufender Backlog-Punkt.
+Runtime-Neustart die einfachste Loesung. Bei wiederholtem Auftreten
+ohne AI-Aktivitaet bitte das Vorkommen melden (mit
+`journalctl -u anvild` und `journalctl -u bellowsd` der letzten
+Stunde) an blacksmith@forgeiec.io — gezieltes, selektives Aufraeumen
+toter Nodes aus dem Studio heraus ist ein laufender Backlog-Punkt.
 
 ---
 

@@ -79,12 +79,12 @@ takip eder — manuel `.deb` dosyalarina gerek yoktur.
 
 ### Desteklenen Platformlar
 
-| Bilesen  | Mimariler     | Debian Sueruemleri |
+| Bilesen  | Mimariler     | Debian/Ubuntu suiteleri |
 |----------|---------------|--------------------|
-| Editoer  | amd64, arm64  | bookworm, trixie   |
-| Daemon   | amd64, arm64  | bookworm, trixie   |
-| Bridges  | amd64, arm64  | bookworm, trixie   |
-| Hearth   | amd64, arm64  | bookworm, trixie   |
+| Editoer  | amd64, arm64  | bookworm, trixie, noble   |
+| Daemon   | amd64, arm64  | bookworm, trixie, jammy, noble   |
+| Bridges  | amd64, arm64  | bookworm, trixie, jammy, noble   |
+| Hearth   | amd64, arm64  | bookworm, trixie, jammy, noble   |
 
 ### Iletisim
 

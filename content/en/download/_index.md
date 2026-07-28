@@ -105,18 +105,16 @@ air-gap workstations — you can download individual releases
 directly from the repository pages:
 
 - **ForgeIEC Studio source**:
-  [GitHub](https://github.com/Beerlesklopfer/ForgeIEC-Studio) /
   [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
 - **anvild + bridges**:
   [Forgejo](https://git.forgeiec.io/ForgeIEC/anvil)
 - **bellowsd**:
   [Forgejo](https://git.forgeiec.io/ForgeIEC/bellows)
 - **Website source**:
-  [GitHub](https://github.com/Beerlesklopfer/forgeiec-website) /
   [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-website)
 
 Per release, signed `.deb` packages + source tarballs are
-attached to the GitHub/Forgejo release tag.
+attached to the Forgejo release tag.
 
 ---
 
@@ -124,8 +122,8 @@ attached to the GitHub/Forgejo release tag.
 
 ```bash
 # Clone the repository (with submodules)
-git clone --recurse-submodules https://github.com/Beerlesklopfer/ForgeIEC-Studio.git
-cd ForgeIEC-Studio
+git clone --recurse-submodules https://git.forgeiec.io/ForgeIEC/forgeiec-studio.git
+cd forgeiec-studio
 
 # Build Studio + all daemons
 cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j$(nproc)

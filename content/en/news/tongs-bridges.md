@@ -124,7 +124,7 @@ IEC access in ST code with a clear 5-level namespace:
 
 ## Plus: Anvil ABI probe — no more version roulette
 
-Tongs bridges talk to anvild via **iceoryx2 shared memory**. With
+Tongs bridges talk to anvild via **Anvil shared memory**. With
 mixed versions between anvild + bridge, **silently inconsistent
 data** used to be possible — bridge writes ABI variant A, anvild
 reads variant B, nobody notices.

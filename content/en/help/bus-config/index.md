@@ -230,10 +230,10 @@ Detail schema:
 | Protocol | `protocol` value | Medium | Bridge | Status |
 |---|---|---|---|---|
 | Modbus TCP | `modbustcp` | Ethernet | `tongs-modbustcp` | productive |
-| Modbus RTU | `modbusrtu` | RS-485 | `tongs-modbusrtu` | in progress |
+| Modbus RTU | `modbusrtu` | RS-485 | `tongs-modbusrtu` | planned |
 | EtherCAT | `ethercat` | Ethernet (DC) | `tongs-ethercat` | in progress |
-| Profibus DP | `profibus` | Fieldbus | `tongs-profibus` | planned |
-| EtherNet/IP | `ethernetip` | Ethernet (CIP) | `tongs-ethernetip` | planned |
+| Profibus DP | `profibus` | Fieldbus | `tongs-profibus` | in progress |
+| EtherNet/IP | `ethernetip` | Ethernet (CIP) | `tongs-ethernetip` | in progress |
 
 ---
 

@@ -129,6 +129,15 @@ shared-memory segments on startup.
 
 Background + fix documented: [FAQ entry](/help/faq/stuck-variables-shm/).
 
+{{< callout type="note" title="Addendum" >}}
+The blanket cleanup at anvild startup has since been removed again:
+it tore away the shared segments of **live** peers (bellowsd,
+hearth, tongs-*). Cleanup is now done by the Anvil layer,
+selectively per dead node; as a user you simply restart the PLC
+runtime. Current state in the
+[FAQ entry](/help/faq/stuck-variables-shm/).
+{{< /callout >}}
+
 ---
 
 ## Where you use it
@@ -150,7 +159,6 @@ Background + fix documented: [FAQ entry](/help/faq/stuck-variables-shm/).
 - [MCP for IT + operations](/help/mcp/it/)
 
 Source repositories:
-[GitHub](https://github.com/Beerlesklopfer/ForgeIEC-Studio) /
 [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio).
 
 ---
