@@ -115,7 +115,7 @@ provisioning.
 |---|---|
 | **GitHub** | [github.com/Beerlesklopfer/screen](https://github.com/Beerlesklopfer/screen) [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/screen?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/screen) |
 | **Forgejo** | [git.forgeiec.io/ForgeIEC/screen](https://git.forgeiec.io/ForgeIEC/screen) |
-| **APT** | `sudo apt install forgeiec-screen` |
+| **APT** | `sudo apt install forgeiec-screen-wayland` |
 
 ---
 

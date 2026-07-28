@@ -19,10 +19,11 @@ haengt von Ihrer Rolle:
 
 ---
 
-## Installation aus dem APT-Repository
+## Installation aus dem Paket-Repository
 
 ForgeIEC wird als signiertes Debian-Repository unter
-`apt.forgeiec.io` bereitgestellt. Einrichtung ist einmalig pro
+`apt.forgeiec.io` und als signiertes RPM-Repository unter
+`rpm.forgeiec.io` bereitgestellt. Einrichtung ist einmalig pro
 Workstation bzw. Ziel-SPS — waehlen Sie Ihre Distribution aus:
 
 {{< distro-install >}}

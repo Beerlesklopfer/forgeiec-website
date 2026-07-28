@@ -65,10 +65,10 @@ sudo apt update
 
 ```bash
 # 编辑器（工作站）
-sudo apt install forgeiec
+sudo apt install forgeiec-studio
 
 # 守护进程（目标 PLC）
-sudo apt install anvild
+sudo apt install forgeiec-anvil-server
 ```
 
 更新遵循正常的 `apt update && apt upgrade` 生命周期——

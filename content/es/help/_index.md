@@ -69,10 +69,10 @@ estandar:
 
 ```bash
 # Editor (estacion de trabajo)
-sudo apt install forgeiec
+sudo apt install forgeiec-studio
 
 # Daemon (PLC destino)
-sudo apt install anvild
+sudo apt install forgeiec-anvil-server
 ```
 
 Las actualizaciones siguen el ciclo normal de `apt update && apt upgrade` —
