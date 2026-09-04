@@ -4,6 +4,10 @@ description: "Die ForgeIEC-Plattform — die Werkzeuge der Schmiede, jedes mit k
 weight: 10
 ---
 
+> **Neu hier?** [Der ForgeIEC-Verbund](verbund/) erklaert das Ganze in einem
+> Zug: das Bild, die Begriffe, die drei Wege und die Fallen — der Einstieg,
+> bevor die Einzelseiten unten Sinn ergeben.
+
 ## Was die Plattform leistet
 
 ForgeIEC ist eine vollstaendige Plattform fuer industrielle
