@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-FileCopyrightText: 2025-2026 Jörg Bernau <blacksmith@forgeiec.io>
+  SPDX-License-Identifier: AGPL-3.0-or-later
+
+  ── Das Schema EINES SYMBOLS ──────────────────────────────────────────────────
+
+  Herausgeloest aus `forgeiec-v2-hearth.xsd` am 07.09.2026. Dort stand es
+  mitten im Projektformat, und das waren ZWEI Gegenstaende in einer Datei:
+
+    * was eine Bedienoberflaeche IST   — hearth-project, hearth-screen,
+                                          hearth-placement, wires, drawing
+    * was ein Symbol IST                — dieses hier
+
+  Sie haben verschiedene Erzeuger. Das Projekt gehoert Hearth Studio, das
+  Symbol dem Symbol-Editor mit seiner `.hearth_library` — zwei Programme,
+  zwei Formate, und bis heute eine Datei.
+
+  DIESE DATEI STEHT ALLEIN. Sie bringt `Uuid` mit, den einzigen Typ, den ein
+  Symbol braucht, und laesst sich deshalb fuer sich uebersetzen — wer nur
+  Symbole prueft, braucht das Projektformat nicht. Umgekehrt gilt es nicht:
+  `forgeiec-v2-hearth.xsd` holt sie sich ueber `xs:include`, weil ein Projekt
+  Symbole ENTHAELT (`<symbols>`).
+
+  DERSELBE NAMENSRAUM WIE DAS PROJEKTFORMAT: `https://forgeiec.io/v2/hearth`.
+  Nicht ein eigener — dann waere aus `xs:include` ein `xs:import` geworden,
+  und ein Symbol unter `<symbols>` muesste sein eigenes `xmlns` tragen. Die
+  Aufteilung auf zwei Dateien ist Ordnung, kein zweites Vokabular.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+  <!-- Die Kennung. Sie steht HIER und nicht drueben, damit diese Datei
+       allein uebersetzt; das Projektformat bekommt sie ueber den include. -->
+  <xs:simpleType name="Uuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="symbol">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:any namespace="##other" processContents="lax"
+                minOccurs="0" maxOccurs="unbounded"/>
+        <xs:any namespace="http://www.w3.org/2000/svg" processContents="lax"/>
+      </xs:sequence>
+      <xs:attribute name="uuid" type="Uuid" use="required"/>
+      <xs:attribute name="name" type="xs:string"/>
+      <xs:attribute name="version" type="xs:string"/>
+      <xs:attribute name="category" type="xs:string"/>
+      <!-- Aus den Metadaten des .hearth_symbol uebernommen: wo das Symbol
+           steht (`field`, …) und welche Norm es zeichnet (`IEC 62424`).
+           Am echten Projekt 6-mal, 10.09.2026. -->
+      <xs:attribute name="location-type" type="xs:string"/>
+      <xs:attribute name="norm-standard" type="xs:string"/>
+      <!-- Die Exportform des Editors (`<symbol uuid name version category
+           author description><svg/></symbol>`) traegt Urheber und
+           Beschreibung; `FSymbolRegistry::adopt()` uebernimmt ALLES, was am
+           <symbol> steht. Gemessen am 11.09.2026 an den vier Schonern:
+           „Eigenschaft 'author' kennt das Schema hier nicht". -->
+      <xs:attribute name="author" type="xs:string"/>
+      <xs:attribute name="description" type="xs:string"/>
+      <!-- KEIN anyAttribute: das <symbol> hat einen Schreiber, und der kennt
+           seine vier Eigenschaften (gemessen 10.09.2026, forgeiec-studio#116). -->
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

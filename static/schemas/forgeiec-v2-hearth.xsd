@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-FileCopyrightText: 2025-2026 Jörg Bernau <blacksmith@forgeiec.io>
+  SPDX-License-Identifier: AGPL-3.0-or-later
+
+  ── Das Schema der .hearth ────────────────────────────────────────────────────
+
+  ABLAGEORT IST FORGEIEC — die Quelle der Informationen (Festlegung des
+  Anwenders, 04.09.2026). Diese Datei ist die EINZIGE gepflegte Fassung; im
+  Hearth-Studio-Baum liegt keine Arbeitskopie mehr.
+
+  Bis zum 04.09.2026 gab es eine, mit einem `cp`-Befehl in der Backlog-Datei
+  daneben. Der Handgriff wurde am 04.09. vergessen: das Studio-Schema bekam
+  `VarBlock`, `<duts>` und zehn Attribute, diese Datei blieb stehen. Eine Regel,
+  deren Vollzug ein Mensch von Hand erledigt, ist keine Regel — sie ist eine
+  Bitte.
+
+  Die Gestalt steht seit dem 01.09.2026 als XML im Baum statt als CSS-Blob, und
+  zwar ausdruecklich, WEIL sich XML pruefen laesst. Hier wird die Zusage
+  eingeloest.
+
+  WAS ES FAENGT — Faelle, die heute erst weit hinten auffallen:
+    * <hearth-screen> ohne slug: die Adresse fehlt, der Menueverweis laeuft ins
+      Leere.
+    * <symbol> ohne <svg> oder ohne uuid: die leere Zusage. Genau die stand am
+      01.09.2026 36-mal in einer Datei.
+    * <drawing> ohne uuid.
+    * Behaelter an der WURZEL statt in <hearth-head>/<hearth-body>.
+    * background= am Screen UND <hearth-head><background>: dieselbe Aussage an
+      zwei Orten.
+
+  PRUEFEN IST NICHT BEWAHREN — die beiden Regeln widersprechen sich NICHT:
+
+    * Der LESER verliert nichts, auch nicht, was er nicht kennt. Ein
+      `<experimental-block>` an der Wurzel ueberlebt einen Rundlauf wortgetreu;
+      das prueft `tests/fixtures/roundtrip.hearth` und muss so bleiben.
+    * Das SCHEMA meldet ihn trotzdem. Es sagt „das gehoert nicht zum Format",
+      nicht „wirf es weg".
+
+  Beides zusammen ist die einzige Haltung, die traegt: stillschweigend
+  wegwerfen waere Datenverlust, stillschweigend dulden waere ein Format, das
+  alles erlaubt. Deshalb ist `roundtrip.hearth` ABSICHTLICH schemawidrig und aus
+  der Pruefung ausgenommen — mit Begruendung, nicht aus Bequemlichkeit.
+
+  WAS ES NICHT FAENGT: die referenzielle Ganzheit. Ob die uuid einer Platzierung
+  auf ein <symbol> in <symbols> zeigt, sagt XSD nicht — xs:key/xs:keyref traegt
+  nicht ueber Wiederverwendung und Namensraeume hinweg. Das braucht einen
+  eigenen Pruefer, dieselbe Sorte Frage wie „zeigt ein Menueeintrag auf einen
+  Screen, den es gibt".
+
+  OFFEN, WO ES OFFEN SEIN MUSS: die Symbolzeichnung ist fremdes SVG, die
+  Serverkonfiguration traegt den Schluessel als Elementnamen. Beides wird mit
+  processContents="lax" durchgelassen — ein Schema, das sie aufzaehlen wollte,
+  waere am Tag nach dem naechsten Symbol falsch.
+-->
+<!--
+  ── KEIN targetNamespace — UND DAS IST EIN BEFUND, KEINE ENTSCHEIDUNG ─────────
+
+  Diese Datei ist die EINZIGE im Baum ohne `targetNamespace`. Ein
+  `<hearth-project>` ohne Namensraum gehoert jedem, der so ein Element
+  schreibt — dieselbe Luecke, die am 05.09.2026 bei der Geraetebeschreibung
+  geschlossen wurde („Wessen Format ist das?").
+
+  Am 07.09.2026 versucht, `https://forgeiec.io/v2/hearth` einzusetzen — nach
+  dem Muster der `.fdd` (`…/v2/fdd`): ein eigenstaendiges DATEIFORMAT bekommt
+  seinen eigenen Namensraum. ES GEHT NICHT, und der Grund ist ein Fehler im
+  Inhaltsmodell von `<symbol>`:
+
+      local complex type: The content model is not determinist.
+
+  `<symbol>` erlaubt `xs:any namespace="##other"` (beliebig oft) GEFOLGT von
+  `xs:any namespace="…/2000/svg"` (genau einmal). Ohne Zielnamensraum liess
+  libxml2 das durchgehen; mit einem faellt auf, dass ein `<svg>` auf BEIDE
+  Platzhalter passt — das Modell war schon immer mehrdeutig, nur hat es
+  niemand gemeldet.
+
+  Es zu berichtigen hiesse, an einem fremden Format zu bauen: die `.hearth`
+  gehoert Hearth Studio. Deshalb steht es als Issue und nicht als Aenderung.
+  Siehe forgeiec-studio, Issue „hearth: <symbol> Inhaltsmodell ist mehrdeutig".
+
+  Die Aufteilung in zwei Dateien (Projekt / Symbol) ist davon UNABHAENGIG und
+  bereits vollzogen — sie aendert am Pruefverhalten nichts, nachgemessen an
+  drei echten .hearth-Dateien.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+  <!-- ── DAS SYMBOL STEHT IN EINER EIGENEN DATEI ──────────────────────────
+       Herausgeloest am 07.09.2026: `<symbol>` und der Typ `Uuid` sind nach
+       forgeiec-v2-hearthsymbol.xsd gewandert. Es waren zwei Gegenstaende in
+       einer Datei — was eine Bedienoberflaeche IST, und was ein Symbol IST —
+       mit zwei verschiedenen Erzeugern.
+
+       GANZ OBEN, und das ist keine Stilfrage: XSD verlangt
+       include/import/redefine VOR jeder Deklaration. In der Mitte platziert
+       uebersetzt libxml2 das GANZE Schema nicht.
+
+       Der include loest ueber den DATEIPFAD auf. Beide Dateien liegen in
+       documentation/schemas/ und werden von dort installiert; Hearth Studio
+       zeigt in seinen Tests direkt hierher
+       (tests/CMakeLists.txt: HEARTH_SCHEMA -> ../forgeiec-studio/...).
+       Wer eine der beiden verschiebt, muss die andere mitnehmen. -->
+  <xs:include schemaLocation="forgeiec-v2-hearthsymbol.xsd"/>
+
+  <!-- ── Bausteine ────────────────────────────────────────────────────────── -->
+
+  <!-- Ein Behaelter, dessen Inhalt hier NICHT festgelegt wird. Fuer alles, was
+       fremdes Markup traegt oder den Schluessel als Elementnamen fuehrt. -->
+  <xs:complexType name="AnyContent">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:anyAttribute processContents="lax"/>
+  </xs:complexType>
+
+  <!-- ── DIE IEC-VARIABLEN ────────────────────────────────────────────────
+
+       DER NAME STEHT IM ATTRIBUT. Ein IEC-Name traegt Schraegstriche und
+       beginnt mitunter mit einer Ziffer; als Elementname geschrieben liest die
+       Datei kein Parser mehr zurueck. `read`/`write` sind ROLLENLISTEN, nicht
+       ja/nein.
+
+       DER ORT SAGT, WIE SIE BEWAHRT WIRD. `<retain>` und `<persistent>` sind
+       BLOECKE — dieselbe Form, in der die IEC 61131-3 es sagt:
+
+           VAR             … END_VAR
+           VAR RETAIN      … END_VAR
+           VAR PERSISTENT  … END_VAR
+
+       Eine Variable steht in genau EINEM Ort; wer beides braucht, schachtelt
+       (`<retain><persistent><var/></persistent></retain>` = VAR RETAIN
+       PERSISTENT). Deshalb verweist `VarBlock` auf sich selbst.
+
+       DAS IST NICHT DER AST VON FRUEHER. Am 02.09.2026 fiel ein
+       `<persistent>`-Ast NEBEN `<vars>`, weil er dieselbe Variable ein zweites
+       Mal nannte. Ein Block nennt sie nicht zweimal — er ist der einzige Ort,
+       an dem sie steht. Die Frage, an der sich beides scheidet: steht der Name
+       zweimal da?
+
+       `retain=`/`persistent=` als Attribut bleiben ZUGELASSEN, weil aeltere
+       Dateien sie tragen und der Leser nichts wegwerfen darf. Geschrieben
+       werden sie nicht mehr. -->
+  <xs:complexType name="Var">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="address" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="bridge" type="xs:string"/>
+    <xs:attribute name="read" type="xs:string"/>
+    <xs:attribute name="write" type="xs:string"/>
+    <xs:attribute name="unit" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+    <!-- ── WAS BISHER NUR IM DESKRIPTOR STAND ──────────────────────────
+         `<vars>` soll `bellows_descriptor.toml` ABLOESEN. Der Einwand dagegen
+         war berechtigt: die Registry trug Name, Typ, Adresse und Rechte, aber
+         weder Beschreibung noch Quelle, Gruppe oder Offsets — sie war AERMER
+         als die Beilage, und ein aermerer Ersatz ist Datenverlust mit Ansage.
+
+         `writable` ist die Auskunft der ANLAGE (kann geschrieben werden),
+         `write` die des PROJEKTS (darf geschrieben werden). Zwei Fragen, zwei
+         Angaben. -->
+    <xs:attribute name="source" type="xs:string"/>
+    <xs:attribute name="group" type="xs:string"/>
+    <xs:attribute name="label" type="xs:string"/>
+    <xs:attribute name="desc" type="xs:string"/>
+    <xs:attribute name="handshake" type="xs:string"/>
+    <xs:attribute name="hw-address" type="xs:string"/>
+    <xs:attribute name="offset" type="xs:int"/>
+    <xs:attribute name="size" type="xs:int"/>
+    <!-- -1 heisst „kein bitgepackter Kanal", nicht „Bit 0". -->
+    <xs:attribute name="bit" type="xs:int"/>
+    <!-- ── DIE ZUGRIFFSMASKE (Vertrag 4.2) ──────────────────────────────
+         Nach dem Vorbild des Linux-Oktetts: 4 lesen, 2 schreiben, 6 beides,
+         0 nicht exportiert. EIN Attribut, nicht eines je Zugriffsart — das
+         Schema muss nicht mitwachsen, wenn eine Art dazukommt. Was die ANLAGE
+         kann; was jemand DARF, steht in `read`/`write`. -->
+    <xs:attribute name="access">
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="0"/>
+          <xs:maxInclusive value="7"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <!-- ABGEKUENDIGT (09.09.2026): die Flagge, die `access` abloest. Aeltere
+         Dateien tragen sie; der Leser wertet sie als 6, der naechste Abgleich
+         schreibt die Maske. Geschrieben wird sie nicht mehr. -->
+    <xs:attribute name="writable" type="xs:boolean"/>
+    <!-- ── DIE PROVENIENZ (Vertrag 4.1c, F-2) ───────────────────────────
+         `uuid` ist die Kennung, die eine Umbenennung ueberlebt — der Name ist
+         Anzeige, nicht Schluessel. `epoch` ist der Lebenslaufstempel aus dem
+         Deskriptor (Millisekunden UTC); mit `uuid` das Paar, ohne das ein
+         Wiedereinlesen nicht sagen kann, GEGEN WELCHEN STAND bearbeitet
+         wurde. Beide seit dem XML-Deskriptor vom 09.09.2026. -->
+    <xs:attribute name="uuid" type="Uuid"/>
+    <xs:attribute name="epoch" type="xs:long"/>
+    <!-- VERWEIS auf einen Bauplan in <duts>. Leer = ein Skalar, der Regelfall.
+         Ein DUT ist auch eine Variable — nur eine, die aus anderen besteht.
+         `index` ist die Stelle in einem Feld von Bauplaenen (Vertrag 4.1). -->
+    <xs:attribute name="dut" type="xs:string"/>
+    <xs:attribute name="index" type="xs:int"/>
+    <!-- Altbestand, nur noch lesend. Siehe den Block oben. -->
+    <xs:attribute name="retain" type="xs:boolean"/>
+    <xs:attribute name="persistent" type="xs:boolean"/>
+    <!-- KEIN anyAttribute. Diese Datei hat EINEN Schreiber, und der kennt
+         seine Attribute. `anyAttribute` war am 04.09.2026 die Antwort auf
+         1133 Befunde an der .forge — einer Datei mit mehreren Schreibern.
+         Hier machte es die Pruefung zur Behauptung: `quatsch="1"` ging durch,
+         und `uuid` — seit dem 04.09. geschrieben — stand nie im Schema, ohne
+         dass es jemand merkte (forgeiec-studio#116). -->
+  </xs:complexType>
+
+  <!-- ── DIE AUFBEWAHRUNGSBLOECKE ─────────────────────────────────────────
+       `xs:choice` statt `xs:sequence`, weil die REIHENFOLGE nichts aussagt —
+       `addVar` haengt hinten an, `setStorage` legt Bloecke hinten an; eine
+       erzwungene Folge waere eine Regel, die der Schreiber selbst nicht
+       einhaelt. Die SCHACHTELUNG dagegen sagt etwas, und sie ist festgelegt
+       (FVar::setStorage): `VAR RETAIN PERSISTENT` — aussen retain, innen
+       persistent. Zwei Schachtelungen fuer dieselbe Aussage waeren zwei
+       Formen. Bis zum 09.09.2026 war der Block hier rekursiv, und
+       <persistent><retain> validierte (forgeiec-studio#116). -->
+  <xs:complexType name="VarBlock">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="var" type="Var"/>
+      <xs:element name="retain" type="RetainBlock"/>
+      <xs:element name="persistent" type="PersistentBlock"/>
+    </xs:choice>
+  </xs:complexType>
+  <!-- <retain>: Variablen, und darin der bewahrte Teil. -->
+  <xs:complexType name="RetainBlock">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="var" type="Var"/>
+      <xs:element name="persistent" type="PersistentBlock"/>
+    </xs:choice>
+  </xs:complexType>
+  <!-- <persistent>: nur Variablen. Ein <retain> darin ist die verbotene
+       zweite Form. -->
+  <xs:complexType name="PersistentBlock">
+    <xs:sequence>
+      <xs:element name="var" type="Var" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ── DIE BAUPLAENE DER ZUSAMMENGESETZTEN VARIABLEN ────────────────────
+
+       EINMAL DER BAUPLAN, VIELMALS DER VERWEIS. Gemessen in
+       `Ackersteuerung_descriptor.toml`: `aValveJobs` ist ein ARRAY[1..24]
+       eines DUT mit vier Feldern — 96 flache Eintraege, viermal derselbe
+       Aufbau, vierundzwanzigmal wiederholt. Als Registratur: EIN Bauplan und
+       vierundzwanzig Verweise.
+
+       Der Gewinn ist nicht die Dateigroesse, sondern dass der Bauplan EINEN
+       Ort hat. Wer ein Feld umbenennt, benennt es einmal um; in der flachen
+       Form muesste er vierundzwanzig Zeilen treffen, und die eine, die er
+       uebersieht, meldet niemand.
+
+       Ein Member traegt seinen LOKALEN Namen (`xSelected`), nicht den vollen
+       Pfad: der Bauplan weiss nicht, wo seine Instanzen stehen — und genau
+       deshalb ist er wiederverwendbar. -->
+  <xs:complexType name="Dut">
+    <xs:sequence>
+      <xs:element name="var" type="Var" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <!-- Laenge einer Instanz in Bytes — der Vertrag des gepackten Structs. -->
+    <xs:attribute name="size" type="xs:int"/>
+  </xs:complexType>
+
+  <!-- ── Der Vorrat ───────────────────────────────────────────────────────── -->
+
+  <!-- Ein Symbol AUS DEM EDITOR. Es bringt seine Kennung mit; Studio vergibt
+       hier nie eine eigene. Ohne <svg> ist es die leere Zusage. -->
+  <!-- Eine in STUDIO gezeichnete Kontur. Hier IST Studio der Urheber, also
+       praegt es die Kennung; die Fassung zaehlt hoch, wenn sich die Kontur
+       aendert, und die Kennung BLEIBT. -->
+  <xs:element name="drawing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:any processContents="lax" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="uuid" type="Uuid" use="required"/>
+      <xs:attribute name="version" type="xs:string"/>
+      <xs:attribute name="layer" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ── Der Bildschirm ───────────────────────────────────────────────────── -->
+
+  <!-- Der Verweis EINER Platzierung: entweder auf ein Symbol oder auf eine
+       Zeichnung, nie auf beides. -->
+  <xs:element name="hearth-placement">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice minOccurs="0">
+          <xs:element name="symbol">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+              <xs:attribute name="uuid" type="Uuid"/>
+              <xs:attribute name="name" type="xs:string"/>
+              <!-- Was `FScreenTree` an den Verweis schreibt: die Nummer in
+                   der Symbolbibliothek und der Ausschnitt. Bis zum
+                   10.09.2026 nur ueber `anyAttribute` erlaubt. -->
+              <xs:attribute name="library-id" type="xs:int"/>
+              <xs:attribute name="viewbox" type="xs:string"/>
+              <!-- Die Familie des Symbols (FPlacement::family) — 46-mal am
+                   echten Projekt, 10.09.2026. -->
+              <xs:attribute name="family" type="xs:string"/>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="drawing">
+            <xs:complexType>
+              <xs:attribute name="uuid" type="Uuid" use="required"/>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+        <xs:element name="hearth-param" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="value" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="hearth-placements" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="transform" type="xs:string"/>
+      <xs:attribute name="z" type="xs:integer"/>
+      <xs:attribute name="pivot" type="xs:string"/>
+      <xs:attribute name="logic" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="hearth-placements">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="hearth-placement" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="wires">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="wire" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="source" type="xs:string" use="required"/>
+            <xs:attribute name="destination" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- WIE es aussieht. Am Projekt gilt es ueberall, am Screen nur dort; der
+       Compiler sammelt und fasst zusammen. -->
+  <xs:complexType name="Appearance">
+    <xs:sequence>
+      <xs:element name="background" minOccurs="0">
+        <xs:complexType><xs:attribute name="color" type="xs:string"/></xs:complexType>
+      </xs:element>
+      <xs:element name="font" minOccurs="0">
+        <xs:complexType>
+          <xs:attribute name="family" type="xs:string"/>
+          <xs:attribute name="size" type="xs:string"/>
+          <xs:attribute name="bold" type="xs:boolean"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="hearth-screen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="hearth-head" type="Appearance" minOccurs="0"/>
+        <xs:element name="hearth-body" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="hearth-placements" minOccurs="0"/>
+              <xs:element ref="wires" minOccurs="0"/>
+              <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Solange der Koerper am Screen nicht ueberall steht: die Listen
+             duerfen auch direkt haengen. Faellt weg, sobald der Schreiber sie
+             ausnahmslos in <hearth-body> setzt. -->
+        <xs:element ref="hearth-placements" minOccurs="0"/>
+        <xs:element ref="wires" minOccurs="0"/>
+        <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <!-- DIE ADRESSE. Ohne sie laeuft jeder Menueverweis ins Leere. -->
+      <xs:attribute name="slug" type="xs:string" use="required"/>
+      <xs:attribute name="id" type="xs:string"/>
+      <xs:attribute name="name" type="xs:string"/>
+      <!-- ── AN WELCHE VORLAGE DIESES BILD GEBUNDEN IST ──────────────────
+           Bei den nur ansehbaren Gattungen (alles ausser `screen`) ist das
+           die UUID der Vorlage aus <templates> — die IDENTITAET, nicht ihr
+           Name. Ein Name aendert sich; ein Verweis auf einen Namen stirbt
+           dabei still, und niemand merkt es, bis das Bild leer bleibt. -->
+      <xs:attribute name="template" type="xs:string"/>
+      <!-- ── DAS BLATT UND SEINE SCHRIFT ─────────────────────────────────
+           Sechs Eigenschaften, die `FScreen` seit jeher schreibt und die bis
+           zum 10.09.2026 NUR ueber `anyAttribute` durchkamen — das Schema
+           hatte sie nie gesehen. Gemessen an 7 Dateien der Schreiberausgabe
+           (forgeiec-studio#116). -->
+      <xs:attribute name="viewport-width" type="xs:int"/>
+      <xs:attribute name="viewport-height" type="xs:int"/>
+      <xs:attribute name="background" type="xs:string"/>
+      <xs:attribute name="font-family" type="xs:string"/>
+      <xs:attribute name="font-size" type="xs:int"/>
+      <xs:attribute name="font-bold" type="xs:boolean"/>
+      <!-- Weiterleitung (Splash: nach `timeout` Sekunden nach `redirect-to`)
+           und die Form des Menues — geschrieben von FScreen/set_screen; am
+           echten Projekt gefunden vom Pruefer im Studio, 10.09.2026, nicht
+           von den Fixtures (forgeiec-studio#121). -->
+      <xs:attribute name="redirect-to" type="xs:string"/>
+      <xs:attribute name="timeout" type="xs:int"/>
+      <xs:attribute name="menu-form" type="xs:string"/>
+      <!-- ── DER BILDSCHIRMSCHONER ──────────────────────────────────────
+           `screensaver` nennt ein Symbol der Kategorie screensaver aus der
+           Registratur des Projekts — seit dem 11.09.2026 per KENNUNG; aeltere
+           Dateien tragen dort noch den Namen einer Vorlage (ember, meadow),
+           deshalb xs:string und nicht Uuid. `ss-timeout` sind die Sekunden
+           bis zum Anlauf. Beide schrieb FScreen seit dem 04.09.2026, kein
+           Schirm trug sie je — bis der erste es tat: „Eigenschaft
+           'screensaver' kennt das Schema hier nicht", 11.09.2026. -->
+      <xs:attribute name="screensaver" type="xs:string"/>
+      <xs:attribute name="ss-timeout" type="xs:int"/>
+      <!-- ── DIE GATTUNG ────────────────────────────────────────────────
+           Was fuer ein Bild das ist — und daraus folgt, ob es BEDIENT wird:
+
+             screen      bedienbar (lesen und schreiben)
+             dashboard   nur ansehen
+             splash      nur ansehen
+
+           Alles ausser `screen` ist heute nur zum Ansehen. Die Regel steht
+           damit an EINER Stelle: an der Gattung. Eine zweite Liste
+           „diese sind schreibgeschuetzt" waere dieselbe Sache an zwei
+           Stellen — und die zweite altert unbemerkt.
+
+           NICHT DASSELBE WIE `template`. `template` nennt die VORLAGE, die
+           das Bild rendert, und die kann der Entwerfer selbst anlegen
+           (`template="meine-anlage"`); `type` nennt die Gattung und bleibt
+           dabei eine von wenigen. Fuer die mitgelieferten Vorlagen fallen
+           beide Woerter heute zusammen — das macht sie nicht zu einer Sache.
+
+           FEHLT DAS ATTRIBUT, gilt `screen`. Das ist die Vorgabe fuer
+           Dateien, die vor dieser Fassung geschrieben wurden; Studio setzt
+           es beim naechsten Speichern. -->
+      <xs:attribute name="type" default="screen">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="screen"/>
+            <xs:enumeration value="dashboard"/>
+            <xs:enumeration value="splash"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ── Die zwei Haelften des Projekts ───────────────────────────────────── -->
+
+  <xs:element name="hearth-project">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="hearth-head">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- Die Gestalt zuerst, dann der Vorrat. Die Reihenfolge der
+                   Behaelter untereinander ist NICHT festgelegt: sie sagt
+                   nichts, und ein Schema, das sie erzwingt, macht aus einer
+                   Umsortierung einen Fehler. -->
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="background" minOccurs="0">
+                  <xs:complexType><xs:attribute name="color" type="xs:string"/></xs:complexType>
+                </xs:element>
+                <xs:element name="font" minOccurs="0">
+                  <xs:complexType>
+                    <xs:attribute name="family" type="xs:string"/>
+                    <xs:attribute name="size" type="xs:string"/>
+                    <xs:attribute name="bold" type="xs:boolean"/>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="symbols">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element ref="symbol" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="drawings">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element ref="drawing" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="meta"        type="AnyContent"/>
+                <!-- Die Sprachkataloge. Ein Baum, KEINE Zeichenkette: der
+                     Uebersetzer sieht in der Datei, was er uebersetzt, und
+                     `FCatalog::toString()` macht daraus erst beim Ausliefern
+                     die Fluent-Form. Bis zum 02.09.2026 war dies ein offener
+                     Behaelter ohne jede Regel —
+                     das Schema beschrieb die Kataloge also gar nicht. -->
+                <xs:element name="i18n" minOccurs="0">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="language" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="text" minOccurs="0" maxOccurs="unbounded">
+                              <xs:complexType>
+                                <xs:simpleContent>
+                                  <xs:extension base="xs:string">
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                    <!-- Was der Uebersetzer wissen muss. -->
+                                    <xs:attribute name="comment" type="xs:string"/>
+                                    <!-- ── NACHGETRAGEN ODER BESTAETIGT? ────
+                                         Die Stringtabelle der Bibliothek
+                                         STUETZT nur: sie traegt nach, was sie
+                                         von einem anderen Symbol schon weiss.
+                                         Ein so gefuellter Wert ist eine
+                                         Vermutung — richtig in neun von zehn
+                                         Faellen und im zehnten falsch, weil
+                                         dasselbe Wort woanders etwas anderes
+                                         bedeutet.
+
+                                         Im Ergebnis ist er von einem
+                                         bestaetigten NICHT zu unterscheiden;
+                                         beide stehen da und sehen fertig aus.
+                                         `auto="true"` macht den Unterschied
+                                         sichtbar, damit ein LLM oder ein
+                                         Uebersetzer genau das ansieht, was
+                                         noch niemand angesehen hat.
+
+                                         NUR wenn wahr geschrieben: ein
+                                         `auto="false"` an jedem bestaetigten
+                                         Eintrag waere Rauschen in jeder Zeile,
+                                         und die Ausnahme faende sich nicht
+                                         mehr. Fehlt das Attribut, ist der
+                                         Eintrag bestaetigt. -->
+                                    <xs:attribute name="auto" type="xs:boolean"/>
+                                  </xs:extension>
+                                </xs:simpleContent>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="name" type="xs:string" use="required"/>
+                          <xs:attribute name="default" type="xs:boolean"/>
+                          <xs:attribute name="comment" type="xs:string"/>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="themes"      type="AnyContent"/>
+                <!-- ── DIE ROLLEN ─────────────────────────────────────
+                     `<role name="…" description="…"/>`. Der Name steht im
+                     ATTRIBUT, wie beim Benutzer: eine Rolle ist ein
+                     SCHLUESSEL, auf den Variablen und Benutzer zeigen.
+
+                     Der INHALT bleibt zugelassen, weil Dateien vor dem
+                     02.09.2026 den Namen dort fuehrten; er ist der Rueckfall,
+                     kein zweiter gueltiger Ort.
+
+                     Eine Rolle OHNE Namen faellt laut: nichts kann auf sie
+                     zeigen, und jede Variable, die sie verlangt, verweist ins
+                     Leere. Gemessen am 27.08.2026 an der Ackersteuerung —
+                     fuenf Screens gemeldet, 404 auf jeder Seite.
+
+                     Sie gehoeren zu den Benutzern: eine Rolle an einem
+                     Benutzer, die niemand erklaert, weist der Daemon beim
+                     Laden ab — die Anlage verweigerte dann ihr eigenes
+                     Projekt. -->
+                <xs:element name="roles" minOccurs="0">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="role" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                              <xs:attribute name="name" type="xs:string"/>
+                              <!-- Die KENNUNG (hearth-studio, „Verweise tragen
+                                   Kennungen", 02.09.2026). Der Lader traegt sie
+                                   beim Oeffnen nach — deshalb traegt keine
+                                   Datei auf der Platte sie, bis sie einmal
+                                   geladen und gesichert wurde, und deshalb fand
+                                   die Messung ueber Fixtures und Schreiberausgabe
+                                   sie nicht: erst der Pruefer im Studio
+                                   (FProjectDocument::validate) sah sie, 10.09. -->
+                              <xs:attribute name="uuid" type="Uuid"/>
+                              <xs:attribute name="description" type="xs:string"/>
+                              <xs:attribute name="script-only" type="xs:boolean"/>
+                            </xs:extension>
+                          </xs:simpleContent>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+
+                <!-- ── DIE BENUTZER ───────────────────────────────────────
+                     `<user pw-hash="…" roles="a b">name</user>`.
+
+                     DER ANMELDENAME STEHT IM ATTRIBUT `name`. Er ist der
+                     SCHLUESSEL — Menuerechte, Sitzungen und die Vermerke der
+                     Anlage zeigen auf ihn —, und ein Schluessel gehoert in ein
+                     Attribut: im Inhalt stuende er neben Leerraum und
+                     Zeilenumbruechen, und jeder Formatierer koennte ihn
+                     veraendern, ohne etwas Falsches zu tun.
+
+                     Der INHALT bleibt zugelassen, weil Dateien vor dem
+                     02.09.2026 den Namen dort fuehrten — Studio und Daemon
+                     lesen ihn als Rueckfall und heben ihn beim naechsten
+                     Sichern. Er ist kein zweiter gueltiger Ort.
+
+                     ── DIE `-epoch`-ATTRIBUTE ──────────────────────────────
+
+                     Zu jedem Feld, das AUF DER ANLAGE geaendert werden kann,
+                     gehoert `<feld>-epoch`: Sekunden seit 1970.
+
+                     Sie tragen die Aufteilung des Eigentums. Die Liste der
+                     Benutzer gehoert dem Projekt; was ein Bediener auf der
+                     Anlage aendert — sein Kennwort, seine Kontaktdaten —,
+                     vermerkt der Server bei sich. Beim Holen der Datei
+                     entscheidet der Vergleich: der NEUERE Stand gewinnt.
+
+                     Ohne Stand gilt der Wert in der Datei als uralt, und der
+                     Vermerk der Anlage setzt sich durch — richtig fuer eine
+                     Datei aus der Zeit davor, denn dort ist die Aenderung
+                     nachweislich passiert.
+
+                     ALS ZAHL, nicht als Datum: sie wird verglichen. Eine
+                     ISO-Zeichenkette liest sich besser und vergleicht sich
+                     schlechter — Zeitzone, Genauigkeit, Schreibweise.
+
+                     `pw-hash` ist ein argon2id-PHC-String. NIE ein Kennwort im
+                     Klartext — weder hier noch irgendwo sonst in dieser
+                     Datei. -->
+                <xs:element name="users" minOccurs="0">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="user" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                              <xs:attribute name="name" type="xs:string"/>
+                              <!-- Die Kennung, wie an <role>. -->
+                              <xs:attribute name="uuid" type="Uuid"/>
+                              <xs:attribute name="pw-hash" type="xs:string"/>
+                              <xs:attribute name="pw-hash-epoch" type="xs:long"/>
+                              <!-- LEERZEICHENGETRENNT, so wie der Daemon liest. -->
+                              <xs:attribute name="roles" type="xs:string"/>
+                              <xs:attribute name="must-change-password" type="xs:boolean"/>
+                              <!-- Vergangene Hashes, leerzeichengetrennt. -->
+                              <xs:attribute name="pw-history" type="xs:string"/>
+                              <xs:attribute name="pw-changed" type="xs:string"/>
+                              <xs:attribute name="email" type="xs:string"/>
+                              <xs:attribute name="email-epoch" type="xs:long"/>
+                              <xs:attribute name="phone-landline" type="xs:string"/>
+                              <xs:attribute name="phone-landline-epoch" type="xs:long"/>
+                              <xs:attribute name="phone-mobile" type="xs:string"/>
+                              <xs:attribute name="phone-mobile-epoch" type="xs:long"/>
+                            </xs:extension>
+                          </xs:simpleContent>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <!-- Die Baupläne — siehe `Dut` oben. VOR <vars>, weil ein
+                     Verweis nach oben leichter zu lesen ist als einer nach
+                     unten. Ein Projekt ohne zusammengesetzte Typen traegt den
+                     Ast gar nicht: ein leerer Bauplanschrank waere eine Frage,
+                     die sich nie jemand gestellt hat. -->
+                <xs:element name="duts" minOccurs="0">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="dut" type="Dut"
+                                  minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <!-- Die IEC-Variablen — Aufbau siehe `VarBlock` oben. -->
+                <xs:element name="vars" type="VarBlock" minOccurs="0"/>
+                <xs:element name="scripts"     type="AnyContent"/>
+                <xs:element name="settings"    type="AnyContent"/>
+                <!-- ── DIE VORLAGEN DES PROJEKTS ──────────────────────
+                     `uuid` IST DIE IDENTITAET. Sie wird nicht gerechnet und
+                     nicht aus Name und Fassung abgeleitet: der Name darf
+                     sich aendern, ohne dass ein Verweis stirbt. Genau daran
+                     ist die Symbolregistratur schon einmal fast gescheitert.
+
+                     Damit koennen MEHRERE Vorlagen gleichen Namens im selben
+                     Projekt stehen und eineindeutig ausgeliefert werden — vom
+                     Namen als Schluessel ging das nicht.
+
+                     `version` ist die Fassung DIESER Kopie. Liefert die
+                     Anlage eine andere, kann der Inspektor es zeigen und das
+                     Projekt nachziehen.
+
+                     ── ZWEI FORMEN IN EINEM BEHAELTER ──────────────────────
+
+                     Hier liegen heute ZWEI verschiedene Dinge, gemessen am
+                     02.09.2026 an der Ausgabe des Schreibers:
+
+                       <template name="…">CDATA</template>
+                           die Tera-UEBERSCHREIBUNG (FProjectDocument::
+                           setTemplateOverride) — der Name im ATTRIBUT.
+
+                       <template type="screen"><name>…</name>
+                                               <payload>…</payload></template>
+                           die abgelegte VORLAGE eines Screens
+                           (FTemplateStore) — der Name als KIND.
+
+                     Das ist nicht dasselbe, und `templateOverrideNames()`
+                     liest ueber beide hinweg das `name`-ATTRIBUT: bei der
+                     zweiten Form findet es nichts und meldet das nicht. Das
+                     Schema beschreibt darum beides, statt eine der beiden
+                     Formen zur Wahrheit zu erklaeren — die Trennung ist eine
+                     Aenderung am Bau, keine am Vertrag. -->
+                <xs:element name="templates" minOccurs="0">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="template" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType mixed="true">
+                          <xs:sequence>
+                            <xs:any processContents="lax" minOccurs="0"
+                                    maxOccurs="unbounded"/>
+                          </xs:sequence>
+                          <xs:attribute name="uuid" type="xs:string"/>
+                          <xs:attribute name="name" type="xs:string"/>
+                          <xs:attribute name="version" type="xs:string"/>
+                          <!-- WOFUER der Bauplan gilt (FTemplate::type). 14-mal
+                               in der Schreiberausgabe, nie im Schema — bis zum
+                               10.09.2026 (forgeiec-studio#116). -->
+                          <xs:attribute name="type">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:enumeration value="screen"/>
+                                <xs:enumeration value="project"/>
+                                <xs:enumeration value="screensaver"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:attribute>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="assets"      type="AnyContent"/>
+                <xs:element name="libraries"   type="AnyContent"/>
+              </xs:choice>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="hearth-body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="screens" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="hearth-screen" minOccurs="0" maxOccurs="unbounded"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <!-- ── DIE NAVIGATIONEN DES PROJEKTS ──────────────────────
+                   MEHRERE sind der Normalfall, nicht die Ausnahme: eines fuer
+                   den Betrieb, eines fuer die Wartung, eines fuer die
+                   Inbetriebnahme. Welcher Screen in welchem steht, sagt der
+                   Verweis IM Menue — nicht ein Merker am Screen.
+
+                   `id` IST DER SCHLUESSEL, eine UUID. `name` ist Anzeige und
+                   steht im INHALT des Elements, nicht in einem Attribut —
+                   leerer Inhalt heisst „das Hauptmenue". Studio vergibt beim
+                   Anlegen `menu-01`, `menu-02`, …; umbenannt wird auf der
+                   Projektseite, und der Verweis ueberlebt das, weil er an der
+                   Kennung haengt.
+
+                   `comment` sagt, WOFUER es dieses Menue gibt. Der Name ist
+                   kurz und steht in einer Auswahlliste; der Grund passt da
+                   nicht hinein und ging bisher verloren.
+
+                   Der INHALT unter dem Namen — Spruenge, Knoepfe, Untermenues,
+                   Trenner — wird hier NICHT festgelegt: er waechst, und ein
+                   Schema, das ihn aufzaehlt, machte aus jeder neuen Eintragsart
+                   einen Fehler. -->
+              <xs:element name="menus" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="menu" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType mixed="true">
+                        <xs:sequence>
+                          <xs:any processContents="lax" minOccurs="0"
+                                  maxOccurs="unbounded"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:string"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="comment" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+
+      <xs:attribute name="id" type="xs:string"/>
+      <xs:attribute name="name" type="xs:string"/>
+      <xs:attribute name="version" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
