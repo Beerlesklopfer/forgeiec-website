@@ -78,6 +78,7 @@ sync-schemas:
 	          forgeiec-v2-bus-config.xsd \
 	          forgeiec-v2-comments.xsd \
 	          forgeiec-v2-sanitize-map.xsd \
+	          forgeiec-v2-hearth.xsd \
 	          README.md; do \
 	  if [ -f "$(STUDIO_SCHEMAS_DIR)/$$f" ]; then \
 	    cp "$(STUDIO_SCHEMAS_DIR)/$$f" static/schemas/$$f; \

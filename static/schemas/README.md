@@ -11,6 +11,7 @@ PLCopen-XML-Dateien validiert. Schema-Layout:
 | `forgeiec-v2-bus-config.xsd`       | ForgeIEC | AGPL-3.0-or-later  | `<busConfig>` (Segment → Device → Module → Setting).           |
 | `forgeiec-v2-comments.xsd`         | ForgeIEC | AGPL-3.0-or-later  | `<comments>` (Free-Text-Comment-Nodes in Variablen-Listen).    |
 | `forgeiec-v2-sanitize-map.xsd`     | ForgeIEC | AGPL-3.0-or-later  | `<renameMap>` (Identifier-Sanitize beim Foreign-Import).       |
+| `forgeiec-v2-hearth.xsd`           | ForgeIEC | AGPL-3.0-or-later  | `<hearth-project>` (Anlagendatei: Kopf/Koerper, Vorrat, Bildschirme). |
 
 **Konvention** (2026-05-21, durchgezogen): jeder `<data name="URI">`
 hat ein Inner-Element mit `xmlns="URI"`. XSD-`targetNamespace`
@@ -54,11 +55,31 @@ Phase D des PLCOPEN-IE-1-Sprints adressiert das systematisch:
 Vanilla-Export erzeugt sauber konformes PLCopen, ForgeIEC-Export
 behält die nicht-konformen Effizienz-Codierungen.
 
-## Hosting
+## Hosting + Offline-Anforderung
 
-Beide Schemas sind ausserdem auf `https://forgeiec.io/schemas/`
-verfügbar (Quelle: `documentation/website/`-Submodule). Importer
-können wahlweise lokal (Repo-Pfad) oder online (URL) validieren.
+**Wichtig**: ForgeIEC validiert XSDs ausschliesslich gegen die
+**lokal** mitgelieferten Files. Die Editor-Pipeline (libxml2-FFI in
+`FXsdValidator::ensureSchema`) ruft `xmlSchemaNewParserCtxt(path)`
+auf einen Filesystem-Pfad — **keine Netzwerk-Calls** zur Schema-
+Auflösung. Damit funktioniert die Validierung in jeder Umgebung
+(Air-Gapped-Industrial-Workstation, lokales LAN ohne Internet,
+Container ohne DNS).
+
+Pfad-Lookup-Strategie in `FXsdValidator::schemasDir()` (in dieser
+Reihenfolge):
+
+1. `$FORGEIEC_SCHEMAS_DIR` Env-Var (Dev/Test-Override).
+2. `<exe-dir>/../share/forgeiec/schemas/` (Linux/macOS-Install).
+3. `<exe-dir>/share/forgeiec/schemas/` (Windows-Install).
+4. `<exe-dir>/../documentation/schemas/` (Dev-Build-Fallback).
+
+Die XSDs werden vom Build-System mit-ausgeliefert:
+- **Debian**: CPack-DEB packt sie als `usr/share/forgeiec/schemas/`.
+- **Windows**: CPack-NSIS packt sie als `<install>/share/forgeiec/schemas/`.
+- **macOS**: App-Bundle hat sie unter `<bundle>/Contents/Resources/schemas/`.
+
+`https://forgeiec.io/schemas/` ist nur eine **convenience mirror**
+für externe Werkzeug-Entwickler — der Editor braucht es nie.
 
 ## Hinzufügen einer neuen ForgeIEC-Extension
 
