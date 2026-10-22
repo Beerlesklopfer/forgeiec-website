@@ -4,7 +4,7 @@ description: "Industrial kiosk browser for HMI panels — CEF + Rust + winit, wi
 weight: 6
 ---
 
-{{< components "screen,hearth,bellowsd" >}}
+{{< components "screen,hearth" >}}
 
 ## The kiosk browser
 
@@ -44,19 +44,19 @@ flowchart LR
     Panel["HMI panel<br/>(Touch-PC at the cabinet)"]
     Screen["Screen<br/>(CEF kiosk)"]
     Hearth["Hearth<br/>(HMI renderer)"]
-    Bellows["bellowsd<br/>(OPC-UA / Modbus)"]
-    Anvild["anvild<br/>(PLC runtime)"]
+    Anvil["Anvil bus<br/>(iceoryx2)"]
+    Plc["forgeiec_plc<br/>(PLC cycle)"]
 
     Panel ---|"runs on"| Screen
     Screen ---|"HTTP"| Hearth
-    Hearth ---|"OPC-UA / Modbus"| Bellows
-    Bellows ---|"Anvil IPC"| Anvild
+    Hearth ---|"reads"| Anvil
+    Anvil ---|"process data"| Plc
 ```
 
 You have an HMI panel at the cabinet: Screen runs on it and is
 pure display (Chromium kiosk). The HMI is rendered by **Hearth**
-as an HTTP UI, fed via OPC-UA / Modbus from **bellowsd**, whose
-live values in turn come from **anvild**. The operator sees only
+as an HTTP UI (preview); Hearth reads the live values directly from
+the **Anvil bus**, where the PLC cycle publishes them. The operator sees only
 the application — **no** Linux desktop, **no** accidentally-
 startable browser functions.
 
@@ -105,7 +105,7 @@ provisioning.
 | **i18n** | Project Fluent, 80+ languages incl. RTL |
 | **Display servers** | X11, Wayland, Windows (Win32) |
 | **Platforms** | Linux amd64 + arm64, Windows x64 |
-| **License** | AGPL-3.0 |
+| **Licence** | AGPL-3.0-or-later |
 
 ---
 

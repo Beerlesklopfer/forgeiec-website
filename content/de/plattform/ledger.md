@@ -4,15 +4,15 @@ description: "Auftragsmanagement — Produktionsplanung, Rezeptverwaltung und ME
 weight: 7
 ---
 
-## Das Schmiedebuch — *In Entwicklung*
+## Das Schmiedebuch — *geplant*
 
 Jede Schmiede führt ein Auftragsbuch — welcher Auftrag, welches Material,
 welche Menge. **Ledger** ist das Auftragsmanagement-Modul der
 ForgeIEC-Plattform: die Brücke zwischen Fertigungssteuerung und
 Betriebswirtschaft.
 
-> Ledger befindet sich in aktiver Entwicklung. Die hier beschriebenen
-> Funktionen repräsentieren den geplanten Umfang.
+> Ledger ist geplant, die Entwicklung hat noch nicht begonnen. Die hier
+> beschriebenen Funktionen repräsentieren den geplanten Umfang.
 
 ---
 
@@ -64,7 +64,7 @@ ERP / MES
   Tongs (Feldbus-Bridges) --> Maschinen
 ```
 
-**Lizenz:** AGPL-3.0
+**Lizenz:** AGPL-3.0-or-later
 
 ---
 

@@ -4,7 +4,7 @@ description: "Industrieller Kiosk-Browser für Bedienpanels — CEF + Rust + win
 weight: 6
 ---
 
-{{< components "screen,hearth,bellowsd" >}}
+{{< components "screen,hearth" >}}
 
 ## Der Kiosk-Browser
 
@@ -45,19 +45,19 @@ flowchart LR
     Panel["Bedienpanel<br/>(Touch-PC am Schaltschrank)"]
     Screen["Screen<br/>(CEF-Kiosk)"]
     Hearth["Hearth<br/>(HMI-Renderer)"]
-    Bellows["bellowsd<br/>(OPC-UA / Modbus)"]
-    Anvild["anvild<br/>(PLC-Runtime)"]
+    Anvil["Anvil-Bus<br/>(iceoryx2)"]
+    Plc["forgeiec_plc<br/>(SPS-Zyklus)"]
 
     Panel ---|"läuft auf"| Screen
     Screen ---|"HTTP"| Hearth
-    Hearth ---|"OPC-UA / Modbus"| Bellows
-    Bellows ---|"Anvil IPC"| Anvild
+    Hearth ---|"liest"| Anvil
+    Anvil ---|"Prozessdaten"| Plc
 ```
 
 Sie haben ein Bedienpanel am Schaltschrank: Screen läuft drauf
 und ist reine Anzeige (Chromium-Kiosk). Die HMI rendert **Hearth**
-als HTTP-UI, gespeist aus OPC-UA / Modbus von **bellowsd**, dessen
-Live-Werte wiederum aus **anvild** stammen. Der Operator sieht nur
+als HTTP-UI (Vorschau); Hearth liest die Live-Werte direkt vom
+**Anvil-Bus**, auf dem der SPS-Zyklus sie veröffentlicht. Der Operator sieht nur
 die Anwendung — **keine** Linux-Oberfläche, **keine** versehentlich-
 startbaren Browser-Funktionen.
 
@@ -107,7 +107,7 @@ auslesbar für Backup / Provisioning.
 | **i18n** | Project Fluent, 80+ Sprachen inkl. RTL |
 | **Display-Server** | X11, Wayland, Windows (Win32) |
 | **Plattformen** | Linux amd64 + arm64, Windows x64 |
-| **Lizenz** | AGPL-3.0 |
+| **Lizenz** | AGPL-3.0-or-later |
 
 ---
 

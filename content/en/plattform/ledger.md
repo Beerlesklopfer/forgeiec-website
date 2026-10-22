@@ -4,14 +4,14 @@ description: "Order Management — production planning, recipe management, and M
 weight: 7
 ---
 
-## The Ledger — *In Development*
+## The Ledger — *planned*
 
 Every forge keeps an order book — which order, which material, which quantity.
 **Ledger** is the order management module of the ForgeIEC platform: the bridge
 between manufacturing control and business operations.
 
-> Ledger is in active development. The features described here
-> represent the planned scope.
+> Ledger is planned; development has not started yet. The features
+> described here represent the planned scope.
 
 ---
 
@@ -63,7 +63,7 @@ ERP / MES
   Tongs (Fieldbus Bridges) --> Machines
 ```
 
-**License:** AGPL-3.0
+**Licence:** AGPL-3.0-or-later
 
 ---
 
