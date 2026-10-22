@@ -4,19 +4,23 @@ description: "SCADA/HMI — Prozessvisualisierung und Anlagenbedienung im Browse
 weight: 4
 ---
 
-## Die Feuerstelle — *In Entwicklung*
+## Die Feuerstelle — *Vorschau*
 
 Die Feuerstelle ist der Mittelpunkt der Schmiede — hier sieht man das Glühen
 des Metalls, hier spürt man die Hitze. **Hearth** ist die SCADA/HMI-Lösung
 der ForgeIEC-Plattform: Prozessvisualisierung und Anlagenbedienung,
 überall erreichbar im Browser.
 
-> Hearth befindet sich in aktiver Entwicklung. Die hier beschriebenen
-> Funktionen repräsentieren den geplanten Umfang.
+{{< callout type="note" title="Vorschau" >}}
+Hearth gibt es als Vorschau: der Hearth-Server (Paket
+`forgeiec-hearth-server`) liest die Prozessdaten direkt vom Anvil-Bus
+und stellt die Bedienoberfläche im Browser bereit. Die folgende Liste
+beschreibt den angestrebten Umfang — nicht alles davon ist umgesetzt.
+{{< /callout >}}
 
 ---
 
-## Geplante Funktionen
+## Angestrebter Umfang
 
 ### Prozessvisualisierung
 
@@ -49,17 +53,19 @@ der ForgeIEC-Plattform: Prozessvisualisierung und Anlagenbedienung,
 
 ## Integration in die Plattform
 
-Hearth verbindet sich über die OPC-UA-Schnittstelle (Bellows) oder
-direkt über gRPC mit der Anvil-Laufzeitumgebung. Der Zugriff erfolgt
-über den Webbrowser — keine Installation auf dem Bediengerät erforderlich.
+Hearth liest die Prozessdaten direkt vom Anvil-Bus (iceoryx2, ohne
+Kopie) — denselben Weg, den die Runtime intern nutzt. Anweisungen an
+die Anlage gibt Hearth an den Anvil-Server (anvild). Der Zugriff
+erfolgt über den Webbrowser — keine Installation auf dem Bediengerät
+erforderlich.
 
 ```
-Browser  --->  Hearth (Web-Server)  --->  anvild / Bellows
-                                            |
-                                          SPS-Kern
+Browser  --->  Hearth (Web-Server)  <---  Anvil-Bus (iceoryx2)  <---  forgeiec_plc (SPS-Zyklus)
+                       |
+                       +--- Anweisungen --->  Anvil-Server (anvild)
 ```
 
-**Lizenz:** AGPL-3.0
+**Lizenz:** AGPL-3.0-or-later
 
 ---
 

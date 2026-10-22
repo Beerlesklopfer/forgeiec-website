@@ -4,19 +4,23 @@ description: "SCADA/HMI — process visualization and plant operation in the bro
 weight: 4
 ---
 
-## The Hearth — *In Development*
+## The Hearth — *Preview*
 
 The hearth is the center of the forge — here you see the glow of the metal,
 here you feel the heat. **Hearth** is the SCADA/HMI solution of the ForgeIEC
 platform: process visualization and plant operation, accessible anywhere
 through the browser.
 
-> Hearth is in active development. The features described here
-> represent the planned scope.
+{{< callout type="note" title="Preview" >}}
+Hearth is available as a preview: the Hearth server (package
+`forgeiec-hearth-server`) reads the process data directly from the
+Anvil bus and serves the operator interface in the browser. The list
+below describes the intended scope — not all of it is implemented.
+{{< /callout >}}
 
 ---
 
-## Planned Features
+## Intended Scope
 
 ### Process Visualization
 
@@ -49,17 +53,19 @@ through the browser.
 
 ## Platform Integration
 
-Hearth connects via the OPC UA interface (Bellows) or directly via gRPC
-to the Anvil runtime environment. Access is through the web browser —
-no installation required on the operator device.
+Hearth reads the process data directly from the Anvil bus (iceoryx2,
+without copying) — the same path the runtime uses internally.
+Instructions to the plant go to the Anvil server (anvild). Access is
+through the web browser — no installation required on the operator
+device.
 
 ```
-Browser  --->  Hearth (Web Server)  --->  anvild / Bellows
-                                            |
-                                          PLC Core
+Browser  --->  Hearth (web server)  <---  Anvil bus (iceoryx2)  <---  forgeiec_plc (PLC cycle)
+                       |
+                       +--- instructions --->  Anvil server (anvild)
 ```
 
-**License:** AGPL-3.0
+**Licence:** AGPL-3.0-or-later
 
 ---
 
