@@ -48,7 +48,7 @@ unsafe = true
       weight = 30
     [[languages.de.menu.main]]
       name = "Kontakt"
-      url = "mailto:blacksmith@forgeiec.io"
+      pageRef = "/kontakt/"
       weight = 40
 
   [languages.en]
@@ -84,7 +84,7 @@ unsafe = true
       weight = 30
     [[languages.en.menu.main]]
       name = "Contact"
-      url = "mailto:blacksmith@forgeiec.io"
+      pageRef = "/contact/"
       weight = 40
 
   [languages.fr]
