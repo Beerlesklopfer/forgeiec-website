@@ -2,6 +2,7 @@
 title: "Rivet"
 date: 2026-10-22
 draft: false
+wide: true
 description: "Rivet: remote access from a phone to controllers in the local network, without port forwarding and without a third-party cloud. Status: in development, pilot with solidarity farms."
 ---
 
@@ -13,6 +14,11 @@ description: "Rivet: remote access from a phone to controllers in the local netw
 .rv-card h3 { margin: 0 0 .4em; font-size: 1.05em; }
 .rv-card p { margin: 0; }
 .rv h3 { margin-top: 1.6em; }
+.rv > :first-child { margin-top: 0; }
+.rv-shot { max-width: 36rem; }
+.rv .rv-card h3 { margin: 0 0 .4em; }
+/* Tables sit inside .rv, so the redesign rule for .prose > table does not reach them. */
+.rv table { display: block; overflow-x: auto; max-width: 100%; border: 1px solid var(--border); border-radius: var(--radius); margin: 1.5rem 0; }
 .rv-fig { margin: 1.4em 0; }
 .rv-fig svg { width: 100%; height: auto; display: block; }
 .rv-fig .rv-v { display: none; max-width: 340px; margin: 0 auto; }
@@ -338,7 +344,11 @@ The README still shows the older scheme `<slug>.<zone>.forgeiec.io`; the code us
 | Phones: last seen, data volume | from the server interface `phones` (status of `forgeiec-rivet-wg`), otherwise from the heartbeat | `Phone.connection` in `models.py` |
 | Gateway service | account `blacksmith`, no root; `CAP_NET_BIND_SERVICE` and `CAP_NET_ADMIN`; `ProtectSystem=strict`, `NoNewPrivileges` | `client/contrib/forgeiec-rivet.service` |
 
+<div class="rv-shot">
+
 {{< screenshot program="rivet" name="gateway-overview" alt="Rivet gateway overview with address, certificate and connection state" caption="Gateway overview: address, certificate, tunnel to the server, portal." >}}
+
+</div>
 
 Note: the README still describes the gateway service without nftables and with `CAP_NET_BIND_SERVICE` only.
 The current code additionally needs `CAP_NET_ADMIN` for the kernel path (TUN `rivet0`, nftables via netlink,

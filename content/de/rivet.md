@@ -2,6 +2,7 @@
 title: "Rivet"
 date: 2026-10-22
 draft: false
+wide: true
 description: "Rivet: Fernzugriff vom Handy auf Steuerungen im lokalen Netz, ohne Portfreigabe und ohne fremde Cloud. Status: in Entwicklung, Pilot mit solidarischen Landwirtschaften."
 ---
 
@@ -13,6 +14,11 @@ description: "Rivet: Fernzugriff vom Handy auf Steuerungen im lokalen Netz, ohne
 .rv-card h3 { margin: 0 0 .4em; font-size: 1.05em; }
 .rv-card p { margin: 0; }
 .rv h3 { margin-top: 1.6em; }
+.rv > :first-child { margin-top: 0; }
+.rv-shot { max-width: 36rem; }
+.rv .rv-card h3 { margin: 0 0 .4em; }
+/* Tables sit inside .rv, so the redesign rule for .prose > table does not reach them. */
+.rv table { display: block; overflow-x: auto; max-width: 100%; border: 1px solid var(--border); border-radius: var(--radius); margin: 1.5rem 0; }
 .rv-fig { margin: 1.4em 0; }
 .rv-fig svg { width: 100%; height: auto; display: block; }
 .rv-fig .rv-v { display: none; max-width: 340px; margin: 0 auto; }
@@ -344,7 +350,11 @@ Die README nennt noch das ältere Schema `<slug>.<zone>.forgeiec.io`; der Code v
 | Handys: zuletzt gesehen, Datenmenge | aus dem Server-Interface `phones` (Status von `forgeiec-rivet-wg`), sonst aus dem Heartbeat | `Phone.connection` in `models.py` |
 | Gateway-Dienst | Konto `blacksmith`, kein root; `CAP_NET_BIND_SERVICE` und `CAP_NET_ADMIN`; `ProtectSystem=strict`, `NoNewPrivileges` | `client/contrib/forgeiec-rivet.service` |
 
+<div class="rv-shot">
+
 {{< screenshot program="rivet" name="gateway-overview" alt="Übersicht des Rivet-Gateways mit Adresse, Zertifikat und Verbindungsstatus" caption="Gateway-Übersicht: Adresse, Zertifikat, Tunnel zum Server, Portal." >}}
+
+</div>
 
 Hinweis: Die README beschreibt den Gateway-Dienst noch ohne nftables und nur mit `CAP_NET_BIND_SERVICE`.
 Der aktuelle Code braucht für den Kernel-Weg zusätzlich `CAP_NET_ADMIN` (TUN `rivet0`, nftables per Netlink,
