@@ -1,5 +1,5 @@
 {{- /* Page header for every non-home page: breadcrumb, title, optional lead. */ -}}
-<header class="page-hero">
+<header class="page-hero{{ if not .Params.full }}{{ if .Params.wide }} page-hero--wide{{ else }} page-hero--narrow{{ end }}{{ end }}">
   <div class="container">
     {{- if not .IsHome }}
     <nav class="breadcrumb" aria-label="Breadcrumb">

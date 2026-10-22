@@ -3,7 +3,4 @@
   Usage: {{< status "use" >}}  states: use | wip | plan | rest
   Optional second argument overrides the label: {{< status "wip" "Gerüst" >}}
 */ -}}
-{{- $s := .Get 0 | default "plan" -}}
-{{- $labels := dict "use" (i18n "statusUse") "wip" (i18n "statusWip") "plan" (i18n "statusPlan") "rest" (i18n "statusRest") -}}
-<span class="chip chip--{{ $s }}">{{ .Get 1 | default (index $labels $s) }}</span>
-{{- /* trim */ -}}
+{{- partial "chip.html" (dict "s" (.Get 0 | default "plan") "label" (.Get 1)) -}}

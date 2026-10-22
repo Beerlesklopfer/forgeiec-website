@@ -222,7 +222,7 @@ small { font-size: .875rem; }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
 .grid-4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
 .split { display: grid; gap: clamp(2rem, 5vw, 4rem); grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
-@media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .split { grid-template-columns: minmax(0, 1fr); } }
 
 /* ===== 4 HEADER ===== */
 .site-header {
@@ -290,7 +290,7 @@ small { font-size: .875rem; }
 .menu-toggle { display: none; }
 
 @media (max-width: 1080px) {
-  .header-cta { display: none; }
+  .header-tools .header-cta { display: none; }
 }
 @media (max-width: 900px) {
   .menu-toggle { display: inline-grid; }
@@ -314,7 +314,7 @@ small { font-size: .875rem; }
   .header-inner { gap: .6rem; }
   .header-tools { gap: .4rem; }
 }
-.mobile-cta { display: none; }
+.main-nav .mobile-cta { display: none; }
 
 /* ===== 5 BUTTONS, CHIPS ===== */
 .btn {
@@ -355,9 +355,9 @@ a:hover > .arrow::after, .arrow:hover::after { transform: translateX(3px); }
 
 /* Hero (home) */
 .hero { background: var(--hero-grad); border-bottom: 1px solid var(--border); }
-.hero-inner { padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(3rem, 7vw, 5.5rem); display: grid; gap: clamp(2rem, 5vw, 4rem); grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; }
-@media (max-width: 960px) { .hero-inner { grid-template-columns: 1fr; } }
-.hero h1 { max-width: 16ch; margin-bottom: 1.25rem; }
+.hero-inner { padding-top: clamp(3.5rem, 9vw, 7rem); padding-bottom: clamp(3rem, 7vw, 5.5rem); display: grid; gap: clamp(2rem, 5vw, 4rem); grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; }
+@media (max-width: 960px) { .hero-inner { grid-template-columns: minmax(0, 1fr); } }
+.hero h1 { max-width: 18ch; margin-bottom: 1.25rem; }
 .hero-lead { font-size: clamp(1.1rem, 1rem + .5vw, 1.35rem); color: var(--text-2); max-width: 36rem; margin-bottom: 2rem; }
 .hero-meta { margin-top: 1.5rem; color: var(--muted); font-size: .92rem; display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
 .hero-meta span { display: inline-flex; align-items: center; gap: .4rem; }
@@ -490,6 +490,9 @@ a.card:hover { border-color: var(--border-strong); transform: translateY(-2px); 
 .diagram { width: 100%; height: auto; display: block; min-width: 0; font-family: var(--font-sans); }
 .diagram text { fill: var(--dg-text); font-size: 14px; }
 .diagram .t-sm { font-size: 12px; fill: var(--dg-muted); }
+.diagram--large text { font-size: 17px; }
+.diagram--large .t-sm { font-size: 14.5px; }
+@media (max-width: 520px) { .figure-frame { padding: .75rem; } }
 .diagram .t-b { font-weight: 700; }
 .diagram .box { fill: var(--dg-box); stroke: var(--dg-stroke); stroke-width: 1.5; }
 .diagram .box-2 { fill: var(--dg-box-2); stroke: var(--dg-stroke); stroke-width: 1.5; }
@@ -499,10 +502,11 @@ a.card:hover { border-color: var(--border-strong); transform: translateY(-2px); 
 .diagram .line-accent { stroke: var(--dg-accent); stroke-width: 2.25; fill: none; }
 .diagram .arrowhead { fill: var(--dg-stroke); }
 .diagram .arrowhead-accent { fill: var(--dg-accent); }
+.diagram .dg-accent-text { fill: var(--accent-text); }
 .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 /* Prose (markdown pages) */
-.page-body { padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 5rem); }
+.page-body { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: clamp(3rem, 6vw, 5rem); }
 .prose { max-width: var(--prose); }
 .prose--wide { max-width: 64rem; }
 .prose > * + * { margin-top: 0; }
@@ -614,3 +618,8 @@ pre.mermaid { background: var(--surface); border: 1px solid var(--border); color
 .figure-alt { margin-top: .6rem; font-size: .95rem; color: var(--text-2); }
 .figure-alt summary { cursor: pointer; color: var(--link); font-weight: 600; font-size: .9rem; }
 .figure-alt[open] summary { margin-bottom: .5rem; }
+
+/* Reading column: prose pages are centred, the page hero aligns with it */
+.page-body > .prose, .page-body > .post-list { margin-left: auto; margin-right: auto; }
+.page-hero--narrow .container { max-width: calc(var(--prose) + 2 * var(--gutter)); }
+.page-hero--wide .container { max-width: calc(64rem + 2 * var(--gutter)); }
