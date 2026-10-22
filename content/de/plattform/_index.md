@@ -4,17 +4,17 @@ description: "Die ForgeIEC-Plattform — die Werkzeuge der Schmiede, jedes mit k
 weight: 10
 ---
 
-> **Neu hier?** [Der ForgeIEC-Verbund](verbund/) erklaert das Ganze in einem
+> **Neu hier?** [Der ForgeIEC-Verbund](verbund/) erklärt das Ganze in einem
 > Zug: das Bild, die Begriffe, die drei Wege und die Fallen — der Einstieg,
 > bevor die Einzelseiten unten Sinn ergeben.
 
 ## Was die Plattform leistet
 
-ForgeIEC ist eine vollstaendige Plattform fuer industrielle
+ForgeIEC ist eine vollständige Plattform für industrielle
 Automatisierung — von der Programmierung bis zum Leitsystem. Jede
-Komponente traegt den Namen eines Schmiedewerkzeugs und hat einen
-klar umrissenen Auftrag. Komponenten sind eigenstaendige Daemonen
-bzw. Anwendungen, gemeinsam laufen sie ueber Zero-Copy-IPC und
+Komponente trägt den Namen eines Schmiedewerkzeugs und hat einen
+klar umrissenen Auftrag. Komponenten sind eigenständige Daemonen
+bzw. Anwendungen, gemeinsam laufen sie über Zero-Copy-IPC und
 gRPC.
 
 | | Komponente | Auftrag | Stand |
@@ -35,10 +35,10 @@ gRPC.
 
 {{< components "studio" >}}
 
-Native C++/Qt6-IDE auf der Workstation. Alle fuenf IEC-Sprachen
+Native C++/Qt6-IDE auf der Workstation. Alle fünf IEC-Sprachen
 (ST + IL + FBD + LD + SFC), Bus-Konfiguration, Live-Monitor,
 Oszilloskop, KI-Helfer eingebaut. Tree-sitter-basierte Syntax,
-gRPC-Anbindung an anvild, MCP-Server fuer LLM-Tooling.
+gRPC-Anbindung an anvild, MCP-Server für LLM-Tooling.
 
 [Mehr erfahren](forge-studio/)
 
@@ -47,13 +47,13 @@ gRPC-Anbindung an anvild, MCP-Server fuer LLM-Tooling.
 {{< components "anvild" >}}
 
 Rust/Tokio-Daemon auf der Ziel-SPS. Multi-Task-Scheduler mit
-pthread-Parallelitaet, deterministische Scan-Cycles, gRPC-Listener
-fuer das Studio, Subprozess-Manager fuer die Bus-Bridges.
+pthread-Parallelität, deterministische Scan-Cycles, gRPC-Listener
+für das Studio, Subprozess-Manager für die Bus-Bridges.
 
 Eingebaut ist **Anvil** — die Zero-Copy-Shared-Memory-Schicht
 zwischen Runtime, Bridges und externen Subscribern. ABI-Probe gegen
-Type-Hash-Drift; Segmente abgestuerzter Peers werden automatisch
-zurueckgeholt, ohne lebende Peers anzutasten. Wire-Protokoll fuer
+Type-Hash-Drift; Segmente abgestürzter Peers werden automatisch
+zurückgeholt, ohne lebende Peers anzutasten. Wire-Protokoll für
 Status, I/O, Diagnostik.
 
 [Mehr erfahren](anvil/)
@@ -62,7 +62,7 @@ Status, I/O, Diagnostik.
 
 {{< components "bellowsd" >}}
 
-OPC-UA-Server + Modbus-TCP-Server fuer HMI-Anbindung. Exportiert
+OPC-UA-Server + Modbus-TCP-Server für HMI-Anbindung. Exportiert
 Pool-Variablen mit `bellows_export`-Flag als OPC-UA-Knoten +
 Modbus-Coils. Pro Variable einzeln gegated.
 
@@ -84,10 +84,10 @@ Profibus und EtherNet/IP in Arbeit.
 {{< components "screen" >}}
 
 CEF-basierter Industrie-Kiosk-Browser (Chromium Embedded Framework
-+ Rust + winit). Laeuft fullscreen auf Bedienpanels, oeffnet eine
++ Rust + winit). Läuft fullscreen auf Bedienpanels, öffnet eine
 beliebige Web-HMI (Bellows / Hearth / 3rd-party). Integrierter
-Rocket-Web-Server fuer Settings (Netz, WireGuard, Zeitzone,
-80+ Sprachen), D-Bus-Backend fuer NetworkManager / timedated /
+Rocket-Web-Server für Settings (Netz, WireGuard, Zeitzone,
+80+ Sprachen), D-Bus-Backend für NetworkManager / timedated /
 localed.
 
 [Mehr erfahren](screen/)
@@ -97,9 +97,9 @@ localed.
 {{< components "hearth" >}}
 
 IIoT-Subscriber + SCADA-Schicht. Subscribet Anvil-Topics — anvild
-legt den passenden Descriptor dafuer unter
+legt den passenden Descriptor dafür unter
 `/etc/forgeiec/hearth/descriptor.toml` ab. Als Paket
-`hearth-server` im APT-Repository verfuegbar. Geplant:
+`hearth-server` im APT-Repository verfügbar. Geplant:
 Time-Series-DB-Anbindung (InfluxDB, TimescaleDB), Mosquitto-MQTT-
 Bridge, Alarm-Management, Grafana-Dashboards.
 
@@ -109,9 +109,9 @@ Bridge, Alarm-Management, Grafana-Dashboards.
 
 {{< components "ledger" >}}
 
-Auftragsverwaltung + MES-Integration. Plant: Produktionsauftraege,
-Stueckzahl-Tracking, Rueckverfolgbarkeit (Material → Charge →
-Produkt), Schichtbuch, Bruecke zu ERP-Systemen. In Planung — kommt
+Auftragsverwaltung + MES-Integration. Plant: Produktionsaufträge,
+Stückzahl-Tracking, Rückverfolgbarkeit (Material → Charge →
+Produkt), Schichtbuch, Brücke zu ERP-Systemen. In Planung — kommt
 nach Hearth.
 
 [Mehr erfahren](ledger/)
@@ -140,26 +140,26 @@ flowchart LR
 ```
 
 Studio sitzt auf der Workstation, alles andere auf den Ziel-
-Systemen. Workstations + Ziel-Systeme koennen ueber das
+Systemen. Workstations + Ziel-Systeme können über das
 [Team-Federation-Modell](/news/federation-team-trust/) miteinander
 verbunden werden — mehrere Workstations sehen ihre Anlagen.
 
 ---
 
-## Open Source + Aufbauend auf Vorgaengern
+## Open Source + Aufbauend auf Vorgängern
 
 Alle Komponenten sind **AGPL-3.0**. Der Source liegt im Forgejo
-unter `git.forgeiec.io` — die Repositories sind nicht oeffentlich
-einsehbar, der Zugriff laeuft ueber SSH nach Freischaltung Ihres
+unter `git.forgeiec.io` — die Repositories sind nicht öffentlich
+einsehbar, der Zugriff läuft über SSH nach Freischaltung Ihres
 SSH-Public-Keys (siehe [Partner](/de/partner/)). Build
-reproduzierbar ueber CPack — signiertes APT-Repository fuer
-Debian/Ubuntu, signiertes RPM-Repository fuer AlmaLinux 9 und
+reproduzierbar über CPack — signiertes APT-Repository für
+Debian/Ubuntu, signiertes RPM-Repository für AlmaLinux 9 und
 Fedora 44.
 
 ForgeIEC steht auf den Schultern von **OpenPLC** (Thiago Alves,
-seit 2018) und behaelt Datei-Kompatibilitaet zu OpenPLC-Projekten.
-Lesen Sie die [Founding-Story](/news/die-forgeiec-geschichte/) fuer
-den vollen Werdegang vom OpenPLC-Fork zur eigenstaendigen
+seit 2018) und behält Datei-Kompatibilität zu OpenPLC-Projekten.
+Lesen Sie die [Founding-Story](/news/die-forgeiec-geschichte/) für
+den vollen Werdegang vom OpenPLC-Fork zur eigenständigen
 Plattform.
 
 ---

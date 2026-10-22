@@ -6,13 +6,13 @@ weight: 4
 
 ## Die Feuerstelle — *In Entwicklung*
 
-Die Feuerstelle ist der Mittelpunkt der Schmiede — hier sieht man das Gluehen
-des Metalls, hier spuert man die Hitze. **Hearth** ist die SCADA/HMI-Loesung
+Die Feuerstelle ist der Mittelpunkt der Schmiede — hier sieht man das Glühen
+des Metalls, hier spürt man die Hitze. **Hearth** ist die SCADA/HMI-Lösung
 der ForgeIEC-Plattform: Prozessvisualisierung und Anlagenbedienung,
-ueberall erreichbar im Browser.
+überall erreichbar im Browser.
 
 > Hearth befindet sich in aktiver Entwicklung. Die hier beschriebenen
-> Funktionen repraesentieren den geplanten Umfang.
+> Funktionen repräsentieren den geplanten Umfang.
 
 ---
 
@@ -20,8 +20,8 @@ ueberall erreichbar im Browser.
 
 ### Prozessvisualisierung
 
-- Webbasierte Darstellung von Anlagenzustaenden und Prozesswerten
-- Responsive Dashboards fuer Desktop, Tablet und Mobilgeraete
+- Webbasierte Darstellung von Anlagenzuständen und Prozesswerten
+- Responsive Dashboards für Desktop, Tablet und Mobilgeräte
 - Echtzeit-Aktualisierung ohne manuelles Neuladen
 - Frei konfigurierbare Prozessbilder mit Symbolen und Animationen
 
@@ -30,28 +30,28 @@ ueberall erreichbar im Browser.
 - Zentrale Alarmverwaltung mit Quittierung und Eskalation
 - Alarmhistorie mit Zeitstempel und Benutzerprotokoll
 - Priorisierung und Filterung nach Anlagenbereichen
-- Push-Benachrichtigungen bei kritischen Zustaenden
+- Push-Benachrichtigungen bei kritischen Zuständen
 
 ### Trendaufzeichnung
 
 - Langzeit-Aufzeichnung von Prozesswerten
 - Konfigurierbare Abtastraten und Speicherdauer
 - Trend-Diagramme mit Zoom, Pan und Cursor-Abfrage
-- Export in CSV und gaengige Formate
+- Export in CSV und gängige Formate
 
-### Bedienoberfaeche
+### Bedienoberfläche
 
-- Eingabemasken fuer Sollwerte und Rezeptparameter
+- Eingabemasken für Sollwerte und Rezeptparameter
 - Benutzerverwaltung mit Berechtigungsstufen
-- Bedienerprotokoll (Audit Trail) fuer regulierte Umgebungen
+- Bedienerprotokoll (Audit Trail) für regulierte Umgebungen
 
 ---
 
 ## Integration in die Plattform
 
-Hearth verbindet sich ueber die OPC-UA-Schnittstelle (Bellows) oder
-direkt ueber gRPC mit der Anvil-Laufzeitumgebung. Der Zugriff erfolgt
-ueber den Webbrowser — keine Installation auf dem Bediengeraet erforderlich.
+Hearth verbindet sich über die OPC-UA-Schnittstelle (Bellows) oder
+direkt über gRPC mit der Anvil-Laufzeitumgebung. Der Zugriff erfolgt
+über den Webbrowser — keine Installation auf dem Bediengerät erforderlich.
 
 ```
 Browser  --->  Hearth (Web-Server)  --->  anvild / Bellows
@@ -65,7 +65,7 @@ Browser  --->  Hearth (Web-Server)  --->  anvild / Bellows
 
 <div style="text-align:center; padding: 2rem;">
 
-**Hearth — Die Anlage im Blick, von ueberall.**
+**Hearth — Die Anlage im Blick, von überall.**
 
 blacksmith@forgeiec.io
 

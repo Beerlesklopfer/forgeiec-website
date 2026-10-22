@@ -1,5 +1,5 @@
 ---
-title: "MCP fuer IT + Betrieb"
+title: "MCP für IT + Betrieb"
 summary: "Deployment, Netzwerk, Zertifikate, Logs, Monitoring, Troubleshooting"
 ---
 
@@ -9,7 +9,7 @@ Administrator oder Betriebs-Verantwortliche. Aufgaben:
 
 - ForgeIEC Studio auf Workstations installieren + ausrollen
 - Netzwerk-Anbindung absichern
-- Identitaeten + Trust-Store verwalten
+- Identitäten + Trust-Store verwalten
 - Logs auswerten, Monitoring anbinden
 - Probleme im laufenden Betrieb diagnostizieren
 
@@ -44,10 +44,10 @@ iptables -A INPUT -p tcp --dport 7531 -j REJECT
 |---|---|
 | `~/.config/ForgeIEC/mcp/server.crt` | RSA-4096, SAN-bound, 10 Jahre |
 | `~/.config/ForgeIEC/mcp/server.key` | RSA-4096 Private Key, 600 |
-| `~/.config/ForgeIEC/mcp/server.san` | SAN-Manifest (regeneriert Cert bei Aenderung) |
+| `~/.config/ForgeIEC/mcp/server.san` | SAN-Manifest (regeneriert Cert bei Änderung) |
 
 Auto-Generation beim ersten Server-Start. Regeneration bei
-Bind-Adress-Aenderung (RFC-6125-SAN-Compliance).
+Bind-Adress-Änderung (RFC-6125-SAN-Compliance).
 
 ### Trust-Store (mTLS-Modus)
 
@@ -72,7 +72,7 @@ ausstellen + keine bestehenden mehr widerrufen.
 
 ---
 
-## Identitaeten + Tokens
+## Identitäten + Tokens
 
 | Quelle | Inhalt |
 |---|---|
@@ -95,7 +95,7 @@ Token-Rotation:
 | `~/.config/ForgeIEC/mcp_audit.log` | JSONL append-only | keine (manuelles Trim bei Bedarf) |
 | `journalctl -u anvild` | systemd-Journal | systemd-Defaults |
 | `journalctl -u bellowsd` | systemd-Journal | systemd-Defaults |
-| Editor-Logs | stderr + `editor.recent_logs` MCP-Tool (500-Eintraege Ring) | flüchtig |
+| Editor-Logs | stderr + `editor.recent_logs` MCP-Tool (500-Einträge Ring) | flüchtig |
 
 ### Audit-Log-Format
 
@@ -121,11 +121,11 @@ Empfohlene Auswertung: `jq` oder Loki/Promtail mit JSON-Parser.
 | `~/.config/ForgeIEC/mcp/trust/` | wichtig (Trust-Store + Roster) |
 | `~/.config/ForgeIEC/mcp/server.key` | regenerierbar (auto bei Start) |
 | `~/.config/ForgeIEC/mcp_audit.log` | je nach Compliance-Anforderung |
-| `/var/lib/anvil/` | enthaelt Projekt-Store + Config |
+| `/var/lib/anvil/` | enthält Projekt-Store + Config |
 | `/etc/forgeiec/bellows/` | bellowsd-Konfig |
 
 Caretaker-Workstation: `ca-team/ca.key` ist die einzige nicht-
-regenerierbare Datei. Verlust = Team-CA-Recovery noetig.
+regenerierbare Datei. Verlust = Team-CA-Recovery nötig.
 
 ---
 
@@ -190,16 +190,16 @@ Anbindung an Prometheus/Grafana: per Cron-Skript `server_info` +
 | Symptom | Diagnose |
 |---|---|
 | Connection refused | Editor nicht gestartet oder anderer Port — `ss -tlnp` |
-| TLS handshake failed | Server-Cert abgelaufen oder Hostname-Mismatch — Cert neu generieren (Bind-Adress-Aenderung triggert das auto) |
-| 401 Unauthorized | Token falsch oder Profil deaktiviert — Preferences pruefen |
+| TLS handshake failed | Server-Cert abgelaufen oder Hostname-Mismatch — Cert neu generieren (Bind-Adress-Änderung triggert das auto) |
+| 401 Unauthorized | Token falsch oder Profil deaktiviert — Preferences prüfen |
 | FORGE_ERR_NO_PROJECT | Projekt nicht offen — `project.open` zuerst |
 
-### Variable bleibt "haengen"
+### Variable bleibt "hängen"
 
 Siehe [FAQ](/help/faq/stuck-variables-shm/). Stale Anvil-SHM.
 Fix: PLC-Runtime neu starten (`Stop` + `Start` bzw.
-`Build → Compile and Upload`) — Anvil raeumt die Segmente toter
-Nodes dabei selbst auf. SHM-Dateien nicht von Hand loeschen.
+`Build → Compile and Upload`) — Anvil räumt die Segmente toter
+Nodes dabei selbst auf. SHM-Dateien nicht von Hand löschen.
 
 ### Build-Mismatch
 
@@ -212,7 +212,7 @@ sudo apt install --reinstall forgeiec-studio
 sudo systemctl restart anvild
 ```
 
-### Deploy schlaegt fehl
+### Deploy schlägt fehl
 
 `codegen.deploy_status.build_log_tail` liefert den g++-stderr-Tail
 (letzte 16 KB). Wenn `Auto-start failed: Runtime binary not found`:
@@ -224,7 +224,7 @@ journalctl -u anvild -n 50 --no-pager
 In der Regel fehlende C-Toolchain auf dem PLC-Target oder
 disk-full.
 
-### Audit-Log waechst unbegrenzt
+### Audit-Log wächst unbegrenzt
 
 ```bash
 # Rotation manuell
@@ -283,7 +283,7 @@ Workstation-Drift.
 
 ## Weiter
 
-- [MCP-Protokoll fuer Applikationsingenieure](/help/mcp/programmers/)
+- [MCP-Protokoll für Applikationsingenieure](/help/mcp/programmers/)
 - [Architektur + Sicherheits-Engineering](/help/ai/architecture/)
 - [FAQ](/help/faq/)
-- [Zurueck zur MCP-Uebersicht](/help/mcp/)
+- [Zurück zur MCP-Übersicht](/help/mcp/)

@@ -6,13 +6,13 @@ weight: 7
 
 ## Das Schmiedebuch — *In Entwicklung*
 
-Jede Schmiede fuehrt ein Auftragsbuch — welcher Auftrag, welches Material,
+Jede Schmiede führt ein Auftragsbuch — welcher Auftrag, welches Material,
 welche Menge. **Ledger** ist das Auftragsmanagement-Modul der
-ForgeIEC-Plattform: die Bruecke zwischen Fertigungssteuerung und
+ForgeIEC-Plattform: die Brücke zwischen Fertigungssteuerung und
 Betriebswirtschaft.
 
 > Ledger befindet sich in aktiver Entwicklung. Die hier beschriebenen
-> Funktionen repraesentieren den geplanten Umfang.
+> Funktionen repräsentieren den geplanten Umfang.
 
 ---
 
@@ -21,38 +21,38 @@ Betriebswirtschaft.
 ### Produktionsplanung
 
 - Auftragserfassung und Priorisierung
-- Kapazitaetsplanung und Maschinenbelegung
+- Kapazitätsplanung und Maschinenbelegung
 - Auftragsstatus-Verfolgung in Echtzeit
-- Rueckmeldung aus der SPS — automatische Fortschrittsmeldung
+- Rückmeldung aus der SPS — automatische Fortschrittsmeldung
 
 ### Rezeptverwaltung
 
-- Verwaltung von Produktionsrezepten und Parametersaetzen
+- Verwaltung von Produktionsrezepten und Parametersätzen
 - Versionierung und Freigabeworkflow
-- Automatische Parameteruebertragung an die SPS bei Auftragswechsel
-- Rueckverfolgbarkeit: welches Rezept wurde wann geladen
+- Automatische Parameterübertragung an die SPS bei Auftragswechsel
+- Rückverfolgbarkeit: welches Rezept wurde wann geladen
 
 ### Batch-Tracking
 
 - Chargenprotokollierung mit Zeitstempel
-- Zuordnung von Produktionsdaten zu Auftraegen
+- Zuordnung von Produktionsdaten zu Aufträgen
 - Materialverfolgung vom Eingang bis zum Endprodukt
-- Exportfunktion fuer Qualitaetsdokumentation
+- Exportfunktion für Qualitätsdokumentation
 
 ### MES-Integration
 
-- Schnittstellen zu uebergeordneten MES-Systemen
+- Schnittstellen zu übergeordneten MES-Systemen
 - ISA-95-kompatible Datenmodelle
 - REST/OPC-UA-basierter Datenaustausch
-- Bidirektional: Auftraege empfangen, Rueckmeldungen senden
+- Bidirektional: Aufträge empfangen, Rückmeldungen senden
 
 ---
 
 ## Integration in die Plattform
 
 Ledger verbindet die Produktionsebene (Anvil, Tongs) mit der
-Planungsebene (MES, ERP). Die SPS meldet Stueckzahlen und Zustaende,
-Ledger verwaltet die Auftraege und steuert den Materialfluss.
+Planungsebene (MES, ERP). Die SPS meldet Stückzahlen und Zustände,
+Ledger verwaltet die Aufträge und steuert den Materialfluss.
 
 ```
 ERP / MES

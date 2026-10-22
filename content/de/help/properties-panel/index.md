@@ -1,14 +1,14 @@
 ---
 title: "Properties-Panel"
-summary: "Inline-Editor fuer das im Project-Tree selektierte Bus-Element"
+summary: "Inline-Editor für das im Project-Tree selektierte Bus-Element"
 ---
 
-## Ueberblick
+## Überblick
 
 Das **Properties-Panel** ist die rechte Detail-Anzeige des
 Editor-Hauptfensters. Es zeigt **alle Felder des aktuell im
 Project-Tree selektierten Elements** an und macht sie inline editierbar
-— ohne dass man fuer jeden Edit einen modalen Dialog oeffnen muss.
+— ohne dass man für jeden Edit einen modalen Dialog öffnen muss.
 
 ```
 Project-Tree                          Properties-Panel
@@ -23,13 +23,13 @@ Project-Tree                          Properties-Panel
 ```
 
 Ein **Single-Click** auf einen Knoten im Project-Tree erzeugt sofort die
-passende Felder-Liste — ein **Doppelklick** oeffnet zusaetzlich den
+passende Felder-Liste — ein **Doppelklick** öffnet zusätzlich den
 modalen Konfigurations-Dialog ([Bus-Konfiguration](../bus-config/)) mit
 identischem Feld-Set.
 
 Das Panel ist in eine `QScrollArea` gewickelt und scrollt vertikal:
 Devices mit FDD-Erweiterungen + Status-Tabelle bekommen leicht
-40+ Felder, und die muessen alle erreichbar bleiben, auch wenn der
+40+ Felder, und die müssen alle erreichbar bleiben, auch wenn der
 Dock-Bereich schmal ist.
 
 ## Bus-Segment
@@ -42,14 +42,14 @@ Wenn ein Bus-Segment selektiert ist, zeigt das Panel:
 | **Protocol** | `modbustcp`, `modbusrtu`, `ethercat`, `profibus`, `ethernetip`. |
 | **Interface** | Netzwerk-Interface, an das der Bridge bindet (`eth0`, `eth1`, …). |
 | **Bind Address** | CIDR-Notation, z. B. `192.168.1.10/24`. Validiert. |
-| **Gateway** | Default-Gateway fuer den Bridge-Prozess. |
+| **Gateway** | Default-Gateway für den Bridge-Prozess. |
 | **Poll Interval** | Periode in `ms`, mit der der Bridge die Devices abfragt. |
 | **Enabled** | Bridge-Subprozess aktiv (an / aus). |
 
 ### Advanced Network (alle optional)
 
 Spiegelt die gleichnamige Gruppe aus dem `FSegmentDialog` und
-ueberschreibt OS- bzw. Bridge-Defaults:
+überschreibt OS- bzw. Bridge-Defaults:
 
   - **Subnet CIDR** (`192.168.24.0/24`)
   - **Source Port Range** (`30000-39999`)
@@ -93,8 +93,8 @@ ueberschreibt OS- bzw. Bridge-Defaults:
 ### Status-Variablen (read-only)
 
 Jedes Device exponiert automatisch das Common-Fault-Model — sieben
-implizite Felder, die ueber Anvil als read-only Status-Topic
-veroeffentlicht werden:
+implizite Felder, die über Anvil als read-only Status-Topic
+veröffentlicht werden:
 
 | Name | IEC-Typ | Bedeutung |
 |---|---|---|
@@ -107,7 +107,7 @@ veroeffentlicht werden:
 | `tLastTransition`      | `ULINT`        | Unix-Zeit (ms) des letzten State-Wechsels. |
 
 Wenn das Device an eine **FDD** (Field-Device-Description) gebunden
-ist (`catalogRef`), zeigt die Status-Tabelle zusaetzlich die
+ist (`catalogRef`), zeigt die Status-Tabelle zusätzlich die
 FDD-spezifischen Erweiterungen mit dem Vermerk `FDD +<offset>` in der
 `Source`-Spalte.
 
@@ -148,21 +148,21 @@ Sortierreihenfolge: Inputs vor Outputs, dann nach Bus-Adresse aufsteigend.
 
 ## Edit-Verhalten
 
-Jeder Edit im Panel laeuft direkt gegen das Modell:
+Jeder Edit im Panel läuft direkt gegen das Modell:
 
   1. Edit im Widget (`editingFinished` / `valueChanged` / `toggled`).
   2. Modell-Feld wird aktualisiert (`seg->name = ...`).
   3. `project->markDirty()` setzt das Dirty-Flag.
   4. Signal `busConfigEdited` wird emittiert.
-  5. Das MainWindow refresht das Project-Tree-Label, falls noetig.
+  5. Das MainWindow refresht das Project-Tree-Label, falls nötig.
 
 Es gibt **kein** explizites `Apply` und **kein** `Cancel` — Edits sind
 sofort wirksam. `Ctrl+Z` (Undo) auf dem Project-Tree macht den letzten
-Edit rueckgaengig.
+Edit rückgängig.
 
 ## Verwandte Themen
 
   - [Bus-Konfiguration](../bus-config/) — modale Dialoge mit
-    identischem Feld-Set, fuer Power-User mit hohem Edit-Volumen.
+    identischem Feld-Set, für Power-User mit hohem Edit-Volumen.
   - [Variables Panel](../variables/) — der Pool, aus dem die
     `IO-Variables`-Tabelle stammt.

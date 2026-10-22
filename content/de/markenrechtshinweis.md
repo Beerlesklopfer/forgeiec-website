@@ -2,23 +2,23 @@
 title: "Markenrechtshinweis"
 date: 2026-05-28
 draft: false
-description: "Hinweis zu Marken Dritter, die auf dieser Website erwaehnt werden, sowie Aufforderung zur vorherigen Kontaktaufnahme statt Abmahnung."
+description: "Hinweis zu Marken Dritter, die auf dieser Website erwähnt werden, sowie Aufforderung zur vorherigen Kontaktaufnahme statt Abmahnung."
 ---
 
 # Markenrechtshinweis
 
 ForgeIEC ist ein **nicht-kommerzielles Open-Source-Projekt** ohne
 Umsatz und ohne Gewinnerzielungsabsicht. Es wird unter der
-**AGPL-3.0-or-later** veroeffentlicht und finanziert sich
-ausschliesslich aus ehrenamtlicher Arbeit der Beitragenden.
+**AGPL-3.0-or-later** veröffentlicht und finanziert sich
+ausschließlich aus ehrenamtlicher Arbeit der Beitragenden.
 
-## Erwaehnte Marken Dritter
+## Erwähnte Marken Dritter
 
 Auf dieser Website werden zur sachlichen Information und im
 Rahmen technischer Dokumentation Produktnamen, Marken oder Logos
-Dritter erwaehnt — insbesondere Hersteller von Industriesteuerungen
+Dritter erwähnt — insbesondere Hersteller von Industriesteuerungen
 und Programmiersystemen, Feldbus-Protokolle und industrielle
-Software-Werkzeuge. Dazu gehoeren unter anderem (alphabetisch):
+Software-Werkzeuge. Dazu gehören unter anderem (alphabetisch):
 
 - **ABB** — eingetragene Marke der ABB Asea Brown Boveri Ltd.
 - **Allen-Bradley**, **RSLogix**, **Studio 5000** — Marken der
@@ -51,63 +51,63 @@ Software-Werkzeuge. Dazu gehoeren unter anderem (alphabetisch):
 - **Weidmueller** / **Weidmuller** — Marke der Weidmueller
   Interface GmbH & Co. KG
 
-Diese Aufzaehlung ist nicht abschliessend; weitere Marken
-koennen in Dokumentationsseiten, Vergleichstabellen oder
+Diese Aufzählung ist nicht abschließend; weitere Marken
+können in Dokumentationsseiten, Vergleichstabellen oder
 Sprachreferenzen vorkommen.
 
 ## Rechtliche Klarstellung
 
-Saemtliche genannten Marken-, Produkt- und Firmennamen sind
+Sämtliche genannten Marken-, Produkt- und Firmennamen sind
 **Eigentum der jeweiligen Rechteinhaber** und dienen auf dieser
-Website ausschliesslich:
+Website ausschließlich:
 
 - der **Identifikation** im Rahmen sachlicher Information,
 - dem **technischen Vergleich** in der Referenzdokumentation
   (z.B. Sprachdialekte der IEC 61131-3, Diskussion verschiedener
   Standard-Bibliotheks-Implementierungen, Hersteller-Datenformate),
-- der **Beschreibung von Interoperabilitaet** (z.B. unterstuetzte
-  Feldbus-Protokolle, importierbare Geraete-Beschreibungs-Formate).
+- der **Beschreibung von Interoperabilität** (z.B. unterstützte
+  Feldbus-Protokolle, importierbare Geräte-Beschreibungs-Formate).
 
-Die Erwaehnung impliziert **weder eine Kooperation, Lizenzierung
-noch eine Empfehlung** durch oder gegenueber dem ForgeIEC-Projekt.
-ForgeIEC steht in keinerlei geschaeftlicher, organisatorischer
+Die Erwähnung impliziert **weder eine Kooperation, Lizenzierung
+noch eine Empfehlung** durch oder gegenüber dem ForgeIEC-Projekt.
+ForgeIEC steht in keinerlei geschäftlicher, organisatorischer
 oder vertraglicher Verbindung zu den genannten Markeninhabern,
-soweit hier nicht ausdruecklich anders angegeben.
+soweit hier nicht ausdrücklich anders angegeben.
 
-ForgeIEC ist eine **unabhaengige Implementierung** der
+ForgeIEC ist eine **unabhängige Implementierung** der
 IEC 61131-3 (offener Industriestandard der IEC) und keine
 Ableitung, Portierung oder Klon eines kommerziellen Produkts.
 
 ## Bitte vor einer Abmahnung Kontakt aufnehmen
 
 Sollten Sie der Auffassung sein, dass auf dieser Website oder im
-ForgeIEC-Projekt **Marken-, Urheber- oder Persoenlichkeitsrechte
-unberechtigt verwendet** werden, bitten wir Sie ausdruecklich um
+ForgeIEC-Projekt **Marken-, Urheber- oder Persönlichkeitsrechte
+unberechtigt verwendet** werden, bitten wir Sie ausdrücklich um
 **eine kurze formlose E-Mail** an:
 
 **[blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io)**
 
 Da das Projekt **keinerlei Einnahmen erzielt** und auch keine
-kommerziellen Interessen verfolgt, waere eine sofortige
-**kostenpflichtige Abmahnung** gegenueber dem Projektbetreiber
-**unverhaeltnismaessig** im Sinne der staendigen
+kommerziellen Interessen verfolgt, wäre eine sofortige
+**kostenpflichtige Abmahnung** gegenüber dem Projektbetreiber
+**unverhältnismäßig** im Sinne der ständigen
 DACH-Rechtsprechung (vgl. u.a. BGH, Urteil vom 12.12.2013, I ZR
-131/12 — „Goldbaeren"). Der Projektbetreiber ist sich seiner
-Verantwortung bewusst und wird **jeder begruendeten Beanstandung
-unverzueglich** nachkommen:
+131/12 — „Goldbären"). Der Projektbetreiber ist sich seiner
+Verantwortung bewusst und wird **jeder begründeten Beanstandung
+unverzüglich** nachkommen:
 
 - **innerhalb von typischerweise 48 Stunden** wird der
-  beanstandete Inhalt entfernt oder geaendert,
-- eine **strafbewehrte Unterlassungserklaerung** geben wir
-  freiwillig ab, sofern eine Rechtsverletzung tatsaechlich
+  beanstandete Inhalt entfernt oder geändert,
+- eine **strafbewehrte Unterlassungserklärung** geben wir
+  freiwillig ab, sofern eine Rechtsverletzung tatsächlich
   vorliegt,
 - die Kosten der ersten anwaltlichen Inanspruchnahme weisen wir
-  als **unbegruendet** zurueck, da diese ohne vorherige
-  Kontaktaufnahme weder erforderlich noch verhaeltnismaessig sind.
+  als **unbegründet** zurück, da diese ohne vorherige
+  Kontaktaufnahme weder erforderlich noch verhältnismäßig sind.
 
-Wir bitten daher um Verstaendnis dafuer, dass wir **anwaltliche
+Wir bitten daher um Verständnis dafür, dass wir **anwaltliche
 Kostennoten ohne vorherige direkte Kontaktaufnahme aus
-grundsaetzlichen Erwaegungen zurueckweisen** werden.
+grundsätzlichen Erwägungen zurückweisen** werden.
 
 ## Kontakt
 

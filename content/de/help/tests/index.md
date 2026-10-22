@@ -1,18 +1,18 @@
 ---
 title: "Testabdeckung"
-summary: "Automatisierte Qualitaetssicherung: 117 Tests pruefen den vollstaendigen IEC 61131-3 Sprachvorrat, alle Standard-Bausteine und das Multi-Task-Threading"
+summary: "Automatisierte Qualitätssicherung: 117 Tests prüfen den vollständigen IEC 61131-3 Sprachvorrat, alle Standard-Bausteine und das Multi-Task-Threading"
 ---
 
 ForgeIEC wird durch eine umfassende automatisierte Test-Suite abgesichert.
-Jeder Commit wird vor dem Merge gegen **117 Unit-Tests** geprueft, die den
-vollstaendigen IEC 61131-3 Structured Text Sprachvorrat, alle
+Jeder Commit wird vor dem Merge gegen **117 Unit-Tests** geprüft, die den
+vollständigen IEC 61131-3 Structured Text Sprachvorrat, alle
 Standard-Funktionsbausteine und das Multi-Task-Threading-System abdecken.
 
-## Test-Suiten im Ueberblick
+## Test-Suiten im Überblick
 
-| Suite | Tests | Prueft |
+| Suite | Tests | Prüft |
 |-------|------:|--------|
-| **FStCompilerTest** | 101 | Vollstaendiger ST-Sprachvorrat |
+| **FStCompilerTest** | 101 | Vollständiger ST-Sprachvorrat |
 | **FStLibraryTest** | 8 | Alle 132 Standard-Bausteine (FBs + FCs) |
 | **FCodeGeneratorThreadingTest** | 8 | Multi-Task-Scheduling + Lock-free Sync |
 | **Gesamt** | **117** | **0 Fehler** |
@@ -21,13 +21,13 @@ Standard-Funktionsbausteine und das Multi-Task-Threading-System abdecken.
 
 ## 1. ST-Sprachvorrat (FStCompilerTest)
 
-101 Tests pruefen jeden unterstuetzten IEC 61131-3 Structured Text
+101 Tests prüfen jeden unterstützten IEC 61131-3 Structured Text
 Sprachkonstrukt. Jeder Test kompiliert ein ST-Fragment durch den
 FStCompiler und verifiziert den generierten C++-Code.
 
 ### 1.1 Zuweisungen
 
-| Test | ST-Code | Prueft |
+| Test | ST-Code | Prüft |
 |------|---------|--------|
 | `assignSimple` | `a := 42;` | Einfache Zuweisung |
 | `assignExpression` | `a := b + 1;` | Ausdruck-Zuweisung |
@@ -69,10 +69,10 @@ FStCompiler und verifiziert den generierten C++-Code.
 
 ### 1.5 Literale
 
-| Test | ST-Code | Prueft |
+| Test | ST-Code | Prüft |
 |------|---------|--------|
 | `literalInteger` | `a := 12345;` | Ganzzahl |
-| `literalReal` | `c := 3.14;` | Fliesskomma |
+| `literalReal` | `c := 3.14;` | Fließkomma |
 | `literalBoolTrue` | `flag := TRUE;` | Boolescher Wert |
 | `literalBoolFalse` | `flag := FALSE;` | Boolescher Wert |
 | `literalString` | `text := 'hello';` | Zeichenkette |
@@ -82,16 +82,16 @@ FStCompiler und verifiziert den generierten C++-Code.
 
 **IF / ELSIF / ELSE / END_IF**
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `ifSimple` | Einfache Bedingung |
 | `ifElse` | If-Else-Verzweigung |
 | `ifElsif` | Mehrfachverzweigung mit ELSIF |
-| `ifNested` | Verschachtelte IF-Bloecke |
+| `ifNested` | Verschachtelte IF-Blöcke |
 
 **FOR / WHILE / REPEAT**
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `forSimple` | FOR idx := 0 TO 10 DO |
 | `forWithBy` | FOR mit BY-Schrittweite |
@@ -100,27 +100,27 @@ FStCompiler und verifiziert den generierten C++-Code.
 
 **CASE**
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `caseStatement` | CASE/OF mit mehreren Labels + switch/case/break |
 
 **RETURN / EXIT**
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `returnStatement` | RETURN → goto __end |
 | `exitStatement` | EXIT innerhalb FOR → break |
 
 ### 1.7 Funktionsbausteine (FB-Aufrufe)
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `fbCallWithInputs` | `MyTon(IN := flag, PT := T#500ms);` |
 | `fbCallWithOutputAssign` | `MyTimer(IN := flag, Q => flag);` — OUT => Zuweisung |
 
 ### 1.8 Array-Zugriffe
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `arrayReadSubscript` | `a := arr[3];` |
 | `arrayWriteSubscript` | `arr[5] := 42;` |
@@ -131,26 +131,26 @@ FStCompiler und verifiziert den generierten C++-Code.
 
 ## 2. Standard-Bibliothek (FStLibraryTest)
 
-8 datengetriebene Tests pruefen **alle 132 Bloecke** aus der
+8 datengetriebene Tests prüfen **alle 132 Blöcke** aus der
 Standard-Bibliothek (`standard_library.sql`) automatisch.
 
 ### 2.1 Funktionsbausteine (13 FBs)
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `fbSingleInstance` | Jeder FB einzeln instanziierbar und aufrufbar |
 | `fbDoubleInstance` | Zwei Instanzen desselben FB-Typs gleichzeitig |
-| `fbOutputRead` | Alle Ausgaenge nach dem Aufruf lesbar |
+| `fbOutputRead` | Alle Ausgänge nach dem Aufruf lesbar |
 
 **Abgedeckte FBs:** SR, RS, R_TRIG, F_TRIG, CTU, CTD, CTUD, TON, TOF, TP,
 RTC, SEMA, RampGen
 
 ### 2.2 Funktionen (119 FCs)
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `fcCall` | Jede FC mit korrekten Parametern aufrufbar (104 getestet) |
-| `fcInExpression` | FC-Rueckgabewert in Ausdruecken verwendbar |
+| `fcInExpression` | FC-Rückgabewert in Ausdrücken verwendbar |
 
 **Abgedeckte Kategorien:**
 
@@ -169,10 +169,10 @@ RTC, SEMA, RampGen
 
 ## 3. Multi-Task-Threading (FCodeGeneratorThreadingTest)
 
-8 Tests pruefen das vollstaendige Multi-Task-Scheduling-System gemaess
+8 Tests prüfen das vollständige Multi-Task-Scheduling-System gemäß
 der Design-Spezifikation (MT-spec, docs/design/multi-task-scheduler.md).
 
-| Test | Prueft |
+| Test | Prüft |
 |------|--------|
 | `singleProgramDefaultTask` | Ein PROGRAM ohne explizite Task → DefaultTask-Synthese, kein Threading |
 | `twoProgramsTwoTasks` | Zwei Tasks → RESOURCE0_start__, Legacy-Shim config_run__, beide Task-Threads |
@@ -180,7 +180,7 @@ der Design-Spezifikation (MT-spec, docs/design/multi-task-scheduler.md).
 | `crossStructuredDoubleBuffer` | Geteilter STRUCT → `__DBUF_[2]` + `thread_local __snap_` + Double-Buffer copy-in/out |
 | `localVarNoSync` | Variable nur in einem Task → normales `__SET_EXTERNAL`, kein Atomic |
 | `conflictTwoWriters` | Zwei Tasks schreiben dieselbe Variable → Compile-Warnung |
-| `singleProgramDefaultTask` | Backward-Kompatibilitaet: bestehende Projekte laufen unveraendert |
+| `singleProgramDefaultTask` | Backward-Kompatibilität: bestehende Projekte laufen unverändert |
 
 ### Multi-Task-Architektur
 
@@ -197,7 +197,7 @@ Primary Task (Task 0)          Secondary Tasks (1..N)
 
 **Sync-Mechanismen:**
 - **CrossPrimitive** (BOOL, INT, REAL, ...): `std::atomic<T>` auf der Location-Variable, `__GET_EXTERNAL_ATOMIC` / `__SET_EXTERNAL_ATOMIC` im Body-Code
-- **CrossStructured** (STRUCT, ARRAY, STRING): Double-Buffer `__DBUF_[2]` mit atomarem Write-Index, `thread_local` Snapshots `__snap_` fuer Set-Konsistenz
+- **CrossStructured** (STRUCT, ARRAY, STRING): Double-Buffer `__DBUF_[2]` mit atomarem Write-Index, `thread_local` Snapshots `__snap_` für Set-Konsistenz
 
 ---
 

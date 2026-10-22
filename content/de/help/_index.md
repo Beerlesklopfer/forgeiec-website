@@ -1,6 +1,6 @@
 ---
 title: "Hilfe"
-summary: "Dokumentation und Ressourcen fuer ForgeIEC"
+summary: "Dokumentation und Ressourcen für ForgeIEC"
 ---
 
 ## Hilfe und Ressourcen
@@ -14,27 +14,27 @@ zu den Grundlagen unseres Projekts und unserer Philosophie.
 
 ### [Online-Hilfe](/help/online/)
 
-Einstiegspunkt fuer die kontext-sensitive Hilfe aus dem Editor.
-F1 oeffnet aus dem Editor heraus genau die passende Seite hier
+Einstiegspunkt für die kontext-sensitive Hilfe aus dem Editor.
+F1 öffnet aus dem Editor heraus genau die passende Seite hier
 auf der Website. URL-Schema und Themen-Slugs sind dort beschrieben.
 
 ### [FAQ](/help/faq/)
 
-Wachsende Sammlung haeufiger Fragen + Loesungen aus der Praxis.
-Beginnt mit einem klassischen Symptom (Variable haengt trotz frischem
-Deploy) und waechst mit jedem neu beobachteten Fall.
+Wachsende Sammlung häufiger Fragen + Lösungen aus der Praxis.
+Beginnt mit einem klassischen Symptom (Variable hängt trotz frischem
+Deploy) und wächst mit jedem neu beobachteten Fall.
 
 ### [KI-Integration](/help/ai/)
 
 Wie Sie den eingebauten KI-Helfer in ForgeIEC Studio nutzen:
 Personas, Provider (ChatGPT / Claude / lokal), Bedienung im Alltag,
-Sicherheits-Modell, Team-Mode fuer mehrere Workstations. Plus eine
-Architektur-Tiefe fuer Security-Auditoren.
+Sicherheits-Modell, Team-Mode für mehrere Workstations. Plus eine
+Architektur-Tiefe für Security-Auditoren.
 
 ### [MCP-Protokoll](/help/mcp/)
 
-Die Protokoll-Schicht unter dem KI-Helfer — fuer Applikations-
-ingenieure die eigene Skripte/Werkzeuge anbinden, und fuer
+Die Protokoll-Schicht unter dem KI-Helfer — für Applikations-
+ingenieure die eigene Skripte/Werkzeuge anbinden, und für
 IT/Betrieb die deployen, monitoren und troubleshooten.
 
 ---
@@ -47,22 +47,22 @@ IT/Betrieb die deployen, monitoren und troubleshooten.
 ### [Projekt-Dateiformat (.forge)](/help/file-format/)
 
 Aufbau einer ForgeIEC-Projektdatei: PLCopen-XML-Wurzel, POU-Typen,
-Adress-Pool, ForgeIEC-Erweiterungen ueber `<addData>` und ST-Sprach-
-zusaetze (Bit-Zugriff, 3-Level-Qualifikation).
+Adress-Pool, ForgeIEC-Erweiterungen über `<addData>` und ST-Sprach-
+zusätze (Bit-Zugriff, 3-Level-Qualifikation).
 
 ### [Bus-Konfiguration](/help/bus-config/)
 
-PLCopen-XML-Schema fuer die industrielle Feldbus-Konfiguration im `.forge`-Projekt.
+PLCopen-XML-Schema für die industrielle Feldbus-Konfiguration im `.forge`-Projekt.
 Segmente, Devices, Variablen-Binding und IEC-Adressvergabe.
 
 ### [Testabdeckung](/help/tests/)
 
-117 automatisierte Tests pruefen den vollstaendigen IEC 61131-3 Sprachvorrat,
+117 automatisierte Tests prüfen den vollständigen IEC 61131-3 Sprachvorrat,
 alle 132 Standard-Bausteine und das Multi-Task-Threading-System.
 
 ### [Open Source Philosophie](/help/open-source/)
 
-Der Gedanke hinter Open Source geht weit ueber Software hinaus — es ist
+Der Gedanke hinter Open Source geht weit über Software hinaus — es ist
 eine Bewegung, die Wissen befreit und Innovation demokratisiert.
 
 ---
@@ -95,7 +95,7 @@ https://apt.forgeiec.io/trixie trixie main" \
 sudo apt update
 ```
 
-Anschliessend kann jedes ForgeIEC-Paket mit dem Standard-Paket-
+Anschließend kann jedes ForgeIEC-Paket mit dem Standard-Paket-
 Manager installiert werden:
 
 ```bash
@@ -107,9 +107,9 @@ sudo apt install forgeiec-anvil-server
 ```
 
 Updates folgen automatisch dem normalen `apt update && apt upgrade`
-Lebenszyklus — es ist keine manuelle `.deb`-Datei noetig.
+Lebenszyklus — es ist keine manuelle `.deb`-Datei nötig.
 
-### Unterstuetzte Plattformen
+### Unterstützte Plattformen
 
 | Komponente | Architekturen | Debian-/Ubuntu-Suites |
 |------------|---------------|------------------|
@@ -118,9 +118,9 @@ Lebenszyklus — es ist keine manuelle `.deb`-Datei noetig.
 | Bridges    | amd64, arm64  | bookworm, trixie, jammy, noble |
 | Hearth     | amd64, arm64  | bookworm, trixie, jammy, noble |
 
-Das Bedien-Panel (`forgeiec-screen-*`) gibt es zusaetzlich als RPM
-fuer AlmaLinux 9 und Fedora 44 unter `rpm.forgeiec.io`. Die
-vollstaendige Paket-/Plattform-Matrix steht auf der
+Das Bedien-Panel (`forgeiec-screen-*`) gibt es zusätzlich als RPM
+für AlmaLinux 9 und Fedora 44 unter `rpm.forgeiec.io`. Die
+vollständige Paket-/Plattform-Matrix steht auf der
 [Download-Seite](/download/).
 
 ### Kontakt
@@ -131,7 +131,7 @@ Bei Fragen wenden Sie sich an: blacksmith@forgeiec.io
 
 <div style="text-align:center; padding: 2rem;">
 
-**Die Dokumentation waechst mit dem Projekt.**
+**Die Dokumentation wächst mit dem Projekt.**
 
 blacksmith@forgeiec.io
 

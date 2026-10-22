@@ -20,27 +20,27 @@ Bussysteme
     +-- 192.168.2.55 -- Unbekannt
 ```
 
-## Unterstuetzte Protokolle
+## Unterstützte Protokolle
 
 | Protokoll | Medium | Einsatzgebiet |
 |-----------|--------|---------------|
-| **Modbus TCP** | Ethernet | Gebaeudeautomation, Prozesstechnik |
-| **Modbus RTU** | RS-485 (seriell) | Sensorik, einfache Feldgeraete |
+| **Modbus TCP** | Ethernet | Gebäudeautomation, Prozesstechnik |
+| **Modbus RTU** | RS-485 (seriell) | Sensorik, einfache Feldgeräte |
 | **EtherCAT** | Ethernet (Echtzeit) | Motion Control, schnelle E/A |
 | **Profibus DP** | Seriell (Feldbus) | Fertigungsautomation |
 
 ## Automatische Adressvergabe
 
 IEC-Adressen (`%IX`, `%QW`, `%MD` etc.) werden global und kollisionsfrei vergeben.
-Bestehende Adressen in globalen Variablenlisten werden beruecksichtigt.
+Bestehende Adressen in globalen Variablenlisten werden berücksichtigt.
 
-## Geraeteerkennung
+## Geräteerkennung
 
-Der integrierte Netzwerk-Scanner erkennt Modbus-faehige Geraete automatisch.
-Gefundene Geraete koennen direkt einem Segment zugeordnet werden.
+Der integrierte Netzwerk-Scanner erkennt Modbus-fähige Geräte automatisch.
+Gefundene Geräte können direkt einem Segment zugeordnet werden.
 
-## Aenderungsverfolgung
+## Änderungsverfolgung
 
-Aenderungen an Bus-Variablen werden in einem uebersichtlichen Diff-Dialog
-dargestellt, bevor sie auf das Laufzeitsystem uebertragen werden. Der Anwender
-behaelt die volle Kontrolle.
+Änderungen an Bus-Variablen werden in einem übersichtlichen Diff-Dialog
+dargestellt, bevor sie auf das Laufzeitsystem übertragen werden. Der Anwender
+behält die volle Kontrolle.

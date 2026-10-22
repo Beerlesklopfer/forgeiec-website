@@ -3,10 +3,10 @@ title: "Download"
 summary: "Alle ForgeIEC-Komponenten — APT-Repository, Direkt-Downloads, Quellcode"
 ---
 
-## ForgeIEC-Komponenten im Ueberblick
+## ForgeIEC-Komponenten im Überblick
 
 ForgeIEC besteht aus mehreren Komponenten. Welche Sie brauchen,
-haengt von Ihrer Rolle:
+hängt von Ihrer Rolle:
 
 | Rolle | Komponente | Wo installieren |
 |---|---|---|
@@ -24,7 +24,7 @@ haengt von Ihrer Rolle:
 ForgeIEC wird als signiertes Debian-Repository unter
 `apt.forgeiec.io` und als signiertes RPM-Repository unter
 `rpm.forgeiec.io` bereitgestellt. Einrichtung ist einmalig pro
-Workstation bzw. Ziel-SPS — waehlen Sie Ihre Distribution aus:
+Workstation bzw. Ziel-SPS — wählen Sie Ihre Distribution aus:
 
 {{< distro-install >}}
 
@@ -44,7 +44,7 @@ sudo apt install forgeiec-screen-wayland  # Kiosk unter Wayland
 sudo apt install forgeiec-screen-xorg     # Kiosk unter X11
 ```
 
-Auf RPM-Systemen heissen die Befehle `sudo dnf install …` bei sonst
+Auf RPM-Systemen heißen die Befehle `sudo dnf install …` bei sonst
 gleichen Paketnamen.
 
 Die Bus-Bridges (`tongs-modbustcp`, `tongs-ethercat`, `tongs-profibus`,
@@ -52,18 +52,18 @@ Die Bus-Bridges (`tongs-modbustcp`, `tongs-ethercat`, `tongs-profibus`,
 `forgeiec-anvil-server` und werden von `anvild` gestartet.
 
 Updates folgen dem normalen `apt update && apt upgrade`-Zyklus —
-keine manuellen `.deb`-Dateien noetig.
+keine manuellen `.deb`-Dateien nötig.
 
 ---
 
-## Unterstuetzte Plattformen
+## Unterstützte Plattformen
 
 ### Debian / Ubuntu (`apt.forgeiec.io`)
 
 | Paket | Architekturen | Suites |
 |---|---|---|
 | `forgeiec-studio` | amd64, arm64 | bookworm, trixie, noble |
-| `forgeiec-fdd-data` | architekturunabhaengig | bookworm, trixie, noble |
+| `forgeiec-fdd-data` | architekturunabhängig | bookworm, trixie, noble |
 | `forgeiec-anvil-server` | amd64, arm64 | bookworm, trixie, jammy, noble |
 | `forgeiec-bellows-server` | amd64, arm64 | bookworm, trixie, jammy, noble |
 | `forgeiec-screen-wayland` | amd64, arm64 | bullseye, bookworm, trixie, jammy, noble |
@@ -83,8 +83,8 @@ Suite-Zuordnung: `bullseye` = Debian 11, `bookworm` = Debian 12,
 Die RPM-Auslieferung ist neu und umfasst derzeit nur das Bedien-Panel.
 ForgeIEC Studio und die Runtime folgen, sobald ihre RPM-Slots stabil sind.
 
-Es gibt **zwei verschiedene Signierschluessel**: `forgeiec.gpg` (ed25519)
-fuer apt und `forgeiec-rpm.asc` (RSA-4096) fuer rpm. Der Unterschied ist
+Es gibt **zwei verschiedene Signierschlüssel**: `forgeiec.gpg` (ed25519)
+für apt und `forgeiec-rpm.asc` (RSA-4096) für rpm. Der Unterschied ist
 nicht kosmetisch — RHEL 9 liefert `rpm` 4.16, dessen interner PGP-Parser
 ed25519 nicht verifizieren kann.
 
@@ -92,16 +92,16 @@ arm64 auf der RPM-Seite fehlt bewusst: der Cross-Compile-Pfad der CI ist
 an Debian-Pakete gebunden, die es auf Enterprise Linux nicht gibt.
 
 **Windows-Build** von ForgeIEC Studio: in Vorbereitung. Bis dahin
-laeuft das Studio unter Linux nativ oder per WSL2 auf Windows-
+läuft das Studio unter Linux nativ oder per WSL2 auf Windows-
 Workstations.
 
 ---
 
 ## Direkt-Downloads (Release-Tarballs)
 
-Wer kein APT-Repository nutzen kann oder mag — z.B. fuer Air-Gap-
+Wer kein APT-Repository nutzen kann oder mag — z.B. für Air-Gap-
 Workstations — kann die einzelnen Releases aus dem Forgejo
-beziehen. **Die Repositories sind nicht oeffentlich einsehbar**:
+beziehen. **Die Repositories sind nicht öffentlich einsehbar**:
 Schicken Sie uns Ihren SSH-Public-Key an blacksmith@forgeiec.io,
 wir schalten ihn frei. Danach stehen Ihnen diese Repositories
 offen:
@@ -112,7 +112,7 @@ offen:
 - **Webseiten-Quellcode**: `ForgeIEC/forgeiec-website`
 
 Pro Release sind signierte `.deb`-Pakete + Source-Tarballs am
-Forgejo-Release-Tag angehaengt.
+Forgejo-Release-Tag angehängt.
 
 ---
 
@@ -145,14 +145,14 @@ Mit ForgeIEC Studio ausgelieferte Beispiel-Projekte:
 
 | Projekt | Zweck |
 |---|---|
-| `knight_rider.forge` | Klassischer Lauflicht-Test fuer Bellows-LEDs |
+| `knight_rider.forge` | Klassischer Lauflicht-Test für Bellows-LEDs |
 | weitere folgen | … |
 
 Zu finden im Studio unter `File -> Open Example`.
 
 ---
 
-## Naechste Schritte
+## Nächste Schritte
 
 - [Erste Schritte mit ForgeIEC Studio](/help/)
 - [KI-Helfer einrichten](/help/ai/)

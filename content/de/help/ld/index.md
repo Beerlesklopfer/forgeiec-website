@@ -3,15 +3,15 @@ title: "Ladder Diagram Editor (LD)"
 summary: "Stromlaufplan-Metapher: Power-Rails, Kontakte, Spulen"
 ---
 
-## Ueberblick
+## Überblick
 
-Ladder Diagram (LD) ist die aelteste der drei grafischen IEC-61131-3-Sprachen
+Ladder Diagram (LD) ist die älteste der drei grafischen IEC-61131-3-Sprachen
 und folgt der **Stromlaufplan-Metapher**: Zwischen einer linken und einer
 rechten **Power-Rail** verlaufen horizontale **Strompfade** (Rungs). Auf
 jedem Rung sitzen Kontakte (links, in Reihe) und Spulen (rechts), die das
 Signal je nach Variablenzustand „leiten" oder „sperren". LD eignet sich
-besonders fuer einfache Steuerungen — Endlagenschaltungen, Selbsthaltungen,
-Verriegelungen — und ist fuer Elektroplaner intuitiv lesbar.
+besonders für einfache Steuerungen — Endlagenschaltungen, Selbsthaltungen,
+Verriegelungen — und ist für Elektroplaner intuitiv lesbar.
 
 ## Editor-Layout
 
@@ -22,9 +22,9 @@ zwei Besonderheiten:
 * **Linke Power-Rail** und **rechte Power-Rail** stehen als spezielle
   Items dauerhaft im Diagramm. Sie sind nicht verschiebbar und wachsen
   vertikal mit der Anzahl der Rungs.
-* Die Toolbar enthaelt zusaetzliche Aktionen fuer LD-Symbole (Kontakte,
+* Die Toolbar enthält zusätzliche Aktionen für LD-Symbole (Kontakte,
   Spulen, Edge-Trigger) und einen `Add Rung`-Button, der eine neue
-  Rung-Verbindung zwischen den Power-Rails einfuegt.
+  Rung-Verbindung zwischen den Power-Rails einfügt.
 
 ## Symbole
 
@@ -32,8 +32,8 @@ zwei Besonderheiten:
 
 | Symbol | Bedeutung |
 |---|---|
-| `--\| \|--` | **Schliesser (NO)** — leitet, wenn die Variable TRUE ist |
-| `--\|/\|--` | **Oeffner (NC)** — leitet, wenn die Variable FALSE ist |
+| `--\| \|--` | **Schließer (NO)** — leitet, wenn die Variable TRUE ist |
+| `--\|/\|--` | **Öffner (NC)** — leitet, wenn die Variable FALSE ist |
 | `--\|P\|--` | **Rising-Edge-Kontakt** — leitet einen Zyklus lang bei steigender Flanke |
 | `--\|N\|--` | **Falling-Edge-Kontakt** — leitet einen Zyklus lang bei fallender Flanke |
 
@@ -46,24 +46,24 @@ als logisches **OR**.
 |---|---|
 | `--( )` | **Standard-Spule** — schreibt den aktuellen Pfad-Zustand in die Variable |
 | `--(/)` | **Negierte Spule** — schreibt den invertierten Zustand |
-| `--(S)` | **Set-Spule** — setzt die Variable auf TRUE und haelt sie (auch wenn der Pfad spaeter wieder oeffnet) |
-| `--(R)` | **Reset-Spule** — setzt die Variable auf FALSE und haelt sie |
+| `--(S)` | **Set-Spule** — setzt die Variable auf TRUE und hält sie (auch wenn der Pfad später wieder öffnet) |
+| `--(R)` | **Reset-Spule** — setzt die Variable auf FALSE und hält sie |
 
 Set/Reset-Paare ergeben eine Selbsthaltung, ohne explizite IF-THEN-Logik.
 
-### Funktionsbloecke im Pfad
+### Funktionsblöcke im Pfad
 
-Funktionen und Funktionsbloecke aus der Library koennen **inline zwischen
+Funktionen und Funktionsblöcke aus der Library können **inline zwischen
 Kontakten und Spulen** eingebaut werden. Der LD-Editor zeichnet sie als
 horizontale Box mit Pin-Liste rechts/links — semantisch identisch zum
-FBD-Block. Typischer Einsatz: Timer (`TON`), Zaehler (`CTU`), Vergleicher
+FBD-Block. Typischer Einsatz: Timer (`TON`), Zähler (`CTU`), Vergleicher
 (`GT`, `EQ`).
 
 ## Beispiel — Selbsthaltung mit Stop-Vorrang
 
-Eine klassische Schuetz-Schaltung: Ein Start-Taster `xStart` schaltet einen
+Eine klassische Schütz-Schaltung: Ein Start-Taster `xStart` schaltet einen
 Motor `qMotor` ein, ein Stop-Taster `xStop` schaltet ihn aus. Solange
-`xStart` gedrueckt war und `xStop` nicht, bleibt der Motor an
+`xStart` gedrückt war und `xStop` nicht, bleibt der Motor an
 (Selbsthaltung).
 
 ```text
@@ -83,19 +83,19 @@ Sprachlich gesprochen:
   * **und** `xStop` (NC) — in Reihe,
   * setzt die Spule `qMotor`.
 
-Beim Compile uebersetzt der LD-Compiler diesen Pfad zu:
+Beim Compile übersetzt der LD-Compiler diesen Pfad zu:
 
 ```text
 qMotor := (xStart OR qMotor) AND NOT xStop;
 ```
 
 Das ist die einfachste Form einer Selbsthaltung mit Stop-Vorrang. Wenn
-beide Taster gleichzeitig gedrueckt werden, gewinnt `xStop`, weil der
-NC-Kontakt den Strompfad oeffnet.
+beide Taster gleichzeitig gedrückt werden, gewinnt `xStop`, weil der
+NC-Kontakt den Strompfad öffnet.
 
 ## Verwandte Themen
 
 * [Function Block Diagram](../fbd/) — datenfluss-orientierte Schwester-Sprache.
-* [Library](../library/) — Funktionsbloecke fuer Inline-Einsatz im Pfad
+* [Library](../library/) — Funktionsblöcke für Inline-Einsatz im Pfad
   (`TON`, `CTU`, `JK_FF`, `DEBOUNCE`).
 * [Variables Panel](../variables/) — Adress-Pool und Variablenbindung.

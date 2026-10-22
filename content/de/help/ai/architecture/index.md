@@ -10,7 +10,7 @@ Source-Tree. Verbindlichkeit nach RFC 2119 (`MUST` / `SHOULD` /
 `MAY`). Version: `v1`. Umfang: ~2300 LOC.
 
 Die Implementierung referenziert die Spec-Abschnitte
-(z.B. `§7.4.2` fuer das Caretaker-Modell). Aenderungen an der Spec
+(z.B. `§7.4.2` für das Caretaker-Modell). Änderungen an der Spec
 durchlaufen denselben Review-Prozess wie Code.
 
 ---
@@ -26,7 +26,7 @@ durchlaufen denselben Review-Prozess wie Code.
 | Lifecycle | `initialize` → `tools/list` → `tools/call` |
 | Capabilities | `tools.listChanged: true` |
 | `notifications/tools/list_changed` | nicht implementiert (Backlog) |
-| Konformitaets-Test | mcp-inspector |
+| Konformitäts-Test | mcp-inspector |
 
 ---
 
@@ -39,22 +39,22 @@ durchlaufen denselben Review-Prozess wie Code.
 | Stack | Qt6 QSslSocket + System-OpenSSL |
 | Versionen | TLS 1.3, 1.2 |
 | Server-Cert | RSA-4096, SAN-bound, 10 Jahre |
-| Cert-Regenerierung | bei Bind-Adress-Aenderung |
+| Cert-Regenerierung | bei Bind-Adress-Änderung |
 | SAN-Validierung | RFC 6125 |
-| Cipher-Suites | OpenSSL-Defaults (Distribution-gehaertet) |
+| Cipher-Suites | OpenSSL-Defaults (Distribution-gehärtet) |
 | Selbst-implementierte Krypto | keine |
 
 ### mTLS (optional)
 
 Aktiv sobald `~/.config/ForgeIEC/mcp/trust/*.pem` mind. ein CA-Cert
-enthaelt.
+enthält.
 
 | Feld | Wert |
 |---|---|
 | peerVerifyMode | QueryPeer |
 | Fallback ohne Client-Cert | Bearer-Auth |
 | Chain-Validation | Qt-SSL-Stack |
-| Subject-Pruefung | gegen peers.toml (eigene Implementierung) |
+| Subject-Prüfung | gegen peers.toml (eigene Implementierung) |
 
 ---
 
@@ -78,7 +78,7 @@ role = "author"
 endpoint = "https://alice-ws.factory:7531"
 ```
 
-Analog `revoked.toml` fuer Revocation-Liste.
+Analog `revoked.toml` für Revocation-Liste.
 
 ### Signatur
 
@@ -93,7 +93,7 @@ Analog `revoked.toml` fuer Revocation-Liste.
 ### Code-Pfad
 
 `FMcpPeerRoster::verifySignature` (Editor),
-`FMcpCaretaker::signCsr` fuer Signing-Inverse. Reload via
+`FMcpCaretaker::signCsr` für Signing-Inverse. Reload via
 QFileSystemWatcher mit 200 ms Debounce.
 
 ---
@@ -120,7 +120,7 @@ sequenceDiagram
     Client->>Server: tools/call (editor.confirm, id, "yes")
     Server->>FSM: resume(id, "yes")
     FSM->>Server: original handler mit force=true
-    Server-->>Client: Result des urspruenglichen Tools
+    Server-->>Client: Result des ursprünglichen Tools
 ```
 
 ### Eigenschaften
@@ -135,9 +135,9 @@ sequenceDiagram
 
 ---
 
-## Write-Zugriff: drei Pruefungen
+## Write-Zugriff: drei Prüfungen
 
-### Pruefung 1 — Build-Time
+### Prüfung 1 — Build-Time
 
 ```cmake
 option(MCP_OVERRIDE_SECURITIES "Unlock MCP write tools" OFF)
@@ -146,11 +146,11 @@ option(MCP_OVERRIDE_SECURITIES "Unlock MCP write tools" OFF)
 Default OFF. Preprocessor-konditional — disabled Code-Pfade sind im
 Default-Binary **nicht enthalten**. Kein Runtime-Switch.
 
-### Pruefung 2 — State Machine
+### Prüfung 2 — State Machine
 
 Jedes schreibende Tool durch §9.5 (siehe oben).
 
-### Pruefung 3 — Sichtbarkeit
+### Prüfung 3 — Sichtbarkeit
 
 | Kanal | Inhalt |
 |---|---|
@@ -163,8 +163,8 @@ Jedes schreibende Tool durch §9.5 (siehe oben).
 
 ## Force-Pfad
 
-Force-Setzungen (Wert-Pinning unabhaengig vom Programm) sind
-**nicht** ueber MCP zugaenglich — kein `force.*`-Tool weder im
+Force-Setzungen (Wert-Pinning unabhängig vom Programm) sind
+**nicht** über MCP zugänglich — kein `force.*`-Tool weder im
 Default- noch im Override-Build.
 
 ### Defense-Layer
@@ -172,7 +172,7 @@ Default- noch im Override-Build.
 | Layer | Mechanismus |
 |---|---|
 | 1 — Codegen-TOML | `-DFORCING_ENABLED` cmake-Option der PLC-Runtime |
-| 2 — anvild RPC | ForceVariable-Endpoint prueft PLC-Build-Mode |
+| 2 — anvild RPC | ForceVariable-Endpoint prüft PLC-Build-Mode |
 | 3 — Editor-UI | F-Checkbox greyout wenn PLC-Build kein Force |
 | 4 — MCP | kein Tool registriert |
 
@@ -191,9 +191,9 @@ Quellklasse: `FMcpFingerprintArt`. Spec: §7.6.
 |---|---|
 | Eingang | SHA-256-Fingerprint (32 Byte) |
 | Bit-Slice | erste 44 Bit, geslicet in 4 × 11 Bit |
-| Wordlist | BIP-39 English (2048 Eintraege) |
+| Wordlist | BIP-39 English (2048 Einträge) |
 | Format | `word-word-word-word` |
-| Bit-Flip-Sensitivitaet (erste 44 Bit) | 4/4 Wortwechsel |
+| Bit-Flip-Sensitivität (erste 44 Bit) | 4/4 Wortwechsel |
 
 ### Randomart
 
@@ -210,7 +210,7 @@ Quellklasse: `FMcpFingerprintArt`. Spec: §7.6.
 |---|---|
 | `server_info.trust_store_cas[]` | pro Trust-Store-CA |
 | `team.list_peers` | pro Peer |
-| `team.request_cert` | fuer frisch ausgestellten Cert |
+| `team.request_cert` | für frisch ausgestellten Cert |
 
 ---
 
@@ -233,11 +233,11 @@ Quellklasse: `FMcpCaretaker`. Spec: §7.4.
 |---|---|
 | Build-Time | `MCP_OVERRIDE_SECURITIES=ON` |
 | Runtime-Flag | QSettings `mcp/caretaker_enabled` |
-| Modal-Bestaetigung | literal "I accept Team-CA responsibility" |
+| Modal-Bestätigung | literal "I accept Team-CA responsibility" |
 | Datei-Existenz | ca.key + ca.crt parse-valid |
 
 `FMcpCaretaker::isCaretaker()` returnt true nur wenn alle 4
-erfuellt.
+erfüllt.
 
 ### Operationen
 
@@ -253,7 +253,7 @@ Alle Mutationen via State Machine.
 
 ### Multi-Caretaker (HA)
 
-Mehrere Caretakers moeglich. Konflikt-Resolution per monotoner
+Mehrere Caretakers möglich. Konflikt-Resolution per monotoner
 `sequence_number` im signierten Roster.
 
 ---
@@ -275,8 +275,8 @@ Mehrere Caretakers moeglich. Konflikt-Resolution per monotoner
 ### Editor
 
 C++17 + Qt6. RAII via QObject-Parent-Chain. Implicit-shared
-QObjects fuer Cross-Thread-Snapshots. Keine globalen mutablen
-Zustaende.
+QObjects für Cross-Thread-Snapshots. Keine globalen mutablen
+Zustände.
 
 Module der MCP-Schicht:
 
@@ -332,22 +332,22 @@ Versionen.
 | OCSP / CRL handling | nicht implementiert |
 | Memorable-ID-Typing-Confirmation (§7.4.2) | derzeit yes/cancel |
 | `notifications/tools/list_changed` SSE | nicht emittiert |
-| Hardware-Token (PKCS#11 / FIDO2) fuer CA-Key | Roadmap |
+| Hardware-Token (PKCS#11 / FIDO2) für CA-Key | Roadmap |
 | `force.*` Tool-Familie | Phase-3 Backlog |
 | Bulk-Mode (MCP-10) | Backlog |
 | Caretaker-Toggle-UI in Preferences | Backlog |
 
-Vollstaendige Liste: `project_open_backlog.md` (intern).
+Vollständige Liste: `project_open_backlog.md` (intern).
 
 ---
 
 ## Lizenz
 
-AGPL-3.0-or-later fuer alle Subprojekte. Source auf Anfrage
-einsehbar — die Forgejo-Repositories sind nicht oeffentlich
-zugaenglich, Zugriff nach Freischaltung des SSH-Public-Keys.
-Reproducible-Build via CPack — signiertes APT-Repository fuer
-Debian/Ubuntu, signiertes RPM-Repository fuer AlmaLinux 9 und
+AGPL-3.0-or-later für alle Subprojekte. Source auf Anfrage
+einsehbar — die Forgejo-Repositories sind nicht öffentlich
+zugänglich, Zugriff nach Freischaltung des SSH-Public-Keys.
+Reproducible-Build via CPack — signiertes APT-Repository für
+Debian/Ubuntu, signiertes RPM-Repository für AlmaLinux 9 und
 Fedora 44.
 
 ---
@@ -363,6 +363,6 @@ verantwortliche Offenlegung bevorzugt.
 
 - [Sicherheits-Modell (Anwender-Sicht)](/help/ai/security/)
 - [Team-Mode](/help/ai/team/)
-- [MCP-Protokoll fuer Programmierer](/help/mcp/programmers/)
-- [MCP fuer IT-Betrieb](/help/mcp/it/)
-- [Zurueck zur AI-Uebersicht](/help/ai/)
+- [MCP-Protokoll für Programmierer](/help/mcp/programmers/)
+- [MCP für IT-Betrieb](/help/mcp/it/)
+- [Zurück zur AI-Übersicht](/help/ai/)

@@ -1,13 +1,13 @@
 ---
 title: "Function Block Diagram Editor (FBD)"
-summary: "Grafische Verschaltung von Funktionen, Funktionsbloecken und Variablen"
+summary: "Grafische Verschaltung von Funktionen, Funktionsblöcken und Variablen"
 ---
 
-## Ueberblick
+## Überblick
 
 Das Function Block Diagram (FBD) ist eine der drei grafischen IEC-61131-3-
-Sprachen, die ForgeIEC Studio unterstuetzt. Ein FBD-Programm besteht aus
-**Funktions- und Funktionsblock-Aufrufen**, die ueber **explizite Drahtverbindungen**
+Sprachen, die ForgeIEC Studio unterstützt. Ein FBD-Programm besteht aus
+**Funktions- und Funktionsblock-Aufrufen**, die über **explizite Drahtverbindungen**
 (Wires) miteinander und mit Eingangs- bzw. Ausgangsvariablen verschaltet werden.
 Im Gegensatz zum Ladder Diagram gibt es im FBD **keine Strom-Schienen** —
 jede Verbindung ist ein einzelner Draht, der einen Output-Pin mit einem oder
@@ -29,9 +29,9 @@ Der FBD-Editor ist ein dreiteiliges Widget:
 +--------------------------------+------------+
 ```
 
-* **Toolbar oben:** Werkzeugumschaltung (Select, Wire, Block einfuegen,
-  In-/Out-Variable einfuegen, Kommentar, Zoom).
-* **QGraphicsView:** Die eigentliche Zeichenflaeche mit Hintergrund-Grid
+* **Toolbar oben:** Werkzeugumschaltung (Select, Wire, Block einfügen,
+  In-/Out-Variable einfügen, Kommentar, Zoom).
+* **QGraphicsView:** Die eigentliche Zeichenfläche mit Hintergrund-Grid
   (10 px fein, 50 px Major) und Maus-Pan (Mittlere Maustaste).
   Mausrad zoomt um den Cursor.
 * **Variablentabelle rechts:** Andockbar, zeigt die lokalen Variablen
@@ -42,17 +42,17 @@ Der FBD-Editor ist ein dreiteiliges Widget:
 
 | Tool | Wirkung |
 |---|---|
-| **Select** | Auswahl, Verschieben, Loeschen von Items. |
+| **Select** | Auswahl, Verschieben, Löschen von Items. |
 | **Wire** | Klick auf einen Output-Port, dann Klick auf einen Input-Port — Verbindung wird angelegt. |
-| **Block einfuegen** | Funktion oder Funktionsblock aus der Library platzieren. Die Pin-Liste (Inputs links, Outputs rechts) wird automatisch aus der Library-Definition uebernommen. |
-| **InVar / OutVar einfuegen** | Eingangs- oder Ausgangsvariable als Item platzieren. Der Name wird ueber ein Eingabefeld gesetzt und kann eine GVL-, Anvil- oder Bellows-qualifizierte Variable sein. |
+| **Block einfügen** | Funktion oder Funktionsblock aus der Library platzieren. Die Pin-Liste (Inputs links, Outputs rechts) wird automatisch aus der Library-Definition übernommen. |
+| **InVar / OutVar einfügen** | Eingangs- oder Ausgangsvariable als Item platzieren. Der Name wird über ein Eingabefeld gesetzt und kann eine GVL-, Anvil- oder Bellows-qualifizierte Variable sein. |
 | **Kommentar** | Freitext-Notiz ohne Semantik. |
 
 ## Blocks und Pins
 
 Ein **Block-Item** stellt einen Aufruf einer Funktion (`ADD`, `SEL`, ...) oder
 eines Funktionsblocks (`TON`, `CTU`, ...) dar. Das Item zeigt im Header den
-Typ-Namen, darunter den Instanz-Namen (nur bei FBs), und auf den Seitenraendern
+Typ-Namen, darunter den Instanz-Namen (nur bei FBs), und auf den Seitenrändern
 die Ports:
 
 ```
@@ -70,23 +70,23 @@ mit einem kleinen Kreis am Port markiert.
 
 Aus dem Library-Panel kann jeder Standard- oder User-Block per **Drag-and-Drop
 direkt in den Editor** gezogen werden. Beim Loslassen wird die Pin-Liste der
-Library-Definition entnommen, und bei Funktionsbloecken erzeugt der Editor
+Library-Definition entnommen, und bei Funktionsblöcken erzeugt der Editor
 automatisch eine `VAR`-Instanz in der lokalen Variablen-Sektion.
 
 ## Round-Trip zu ST
 
-Beim Compile uebersetzt der ForgeIEC-Compiler den FBD-Body in
-Structured Text. Topologische Sortierung der Bloecke nach Datenfluss
-bestimmt die Ausfuehrungsreihenfolge. Damit gilt: **jeder FBD-Body ist
+Beim Compile übersetzt der ForgeIEC-Compiler den FBD-Body in
+Structured Text. Topologische Sortierung der Blöcke nach Datenfluss
+bestimmt die Ausführungsreihenfolge. Damit gilt: **jeder FBD-Body ist
 semantisch gleichwertig zu einem ST-Body**, und die Wahl der Sprache ist
 eine reine Lesbarkeitsfrage.
 
-## Beispiel — Einschaltverzoegerung mit `TON`
+## Beispiel — Einschaltverzögerung mit `TON`
 
-Eine `TON` (on-delay timer) verzoegert ein Eingangssignal um eine
-einstellbare Zeit. In FBD wuerden Sie
+Eine `TON` (on-delay timer) verzögert ein Eingangssignal um eine
+einstellbare Zeit. In FBD würden Sie
 
-  * eine **InVariable** `start` an den `IN`-Pin der `TON`-Instanz draehten,
+  * eine **InVariable** `start` an den `IN`-Pin der `TON`-Instanz drahten,
   * eine **InVariable** mit Wert `T#5s` an den `PT`-Pin,
   * den `Q`-Output mit einer **OutVariable** `lampe` verbinden.
 
@@ -111,6 +111,6 @@ beiden `:=`-Zuweisungen.
 
 ## Verwandte Themen
 
-* [Library](../library/) — Welche Bloecke stehen im Block-Picker zur Verfuegung.
+* [Library](../library/) — Welche Blöcke stehen im Block-Picker zur Verfügung.
 * [Variables Panel](../variables/) — Variablendeklaration und Adress-Pool.
 * [Ladder Diagram](../ld/) — Strompfad-orientierte Schwester-Sprache.

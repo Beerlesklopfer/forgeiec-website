@@ -32,15 +32,15 @@ an dem sie geändert wird.
 
 ## 01 · Die Werkstatt {#werkstatt}
 
-Die Namen sind kein Zufall. Der Verbund ist eine Schmiede, und jeder Teil heisst nach
+Die Namen sind kein Zufall. Der Verbund ist eine Schmiede, und jeder Teil heißt nach
 dem Werkzeug, dessen Arbeit er tut.
 
 | Teil | Rolle | Auftrag |
 |---|---|---|
 | **Forge** | Entwurf | Die Entwicklungsumgebung. Hier entstehen Steuerungsprogramm, Variablen, Datentypen und die Bustopologie. |
 | **Anvil** | Laufzeit · Amboss | Wo geschlagen wird: die Steuerungslaufzeit auf dem Anlagenrechner — Aufseher, Rechenprozess und der Speicher dazwischen. |
-| **Tongs** | Verbinder · Zange | Fasst an, was heiss ist: die Hardware. Ein Prozess je Bussegment, je Feldbusprotokoll eine eigene Zange. |
-| **Bellows** | Brücke · Blasebalg | Bringt Luft von aussen herein. Fremde Systeme holen Werte über OPC UA oder Modbus TCP. |
+| **Tongs** | Verbinder · Zange | Fasst an, was heiß ist: die Hardware. Ein Prozess je Bussegment, je Feldbusprotokoll eine eigene Zange. |
+| **Bellows** | Brücke · Blasebalg | Bringt Luft von außen herein. Fremde Systeme holen Werte über OPC UA oder Modbus TCP. |
 | **Hearth** | Bedienung · Feuerstelle | Wo der Mensch steht. Anlagenbilder, Werte, Bedienelemente. |
 | **Spark** | Weg · Funke | Springt über: der Weg zwischen Rechnern, wenn eine Anlage nicht auf einem Knoten läuft. |
 
@@ -235,7 +235,7 @@ Byte   0   1   2   3   4   5   6   7   8 …
          └────────────────────── BOOL,  Versatz 0, Bit 0
 ```
 
-Diese Auskunft heisst **Deskriptor**: eine Liste, die je Feld Name, Typ, Versatz,
+Diese Auskunft heißt **Deskriptor**: eine Liste, die je Feld Name, Typ, Versatz,
 Größe und gegebenenfalls das Bit nennt. Ohne sie sind die Bytes bedeutungslos; mit ihr
 ist das Lesen ein Zeiger und eine Addition.
 
@@ -480,7 +480,7 @@ bekäme mehr einen Schnappschuss eines ganzen Buszyklus.
 
 ### Sie sucht sich nichts
 
-Es gibt keine Entdeckung, weil das Elternteil weiss, wen es erzeugt hat. Das Kind
+Es gibt keine Entdeckung, weil das Elternteil weiß, wen es erzeugt hat. Das Kind
 wählt nicht, es bekommt zugewiesen.
 
 ### Was Sie mitbringen müssen

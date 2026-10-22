@@ -1,7 +1,7 @@
 ---
 title: "IEC-Standard-Library als Lern-Referenz mit LLM-Auto-Fix"
 date: 2026-05-14
-summary: "Jede Funktion und jeder Funktionsbaustein der IEC 61131-3 mit Lehrbuch-Erklaerung, matiec-Quirks und einem maschinenlesbaren Auto-Fix-Block fuer den AI-Assistenten."
+summary: "Jede Funktion und jeder Funktionsbaustein der IEC 61131-3 mit Lehrbuch-Erklärung, matiec-Quirks und einem maschinenlesbaren Auto-Fix-Block für den AI-Assistenten."
 components: [studio]
 ---
 
@@ -10,13 +10,13 @@ components: [studio]
 ## Worum es geht
 
 PLC-Programmierer haben es bis heute mit zwei sehr unterschiedlichen
-Lernpfaden zu tun. Anfaenger wollen verstehen **wie ein Timer
-ueberhaupt funktioniert** (was ist `IN`, was ist `PT`, warum muss
+Lernpfaden zu tun. Anfänger wollen verstehen **wie ein Timer
+überhaupt funktioniert** (was ist `IN`, was ist `PT`, warum muss
 ich eine Instanz deklarieren?). Profis wollen **die exakte
-Spec-Konformitaet nachschlagen** (welche Operatoren akzeptiert
-matiec? Wie verhaelt sich `MOD` bei negativen Operanden?). Und
+Spec-Konformität nachschlagen** (welche Operatoren akzeptiert
+matiec? Wie verhält sich `MOD` bei negativen Operanden?). Und
 ein LLM-Assistent will **eine Compiler-Fehlermeldung in eine
-ausfuehrbare Korrektur uebersetzen** ohne zu raten.
+ausführbare Korrektur übersetzen** ohne zu raten.
 
 Auf forgeiec.io gibt es jetzt eine
 [IEC 61131-3 Reference](/reference/iec61131-3/), die alle drei
@@ -38,16 +38,16 @@ Erste Welle, Stand 2026-05-14:
 - **Function & FB calls** mit zwei Tiefenartikeln:
   [FB-Instanz vs. Function-Call](/reference/iec61131-3/textual/structured-text/function-calls/fb-instance-vs-function/)
   und [Positional vs. Named Parameters](/reference/iec61131-3/textual/structured-text/function-calls/positional-vs-named/).
-- **Standard Library**: erster vollstaendiger Funktionsbaustein
+- **Standard Library**: erster vollständiger Funktionsbaustein
   [TON — Timer-On-Delay](/reference/iec61131-3/standard-library/function-blocks/ton/)
-  mit Pin-Layout, Beispielen, Semantik und Reihe von Auto-Fix-Eintraegen.
+  mit Pin-Layout, Beispielen, Semantik und Reihe von Auto-Fix-Einträgen.
 - **Literals**: [Integer & Hexadecimal](/reference/iec61131-3/textual/structured-text/literals/integer-literals/)
   inklusive der zwei matiec-Quirks die uns am 2026-05-14 in der
   Ackersteuerung den Tag gekostet haben.
 
 ## Das Auto-Fix-Block-Schema
 
-Jede Konstrukt-Seite traegt im Frontmatter einen
+Jede Konstrukt-Seite trägt im Frontmatter einen
 `llm_signals[]`-Block. Format:
 
 ```yaml
@@ -76,7 +76,7 @@ verschiedenen Fix-Strategien je nachdem, wo der Fehler feuert.
 
 ## Echte Quirks aus echten Projekten
 
-Die ersten neun dokumentierten `error_pattern`-Eintraege kommen
+Die ersten neun dokumentierten `error_pattern`-Einträge kommen
 **alle aus dem Ackersteuerung-Cleanup vom 2026-05-14** — nichts
 ist erfunden. Beispiele:
 
@@ -85,16 +85,16 @@ ist erfunden. Beispiele:
   Hex-Ziffern. Workaround: dezimale Labels.
 - `'BYTE' has no member named 'BYTE'` beim g++-Compile auf der
   PLC — matiec emittiert `data__->BYTE` statt einer
-  Literal-Konversion fuer `SHL(BYTE#1, …)`. Workaround:
+  Literal-Konversion für `SHL(BYTE#1, …)`. Workaround:
   vorberechnen oder `INT_TO_BYTE(1)` benutzen.
 - `is a Function Block — declare instance first` — der
-  Klassiker fuer LLMs, die `TON(IN:=x, PT:=t)` direkt aufrufen
+  Klassiker für LLMs, die `TON(IN:=x, PT:=t)` direkt aufrufen
   wollen. Fix: erst Instanz deklarieren, dann die Instanz
   aufrufen.
 
-## Was als naechstes kommt
+## Was als nächstes kommt
 
-Der Reference-Sprint laeuft ueber mehrere Sessions. Roadmap:
+Der Reference-Sprint läuft über mehrere Sessions. Roadmap:
 
 - Weitere Standard-FBs (CTU, R_TRIG, RS, TOF, TP, …) nach dem
   TON-Muster.

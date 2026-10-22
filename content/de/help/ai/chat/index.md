@@ -20,14 +20,14 @@ oben nach unten:
 
 ## Eine Anfrage stellen
 
-Tippen Sie Ihre Frage normal ins Eingabefeld und druecken Sie
+Tippen Sie Ihre Frage normal ins Eingabefeld und drücken Sie
 **Enter**.
 
 > „Lege mir 16 BOOL-Variablen `LED_00` bis `LED_15` an,
 > auf den Adressen `%MX0.0` bis `%MX1.7`, mit Bellows-Export."
 
-Der Helfer fasst zunaechst Ihre Anfrage in Schritte zusammen, fuehrt
-sie aus, fragt bei jeder schreibenden Aktion zurueck und gibt am Ende
+Der Helfer fasst zunächst Ihre Anfrage in Schritte zusammen, führt
+sie aus, fragt bei jeder schreibenden Aktion zurück und gibt am Ende
 einen Bericht.
 
 ---
@@ -37,39 +37,39 @@ einen Bericht.
 Wie in einer Linux-Shell:
 
 - **Pfeil hoch** im Eingabe-Feld → letzte Eingabe wieder rausholen
-- **Pfeil runter** → naechst-juengere Eingabe
-- Spart Tippen wenn Sie eine aehnliche Frage variieren wollen
+- **Pfeil runter** → nächst-jüngere Eingabe
+- Spart Tippen wenn Sie eine ähnliche Frage variieren wollen
 
 ---
 
 ## Notbremse — der rote STOP-Knopf
 
-Wenn der Geschwindigkeits-Modus aktiv ist (siehe naechster Abschnitt),
+Wenn der Geschwindigkeits-Modus aktiv ist (siehe nächster Abschnitt),
 erscheint **unten ein gelber Sicherheits-Streifen** mit einem **roten
 runden STOP-Knopf** rechts daneben.
 
-**Druecken Sie ihn jederzeit** wenn die KI etwas tut das Sie nicht
+**Drücken Sie ihn jederzeit** wenn die KI etwas tut das Sie nicht
 wollen. Er unterbricht **sofort**:
 
 - Den laufenden Modell-Aufruf
 - Alle wartenden Tool-Schritte
-- Eventuell offene Confirm-Rueckfragen werden auf „cancel" gesetzt
+- Eventuell offene Confirm-Rückfragen werden auf „cancel" gesetzt
 
 Der Knopf ist genauso ausgelegt wie der klassische rote
-Not-Aus-Pilzkopf-Taster nach DIN EN ISO 13850: gross, rot,
+Not-Aus-Pilzkopf-Taster nach DIN EN ISO 13850: groß, rot,
 leicht zu treffen, immer erreichbar.
 
 ---
 
 ## Der Geschwindigkeits-Modus (Danger-Mode)
 
-Standardmaessig stellt ForgeIEC Studio bei **jeder** schreibenden
-Aktion der KI eine Rueckfrage. Das ist sicher, aber langsam — wenn die KI
+Standardmäßig stellt ForgeIEC Studio bei **jeder** schreibenden
+Aktion der KI eine Rückfrage. Das ist sicher, aber langsam — wenn die KI
 50 Variablen anlegen soll, klickt man sich 50× durch.
 
-**Im Geschwindigkeits-Modus** beantwortet ForgeIEC Studio diese Rueckfragen
+**Im Geschwindigkeits-Modus** beantwortet ForgeIEC Studio diese Rückfragen
 **automatisch mit „yes"**. Der LLM-Loop kann dann ohne menschliche
-Unterbrechung durchlaufen. Empfohlen nur fuer **Test-Setups** oder
+Unterbrechung durchlaufen. Empfohlen nur für **Test-Setups** oder
 **experimentelle Iteration** — in Produktion sollten Sie ihn
 **ausschalten**.
 
@@ -77,12 +77,12 @@ Unterbrechung durchlaufen. Empfohlen nur fuer **Test-Setups** oder
 
 `Preferences -> AI` → Haken bei `Danger Mode — auto-confirm AI tool calls`.
 
-Beim Einschalten erscheint eine zusaetzliche Sicherheits-Warnung mit
+Beim Einschalten erscheint eine zusätzliche Sicherheits-Warnung mit
 dem Hinweis dass dieser Modus **nicht** auf einer produktiven SPS
-laufen soll. Bestaetigen Sie nur wenn Sie das verstanden haben.
+laufen soll. Bestätigen Sie nur wenn Sie das verstanden haben.
 
 Beim Wechsel zwischen Personas bleibt der Modus pro Persona
-gespeichert — Sie koennen also nur den Blacksmith Master schnell
+gespeichert — Sie können also nur den Blacksmith Master schnell
 machen und den Trainee weiterhin langsam betreiben.
 
 ---
@@ -90,7 +90,7 @@ machen und den Trainee weiterhin langsam betreiben.
 ## Tool-Schritte-Grenze (max_tool_turns)
 
 Eine einzelne Anfrage von Ihnen kann beim Helfer **mehrere
-Werkzeug-Aufrufe** ausloesen. Beispiel: „Knight-Rider-Programm
+Werkzeug-Aufrufe** auslösen. Beispiel: „Knight-Rider-Programm
 anlegen" macht intern:
 
 1. POU `KnightRider` anlegen
@@ -101,19 +101,19 @@ anlegen" macht intern:
 6. SPS starten
 
 Das sind schon 21 Schritte. Damit der Helfer nicht in eine
-Endlos-Schleife laeuft, gibt es eine **Schritt-Grenze pro Anfrage**.
+Endlos-Schleife läuft, gibt es eine **Schritt-Grenze pro Anfrage**.
 
-**Standard: 10 Schritte.** Reicht fuer einfache Anfragen.
+**Standard: 10 Schritte.** Reicht für einfache Anfragen.
 
-**Anpassen** ueber `Preferences -> AI -> Max tool turns per user request`.
+**Anpassen** über `Preferences -> AI -> Max tool turns per user request`.
 Erlaubte Werte: 1 bis 1000.
 
 **Im Geschwindigkeits-Modus** wird die Grenze **automatisch
 deaktiviert** — wenn Sie schon der KI vertraut haben, soll sie auch
-einen langen Job durchziehen koennen.
+einen langen Job durchziehen können.
 
 Wenn die Grenze erreicht ist, bricht der Helfer kontrolliert ab und
-sagt: „Tool-loop guard hit max N turns; aborted." Sie koennen dann
+sagt: „Tool-loop guard hit max N turns; aborted." Sie können dann
 „weiter" tippen, und er macht ab dort weiter.
 
 ---
@@ -124,18 +124,18 @@ Manchmal probiert ein Modell denselben Fehler 3-4 mal hintereinander.
 Hilfreich:
 
 - **STOP-Knopf** → Loop sauber abbrechen
-- **Anders fragen** — kuerzer, konkreter, mit Adressen statt Namen
+- **Anders fragen** — kürzer, konkreter, mit Adressen statt Namen
 - **Persona wechseln** — Reviewer findet manchmal den Fehler den
-  Blacksmith Master uebersieht
+  Blacksmith Master übersieht
 - **Modell wechseln** — wenn Ihr lokales Modell zu klein ist, kann
-  ein groesseres Modell denselben Auftrag in einem Versuch loesen
+  ein größeres Modell denselben Auftrag in einem Versuch lösen
 
 ---
 
 ## Weiter
 
-- [Was die KI kann](/help/ai/tools/) — Liste der moeglichen Aktionen
+- [Was die KI kann](/help/ai/tools/) — Liste der möglichen Aktionen
 - [Sicherheits-Modell](/help/ai/security/) — Details zum Geschwindigkeits-
   Modus
-- [Personas](/help/ai/agents/) — welcher Charakter fuer welche Aufgabe
-- [Zurueck zur AI-Uebersicht](/help/ai/)
+- [Personas](/help/ai/agents/) — welcher Charakter für welche Aufgabe
+- [Zurück zur AI-Übersicht](/help/ai/)

@@ -4,9 +4,9 @@ title: "ForgeIEC"
 
 <div style="text-align:center; padding: 3rem 1rem;">
 
-# Geschmiedet fuer die Industrie.
+# Geschmiedet für die Industrie.
 
-**Eine IEC 61131-3 Entwicklungsumgebung in Industriequalitaet — Open Source, KI-nativ, ohne Vendor-Lock-In.**
+**Eine IEC 61131-3 Entwicklungsumgebung in Industriequalität — Open Source, KI-nativ, ohne Vendor-Lock-In.**
 
 [Download](/download/) · [Architektur](/help/ai/architecture/) · [News](/news/)
 
@@ -19,61 +19,61 @@ title: "ForgeIEC"
 | Bereich | Status |
 |---|---|
 | **Alle 5 IEC-61131-3-Sprachen** — ST, IL, FBD, LD, SFC | produktiv |
-| **Multi-Task-Scheduler** — echte pthread-Parallelitaet | produktiv |
+| **Multi-Task-Scheduler** — echte pthread-Parallelität | produktiv |
 | **Live-Diagnose** — Monitor + Oszilloskop mit Trigger, CSV-Aufnahme | produktiv |
 | **Bus-System** — Modbus-TCP produktiv, EtherCAT + Profibus + EtherNet/IP in Arbeit | gemischt |
-| **Hersteller-Daten als First-Class** — FDDs mit eingebetteten PDFs + Diagnose-Bit-Aufloesung | produktiv |
+| **Hersteller-Daten als First-Class** — FDDs mit eingebetteten PDFs + Diagnose-Bit-Auflösung | produktiv |
 | **KI-Helfer eingebaut** — ~180 typisierte MCP-Werkzeuge, 5 Personas | produktiv |
 | **Team-Federation** — mehrere Workstations mit Caretaker-CA | MVP produktiv |
-| **HMI / OPC-UA-Anbindung** ueber bellowsd | produktiv |
+| **HMI / OPC-UA-Anbindung** über bellowsd | produktiv |
 | **Reproduzierbare Builds** — signierte APT- + RPM-Repositories, AGPL-3.0 | produktiv |
 
 ---
 
-## Drei Saeulen
+## Drei Säulen
 
 ### 🛠️ ForgeIEC Studio — die IDE
 
-Native C++/Qt6-Anwendung, alle fuenf IEC-Sprachen, Bus-Konfiguration,
+Native C++/Qt6-Anwendung, alle fünf IEC-Sprachen, Bus-Konfiguration,
 Live-Monitor, Oszilloskop, KI-Helfer eingebaut. Multi-Workstation-
-Federation ueber Trust-Store + Caretaker-Modell. Keine Browser-UI,
+Federation über Trust-Store + Caretaker-Modell. Keine Browser-UI,
 keine Cloud-Pflicht.
 
 ### 🔥 anvild — die Runtime
 
 Rust/Tokio-Daemon auf der Ziel-SPS. Multi-Task, deterministische
-Scan-Cycles, gRPC-Anbindung zum Studio, Subprocess-Manager fuer
-die Bus-Bridges, automatischer Watchdog-Neustart abgestuerzter
+Scan-Cycles, gRPC-Anbindung zum Studio, Subprocess-Manager für
+die Bus-Bridges, automatischer Watchdog-Neustart abgestürzter
 Bridges.
 
 ### 🔧 tongs-* — Bus-Bridges
 
 Pro Protokoll ein Daemon. Einheitliches Fault-Modell, FDD-getriebene
 Diagnose-Bits, Anvil-Zero-Copy-IPC zwischen Bridge und Runtime,
-Bridges koennen unabhaengig crashen + neu starten.
+Bridges können unabhängig crashen + neu starten.
 
 ---
 
 ## Warum ForgeIEC?
 
-Industrielle Automatisierung ist Schluesseltechnologie — und der
+Industrielle Automatisierung ist Schlüsseltechnologie — und der
 Zugang zu professionellen Werkzeugen wird durch Lizenzkosten und
-proprietaere Systeme eingeschraenkt. ForgeIEC macht die Wertschoepfung
-fuer jeden zugaenglich.
+proprietäre Systeme eingeschränkt. ForgeIEC macht die Wertschöpfung
+für jeden zugänglich.
 
 Drei Versprechen die wir halten:
 
 - **Open Source (AGPL-3.0)** — Source auf Anfrage einsehbar (SSH-Key-
-  Freischaltung), Build reproduzierbar, Updates ueber signiertes
+  Freischaltung), Build reproduzierbar, Updates über signiertes
   APT-Repository
 - **Vendor-neutral** — Hersteller-Daten als FDDs eingebunden, kein
-  proprietaeres Geraete-Format, Migration-faehig
-- **Industrie-Sicherheit** — 4-Layer-Defense fuer Force-Setzungen,
-  Confirmation State Machine fuer jede schreibende Aktion, ehrliches
+  proprietäres Geräte-Format, Migration-fähig
+- **Industrie-Sicherheit** — 4-Layer-Defense für Force-Setzungen,
+  Confirmation State Machine für jede schreibende Aktion, ehrliches
   Sampling-Limit-Modell statt Marketing-Versprechen
 
 Mehr dazu in der [Founding-Story](/news/die-forgeiec-geschichte/) —
-wie aus einem 2018er OpenPLC-Fork eine eigenstaendige Plattform wurde.
+wie aus einem 2018er OpenPLC-Fork eine eigenständige Plattform wurde.
 
 ---
 

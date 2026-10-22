@@ -25,7 +25,7 @@ unsafe = true
   title = "ForgeIEC"
   contentDir = "content/de"
     [languages.de.params]
-    description = "IEC 61131-3 SPS-Entwicklungsumgebung fuer die Industrie"
+    description = "IEC 61131-3 SPS-Entwicklungsumgebung für die Industrie"
     [[languages.de.menu.main]]
       name = "Plattform"
       pageRef = "/plattform/"

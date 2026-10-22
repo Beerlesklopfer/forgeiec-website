@@ -1,7 +1,7 @@
 ---
 title: "Der KI-Helfer im Editor: vom Chat zur Plattform"
 date: 2026-05-12
-summary: "Eingebauter AI-Assistent mit ~80 Werkzeugen, Multi-Persona-Workflow und offenem Anschluss fuer Claude Desktop, VS Code, ChatGPT"
+summary: "Eingebauter AI-Assistent mit ~80 Werkzeugen, Multi-Persona-Workflow und offenem Anschluss für Claude Desktop, VS Code, ChatGPT"
 components: [studio, anvild]
 ---
 
@@ -12,16 +12,16 @@ components: [studio, anvild]
 KI-Code-Assistenz ist im Software-Bereich angekommen — in der
 Industrieautomatisierung bisher nicht. Der Grund: SPS-Code wirkt
 auf reale Hardware, jede falsche Variable bewegt einen Motor oder
-oeffnet ein Ventil. Cloud-LLMs als „Code-completion auf SPS"
+öffnet ein Ventil. Cloud-LLMs als „Code-completion auf SPS"
 funktioniert ohne strenge Sicherheits-Schicht nicht.
 
-ForgeIEC Studio loest das mit **MCP (Model Context Protocol)** als
+ForgeIEC Studio löst das mit **MCP (Model Context Protocol)** als
 Schnittstelle zwischen LLM und Editor. Das LLM ruft typisierte
 Werkzeuge — keine freien Shell-Befehle — und jeder Schritt der
-Aenderungen verursacht laeuft durch eine Operator-Bestaetigung.
+Änderungen verursacht läuft durch eine Operator-Bestätigung.
 
 Damit ist ForgeIEC der erste IEC-61131-3-Editor mit einer
-**ernsthaft tragfaehigen** KI-Integration.
+**ernsthaft tragfähigen** KI-Integration.
 
 ---
 
@@ -41,13 +41,13 @@ Sechs Tool-Familien decken die Editor-Bedienung ab:
 | `editor.*` | Sauberer Quit, Logs, Confirm-Antworten |
 | `forge.help` | Selbst-Doku — die KI fragt sich selber aus |
 
-Gesamt ueber **80 Tools**, alle JSON-Schema-getypt und durch
+Gesamt über **80 Tools**, alle JSON-Schema-getypt und durch
 `forge.help_for(name)` mit Beispielen + Fehlerklassen
 selbstbeschreibend.
 
 ---
 
-## Fuenf Personas, ein Chat-Reiter
+## Fünf Personas, ein Chat-Reiter
 
 Statt einer einzigen statischen Sitzung gibt es **rollenbasierte
 Personas** im AI-Reiter:
@@ -55,9 +55,9 @@ Personas** im AI-Reiter:
 - **Blacksmith Master** — der Vorarbeiter, darf alles
 - **Reviewer** — read-only, kann nichts kaputt machen
 - **Doc** — schreibt Variablen-Kommentare + Doku
-- **Monitor** — beobachtet Live-Anlagen, nichts veraendert
+- **Monitor** — beobachtet Live-Anlagen, nichts verändert
 - **Trainee** — wie Vorarbeiter, aber jede Aktion einzeln
-  bestaetigt — ideal fuer Einarbeitung
+  bestätigt — ideal für Einarbeitung
 
 Jede Persona hat **eigenen API-Endpoint + Modell** — so kann
 GPT-4o den Code schreiben und Claude-Opus dazu den Review machen.
@@ -88,20 +88,20 @@ Client ein — fertig. Anbindung an
 ## Sicherheit: Drei Schichten, sichtbar
 
 Die KI ist secure-by-default. Drei aufeinander aufbauende
-Schichten muessen passiert werden:
+Schichten müssen passiert werden:
 
 1. **Build-time Gate** — die Standard-Distribution aus dem APT-Repo
    ist read-only. Schreibende Aktionen erfordern einen separat
    gebauten Editor. Das ist eine echte Trennung, kein Hakchen.
 2. **Confirmation State Machine** — jede schreibende Aktion
-   liefert `FORGE_ERR_CONFIRMATION_REQUIRED` zurueck, der Operator
-   bestaetigt per `editor.confirm`. Keine stille Hintergrund-
-   Aenderung.
+   liefert `FORGE_ERR_CONFIRMATION_REQUIRED` zurück, der Operator
+   bestätigt per `editor.confirm`. Keine stille Hintergrund-
+   Änderung.
 3. **Operator-Sichtbarkeit** — jede Aktion im Chat-Verlauf
    sichtbar, Audit-Log mit Zeitstempel.
 
 Force-Setzungen (Hardware-Output pinnen) sind **explizit nicht**
-ueber MCP zugaenglich — das bleibt Operator-Hoheit ueber die GUI.
+über MCP zugänglich — das bleibt Operator-Hoheit über die GUI.
 
 Mehr: [Sicherheits-Modell](/help/ai/security/) und
 [Architektur-Tiefe](/help/ai/architecture/).
@@ -122,7 +122,7 @@ Beispiel:
 Plus konfigurierbare **Tool-Schritte-Grenze** (default 10 Schritte
 pro User-Anfrage) und ein Geschwindigkeits-Modus mit
 **Notbremse-Knopf** (roter Not-Aus-Knopf mit klassischer Pilzkopf-Form) wenn die KI
-trotzdem aus dem Ruder laeuft.
+trotzdem aus dem Ruder läuft.
 
 ---
 
@@ -153,12 +153,12 @@ formale Spec, RFC-2119-Sprache).
 
 ## Wo Sie das nutzen
 
-| Setup | Wofuer |
+| Setup | Wofür |
 |---|---|
 | **Lokales Coding** | Cloud-LLM oder lokales Modell, Personas im AI-Reiter |
 | **Code-Review** | Reviewer-Persona, read-only — keine Gefahr |
 | **Inbetriebnahme** | Monitor-Persona auf Produktions-SPS — nur Beobachtung |
-| **Einarbeitung** | Trainee-Persona, jede Aktion einzeln bestaetigen |
+| **Einarbeitung** | Trainee-Persona, jede Aktion einzeln bestätigen |
 | **CI-Build-Server** | Headless-Studio + curl + JSON-RPC aus dem Build-Skript |
 | **Multi-LLM-Cooperation** | GPT als Kritiker, Claude als Coder, jeder mit eigener Persona |
 
@@ -170,5 +170,5 @@ formale Spec, RFC-2119-Sprache).
 - [Personas](/help/ai/agents/), [Bedienung](/help/ai/chat/),
   [Was die KI kann](/help/ai/tools/)
 - [Providers — ChatGPT, Claude, lokal](/help/ai/providers/)
-- [MCP fuer Applikationsingenieure](/help/mcp/programmers/)
-- [MCP fuer IT + Betrieb](/help/mcp/it/)
+- [MCP für Applikationsingenieure](/help/mcp/programmers/)
+- [MCP für IT + Betrieb](/help/mcp/it/)

@@ -3,10 +3,10 @@ title: "Structured Text Editor"
 summary: "ST-Editor + Sprachfundamente: IEC 61131-3 Statements, Bit-Zugriff, qualifizierte Pool-Referenzen"
 ---
 
-## Ueberblick
+## Überblick
 
-**Structured Text (ST)** ist die Pascal-aehnliche Hochsprache der
-IEC 61131-3 und der Standard-Editor fuer PROGRAM-, FUNCTION_BLOCK- und
+**Structured Text (ST)** ist die Pascal-ähnliche Hochsprache der
+IEC 61131-3 und der Standard-Editor für PROGRAM-, FUNCTION_BLOCK- und
 FUNCTION-POUs in ForgeIEC. Der Editor ist eine `QWidget`-basierte
 Komposition aus Variablentabelle und Code-Bereich, gekoppelt durch einen
 vertikalen Splitter.
@@ -26,44 +26,44 @@ vertikalen Splitter.
 
 | Bereich | Inhalt |
 |---|---|
-| **Variablentabelle** (oben) | Deklarationen mit Spalten Name, Typ, Initialwert, Adresse, Kommentar. Aenderungen synchronisieren sich live in den `VAR ... END_VAR`-Block des Codes. |
-| **Code-Bereich** (unten) | ST-Quelltext zwischen den Variablensektionen. Zeilenfolding ueber den Tree-Sitter-AST, Zeilennummern, Cursor-Line-Highlight. |
-| **Search Bar** (Ctrl-F / Ctrl-H) | Eingeblendet ueber dem Code-Bereich, mit Replace-Modus fuer Such-und-Ersetzen. |
+| **Variablentabelle** (oben) | Deklarationen mit Spalten Name, Typ, Initialwert, Adresse, Kommentar. Änderungen synchronisieren sich live in den `VAR ... END_VAR`-Block des Codes. |
+| **Code-Bereich** (unten) | ST-Quelltext zwischen den Variablensektionen. Zeilenfolding über den Tree-Sitter-AST, Zeilennummern, Cursor-Line-Highlight. |
+| **Search Bar** (Ctrl-F / Ctrl-H) | Eingeblendet über dem Code-Bereich, mit Replace-Modus für Such-und-Ersetzen. |
 
 Der Splitter speichert seine Position pro POU im Layout-State.
 
 ## Tree-Sitter Syntax-Highlighting
 
 Statt eines regex-basierten `QSyntaxHighlighter` parst ForgeIEC den
-ST-Quelltext mit **Tree-Sitter** zu einem AST und faerbt anhand von
+ST-Quelltext mit **Tree-Sitter** zu einem AST und färbt anhand von
 Capture-Queries:
 
   - **Keywords** (`IF`, `THEN`, `FOR`, `FUNCTION_BLOCK`, ...): Magenta
-  - **Datentypen** (`BOOL`, `INT`, `REAL`, `TIME`, ...): Tuerkis
-  - **Strings + Zeitliterale** (`'abc'`, `T#20ms`): Gruen
+  - **Datentypen** (`BOOL`, `INT`, `REAL`, `TIME`, ...): Türkis
+  - **Strings + Zeitliterale** (`'abc'`, `T#20ms`): Grün
   - **Kommentare** (`(* ... *)`, `// ...`): Grau, kursiv
   - **PUBLISH / SUBSCRIBE**: Anvil-Erweiterungs-Keywords, eigener Stil
 
 Vorteil: Highlighting bleibt korrekt bei komplexen Konstrukten
 (verschachtelte Kommentare, Zeit-Literale, qualifizierte Referenzen),
-und derselbe AST liefert die foldbaren Bereiche fuer Code-Folding.
+und derselbe AST liefert die foldbaren Bereiche für Code-Folding.
 
 ## Code-Completion (Ctrl-Space)
 
-Druecken von **Ctrl-Space** oder das Tippen von zwei Zeichen oeffnet das
+Drücken von **Ctrl-Space** oder das Tippen von zwei Zeichen öffnet das
 Completion-Popup. Der Completer kennt:
 
   - **IEC-Keywords** (`IF`, `CASE`, `FOR`, `WHILE`, `RETURN`, ...)
   - **Datentypen** (`BOOL`, `INT`, `DINT`, `REAL`, `STRING`, `TIME`, ...)
   - **Lokale Variablen** der aktuellen POU
   - **POU-Namen** des Projekts (PROGRAM, FUNCTION_BLOCK, FUNCTION)
-  - **Library-Bloecke** (`TON`, `R_TRIG`, `JK_FF`, `DEBOUNCE`, ...)
+  - **Library-Blöcke** (`TON`, `R_TRIG`, `JK_FF`, `DEBOUNCE`, ...)
   - **Standard-Funktionen** (`ABS`, `SQRT`, `LIMIT`, `LEN`, ...)
 
-Aenderungen am Variablen-Pool (`poolChanged`-Signal) werden mit 100 ms
-Debounce in das Completion-Modell uebernommen — neue Pool-Eintraege sind
-dadurch fast augenblicklich verfuegbar, ohne dass jede Tastatur-Eingabe
-einen Vollscan ausloest.
+Änderungen am Variablen-Pool (`poolChanged`-Signal) werden mit 100 ms
+Debounce in das Completion-Modell übernommen — neue Pool-Einträge sind
+dadurch fast augenblicklich verfügbar, ohne dass jede Tastatur-Eingabe
+einen Vollscan auslöst.
 
 ## Sprachfundamente (IEC 61131-3)
 
@@ -81,7 +81,7 @@ einen Vollscan ausloest.
 
 ### Expressions
 
-Standard-Operatoren mit IEC-Praezedenz: `**`, unaeres `+/-/NOT`, `* / MOD`,
+Standard-Operatoren mit IEC-Präzedenz: `**`, unäres `+/-/NOT`, `* / MOD`,
 `+ -`, Vergleiche, `AND / &`, `XOR`, `OR`. Klammern wie in Pascal.
 Implizite numerische Typkonvertierungen sind nicht erlaubt — `INT_TO_DINT`,
 `REAL_TO_INT` etc. sind explizit aufzurufen.
@@ -96,23 +96,23 @@ status.0 := TRUE;             (* Bit 0 setzen *)
 alarm := flags.7 OR flags.3;  (* Bits lesen *)
 ```
 
-Der Compiler uebersetzt das in saubere Bit-Maskierung mit `AND`/`OR`/Shift,
+Der Compiler übersetzt das in saubere Bit-Maskierung mit `AND`/`OR`/Shift,
 ohne Helfer-Variablen.
 
 ### 3-Level qualifizierte Referenzen
 
-`<Category>.<Group>.<Variable>` greift direkt auf Pool-Eintraege zu, ohne
-GVLs explizit deklarieren zu muessen:
+`<Category>.<Group>.<Variable>` greift direkt auf Pool-Einträge zu, ohne
+GVLs explizit deklarieren zu müssen:
 
 | Prefix | Quelle |
 |---|---|
 | `Anvil.X.Y`   | Pool-Eintrag mit `anvilGroup="X"` |
 | `Bellows.X.Y` | Pool-Eintrag mit `hmiGroup="X"` |
 | `GVL.X.Y`     | Pool-Eintrag mit `gvlNamespace="X"` |
-| `HMI.X.Y`     | Synonym fuer `Bellows.X.Y` |
+| `HMI.X.Y`     | Synonym für `Bellows.X.Y` |
 
-`Anvil.X.Y` und `Bellows.X.Y` koennen unabhaengig voneinander auf
-unterschiedliche Pool-Eintraege zeigen — der Compiler emittiert getrennte
+`Anvil.X.Y` und `Bellows.X.Y` können unabhängig voneinander auf
+unterschiedliche Pool-Einträge zeigen — der Compiler emittiert getrennte
 C-Symbole, sobald die IEC-Adressen sich unterscheiden.
 
 ### Adressierte Variablen (`AT %...`)
@@ -125,7 +125,7 @@ motor_speed   AT %QW1    : INT;
 flag_persist  AT %MX10.3 : BOOL;
 ```
 
-Adresse ist Primaerschluessel im Pool — siehe
+Adresse ist Primärschlüssel im Pool — siehe
 [Projekt-Dateiformat](../file-format/).
 
 ## Code-Beispiele
@@ -162,12 +162,12 @@ END_PROGRAM
 ```
 
 `Bellows.Pfirsich.T_1` und `Anvil.Sensors.contact_door` sind 3-Level-
-Referenzen, die der Compiler ohne GVL-Deklaration aufloest — vorausgesetzt,
-beide Tags sind im Adress-Pool gepflegt und der HMI-Export fuer die
+Referenzen, die der Compiler ohne GVL-Deklaration auflöst — vorausgesetzt,
+beide Tags sind im Adress-Pool gepflegt und der HMI-Export für die
 Gruppe `Pfirsich` ist aktiv.
 
 ## Verwandte Themen
 
-- [Bibliothek](../library/) — verfuegbare Funktionsbloecke + Funktionen
+- [Bibliothek](../library/) — verfügbare Funktionsblöcke + Funktionen
 - [Instruction List](../il/) — alternativer Text-Editor (akkumulator-basiert)
 - [Projekt-Dateiformat](../file-format/) — wie ST-Code in `.forge` gespeichert wird

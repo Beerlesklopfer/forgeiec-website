@@ -1,27 +1,27 @@
 ---
 title: "FAQ"
-summary: "Wachsende Sammlung haeufiger Fragen + Loesungen aus der Praxis"
+summary: "Wachsende Sammlung häufiger Fragen + Lösungen aus der Praxis"
 ---
 
-## Haeufig gestellte Fragen
+## Häufig gestellte Fragen
 
-Hier sammeln wir Symptome + Loesungen, die in Devloop oder Inbetrieb-
-nahme regelmaessig vorkommen. Jeder Eintrag ist nach **Symptom** sortiert
+Hier sammeln wir Symptome + Lösungen, die in Devloop oder Inbetrieb-
+nahme regelmäßig vorkommen. Jeder Eintrag ist nach **Symptom** sortiert
 und nennt sowohl die schnelle Abhilfe als auch den eigentlichen Grund —
-damit Sie nicht nur das aktuelle Problem loesen, sondern auch verstehen
+damit Sie nicht nur das aktuelle Problem lösen, sondern auch verstehen
 warum es auftrat.
 
-Die FAQ waechst mit dem Projekt — wenn Sie einen Fall haben der hier
-fehlt, schreiben Sie an blacksmith@forgeiec.io oder oeffnen Sie ein
+Die FAQ wächst mit dem Projekt — wenn Sie einen Fall haben der hier
+fehlt, schreiben Sie an blacksmith@forgeiec.io oder öffnen Sie ein
 Issue.
 
 ---
 
 ## Themen
 
-### [Variablen bleiben "haengen" trotz frischem Deploy](/help/faq/stuck-variables-shm/)
+### [Variablen bleiben "hängen" trotz frischem Deploy](/help/faq/stuck-variables-shm/)
 
-Eine BOOL- oder INT-Variable behaelt einen Wert (TRUE/FALSE oder einen
+Eine BOOL- oder INT-Variable behält einen Wert (TRUE/FALSE oder einen
 Zahlenwert) der nicht zur Programm-Logik passt. `monitor.snapshot`
 meldet `forced=false`, der ST-Code schreibt offensichtlich einen anderen
 Wert — und trotzdem bleibt der Wert "kleben". Ursache: stale Anvil-
