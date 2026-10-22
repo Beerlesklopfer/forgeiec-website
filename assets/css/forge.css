@@ -623,3 +623,10 @@ pre.mermaid { background: var(--surface); border: 1px solid var(--border); color
 .page-body > .prose, .page-body > .post-list { margin-left: auto; margin-right: auto; }
 .page-hero--narrow .container { max-width: calc(var(--prose) + 2 * var(--gutter)); }
 .page-hero--wide .container { max-width: calc(64rem + 2 * var(--gutter)); }
+
+/* Forge sound toggle */
+.sound-toggle .i-sound-on { display: none; }
+.sound-toggle[aria-pressed="true"] .i-sound-on { display: block; }
+.sound-toggle[aria-pressed="true"] .i-sound-off { display: none; }
+.sound-toggle[aria-pressed="true"] { color: var(--accent-text); border-color: var(--brand); }
+@media (max-width: 380px) { .icon-btn { width: 34px; height: 34px; } }

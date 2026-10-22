@@ -21,6 +21,39 @@
     });
   }
 
+  // Forge sound: off by default. The synthesis script is loaded only when
+  // the visitor has switched it on (stored flag) or switches it on now.
+  var SOUND_KEY = 'forgeiec-sound';
+  var soundBtn = document.querySelector('.sound-toggle');
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isBot = navigator.webdriver === true;
+  function soundStored() {
+    try { return localStorage.getItem(SOUND_KEY) === 'on'; } catch (e) { return false; }
+  }
+  var soundOn = soundStored();
+  function loadSound(cb) {
+    if (window.ForgeAnvil) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = soundBtn.getAttribute('data-src');
+    s.onload = cb;
+    document.head.appendChild(s);
+  }
+  if (soundBtn) {
+    soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+    soundBtn.addEventListener('click', function () {
+      soundOn = !soundOn;
+      soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+      try { localStorage.setItem(SOUND_KEY, soundOn ? 'on' : 'off'); } catch (e) { /* storage blocked: lasts for this page */ }
+      if (soundOn) loadSound(function () { window.ForgeAnvil.play(); });
+    });
+    // Autoplay after load only when stored on, not for reduced motion, not for automation.
+    if (soundOn && !reduced && !isBot) {
+      window.addEventListener('load', function () {
+        loadSound(function () { if (soundOn) window.ForgeAnvil.play(); });
+      });
+    }
+  }
+
   var header = document.querySelector('.site-header');
   var menuBtn = document.querySelector('.menu-toggle');
   if (header && menuBtn) {
