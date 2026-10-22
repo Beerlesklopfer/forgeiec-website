@@ -54,6 +54,11 @@ noClasses = false
       pageRef = "/architektur"
       weight = 20
     [[languages.de.menu.main]]
+      identifier = "roadmap"
+      name = "Roadmap"
+      pageRef = "/roadmap"
+      weight = 25
+    [[languages.de.menu.main]]
       identifier = "download"
       name = "Download"
       pageRef = "/download"
@@ -110,6 +115,11 @@ noClasses = false
       name = "Architecture"
       pageRef = "/architektur"
       weight = 20
+    [[languages.en.menu.main]]
+      identifier = "roadmap"
+      name = "Roadmap"
+      pageRef = "/roadmap"
+      weight = 25
     [[languages.en.menu.main]]
       identifier = "download"
       name = "Download"

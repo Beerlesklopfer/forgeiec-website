@@ -57,7 +57,7 @@ ForgeIEC is IEC 61131-3 control software: a Studio for programming, a runtime on
 <div class="card">
 <p class="card-kicker">Languages</p>
 <h3>Graphical editors that compile</h3>
-<p>FBD, LD, SFC and IL have editors but are not compiled yet. What is needed is the path from the graphical body to code — and clean serialisation to PLCopen XML.</p>
+<p>LD, FBD and SFC have editors but are not compiled yet – they are planned for versions 0.3, 0.4 and 0.5 (<a href="/en/roadmap/">roadmap</a>); IL is deprecated. What is needed is the path from the graphical body to code — and clean serialisation to PLCopen XML.</p>
 <div class="chip-row">{{< status "wip" >}}</div>
 </div>
 <div class="card">

@@ -56,7 +56,7 @@ ForgeIEC ist Steuerungssoftware nach IEC 61131-3: ein Studio zum Programmieren, 
 <div class="card">
 <p class="card-kicker">Sprachen</p>
 <h3>Grafische Editoren, die übersetzen</h3>
-<p>FBD, LD, SFC und IL haben Editoren, werden aber noch nicht übersetzt. Gebraucht wird der Weg vom grafischen Rumpf zum Code — und saubere Serialisierung nach PLCopen XML.</p>
+<p>Für KOP, FUP und AS gibt es Editoren, übersetzt werden sie noch nicht – geplant sind sie für die Versionen 0.3, 0.4 und 0.5 (<a href="/de/roadmap/">Roadmap</a>); AWL ist abgekündigt. Gebraucht wird der Weg vom grafischen Rumpf zum Code — und saubere Serialisierung nach PLCopen XML.</p>
 <div class="chip-row">{{< status "wip" >}}</div>
 </div>
 <div class="card">

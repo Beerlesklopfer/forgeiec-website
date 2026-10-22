@@ -128,6 +128,7 @@
       <span class="legend-item">{{ partial "chip.html" (dict "s" "plan") }} {{ .legendPlan }}</span>
       <span class="legend-item">{{ partial "chip.html" (dict "s" "rest") }} {{ .legendRest }}</span>
     </p>
+    {{- with .roadmapHref }}<p class="mt-2"><a class="btn btn-secondary" href="{{ . | relLangURL }}">{{ $p.status.roadmapLabel }} <span class="arrow" aria-hidden="true"></span></a></p>{{ end }}
   </div>
 </section>
 {{- end }}
