@@ -7,6 +7,14 @@ components: [studio]
 
 {{< components "studio" >}}
 
+{{< callout type="note" title="Nachtrag Oktober 2026" >}}
+matiec ist abgelöst. ForgeIEC übersetzt ST mit einem eigenen Kern nach
+C++, der auch die objektorientierten Erweiterungen (METHOD, INTERFACE,
+EXTENDS) beherrscht. Der folgende Beitrag gibt den Stand vom Mai 2026
+wieder.
+{{< /callout >}}
+<!-- ENTWURF: Ob eine Rust+LLVM-Migration ("rustly"/"rusty") noch Plan ist, ist offen (Audit W-16). Der Beitrag bleibt als historischer Stand stehen. -->
+
 ## Worum es geht
 
 ForgeIEC's Codegen-Schicht ist nicht an einen Compiler
@@ -22,7 +30,7 @@ Reihenfolge ist:
 1. **matiec** — die etablierte ST→C-Pipeline aus dem
    Beremiz-Universum. Heute der Default für jedes neue
    ForgeIEC-Projekt. Pro Konstrukt dokumentiert in der
-   neuen [IEC-Reference](/reference/iec61131-3/), inklusive
+   neuen [IEC-Reference](/en/reference/iec61131-3/), inklusive
    der bekannten Quirks.
 2. **matiec++** — die in Vorbereitung befindliche C++-Variante.
    Generiert C++ statt C, was mehrere Probleme der heutigen
@@ -64,7 +72,7 @@ Schnittstelle**; der Compiler ist austauschbar.
 ## Was bedeutet das praktisch?
 
 - **Bibliotheken werden Backend-aware**. Das in Vorbereitung
-  befindliche [Library-System](#) (`.forge_lib`-Dateiformat,
+  befindliche [Library-System](/de/help/library/) (`.forge_lib`-Dateiformat,
   in Planung) trägt pro POU eine Backend-Markierung. Eine
   Library kann gleichzeitig matiec-, matiec++- und rustly-
   Implementierungen liefern; das konsumierende Projekt

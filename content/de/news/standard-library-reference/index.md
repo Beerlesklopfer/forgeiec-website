@@ -19,7 +19,7 @@ ein LLM-Assistent will **eine Compiler-Fehlermeldung in eine
 ausführbare Korrektur übersetzen** ohne zu raten.
 
 Auf forgeiec.io gibt es jetzt eine
-[IEC 61131-3 Reference](/reference/iec61131-3/), die alle drei
+[IEC 61131-3 Reference](/en/reference/iec61131-3/), die alle drei
 Zielgruppen parallel bedient.
 
 ## Was bisher live ist
@@ -27,21 +27,21 @@ Zielgruppen parallel bedient.
 Erste Welle, Stand 2026-05-14:
 
 - **Strukturierter Aufbau**: 3 Sprachfamilien als Top-Level
-  ([Textual](/reference/iec61131-3/textual/) — ST + IL,
-  [Graphical](/reference/iec61131-3/graphical/) — LD + FBD,
-  [Structured](/reference/iec61131-3/structured/) — SFC) plus
-  [Common Elements](/reference/iec61131-3/common/) und
-  [Standard Library](/reference/iec61131-3/standard-library/).
+  ([Textual](/en/reference/iec61131-3/textual/) — ST + IL,
+  [Graphical](/en/reference/iec61131-3/graphical/) — LD + FBD,
+  [Structured](/en/reference/iec61131-3/structured/) — SFC) plus
+  [Common Elements](/en/reference/iec61131-3/common/) und
+  [Standard Library](/en/reference/iec61131-3/standard-library/).
 - **ST Control Flow** voll dokumentiert:
-  [`IF` / `ELSIF` / `ELSE`](/reference/iec61131-3/textual/structured-text/control-flow/if-statement/),
-  [`CASE`](/reference/iec61131-3/textual/structured-text/control-flow/case-statement/).
+  [`IF` / `ELSIF` / `ELSE`](/en/reference/iec61131-3/textual/structured-text/control-flow/if-statement/),
+  [`CASE`](/en/reference/iec61131-3/textual/structured-text/control-flow/case-statement/).
 - **Function & FB calls** mit zwei Tiefenartikeln:
-  [FB-Instanz vs. Function-Call](/reference/iec61131-3/textual/structured-text/function-calls/fb-instance-vs-function/)
-  und [Positional vs. Named Parameters](/reference/iec61131-3/textual/structured-text/function-calls/positional-vs-named/).
+  [FB-Instanz vs. Function-Call](/en/reference/iec61131-3/textual/structured-text/function-calls/fb-instance-vs-function/)
+  und [Positional vs. Named Parameters](/en/reference/iec61131-3/textual/structured-text/function-calls/positional-vs-named/).
 - **Standard Library**: erster vollständiger Funktionsbaustein
-  [TON — Timer-On-Delay](/reference/iec61131-3/standard-library/function-blocks/ton/)
+  [TON — Timer-On-Delay](/en/reference/iec61131-3/standard-library/function-blocks/ton/)
   mit Pin-Layout, Beispielen, Semantik und Reihe von Auto-Fix-Einträgen.
-- **Literals**: [Integer & Hexadecimal](/reference/iec61131-3/textual/structured-text/literals/integer-literals/)
+- **Literals**: [Integer & Hexadecimal](/en/reference/iec61131-3/textual/structured-text/literals/integer-literals/)
   inklusive der zwei matiec-Quirks die uns am 2026-05-14 in der
   Ackersteuerung den Tag gekostet haben.
 

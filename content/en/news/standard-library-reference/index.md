@@ -19,7 +19,7 @@ a compiler error message into an executable fix** without
 guessing.
 
 forgeiec.io now hosts an
-[IEC 61131-3 reference](/reference/iec61131-3/) that serves
+[IEC 61131-3 reference](/en/reference/iec61131-3/) that serves
 all three audiences in parallel.
 
 ## What's live in the first wave
@@ -27,22 +27,22 @@ all three audiences in parallel.
 As of 2026-05-14:
 
 - **Structured layout**: 3 language families as top-level
-  ([Textual](/reference/iec61131-3/textual/) — ST + IL,
-  [Graphical](/reference/iec61131-3/graphical/) — LD + FBD,
-  [Structured](/reference/iec61131-3/structured/) — SFC) plus
-  [Common Elements](/reference/iec61131-3/common/) and
-  [Standard Library](/reference/iec61131-3/standard-library/).
+  ([Textual](/en/reference/iec61131-3/textual/) — ST + IL,
+  [Graphical](/en/reference/iec61131-3/graphical/) — LD + FBD,
+  [Structured](/en/reference/iec61131-3/structured/) — SFC) plus
+  [Common Elements](/en/reference/iec61131-3/common/) and
+  [Standard Library](/en/reference/iec61131-3/standard-library/).
 - **ST control flow** documented in full:
-  [`IF` / `ELSIF` / `ELSE`](/reference/iec61131-3/textual/structured-text/control-flow/if-statement/),
-  [`CASE`](/reference/iec61131-3/textual/structured-text/control-flow/case-statement/).
+  [`IF` / `ELSIF` / `ELSE`](/en/reference/iec61131-3/textual/structured-text/control-flow/if-statement/),
+  [`CASE`](/en/reference/iec61131-3/textual/structured-text/control-flow/case-statement/).
 - **Function & FB calls**, two deep-dive pages:
-  [FB instances vs. function calls](/reference/iec61131-3/textual/structured-text/function-calls/fb-instance-vs-function/)
-  and [Positional vs. named parameters](/reference/iec61131-3/textual/structured-text/function-calls/positional-vs-named/).
+  [FB instances vs. function calls](/en/reference/iec61131-3/textual/structured-text/function-calls/fb-instance-vs-function/)
+  and [Positional vs. named parameters](/en/reference/iec61131-3/textual/structured-text/function-calls/positional-vs-named/).
 - **Standard library**: first complete function block
-  [TON — timer-on-delay](/reference/iec61131-3/standard-library/function-blocks/ton/)
+  [TON — timer-on-delay](/en/reference/iec61131-3/standard-library/function-blocks/ton/)
   with pin layout, examples, semantics and a row of auto-fix
   signals.
-- **Literals**: [Integer & hexadecimal](/reference/iec61131-3/textual/structured-text/literals/integer-literals/)
+- **Literals**: [Integer & hexadecimal](/en/reference/iec61131-3/textual/structured-text/literals/integer-literals/)
   including the two matiec quirks that cost us the morning of
   2026-05-14 in the Ackersteuerung project.
 
