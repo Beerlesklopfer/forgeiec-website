@@ -142,6 +142,11 @@ Ziel-SPS installiert.
 
 ---
 
+## Ansichten
+
+{{< screenshot program="studio" name="plc-stats" alt="Laufzeitstatistik der Steuerung im Studio" caption="Laufzeitstatistik: Zustand, Programm, Laufzeit und Zykluswerte, live." >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **Anvil — Wo Daten zu Steuerbefehlen geschmiedet werden.**

@@ -106,6 +106,21 @@ Complete IEC standard library in a SQLite database:
 
 ---
 
+## Screens
+
+{{< screenshot program="studio" name="editor-st" alt="ForgeIEC Studio with a Structured Text program in the editor" caption="The ST editor in the Studio's main window." >}}
+
+{{< screenshot program="studio" name="variables" alt="Project variable list with filter bar" caption="Variables: filter by text, type, range and tag." >}}
+
+{{< screenshot program="studio" name="library" alt="Block library with categories and documentation" caption="Library: blocks by category, search includes the documentation." >}}
+
+{{< screenshot program="studio" name="oscilloscope" alt="Oscilloscope showing several variable traces" caption="Oscilloscope: timing, analog and normalized view." >}}
+
+{{< screenshot program="fdd-editor" name="catalog" alt="FDD editor with a device description as a tree and an edit form" caption="The FDD editor: device descriptions as a tree, edited in a form." >}}
+
+{{< screenshot program="studio" name="editor-sfc" alt="Sequential Function Chart (SFC) editor, planned for version 0.5" caption="Sequential Function Chart (SFC): planned for version 0.5, programs are not compiled yet." status="plan" >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **Forge Studio — The workbench for industrial automation.**

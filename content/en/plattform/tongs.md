@@ -136,6 +136,13 @@ slave_id = 1
 
 ---
 
+## Screens
+
+{{< screenshot program="studio" name="network" alt="Network picture with interfaces, buses and devices" caption="The network picture: interfaces, the buses on them, the devices on the buses." >}}
+
+{{< screenshot program="studio" name="device" alt="Device drawing with lit status lamps and properties" caption="Device view: the drawing from the device description, lamps lit by live values." >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **Tongs — The sure grip into the industrial periphery.**

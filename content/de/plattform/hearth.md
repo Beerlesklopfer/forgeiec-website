@@ -69,6 +69,13 @@ Browser  --->  Hearth (Web-Server)  <---  Anvil-Bus (iceoryx2)  <---  forgeiec_p
 
 ---
 
+## Ansichten
+
+{{< screenshot program="hearth" name="editor" alt="Hearth Studio mit einem Bildschirm aus Symbolen und Verbindungen" caption="Hearth Studio: Bildschirme aus Symbolen, Verbindungen und Variablen." status="wip" >}}
+
+{{< screenshot program="hearth-server" name="hmi" alt="Veröffentlichter Hearth-Bildschirm im Browser mit Live-Werten" caption="Ein veröffentlichter Bildschirm im Browser, mit Live-Werten." status="wip" >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **Hearth — Die Anlage im Blick, von überall.**

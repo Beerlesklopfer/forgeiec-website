@@ -106,6 +106,21 @@ Vollständige IEC-Standardbibliothek in einer SQLite-Datenbank:
 
 ---
 
+## Ansichten
+
+{{< screenshot program="studio" name="editor-st" alt="ForgeIEC Studio mit einem Programm in Strukturiertem Text im Editor" caption="Der ST-Editor im Hauptfenster des Studios." >}}
+
+{{< screenshot program="studio" name="variables" alt="Variablenliste des Projekts mit Filterleiste" caption="Variablen: filtern nach Text, Typ, Bereich und Markierung." >}}
+
+{{< screenshot program="studio" name="library" alt="Bausteinbibliothek mit Kategorien und Dokumentation" caption="Bibliothek: Bausteine nach Kategorie, Suche auch in der Dokumentation." >}}
+
+{{< screenshot program="studio" name="oscilloscope" alt="Oszilloskop mit mehreren Variablenverläufen" caption="Oszilloskop: Zeitdiagramm, analoge und normierte Ansicht." >}}
+
+{{< screenshot program="fdd-editor" name="catalog" alt="FDD-Editor mit Gerätebeschreibung als Baum und Eingabemaske" caption="Der FDD-Editor: Gerätebeschreibungen als Baum, bearbeitet in einer Maske." >}}
+
+{{< screenshot program="studio" name="editor-sfc" alt="Editor für Ablaufsprache (AS), geplant für Version 0.5" caption="Ablaufsprache (AS): geplant für Version 0.5, Programme werden noch nicht übersetzt." status="plan" >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **Forge Studio — Die Werkbank für industrielle Automatisierung.**

@@ -98,6 +98,11 @@ erscheinen.
 
 ---
 
+## Ansichten
+
+{{< screenshot program="studio" name="ai-assistant" alt="KI-Helfer-Leiste mit einem Reiter je Persona" caption="Der KI-Helfer: ein Reiter je Persona." >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **Die KI ist Werkzeug. Sie entscheiden.**

@@ -139,6 +139,11 @@ generated C++ code at deployment time.
 
 ---
 
+## Screens
+
+{{< screenshot program="studio" name="plc-stats" alt="Runtime statistics of the controller in the Studio" caption="Runtime statistics: state, program, run time and cycle figures, live." >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **Anvil — Where data is forged into control commands.**

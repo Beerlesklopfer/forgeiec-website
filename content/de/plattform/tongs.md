@@ -139,6 +139,13 @@ slave_id = 1
 
 ---
 
+## Ansichten
+
+{{< screenshot program="studio" name="network" alt="Netzbild mit Schnittstellen, Bussen und Geräten" caption="Das Netzbild: Schnittstellen, Busse darauf, Geräte daran." >}}
+
+{{< screenshot program="studio" name="device" alt="Gerätezeichnung mit leuchtenden Statuslampen und Eigenschaften" caption="Geräteansicht: die Zeichnung aus der Gerätebeschreibung, Lampen mit Live-Werten." >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **Tongs — Der sichere Griff in die industrielle Peripherie.**
