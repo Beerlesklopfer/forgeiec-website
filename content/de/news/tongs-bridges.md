@@ -26,10 +26,14 @@ drin gibt es eine **modulare Komponenten-Familie**.
 
 | Daemon | Protokoll | Status |
 |---|---|---|
-| `tongs-modbustcp` | Modbus TCP Master + Slave-Mode | produktiv |
-| `tongs-ethercat` | EtherCAT-Master mit DC-Sync | in Arbeit |
-| `tongs-profibus` | Profibus DP/PA | geplant |
-| `tongs-ethernetip` | EtherNet/IP CIP | geplant |
+| `tongs-modbustcp` | Modbus TCP Master + Slave-Mode | verfügbar |
+| `tongs-modbusrtu` | Modbus RTU | verfügbar |
+| `tongs-lorawan` | LoRaWAN | in Arbeit (Schwerpunkt) |
+| `tongs-ethercat` | EtherCAT-Master mit DC-Sync | Gerüst, in Arbeit |
+| `tongs-profibus` | Profibus DP/PA | Gerüst, in Arbeit |
+| `tongs-ethernetip` | EtherNet/IP CIP | Gerüst, in Arbeit |
+
+*Status aktualisiert im Oktober 2026.*
 
 Alle laufen unter dem **gleichen** anvild-Subprozess-Manager.
 Lifecycle, Logging, Auto-Restart — gemeinsam, nicht pro Protokoll

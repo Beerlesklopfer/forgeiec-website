@@ -128,7 +128,7 @@ FVariable
   scope:   anvil.Stachelbeere
   flags:
     bellows_export: false    ← in HMI/OPC-UA exportieren?
-    force_enabled:  false    ← darf forciert werden? (4-Layer-Gate)
+    force_enabled:  false    ← darf forciert werden? (Force-Sperre)
     monitor_enabled: true
   busBinding:
     deviceId:       <UUID-of-Stachelbeere>
@@ -148,7 +148,8 @@ Drei separate Flags steuern was eine Variable darf — alle Default OFF:
   OPC-UA-Knoten + Modbus-TCP-Server-Coil sichtbar (HMI-Anbindung)
 - **`force_enabled`** — `F`-Checkbox darf in der GUI gesetzt
   werden; ohne dieses Flag ist Forcing schon im Code-Generator
-  abgeschaltet (Layer 1 der [4-Layer-Defense](/help/ai/security/))
+  abgeschaltet (erste Stufe der [Force-Sperre](/de/help/ai/security/): dreifach
+  gesperrt — Codegen, Runtime, Editor; für die KI eine vierte Sperre)
 - **`monitor_enabled`** — Variable erscheint im Live-Monitor-Stream
   (sonst nur lokal in der PLC)
 
@@ -227,11 +228,12 @@ Detail-Schema:
 
 | Protokoll | `protocol`-Wert | Medium | Bridge | Status |
 |---|---|---|---|---|
-| Modbus TCP | `modbustcp` | Ethernet | `tongs-modbustcp` | produktiv |
-| Modbus RTU | `modbusrtu` | RS-485 | `tongs-modbusrtu` | geplant |
-| EtherCAT | `ethercat` | Ethernet (DC) | `tongs-ethercat` | in Arbeit |
-| Profibus DP | `profibus` | Feldbus | `tongs-profibus` | in Arbeit |
-| EtherNet/IP | `ethernetip` | Ethernet (CIP) | `tongs-ethernetip` | in Arbeit |
+| Modbus TCP | `modbustcp` | Ethernet | `tongs-modbustcp` | {{< status "use" "verfügbar" >}} |
+| Modbus RTU | `modbusrtu` | RS-485 | `tongs-modbusrtu` | {{< status "use" "verfügbar" >}} |
+| LoRaWAN | — | Funk | `tongs-lorawan` | {{< status "wip" "in Arbeit (Schwerpunkt)" >}} |
+| EtherCAT | `ethercat` | Ethernet (DC) | `tongs-ethercat` | {{< status "wip" "Gerüst, in Arbeit" >}} |
+| PROFIBUS DP | `profibus` | Feldbus | `tongs-profibus` | {{< status "wip" "Gerüst, in Arbeit" >}} |
+| EtherNet/IP | `ethernetip` | Ethernet (CIP) | `tongs-ethernetip` | {{< status "wip" "Gerüst, in Arbeit" >}} |
 
 ---
 
@@ -243,6 +245,5 @@ Detail-Schema:
   als First-Class
 - [Tongs-Bridge-Familie](/news/tongs-bridges/) — Fault-Modell +
   Bridge-Lifecycle
-- [Sicherheits-Modell](/help/ai/security/) — 4-Layer-Defense für
-  Force-Setzungen
+- [Sicherheits-Modell](/help/ai/security/) — die Force-Sperre
 - [`.forge`-Dateiformat](../file-format/)

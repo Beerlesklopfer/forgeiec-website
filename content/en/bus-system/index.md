@@ -24,10 +24,12 @@ Bus Systems
 
 | Protocol | Medium | Application |
 |----------|--------|-------------|
-| **Modbus TCP** | Ethernet | Building automation, process control |
-| **Modbus RTU** | RS-485 (serial) | Sensors, simple field devices |
-| **EtherCAT** | Ethernet (real-time) | Motion control, fast I/O |
-| **Profibus DP** | Serial (fieldbus) | Manufacturing automation |
+| **Modbus TCP** {{< status "use" "available" >}} | Ethernet | Building automation, process control |
+| **Modbus RTU** {{< status "use" "available" >}} | RS-485 (serial) | Sensors, simple field devices |
+| **LoRaWAN** {{< status "wip" "in progress (focus)" >}} | Wireless | Sensors in agriculture and on wide-area plants |
+| **EtherCAT** {{< status "wip" "skeleton, in progress" >}} | Ethernet (real-time) | Motion control, fast I/O |
+| **PROFIBUS DP** {{< status "wip" "skeleton, in progress" >}} | Serial (fieldbus) | Manufacturing automation |
+| **EtherNet/IP** {{< status "wip" "skeleton, in progress" >}} | Ethernet | Manufacturing automation |
 
 ## Automatic Address Assignment
 

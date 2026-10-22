@@ -24,10 +24,12 @@ Bussysteme
 
 | Protokoll | Medium | Einsatzgebiet |
 |-----------|--------|---------------|
-| **Modbus TCP** | Ethernet | Gebäudeautomation, Prozesstechnik |
-| **Modbus RTU** | RS-485 (seriell) | Sensorik, einfache Feldgeräte |
-| **EtherCAT** | Ethernet (Echtzeit) | Motion Control, schnelle E/A |
-| **Profibus DP** | Seriell (Feldbus) | Fertigungsautomation |
+| **Modbus TCP** {{< status "use" "verfügbar" >}} | Ethernet | Gebäudeautomation, Prozesstechnik |
+| **Modbus RTU** {{< status "use" "verfügbar" >}} | RS-485 (seriell) | Sensorik, einfache Feldgeräte |
+| **LoRaWAN** {{< status "wip" "in Arbeit (Schwerpunkt)" >}} | Funk | Sensorik in der Landwirtschaft und auf weitläufigen Anlagen |
+| **EtherCAT** {{< status "wip" "Gerüst, in Arbeit" >}} | Ethernet (Echtzeit) | Motion Control, schnelle E/A |
+| **PROFIBUS DP** {{< status "wip" "Gerüst, in Arbeit" >}} | Seriell (Feldbus) | Fertigungsautomation |
+| **EtherNet/IP** {{< status "wip" "Gerüst, in Arbeit" >}} | Ethernet | Fertigungsautomation |
 
 ## Automatische Adressvergabe
 
