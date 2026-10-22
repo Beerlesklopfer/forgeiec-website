@@ -21,7 +21,7 @@ Sie wechseln im AI-Reiter einfach zwischen den Karteikarten.
 
 ---
 
-## Die fünf Personas
+## Die sechs Personas
 
 ### Blacksmith Master — der Vorarbeiter
 
@@ -63,6 +63,17 @@ Sie wechseln im AI-Reiter einfach zwischen den Karteikarten.
 - **Typische Frage:** "Warum bleibt `Motor_Bereit` während des
   Startvorgangs auf FALSE? Schau dir die letzten 5 Sekunden auf
   dem Oszi an."
+
+### Team Lead — der Koordinator
+
+- **Wann wählen?** Wenn eine größere Aufgabe auf mehrere Personas
+  verteilt werden soll.
+- **Was darf er?** Projekt, Bibliothek, Katalog und Live-Werte
+  **lesen**, die Aufgabe in Teilaufgaben zerlegen, sie an Blacksmith
+  Master, Reviewer, Doc und Monitor weitergeben und deren Ergebnisse
+  zusammenfassen.
+- **Was darf er NICHT?** Selbst Code ändern, deployen oder die
+  Runtime steuern.
 
 ### Trainee — für Einarbeitung und Erstkontakt
 

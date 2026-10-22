@@ -308,7 +308,7 @@ Versionen.
 
 | Standard | Verwendung |
 |---|---|
-| IEC 61131-3 | Programmiersprache + Compile-Path (matiec) |
+| IEC 61131-3 | Programmiersprache; eigener ST-Kern übersetzt nach C++ |
 | PLCopen XML | Projekt-Dateiformat |
 | RFC 6125 | TLS-Server-Cert SAN-Validation |
 | RFC 8032 (Ed25519) | Roster-Signatur (bevorzugt) |
@@ -343,12 +343,15 @@ Vollständige Liste: `project_open_backlog.md` (intern).
 
 ## Lizenz
 
-AGPL-3.0-or-later für alle Subprojekte. Source auf Anfrage
-einsehbar — die Forgejo-Repositories sind nicht öffentlich
+Die Werkzeuge und Dienste von ForgeIEC stehen unter
+AGPL-3.0-or-later. Der generierte Steuerungscode, die
+Runtime-API-Header und die Bibliothek libanvil stehen unter
+Apache-2.0; eine kommerzielle Lizenz ist erhältlich. Source auf
+Anfrage einsehbar — die Forgejo-Repositories sind nicht öffentlich
 zugänglich, Zugriff nach Freischaltung des SSH-Public-Keys.
-Reproducible-Build via CPack — signiertes APT-Repository für
-Debian/Ubuntu, signiertes RPM-Repository für AlmaLinux 9 und
-Fedora 44.
+Signierte Pakete aus einer automatisierten CI — signiertes
+APT-Repository für Debian/Ubuntu, signiertes RPM-Repository für
+AlmaLinux 9 und Fedora 44.
 
 ---
 
