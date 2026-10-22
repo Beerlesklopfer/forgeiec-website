@@ -1,6 +1,6 @@
 ---
 title: "Forge Studio"
-description: "IEC 61131-3 development environment — all five languages, native Qt6 interface"
+description: "IEC 61131-3 development environment — ST today, the other four languages in progress; native Qt6 interface"
 weight: 1
 ---
 
@@ -14,20 +14,23 @@ application.
 
 ---
 
-## All Five IEC 61131-3 Languages
+## IEC 61131-3: ST today, the other four in progress
 
-One editor for all languages — seamless switching, shared variables,
-unified project structure:
+Structured Text is in productive use (pilot operation). The IL, FBD,
+LD and SFC editors are in progress; programs in these languages are
+**not compiled yet**.
 
-- **Structured Text (ST)** — High-level language with syntax highlighting,
-  auto-completion, and Tree-sitter-based parsing
-- **Instruction List (IL)** — Assembly-like language with intelligent
+- **Structured Text (ST)** — {{< status "use" >}} High-level language with syntax highlighting,
+  auto-completion, and Tree-sitter-based parsing; own compiler core
+  that also handles the object-oriented extensions (METHOD,
+  INTERFACE, EXTENDS)
+- **Instruction List (IL)** — {{< status "wip" >}} Assembly-like language with intelligent
   editing and language switching to/from ST
-- **Function Block Diagram (FBD)** — Graphical editor with
+- **Function Block Diagram (FBD)** — {{< status "wip" >}} Graphical editor with
   block library and drag-and-drop
-- **Ladder Diagram (LD)** — Familiar representation for switching logic,
+- **Ladder Diagram (LD)** — {{< status "wip" >}} Familiar representation for switching logic,
   wired directly on screen
-- **Sequential Function Chart (SFC)** — Step sequence diagrams for
+- **Sequential Function Chart (SFC)** — {{< status "wip" >}} Step sequence diagrams for
   sequential control with transitions and actions
 
 ---
@@ -59,10 +62,12 @@ is integrated directly into the development environment:
 
 ## Connection to the Runtime Environment
 
-Forge Studio communicates via gRPC with the Anvil runtime environment:
+Forge Studio communicates via gRPC with the Anvil server (anvild):
 
-- **Compilation on the workstation** — the IEC compiler (iec2c) runs
-  locally, only the generated C code is transferred to the PLC
+- **Two-stage translation** — the Studio translates IEC code into
+  C++ source and sends it encrypted to the controller; there the
+  runtime builds it with g++ — so the controller needs `make` and
+  `g++`, but no IEC compiler
 - **Encrypted upload** — AES-256-GCM encrypted transfer to the
   target system
 - **Live debugging** — watch and force variables in real time
@@ -93,8 +98,8 @@ Complete IEC standard library in a SQLite database:
 | **GUI Framework** | Qt 6 Widgets |
 | **Syntax Engine** | Tree-sitter |
 | **Communication** | gRPC (protobuf) |
-| **Platforms** | Linux x86_64, ARM64 |
-| **License** | AGPL-3.0 |
+| **Platforms** | Linux x86_64/ARM64, Windows x64 (installer on request) |
+| **Licence** | AGPL-3.0-or-later (generated code: Apache-2.0) |
 
 ---
 
