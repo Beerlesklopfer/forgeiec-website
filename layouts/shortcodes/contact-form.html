@@ -1,0 +1,157 @@
+{{- /*
+  Contact form for forgeiec.io. Usage in a content page: {{< contact-form >}}
+
+  Talks to the backend in contact-service/ (same origin, /api/contact/).
+  Loads only static/css/contact.css and static/js/contact.js from this site;
+  no third-party requests. Without JavaScript the form stays hidden and the
+  <noscript> block offers the mailto: address instead (the backend needs a
+  token that only the script can fetch).
+
+  Texts: de (default) and en; other languages fall back to en.
+  Optional: ?type=pilot|licence|partnership|job|other preselects the subject.
+*/ -}}
+{{- $lang := .Page.Language.Lang -}}
+{{- $mail := "blacksmith@forgeiec.io" -}}
+{{- $privacy := or (site.GetPage "/datenschutz") (site.GetPage "/privacy") -}}
+{{- $t := dict
+  "de" (dict
+    "name" "Name"
+    "email" "E-Mail-Adresse"
+    "type" "Anliegen"
+    "choose" "Bitte wählen"
+    "pilot" "Pilotprojekt anfragen"
+    "licence" "Lizenzen"
+    "partnership" "Partnerschaft / Mitarbeit am Code"
+    "job" "Stelle / Zusammenarbeit"
+    "other" "Sonstiges"
+    "message" "Nachricht"
+    "messageHint" "10 bis 5000 Zeichen."
+    "consentBefore" "Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage per E-Mail an ForgeIEC übermittelt und verarbeitet werden."
+    "consentLink" "Datenschutzerklärung"
+    "consentNoPage" "Die Angaben werden nur für die Antwort auf diese Anfrage verwendet."
+    "required" "Pflichtfeld"
+    "hp" "Dieses Feld bitte leer lassen"
+    "submit" "Nachricht senden"
+    "sending" "Wird gesendet …"
+    "noscript" "Das Formular braucht JavaScript. Schreiben Sie uns stattdessen eine E-Mail an"
+    "noscriptHint" "Nennen Sie bitte Ihr Anliegen (Pilotprojekt, Lizenz, Partnerschaft, Stelle oder Sonstiges) im Betreff."
+  )
+  "en" (dict
+    "name" "Name"
+    "email" "E-mail address"
+    "type" "Subject"
+    "choose" "Please choose"
+    "pilot" "Request a pilot"
+    "licence" "Licences"
+    "partnership" "Partnership / contributing"
+    "job" "Job / collaboration"
+    "other" "Other"
+    "message" "Message"
+    "messageHint" "10 to 5000 characters."
+    "consentBefore" "I agree that my details are sent to ForgeIEC by e-mail and processed to handle my enquiry."
+    "consentLink" "Privacy policy"
+    "consentNoPage" "The details are used only to answer this enquiry."
+    "required" "required"
+    "hp" "Please leave this field empty"
+    "submit" "Send message"
+    "sending" "Sending …"
+    "noscript" "The form needs JavaScript. Please send us an e-mail instead to"
+    "noscriptHint" "Please name your topic (pilot, licence, partnership, job or other) in the subject line."
+  )
+-}}
+{{- $m := index $t $lang | default (index $t "en") -}}
+{{- $js := dict
+  "de" (dict
+    "sent" "Danke! Ihre Nachricht ist bei uns angekommen. Wir melden uns per E-Mail."
+    "checkFields" "Bitte prüfen Sie die markierten Felder."
+    "required" "Bitte ausfüllen."
+    "tooLong" "Zu lang."
+    "tooShort" "Zu kurz (mindestens 10 Zeichen)."
+    "invalidEmail" "Bitte eine gültige E-Mail-Adresse angeben."
+    "invalid" "Ungültige Eingabe."
+    "controlChars" "Enthält unzulässige Steuerzeichen."
+    "consent" "Ohne Ihr Einverständnis können wir die Nachricht nicht senden."
+    "tokenRetry" "Die Seite war zu lange geöffnet. Bitte senden Sie noch einmal."
+    "rateLimited" "Zu viele Nachrichten in kurzer Zeit. Bitte versuchen Sie es später noch einmal oder schreiben Sie direkt an"
+    "unavailable" "Das Formular ist gerade nicht erreichbar. Bitte schreiben Sie direkt an"
+    "counter" "{n} / 5000 Zeichen"
+  )
+  "en" (dict
+    "sent" "Thank you! Your message has arrived. We will reply by e-mail."
+    "checkFields" "Please check the marked fields."
+    "required" "Please fill in."
+    "tooLong" "Too long."
+    "tooShort" "Too short (at least 10 characters)."
+    "invalidEmail" "Please enter a valid e-mail address."
+    "invalid" "Invalid input."
+    "controlChars" "Contains control characters that are not allowed."
+    "consent" "We cannot send the message without your consent."
+    "tokenRetry" "The page was open for too long. Please send again."
+    "rateLimited" "Too many messages in a short time. Please try again later or write directly to"
+    "unavailable" "The form is not available right now. Please write directly to"
+    "counter" "{n} / 5000 characters"
+  )
+-}}
+{{- $jm := merge (index $js $lang | default (index $js "en")) (dict "mail" $mail "sending" $m.sending "submit" $m.submit "lang" (cond (eq $lang "de") "de" "en")) -}}
+<link rel="stylesheet" href="{{ "css/contact.css" | relURL }}">
+<div class="contact-form-wrap">
+  <noscript>
+    <p class="contact-noscript">{{ $m.noscript }} <a href="mailto:{{ $mail }}">{{ $mail }}</a>. {{ $m.noscriptHint }}</p>
+  </noscript>
+  <form class="contact-form" id="contact-form" action="/api/contact/" method="post" novalidate hidden
+        data-endpoint="/api/contact/">
+    <div class="cf-row cf-row-2">
+      <div class="cf-field">
+        <label for="cf-name">{{ $m.name }} <span class="cf-req" aria-hidden="true">*</span></label>
+        <input id="cf-name" name="name" type="text" autocomplete="name" maxlength="100"
+               required aria-required="true" aria-describedby="cf-name-err">
+        <p class="cf-err" id="cf-name-err" hidden></p>
+      </div>
+      <div class="cf-field">
+        <label for="cf-email">{{ $m.email }} <span class="cf-req" aria-hidden="true">*</span></label>
+        <input id="cf-email" name="email" type="email" autocomplete="email" maxlength="254"
+               inputmode="email" spellcheck="false" required aria-required="true" aria-describedby="cf-email-err">
+        <p class="cf-err" id="cf-email-err" hidden></p>
+      </div>
+    </div>
+    <div class="cf-field">
+      <label for="cf-type">{{ $m.type }} <span class="cf-req" aria-hidden="true">*</span></label>
+      <select id="cf-type" name="subject-type" required aria-required="true" aria-describedby="cf-type-err">
+        <option value="">{{ $m.choose }}</option>
+        {{- range slice "pilot" "licence" "partnership" "job" "other" }}
+        <option value="{{ . }}">{{ index $m . }}</option>
+        {{- end }}
+      </select>
+      <p class="cf-err" id="cf-type-err" hidden></p>
+    </div>
+    <div class="cf-field">
+      <label for="cf-message">{{ $m.message }} <span class="cf-req" aria-hidden="true">*</span></label>
+      <textarea id="cf-message" name="message" rows="8" minlength="10" maxlength="5000"
+                required aria-required="true" aria-describedby="cf-message-hint cf-message-count cf-message-err"></textarea>
+      <div class="cf-meta">
+        <span id="cf-message-hint">{{ $m.messageHint }}</span>
+        <span id="cf-message-count" class="cf-count" aria-live="polite" aria-atomic="true"></span>
+      </div>
+      <p class="cf-err" id="cf-message-err" hidden></p>
+    </div>
+    <div class="cf-hp" aria-hidden="true">
+      <label for="cf-website">{{ $m.hp }}</label>
+      <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" value="">
+    </div>
+    <div class="cf-field cf-check">
+      <input id="cf-consent" name="consent" type="checkbox" value="on" required aria-required="true"
+             aria-describedby="cf-consent-err">
+      <label for="cf-consent">{{ $m.consentBefore }}
+        {{- with $privacy }} <a href="{{ .RelPermalink }}">{{ $m.consentLink }}</a>{{ else }} {{ $m.consentNoPage }}{{ end }}
+        <span class="cf-req" aria-hidden="true">*</span></label>
+      <p class="cf-err" id="cf-consent-err" hidden></p>
+    </div>
+    <div class="cf-actions">
+      <button type="submit" class="cf-submit">{{ $m.submit }}</button>
+      <span class="cf-legend"><span aria-hidden="true">*</span> {{ $m.required }}</span>
+    </div>
+    <div class="cf-status" id="cf-status" role="status" aria-live="polite" tabindex="-1"></div>
+  </form>
+  <script type="application/json" id="contact-form-messages">{{ $jm | jsonify | safeJS }}</script>
+</div>
+<script src="{{ "js/contact.js" | relURL }}" defer></script>
