@@ -1,0 +1,219 @@
+/* ForgeIEC contact form (layouts/shortcodes/contact-form.html).
+
+   Uses the design tokens of the site stylesheet where they exist and falls
+   back to values that match the current dark theme. Tokens read here:
+
+     --surface        form background            (fallback #1E293B)
+     --surface-2      input background           (fallback #0F172A)
+     --text           body text                  (fallback #E2E8F0)
+     --muted          hints, counter             (fallback #94A3B8)
+     --heading        labels                     (fallback #F8FAFC)
+     --border         input border               (fallback #334155)
+     --border-strong  input border on hover      (fallback #475569)
+     --brand          button, accents            (fallback #F59E0B)
+     --brand-strong   button hover               (fallback #FBBF24)
+     --brand-ink      text on the button         (fallback #1C1303)
+     --link           links                      (fallback #FBBF24)
+     --focus          focus ring                 (fallback #60A5FA)
+     --good, --ok-bg  success message            (fallback #86EFAC / #12301D)
+     --bad            errors                     (fallback #FCA5A5)
+     --radius, --radius-sm                       (fallback 12px / 8px)
+     --font-sans                                 (fallback system-ui stack)
+
+   All rules are scoped to .contact-form-wrap so nothing leaks into the
+   rest of the site. */
+
+.contact-form-wrap {
+  --cf-surface: var(--surface, #1E293B);
+  --cf-input: var(--surface-2, #0F172A);
+  --cf-text: var(--text, #E2E8F0);
+  --cf-muted: var(--muted, #94A3B8);
+  --cf-heading: var(--heading, #F8FAFC);
+  --cf-border: var(--border, #334155);
+  --cf-border-strong: var(--border-strong, #475569);
+  --cf-brand: var(--brand, #F59E0B);
+  --cf-brand-strong: var(--brand-strong, #FBBF24);
+  --cf-brand-ink: var(--brand-ink, #1C1303);
+  --cf-link: var(--link, #FBBF24);
+  --cf-focus: var(--focus, #60A5FA);
+  --cf-good: var(--good, #86EFAC);
+  --cf-ok-bg: var(--ok-bg, #12301D);
+  --cf-bad: var(--bad, #FCA5A5);
+  --cf-radius: var(--radius, 12px);
+  --cf-radius-sm: var(--radius-sm, 8px);
+
+  max-width: 100%;
+  margin: 1.5rem 0 2rem;
+  text-align: start;
+  color: var(--cf-text);
+  font-family: var(--font-sans, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif);
+}
+
+.contact-form-wrap *,
+.contact-form-wrap *::before,
+.contact-form-wrap *::after { box-sizing: border-box; }
+
+.contact-form-wrap a { color: var(--cf-link); text-decoration: underline; text-underline-offset: 2px; }
+
+.contact-form {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--cf-surface);
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius);
+}
+.contact-form[hidden] { display: none; }
+
+.cf-row-2 { display: grid; gap: 1.25rem; grid-template-columns: 1fr 1fr; }
+@media (max-width: 640px) { .cf-row-2 { grid-template-columns: 1fr; } }
+
+.cf-field { display: grid; gap: 0.4rem; min-width: 0; }
+
+.cf-field > label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--cf-heading);
+}
+
+.cf-req { color: var(--cf-brand); font-weight: 700; }
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.8rem;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cf-text);
+  background: var(--cf-input);
+  border: 1px solid var(--cf-border-strong);
+  border-radius: var(--cf-radius-sm);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.contact-form textarea { resize: vertical; min-height: 10rem; }
+.contact-form select { cursor: pointer; }
+
+.contact-form input:hover,
+.contact-form select:hover,
+.contact-form textarea:hover { border-color: var(--cf-muted); }
+
+.contact-form input:focus-visible,
+.contact-form select:focus-visible,
+.contact-form textarea:focus-visible,
+.contact-form button:focus-visible,
+.contact-form-wrap a:focus-visible,
+.cf-status:focus-visible {
+  outline: 3px solid var(--cf-focus);
+  outline-offset: 2px;
+}
+
+.contact-form [aria-invalid="true"] { border-color: var(--cf-bad); }
+
+.cf-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--cf-muted);
+}
+.cf-count { font-variant-numeric: tabular-nums; }
+.cf-count-warn { color: var(--cf-brand); }
+
+.cf-err {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--cf-bad);
+}
+.cf-err[hidden] { display: none; }
+
+/* Consent checkbox: box left, text right. */
+.cf-check {
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  column-gap: 0.75rem;
+}
+.cf-check input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin: 0.2rem 0 0;
+  accent-color: var(--cf-brand);
+  cursor: pointer;
+}
+.cf-check > label {
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--cf-text);
+  cursor: pointer;
+}
+.cf-check .cf-err { grid-column: 2; }
+
+/* Honeypot: off-screen for sighted users, aria-hidden for screen readers,
+   tabindex -1 for keyboard users. Not display:none, which some bots skip. */
+.cf-hp {
+  position: absolute !important;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.contact-form { position: relative; }
+
+.cf-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.cf-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.7rem 1.6rem;
+  font: inherit;
+  font-weight: 650;
+  font-size: 1rem;
+  color: var(--cf-brand-ink);
+  background: var(--cf-brand);
+  border: 0;
+  border-radius: var(--cf-radius-sm);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.cf-submit:hover { background: var(--cf-brand-strong); }
+.cf-submit:disabled { opacity: 0.65; cursor: progress; }
+.cf-legend { font-size: 0.85rem; color: var(--cf-muted); }
+
+.cf-status:empty { display: none; }
+.cf-status {
+  padding: 0.85rem 1rem;
+  border-radius: var(--cf-radius-sm);
+  border: 1px solid var(--cf-border);
+  border-inline-start-width: 4px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.cf-status-ok { border-color: var(--cf-good); background: var(--cf-ok-bg); }
+.cf-status-error { border-color: var(--cf-bad); }
+
+.contact-noscript {
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--cf-border);
+  border-inline-start: 4px solid var(--cf-brand);
+  border-radius: var(--cf-radius-sm);
+  background: var(--cf-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form-wrap * { transition: none !important; }
+}

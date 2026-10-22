@@ -40,16 +40,17 @@ noClasses = false
     description = "Steuerungssoftware nach IEC 61131-3 für Maschinen- und Anlagenbauer"
     ctaLabel = "Pilotprojekt anfragen"
     ctaSubject = "Pilotprojekt ForgeIEC"
+    # Header and landing-page CTA: the contact form with the subject preselected.
+    ctaHref = "/de/kontakt/?type=pilot"
     [[languages.de.menu.main]]
       identifier = "plattform"
       name = "Plattform"
       pageRef = "/plattform"
       weight = 10
     [[languages.de.menu.main]]
-      # Plain URL: the Rivet page comes from branch rivet-page.
       identifier = "rivet"
       name = "Rivet"
-      url = "/de/rivet/"
+      pageRef = "/rivet"
       weight = 15
     [[languages.de.menu.main]]
       identifier = "architektur"
@@ -91,6 +92,11 @@ noClasses = false
       name = "Mitmachen"
       pageRef = "/entwickler/mitmachen"
       weight = 3
+    [[languages.de.menu.main]]
+      identifier = "kontakt"
+      name = "Kontakt"
+      pageRef = "/kontakt"
+      weight = 60
 
   [languages.en]
   label = "English"
@@ -102,16 +108,17 @@ noClasses = false
     description = "IEC 61131-3 control software for machine and plant builders"
     ctaLabel = "Request a pilot"
     ctaSubject = "ForgeIEC pilot project"
+    # Header and landing-page CTA: the contact form with the subject preselected.
+    ctaHref = "/en/contact/?type=pilot"
     [[languages.en.menu.main]]
       identifier = "plattform"
       name = "Platform"
       pageRef = "/plattform"
       weight = 10
     [[languages.en.menu.main]]
-      # Plain URL: the Rivet page comes from branch rivet-page.
       identifier = "rivet"
       name = "Rivet"
-      url = "/en/rivet/"
+      pageRef = "/rivet"
       weight = 15
     [[languages.en.menu.main]]
       identifier = "architektur"
@@ -153,3 +160,8 @@ noClasses = false
       name = "Contribute"
       pageRef = "/entwickler/mitmachen"
       weight = 3
+    [[languages.en.menu.main]]
+      identifier = "kontakt"
+      name = "Contact"
+      pageRef = "/contact"
+      weight = 60

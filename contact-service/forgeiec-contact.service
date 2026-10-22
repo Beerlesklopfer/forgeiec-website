@@ -1,0 +1,80 @@
+# systemd unit for the ForgeIEC website contact form backend.
+#
+# Install:  cp forgeiec-contact.service /etc/systemd/system/
+#           systemctl daemon-reload && systemctl enable --now forgeiec-contact
+# The script lives in /opt/forgeiec-contact/contact_service.py (root-owned,
+# 0644); configuration in /etc/forgeiec-contact/env (root:root, 0600; read
+# by systemd itself, so the dynamic service user never sees the file).
+
+[Unit]
+Description=ForgeIEC website contact form backend
+Documentation=file:/opt/forgeiec-contact/README.md
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -I /opt/forgeiec-contact/contact_service.py
+EnvironmentFile=/etc/forgeiec-contact/env
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=20s
+KillSignal=SIGTERM
+
+# --- identity and privileges ------------------------------------------------
+DynamicUser=yes
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+SecureBits=noroot-locked
+UMask=0077
+
+# --- file system ------------------------------------------------------------
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectProc=invisible
+ProcSubset=pid
+ReadOnlyPaths=/opt/forgeiec-contact
+InaccessiblePaths=-/var/www
+
+# --- kernel and namespaces --------------------------------------------------
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RemoveIPC=yes
+PrivateUsers=yes
+KeyringMode=private
+
+# --- system calls -----------------------------------------------------------
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources @mount @debug @cpu-emulation @obsolete @raw-io @reboot @swap @clock @module
+SystemCallErrorNumber=EPERM
+
+# --- network ----------------------------------------------------------------
+# AF_UNIX is needed for syslog/journal; AF_INET/AF_INET6 for HTTP and SMTP.
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+# Only loopback traffic: nginx connects from 127.0.0.1 and the local MTA
+# listens on localhost:25. If CONTACT_SMTP_HOST points to another machine,
+# add its address here (e.g. IPAddressAllow=localhost 192.0.2.25).
+IPAddressAllow=localhost
+IPAddressDeny=any
+
+# --- resources --------------------------------------------------------------
+MemoryMax=64M
+TasksMax=32
+LimitNOFILE=256
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target
