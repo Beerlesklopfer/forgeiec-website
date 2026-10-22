@@ -114,7 +114,7 @@ Weitere (seltenere) Auslöser ohne AI-Beteiligung:
 Wenn Sie ein einmaliges Vorkommen erleben, ist der oben genannte
 Runtime-Neustart die einfachste Lösung. Bei wiederholtem Auftreten
 ohne AI-Aktivität bitte das Vorkommen melden (mit
-`journalctl -u anvild` und `journalctl -u bellowsd` der letzten
+`journalctl -u forgeiec-anvil-server` und `journalctl -u bellowsd` der letzten
 Stunde) an blacksmith@forgeiec.io — gezieltes, selektives Aufräumen
 toter Nodes aus dem Studio heraus ist ein laufender Backlog-Punkt.
 

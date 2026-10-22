@@ -93,7 +93,7 @@ Token-Rotation:
 | Pfad | Format | Rotation |
 |---|---|---|
 | `~/.config/ForgeIEC/mcp_audit.log` | JSONL append-only | keine (manuelles Trim bei Bedarf) |
-| `journalctl -u anvild` | systemd-Journal | systemd-Defaults |
+| `journalctl -u forgeiec-anvil-server` | systemd-Journal | systemd-Defaults |
 | `journalctl -u bellowsd` | systemd-Journal | systemd-Defaults |
 | Editor-Logs | stderr + `editor.recent_logs` MCP-Tool (500-Einträge Ring) | flüchtig |
 
@@ -164,7 +164,7 @@ Liefert u.a.:
 ### anvild Health
 
 ```bash
-systemctl is-active anvild
+systemctl is-active forgeiec-anvil-server
 systemctl is-active bellowsd
 ```
 
@@ -209,7 +209,7 @@ installiert. Sicherheits-Risiko. Korrektur:
 
 ```bash
 sudo apt install --reinstall forgeiec-studio
-sudo systemctl restart anvild
+sudo systemctl restart forgeiec-anvil-server
 ```
 
 ### Deploy schlägt fehl
@@ -218,7 +218,7 @@ sudo systemctl restart anvild
 (letzte 16 KB). Wenn `Auto-start failed: Runtime binary not found`:
 
 ```bash
-journalctl -u anvild -n 50 --no-pager
+journalctl -u forgeiec-anvil-server -n 50 --no-pager
 ```
 
 In der Regel fehlende C-Toolchain auf dem PLC-Target oder

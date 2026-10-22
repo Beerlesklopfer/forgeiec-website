@@ -127,7 +127,7 @@ FVariable
   address: "%IX0.0"     ← physical, allocated by the pool
   scope:   anvil.Stachelbeere
   flags:
-    bellows_export: false    ← expose to HMI / OPC-UA?
+    bellows_export: false    ← expose to HMI / OPC-UA? (bellowsd is resting)
     force_enabled:  false    ← allowed to be forced? (force lock)
     monitor_enabled: true
   busBinding:

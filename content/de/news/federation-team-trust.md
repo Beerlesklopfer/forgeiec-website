@@ -130,7 +130,7 @@ findet die belastbaren Details unter
 Im selben Release ist auch der `anvild`-Auto-Cleanup eingeflossen.
 Was bisher als „Variable klebt trotz frischem Deploy" gelegentlich
 Inbetriebnahme-Sitzungen verlangsamt hat, ist mit
-`sudo systemctl restart anvild` jetzt einfach erledigt — der
+`sudo systemctl restart forgeiec-anvil-server` jetzt einfach erledigt — der
 Daemon räumt stale Shared-Memory-Segmente beim Start selbst auf.
 
 Hintergrund + Fix dokumentiert: [FAQ-Eintrag](/help/faq/stuck-variables-shm/).

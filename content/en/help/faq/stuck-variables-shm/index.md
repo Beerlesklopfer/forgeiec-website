@@ -112,7 +112,7 @@ Rarer triggers without AI involvement:
 
 If it happens once, the runtime restart above is the simplest fix.
 For repeated occurrences without AI activity, please report the
-incident (with `journalctl -u anvild` and `journalctl -u bellowsd`
+incident (with `journalctl -u forgeiec-anvil-server` and `journalctl -u bellowsd`
 from the last hour) to blacksmith@forgeiec.io — targeted, selective
 reaping of dead nodes from within Studio is an ongoing backlog item.
 

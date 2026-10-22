@@ -127,7 +127,7 @@ FVariable
   address: "%IX0.0"     ← physisch, vom Pool-Allokator
   scope:   anvil.Stachelbeere
   flags:
-    bellows_export: false    ← in HMI/OPC-UA exportieren?
+    bellows_export: false    ← in HMI/OPC-UA exportieren? (bellowsd ruht)
     force_enabled:  false    ← darf forciert werden? (Force-Sperre)
     monitor_enabled: true
   busBinding:

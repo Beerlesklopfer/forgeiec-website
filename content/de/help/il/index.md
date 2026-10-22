@@ -4,12 +4,12 @@ summary: "IL-Editor: akkumulator-basierte IEC 61131-3 Sprache mit CR-Register"
 ---
 
 {{< callout type="warning" title="Abgekündigt" >}}
-IL ist **abgekündigt**: IEC 61131-3 (Ausgabe 3) erklärt die
-Anweisungsliste für veraltet. In ForgeIEC wird IL **nicht
-weiterentwickelt** und **nicht übersetzt**. Für lauffähige Programme
+AWL (Anweisungsliste) ist nicht mehr Teil der aktuellen Ausgabe der IEC 61131-3 und abgekündigt; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler. In ForgeIEC wird
+IL **nicht weiterentwickelt** und **nicht übersetzt**. Für lauffähige Programme
 nutzen Sie [Strukturierten Text (ST)](/de/help/st/). Siehe auch die
 [Roadmap](/de/roadmap/).
 {{< /callout >}}
+<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
 
 ## Überblick
 

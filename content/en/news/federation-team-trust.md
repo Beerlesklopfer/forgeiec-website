@@ -124,7 +124,7 @@ the load-bearing details are at
 The same release also includes `anvild` auto-cleanup. What used to
 slow down occasional commissioning sessions as "variable sticks
 despite fresh deploy" is now simply
-`sudo systemctl restart anvild` — the daemon cleans up stale
+`sudo systemctl restart forgeiec-anvil-server` — the daemon cleans up stale
 shared-memory segments on startup.
 
 Background + fix documented: [FAQ entry](/help/faq/stuck-variables-shm/).

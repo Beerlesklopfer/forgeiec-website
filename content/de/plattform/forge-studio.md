@@ -19,8 +19,9 @@ einer Anwendung.
 Strukturierter Text ist im produktiven Einsatz (Pilotbetrieb, Release
 0.2). Je Release kommt eine Sprache hinzu: **0.3 LD, 0.4 FBD, 0.5
 SFC**. Programme in diesen Sprachen werden derzeit **noch nicht
-übersetzt**. IL ist abgekündigt (IEC 61131-3 Ausgabe 3 erklärt sie für
-veraltet). Siehe [Roadmap](/de/roadmap/).
+übersetzt**. AWL (Anweisungsliste) ist nicht mehr Teil der aktuellen Ausgabe der IEC 61131-3 und abgekündigt; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler.
+<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+Siehe [Roadmap](/de/roadmap/).
 
 - **Strukturierter Text (ST)** — {{< status "use" >}} Hochsprache mit Syntax-Hervorhebung,
   Auto-Vervollständigung und Tree-sitter-basiertem Parsing; eigener

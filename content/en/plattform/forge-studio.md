@@ -18,9 +18,10 @@ application.
 
 Structured Text is in productive use (pilot operation, release 0.2).
 Each release adds one language: **0.3 LD, 0.4 FBD, 0.5 SFC**.
-Programs in these languages are **not compiled yet**. IL is
-deprecated (IEC 61131-3 edition 3 deprecates it). See the
-[roadmap](/en/roadmap/).
+Programs in these languages are **not compiled yet**. 
+IL (instruction list) is no longer part of the current edition of IEC 61131-3 and is deprecated; it would also need its own translation path to assembler.
+<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+See the [roadmap](/en/roadmap/).
 
 - **Structured Text (ST)** — {{< status "use" >}} High-level language with syntax highlighting,
   auto-completion, and Tree-sitter-based parsing; own compiler core
