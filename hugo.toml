@@ -4,6 +4,9 @@ defaultContentLanguage = 'de'
 defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
 
+# No tag or category pages: the site does not use taxonomies.
+disableKinds = ["taxonomy", "term"]
+
 # Only German and English are maintained. The content directories of
 # ar, es, fr, ja, tr and zh stay in the repository, but the languages
 # are not configured here and therefore not built (owner's decision,

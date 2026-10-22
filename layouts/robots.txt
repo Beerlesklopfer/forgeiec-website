@@ -1,11 +1,12 @@
 # ForgeIEC — IEC 61131-3 SPS-Entwicklungsumgebung (PLC IDE)
-# Desktop editor for all five IEC 61131-3 languages (ST/IL/FBD/LD/SFC)
-# + Rust runtime daemon (anvild) + MCP server for AI-assisted PLC
-# engineering.
+# IEC 61131-3 control software for machine and plant builders:
+# Structured Text editor with own compiler core, Rust runtime
+# (Anvil server, anvild), bus bridges, MCP server for AI-assisted
+# PLC engineering.
 #
-# Topics: IEC 61131-3, structured text, ladder logic, function block
-# diagram, sequential function chart, PLCopen XML, industrial fieldbus
-# protocols, OPC UA, industrial automation, FDD device catalog,
+# Topics: IEC 61131-3, structured text, PLCopen XML, industrial fieldbus
+# protocols, LoRaWAN, Modbus, industrial automation, FDD device catalog,
+# remote access (Rivet),
 # MCP server, AI agent, LLM integration.
 
 # Default — all crawlers allowed, full site.
