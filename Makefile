@@ -8,7 +8,7 @@ DEPLOY_PATH ?= /var/www/forgeiec.io/public/
 DEPLOY_SSH  ?= $(DEPLOY_USER)@$(DEPLOY_HOST)
 
 .DEFAULT_GOAL := help
-.PHONY: help build serve deploy clean sync-schemas
+.PHONY: help build serve deploy clean sync-schemas screenshots-missing screenshots-list
 
 # Studio-Repo Root, in dem die Quell-XSDs liegen. Wird beim
 # sync-schemas-Target aus dem Submodule-Verzeichnis raus auf
@@ -26,6 +26,8 @@ help:
 	@echo "  make deploy   Build + rsync nach $(DEPLOY_SSH):$(DEPLOY_PATH)"
 	@echo "  make sync-schemas   XSDs aus ../schemas/ in static/schemas/ syncen"
 	@echo "  make clean    Loescht public/ und resources/_gen/"
+	@echo "  make screenshots-missing  Listet Screenshot-Stubs (<program>/<name>)"
+	@echo "  make screenshots-list     Vorhandene Screenshots mit Version, veraltete markiert"
 	@echo ""
 	@echo "Variablen (per make VAR=value oder Environment ueberschreibbar):"
 	@echo "  HUGO          $(HUGO)"
@@ -88,3 +90,29 @@ sync-schemas:
 	  fi; \
 	done
 	@echo "Sync done. Review with: git diff static/schemas/"
+
+# ---- Screenshots (static/img/screenshots/README.md) ----
+SHOTS_DIR := static/img/screenshots
+
+# Build into a temp dir and list every placeholder (data-stub attribute,
+# survives --minify) as <program>/<name>.
+screenshots-missing:
+	@tmp=$$(mktemp -d); \
+	$(HUGO) --quiet -d "$$tmp" >/dev/null || { rm -rf "$$tmp"; exit 1; }; \
+	grep -rhoE 'data-stub="[^"]+"' "$$tmp" | sed -E 's/data-stub="([^"]+)"/\1/' | sort -u; \
+	rm -rf "$$tmp"
+
+# List existing screenshots with their version; flag a file as outdated
+# when the program's current version (versions.txt) is newer than the
+# newest screenshot of that program/name.
+screenshots-list:
+	@find $(SHOTS_DIR) -mindepth 2 -maxdepth 2 -type f \( -name '*.png' -o -name '*.webp' \) \
+	  | sed -nE 's|^$(SHOTS_DIR)/([^/]+)/(.+)-([0-9]+\.[0-9]+\.[0-9]+)\.(png\|webp)$$|\1 \2 \3|p' \
+	  | sort -k1,1 -k2,2 -k3,3V \
+	  | awk 'NR==FNR { if ($$0 !~ /^#/ && NF >= 2) cur[$$1] = $$2; next } \
+	         { key = $$1 "/" $$2; ver[key] = $$3; prog[key] = $$1 } \
+	         END { n = 0; for (k in ver) { n++; c = cur[prog[k]]; flag = ""; \
+	               if (c != "") { cmd = "printf \"%s\\n%s\\n\" " ver[k] " " c " | sort -V | tail -1"; \
+	                 cmd | getline top; close(cmd); if (top != ver[k]) flag = "  outdated (current " c ")"; } \
+	               printf "%-32s %s%s\n", k, ver[k], flag } \
+	               if (n == 0) print "(no screenshots yet)" }' $(SHOTS_DIR)/versions.txt -
