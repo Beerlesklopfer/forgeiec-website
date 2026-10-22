@@ -40,6 +40,9 @@
     </div>
     <div class="footer-bottom">
       <span>&copy; {{ now.Format "2006" }} Jörg Bernau · ForgeIEC</span>
+      {{- with site.GetPage "/datenschutz" }}
+      <a href="{{ .RelPermalink }}#cookies">{{ i18n "noCookies" }}</a>
+      {{- end }}
       <span>AGPL-3.0-or-later · Apache-2.0</span>
     </div>
   </div>
