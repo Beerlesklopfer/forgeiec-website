@@ -334,6 +334,8 @@ small { font-size: .875rem; }
 .btn-ghost:hover { color: var(--accent-text); }
 .btn-sm { padding: .5rem .95rem; font-size: .9rem; }
 .btn-row { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+/* Long labels (e.g. "Zur Roadmap: was als Nächstes kommt") must wrap on phones. */
+@media (max-width: 640px) { .btn { white-space: normal; text-align: center; } }
 .arrow::after { content: "→"; transition: transform .15s; }
 a:hover > .arrow::after, .arrow:hover::after { transform: translateX(3px); }
 
