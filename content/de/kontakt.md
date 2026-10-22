@@ -5,8 +5,6 @@ translationKey: "contact"
 description: "Kontakt zu ForgeIEC: Pilotprojekt anfragen, Fragen zu Lizenzen, Partnerschaft und Mitarbeit, Stellen und Zusammenarbeit — per Formular oder E-Mail."
 ---
 
-# Kontakt
-
 Schreiben Sie uns über das Formular auf dieser Seite oder per E-Mail. Jede Nachricht wird von einem Menschen gelesen.
 
 ## Wofür Sie uns schreiben können

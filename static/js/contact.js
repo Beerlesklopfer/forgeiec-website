@@ -185,6 +185,7 @@
     start.then(function () { return post(false); }).then(function (data) {
       if (data.ok) {
         form.reset();
+        applyPreselect();
         updateCounter();
         setStatus("ok", M.sent);
         status.focus();
@@ -213,14 +214,18 @@
     });
   }
 
-  // Optional preselection: /kontakt/?type=pilot
+  // Optional preselection: /kontakt/?type=pilot (also kept after a reset).
+  var preselect = "";
+  function applyPreselect() {
+    if (preselect) form.elements["subject-type"].value = preselect;
+  }
   try {
     var wanted = (new URLSearchParams(window.location.search).get("type") || "").replace(/[^a-z]/g, "");
-    var select = form.elements["subject-type"];
-    if (wanted && select.querySelector('option[value="' + wanted + '"]')) {
-      select.value = wanted;
+    if (wanted && form.elements["subject-type"].querySelector('option[value="' + wanted + '"]')) {
+      preselect = wanted;
     }
   } catch (e) { /* old browser: no preselection */ }
+  applyPreselect();
 
   form.hidden = false;
   form.addEventListener("submit", onSubmit);

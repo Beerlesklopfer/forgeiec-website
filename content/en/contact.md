@@ -5,8 +5,6 @@ translationKey: "contact"
 description: "Contact ForgeIEC: request a pilot, questions about licences, partnership and contributing, jobs and collaboration — by form or e-mail."
 ---
 
-# Contact
-
 Write to us with the form on this page or by e-mail. Every message is read by a person.
 
 ## What you can write to us about
