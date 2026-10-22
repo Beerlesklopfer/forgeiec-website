@@ -289,10 +289,10 @@ small { font-size: .875rem; }
 }
 .menu-toggle { display: none; }
 
-@media (max-width: 1080px) {
+@media (max-width: 640px) {
   .header-tools .header-cta { display: none; }
 }
-@media (max-width: 900px) {
+@media (max-width: 1180px) {
   .menu-toggle { display: inline-grid; }
   .main-nav {
     display: none; position: absolute; left: 0; right: 0; top: 100%;
