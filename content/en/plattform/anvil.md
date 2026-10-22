@@ -11,26 +11,34 @@ hardened, and refined. **Anvil** is the runtime environment of the ForgeIEC
 platform: the place where source code meets real-time execution.
 
 Anvil manages the PLC scan cycle, the process images, and the data exchange
-between the PLC program and the fieldbus bridges. The runtime daemon `anvild`
-is the heartbeat of every ForgeIEC installation.
+between the PLC program and the fieldbus bridges. The runtime daemon, the
+**Anvil server (anvild)**, is the heartbeat of every ForgeIEC installation.
+(Since September 2026 the program is called `anvil-server`, the service
+`forgeiec-anvil-server.service`.)
 
 ---
 
 ## Architecture
 
 ```
-+--------------+         +------------+         +------------------+
-|              |         |            |         |                  |
-| PLC Program  |<------->|  anvild    |<------->|  Modbus Bridge   |--> Field devices
-|  (IEC Code)  |  gRPC   |  (Daemon)  |  Anvil  |  EtherCAT Bridge |--> Drives
-|              |         |            |  SHM    |  Profibus Bridge  |--> Sensors
-+--------------+         +------------+         |  OPC UA Bridge   |--> SCADA
-                                                +------------------+
-
-                         <-- Anvil -->
-                         Zero-Copy IPC
-                         Shared Memory
+ Workstation              Controller (Linux)
++-----------+  gRPC  +---------------------+
+|  Studio   |------->|  Anvil server       |  starts and supervises
++-----------+        |  (anvild)           |-----------------------+
+                     +---------------------+                       |
+                                                                   v
+   +------------------+   Anvil bus (iceoryx2,   +------------------+
+   | forgeiec_plc     |<------------------------>| tongs-* bridges  |--> field devices
+   | (PLC cycle)      |   zero-copy shared mem.) | (one process     |
+   +------------------+            ^             |  per segment)    |
+                                   |             +------------------+
+                             +-----------+
+                             |  Hearth   |  operator interface (preview)
+                             +-----------+
 ```
+
+The PLC cycle runs as its own process `forgeiec_plc`; anvild starts it
+and the bridges, takes the Studio's commands and supervises everything.
 
 ---
 
@@ -106,13 +114,14 @@ subprocesses:
 
 The compilation follows a two-stage model:
 
-1. **Workstation**: Forge Studio runs `iec2c` (IEC 61131-3 to C)
+1. **Workstation**: Forge Studio translates the IEC code into C++
+   source with its own compiler core
 2. **Target system**: `anvild` generates a platform-specific Makefile
    and calls `make` (g++)
 
-The IEC compiler (`iec2c`) only runs on the workstation. The target
-system requires `make`, `g++`, `libstdc++` and `librt` to compile the
-generated C code at deployment time.
+The IEC compiler only runs on the workstation. The target system
+requires `make`, `g++`, `libstdc++` and `librt` to compile the
+generated C++ code at deployment time.
 
 ---
 
@@ -122,11 +131,11 @@ generated C code at deployment time.
 |----------|-------|
 | **Language** | Rust |
 | **Communication** | gRPC (tonic/prost) |
-| **IPC** | Anvil Technology (Zero-Copy Shared Memory) |
+| **IPC** | Anvil bus (iceoryx2, zero-copy shared memory) |
 | **Configuration** | TOML |
 | **Platforms** | x86_64, ARM64, ARMv7 (Linux) |
 | **Process Model** | systemd daemon + subprocesses |
-| **License** | AGPL-3.0 |
+| **Licence** | AGPL-3.0-or-later; runtime API, libanvil and generated code: Apache-2.0 |
 
 ---
 

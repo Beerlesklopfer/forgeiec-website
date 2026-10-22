@@ -1,6 +1,6 @@
 ---
 title: "Tongs"
-description: "Feldbus-Bridges — Modbus TCP/RTU, EtherCAT, Profibus als eigenständige Prozesse"
+description: "Feldbus-Bridges — Modbus TCP/RTU, LoRaWAN, EtherCAT, PROFIBUS, EtherNet/IP als eigenständige Prozesse"
 weight: 6
 ---
 
@@ -17,16 +17,20 @@ SPS-Kern.
 
 | Protokoll | Bridge | Medium | Status |
 |-----------|--------|--------|--------|
-| **Modbus TCP** | `tongs-modbustcp` | Ethernet | Verfügbar |
-| **Modbus RTU** | `tongs-modbusrtu` | RS-485 (seriell) | Verfügbar |
-| **EtherCAT** | `tongs-ethercat` | Ethernet (Echtzeit) | In Entwicklung |
-| **Profibus DP** | `tongs-profibus` | Seriell (Feldbus) | In Entwicklung |
+| **Modbus TCP** | `tongs-modbustcp` | Ethernet | {{< status "use" "verfügbar" >}} |
+| **Modbus RTU** | `tongs-modbusrtu` | RS-485 (seriell) | {{< status "use" "verfügbar" >}} |
+| **LoRaWAN** | `tongs-lorawan` | Funk (Sensorik für Landwirtschaft und weitläufige Anlagen) | {{< status "wip" "in Arbeit (Schwerpunkt)" >}} |
+| **EtherCAT** | `tongs-ethercat` | Ethernet (Echtzeit) | {{< status "wip" "Gerüst, in Arbeit" >}} |
+| **PROFIBUS DP** | `tongs-profibus` | Seriell (Feldbus) | {{< status "wip" "Gerüst, in Arbeit" >}} |
+| **EtherNet/IP** | `tongs-ethernetip` | Ethernet | {{< status "wip" "Gerüst, in Arbeit" >}} |
+
+<!-- ENTWURF: Laut Audit W-14 liefert das Paket forgeiec-anvil-server kein tongs-modbusrtu aus; der Eigentümer nennt Modbus RTU verfügbar. Auslieferung prüfen. -->
 
 ---
 
 ## Architektur: Ein Prozess pro Segment
 
-Jede Bridge läuft als eigenständiger Prozess. `anvild` startet, überwacht
+Jede Bridge läuft als eigenständiger Prozess. Der Anvil-Server (anvild) startet, überwacht
 und restartet Bridges automatisch. Ein Absturz einer Bridge beeinträchtigt
 weder den SPS-Kern noch andere Bridges.
 
@@ -128,10 +132,10 @@ slave_id = 1
 |-------------|------|
 | **Sprache** | Rust |
 | **Modbus-Crate** | tokio-modbus 0.17 |
-| **IPC** | Anvil Technology (Zero-Copy Shared Memory) |
+| **IPC** | Anvil-Bus (iceoryx2, Zero-Copy Shared Memory) |
 | **Prozessmodell** | Ein Daemon pro aktivem Segment |
 | **Plattformen** | x86_64, ARM64, ARMv7 (Linux) |
-| **Lizenz** | AGPL-3.0 |
+| **Lizenz** | AGPL-3.0-or-later |
 
 ---
 
