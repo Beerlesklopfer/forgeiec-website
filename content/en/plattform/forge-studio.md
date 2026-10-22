@@ -53,10 +53,9 @@ The AI assistant (persona "Doc") reads the project and proposes Markdown documen
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Check
-    Check --> Irrigate: moisture < 30.0 AND NOT rain
-    Check --> Check: otherwise
-    Irrigate --> Check: runtime.Q
+    [*] --> ValveClosed
+    ValveClosed --> ValveOpen: moisture < 30.0 AND NOT rain
+    ValveOpen --> ValveClosed: runtime.Q OR rain
 ```
 
 <figcaption>Example: what a flow diagram in the <code>stateDiagram-v2</code> format looks like, here for the irrigation program from the home page. Written by hand as an illustration, not output of the Studio; rendered by this website's own copy of Mermaid.</figcaption>

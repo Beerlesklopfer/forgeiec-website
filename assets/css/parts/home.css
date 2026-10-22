@@ -18,3 +18,7 @@
 .legend-item { display: inline-flex; align-items: center; gap: .5rem; margin-right: .75rem; }
 .hero-inner > * { min-width: 0; }
 .home-shot { margin-top: clamp(2rem, 4vw, 3rem); max-width: 60rem; margin-left: auto; margin-right: auto; }
+
+/* Four solution cards: two by two from tablet width, one column on phones. */
+.grid-cards-4 { grid-template-columns: 1fr; }
+@media (min-width: 760px) { .grid-cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

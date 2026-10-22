@@ -53,10 +53,9 @@ Der KI-Assistent (Persona „Doc“) liest das Projekt und schlägt Markdown-Dok
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Pruefen
-    Pruefen --> Bewaessern: feuchte < 30.0 AND NOT regen
-    Pruefen --> Pruefen: sonst
-    Bewaessern --> Pruefen: laufzeit.Q
+    [*] --> VentilZu
+    VentilZu --> VentilAuf: feuchte < 30.0 AND NOT regen
+    VentilAuf --> VentilZu: laufzeit.Q OR regen
 ```
 
 <figcaption>Beispiel: So sieht ein Ablaufdiagramm im Format <code>stateDiagram-v2</code> aus, hier für das Bewässerungsprogramm von der Startseite. Von Hand geschrieben zur Veranschaulichung, keine Ausgabe des Studios; dargestellt mit dem Mermaid dieser Website.</figcaption>

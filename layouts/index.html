@@ -59,7 +59,7 @@
       <h2 id="h-solution">{{ .title }}</h2>
       <p>{{ .lead | markdownify }}</p>
     </div>
-    <div class="grid {{ if eq (len .cards) 4 }}grid-2{{ else }}grid-3{{ end }}">
+    <div class="grid {{ if eq (len .cards) 4 }}grid-cards-4{{ else }}grid-3{{ end }}">
       {{- range .cards }}
       <article class="card">
         <div class="card-icon">{{ partial "icon.html" .icon }}</div>
