@@ -5,10 +5,8 @@ draft: false
 description: "Rivet: Fernzugriff vom Handy auf Steuerungen im lokalen Netz, ohne Portfreigabe und ohne fremde Cloud. Status: in Entwicklung, Pilot mit solidarischen Landwirtschaften."
 ---
 
-# Rivet
-
 <style>
-.rv { --rv-line: var(--text, currentColor); --rv-accent: var(--spark, #F59E0B); --rv-box: rgba(148,163,184,.12); --rv-muted: rgba(148,163,184,.9); }
+.rv { --rv-line: var(--text, currentColor); --rv-accent: var(--brand, #F59E0B); --rv-box: rgba(148,163,184,.12); --rv-muted: rgba(148,163,184,.9); }
 .rv-lead { font-size: 1.2em; line-height: 1.5; margin: 0 0 1.2em; }
 .rv-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1em; margin: 1.2em 0; }
 .rv-card { border: 1px solid rgba(148,163,184,.35); border-radius: .4em; padding: .9em 1em; background: var(--rv-box); }
@@ -20,10 +18,10 @@ description: "Rivet: Fernzugriff vom Handy auf Steuerungen im lokalen Netz, ohne
 .rv-fig .rv-v { display: none; max-width: 340px; margin: 0 auto; }
 .rv-fig figcaption { font-size: .9em; opacity: .85; margin-top: .4em; }
 .rv-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4em; }
-.hero-body .rv table { font-size: .92em; }
-.hero-body .rv th { padding: .5em .7em; text-align: left; vertical-align: bottom; }
-.hero-body .rv td { padding: .6em .7em; vertical-align: top; }
-.hero-body .rv table td:first-child { white-space: normal; width: auto; min-width: 7em; }
+.prose .rv table { font-size: .92em; }
+.prose .rv th { padding: .5em .7em; text-align: left; vertical-align: bottom; }
+.prose .rv td { padding: .6em .7em; vertical-align: top; }
+.prose .rv table td:first-child { white-space: normal; width: auto; min-width: 7em; }
 .rv td code { overflow-wrap: normal; word-break: normal; }
 .rv p code, .rv li code { overflow-wrap: anywhere; }
 .rv pre { overflow-x: auto; max-width: 100%; }
@@ -35,8 +33,8 @@ description: "Rivet: Fernzugriff vom Handy auf Steuerungen im lokalen Netz, ohne
   .rv-fig .rv-h { display: none; }
   .rv-fig .rv-v { display: block; }
   .rv { max-width: calc(100vw - 4rem); }
-  .hero-body .rv table { display: block; overflow-x: auto; max-width: 100%; }
-  .hero-body .rv th, .hero-body .rv td { min-width: 10em; }
+  .prose .rv table { display: block; overflow-x: auto; max-width: 100%; }
+  .prose .rv th, .prose .rv td { min-width: 10em; }
 }
 </style>
 
@@ -150,8 +148,21 @@ Cloud-Anbieter dazwischen. Und für Betreiber, die ihre Anlage selbst vom Handy 
 
 ### Nächster Schritt
 
-<p class="rv-cta">Sie möchten Rivet in einem Pilot erproben? <a href="/de/kontakt/">Pilot anfragen</a></p>
-<!-- ENTWURF: Ein Pilotangebot (Umfang, Konditionen, Kosten) ist im Repository nicht beschrieben; die Kontaktseite /de/kontakt/ existiert in diesem Branch noch nicht. -->
+<p class="rv-cta">Sie möchten Rivet in einem Pilot erproben? <a href="/de/kontakt/?type=pilot">Pilot anfragen</a></p>
+<!-- ENTWURF: Ein Pilotangebot (Umfang, Konditionen, Kosten) ist im Repository nicht beschrieben. -->
+
+</div>
+</div>
+
+<div class="rv-two">
+<div>
+
+{{< screenshot program="rivet" name="gateway-setup" alt="Einrichtung des Rivet-Gateways im Browser" caption="Gateway einrichten: Registrierungscode eingeben, Betriebsart wählen." >}}
+
+</div>
+<div>
+
+{{< screenshot program="rivet" name="portal-phone-setup" alt="Rivet-Portal: Handy mit QR-Code für die WireGuard-App hinzufügen" caption="Handy hinzufügen: QR-Code mit der WireGuard-App scannen." >}}
 
 </div>
 </div>
@@ -332,6 +343,8 @@ Die README nennt noch das ältere Schema `<slug>.<zone>.forgeiec.io`; der Code v
 | Peers abgleichen | Timer `forgeiec-rivet-uplink-sync` alle 10 Minuten | `server/wg-daemon/contrib/` |
 | Handys: zuletzt gesehen, Datenmenge | aus dem Server-Interface `phones` (Status von `forgeiec-rivet-wg`), sonst aus dem Heartbeat | `Phone.connection` in `models.py` |
 | Gateway-Dienst | Konto `blacksmith`, kein root; `CAP_NET_BIND_SERVICE` und `CAP_NET_ADMIN`; `ProtectSystem=strict`, `NoNewPrivileges` | `client/contrib/forgeiec-rivet.service` |
+
+{{< screenshot program="rivet" name="gateway-overview" alt="Übersicht des Rivet-Gateways mit Adresse, Zertifikat und Verbindungsstatus" caption="Gateway-Übersicht: Adresse, Zertifikat, Tunnel zum Server, Portal." >}}
 
 Hinweis: Die README beschreibt den Gateway-Dienst noch ohne nftables und nur mit `CAP_NET_BIND_SERVICE`.
 Der aktuelle Code braucht für den Kernel-Weg zusätzlich `CAP_NET_ADMIN` (TUN `rivet0`, nftables per Netlink,

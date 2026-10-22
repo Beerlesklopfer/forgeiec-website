@@ -5,10 +5,8 @@ draft: false
 description: "Rivet: remote access from a phone to controllers in the local network, without port forwarding and without a third-party cloud. Status: in development, pilot with solidarity farms."
 ---
 
-# Rivet
-
 <style>
-.rv { --rv-line: var(--text, currentColor); --rv-accent: var(--spark, #F59E0B); --rv-box: rgba(148,163,184,.12); --rv-muted: rgba(148,163,184,.9); }
+.rv { --rv-line: var(--text, currentColor); --rv-accent: var(--brand, #F59E0B); --rv-box: rgba(148,163,184,.12); --rv-muted: rgba(148,163,184,.9); }
 .rv-lead { font-size: 1.2em; line-height: 1.5; margin: 0 0 1.2em; }
 .rv-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1em; margin: 1.2em 0; }
 .rv-card { border: 1px solid rgba(148,163,184,.35); border-radius: .4em; padding: .9em 1em; background: var(--rv-box); }
@@ -20,10 +18,10 @@ description: "Rivet: remote access from a phone to controllers in the local netw
 .rv-fig .rv-v { display: none; max-width: 340px; margin: 0 auto; }
 .rv-fig figcaption { font-size: .9em; opacity: .85; margin-top: .4em; }
 .rv-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4em; }
-.hero-body .rv table { font-size: .92em; }
-.hero-body .rv th { padding: .5em .7em; text-align: left; vertical-align: bottom; }
-.hero-body .rv td { padding: .6em .7em; vertical-align: top; }
-.hero-body .rv table td:first-child { white-space: normal; width: auto; min-width: 7em; }
+.prose .rv table { font-size: .92em; }
+.prose .rv th { padding: .5em .7em; text-align: left; vertical-align: bottom; }
+.prose .rv td { padding: .6em .7em; vertical-align: top; }
+.prose .rv table td:first-child { white-space: normal; width: auto; min-width: 7em; }
 .rv td code { overflow-wrap: normal; word-break: normal; }
 .rv p code, .rv li code { overflow-wrap: anywhere; }
 .rv pre { overflow-x: auto; max-width: 100%; }
@@ -35,8 +33,8 @@ description: "Rivet: remote access from a phone to controllers in the local netw
   .rv-fig .rv-h { display: none; }
   .rv-fig .rv-v { display: block; }
   .rv { max-width: calc(100vw - 4rem); }
-  .hero-body .rv table { display: block; overflow-x: auto; max-width: 100%; }
-  .hero-body .rv th, .hero-body .rv td { min-width: 10em; }
+  .prose .rv table { display: block; overflow-x: auto; max-width: 100%; }
+  .prose .rv th, .prose .rv td { min-width: 10em; }
 }
 </style>
 
@@ -149,8 +147,21 @@ cloud vendor in between. And for operators who want to operate their own plant f
 
 ### Next step
 
-<p class="rv-cta">Would you like to try Rivet in a pilot? <a href="/en/contact/">Request a pilot</a></p>
-<!-- ENTWURF: A pilot offer (scope, terms, costs) is not described in the repository; the contact page /en/contact/ does not exist on this branch yet. -->
+<p class="rv-cta">Would you like to try Rivet in a pilot? <a href="/en/contact/?type=pilot">Request a pilot</a></p>
+<!-- ENTWURF: A pilot offer (scope, terms, costs) is not described in the repository. -->
+
+</div>
+</div>
+
+<div class="rv-two">
+<div>
+
+{{< screenshot program="rivet" name="gateway-setup" alt="Setting up the Rivet gateway in the browser" caption="Setting up the gateway: enter the registration code, choose the mode." >}}
+
+</div>
+<div>
+
+{{< screenshot program="rivet" name="portal-phone-setup" alt="Rivet portal: add a phone with a QR code for the WireGuard app" caption="Adding a phone: scan the QR code with the WireGuard app." >}}
 
 </div>
 </div>
@@ -326,6 +337,8 @@ The README still shows the older scheme `<slug>.<zone>.forgeiec.io`; the code us
 | Peer sync | timer `forgeiec-rivet-uplink-sync` every 10 minutes | `server/wg-daemon/contrib/` |
 | Phones: last seen, data volume | from the server interface `phones` (status of `forgeiec-rivet-wg`), otherwise from the heartbeat | `Phone.connection` in `models.py` |
 | Gateway service | account `blacksmith`, no root; `CAP_NET_BIND_SERVICE` and `CAP_NET_ADMIN`; `ProtectSystem=strict`, `NoNewPrivileges` | `client/contrib/forgeiec-rivet.service` |
+
+{{< screenshot program="rivet" name="gateway-overview" alt="Rivet gateway overview with address, certificate and connection state" caption="Gateway overview: address, certificate, tunnel to the server, portal." >}}
 
 Note: the README still describes the gateway service without nftables and with `CAP_NET_BIND_SERVICE` only.
 The current code additionally needs `CAP_NET_ADMIN` for the kernel path (TUN `rivet0`, nftables via netlink,
