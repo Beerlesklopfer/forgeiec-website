@@ -10,7 +10,7 @@
      gelesen wird. Canonical zeigt auf die echte Seite — Search-
      Engines verlinken nicht das Alias. Meta-Refresh laed Browser
      direkt um. */}}
-<meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+<meta http-equiv="refresh" content="0; url={{ .RelPermalink }}">
 <style>
 body { font-family: system-ui, sans-serif; max-width: 720px; margin: 4rem auto; padding: 0 1rem; line-height: 1.5; color: #222; }
 h1 { font-size: 2rem; margin-bottom: 0.3rem; }
@@ -30,7 +30,7 @@ PROFIBUS, EtherNet/IP in progress) and an MCP server for AI-assisted
 engineering. Preview version 0.2.</p>
 
 <p>If your browser doesn't redirect automatically, continue to
-<a href="{{ .Permalink }}">{{ .Permalink }}</a>.</p>
+<a href="{{ .RelPermalink }}">{{ .Permalink }}</a>.</p>
 
 {{- /* Sprach-Wahl: hilfreich für Crawler die alle Lokalisierungen
        indizieren sollen, und für User die nicht das Default trifft. */ -}}
