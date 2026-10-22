@@ -121,8 +121,8 @@ FBD/LD/SFC/IL are not compiled yet.
 {{< screenshot program="studio" name="tongs-panel" alt="Tongs-Ansicht mit Diagnose und Busverkehr" caption="Tongs-Ansicht je Protokoll mit Diagnose und Busverkehr." status="wip" >}}
 {{< screenshot program="studio" name="tongs-panel" alt="Tongs view with diagnosis and bus traffic" caption="Tongs view per protocol with diagnosis and bus traffic." status="wip" >}}
 
-{{< screenshot program="studio" name="editor-sfc" alt="Editor für Ablaufsprache (AS), in Arbeit" caption="Ablaufsprache (AS): der Editor ist in Arbeit, Programme werden noch nicht übersetzt." status="wip" >}}
-{{< screenshot program="studio" name="editor-sfc" alt="Sequential Function Chart (SFC) editor, in progress" caption="Sequential Function Chart (SFC): the editor is in progress, programs are not compiled yet." status="wip" >}}
+{{< screenshot program="studio" name="editor-sfc" alt="Editor für Ablaufsprache (AS), geplant für Version 0.5" caption="Ablaufsprache (AS): geplant für Version 0.5, Programme werden noch nicht übersetzt." status="plan" >}}
+{{< screenshot program="studio" name="editor-sfc" alt="Sequential Function Chart (SFC) editor, planned for version 0.5" caption="Sequential Function Chart (SFC): planned for version 0.5, programs are not compiled yet." status="plan" >}}
 
 {{< screenshot program="fdd-editor" name="catalog" alt="FDD-Editor mit Gerätebeschreibung als Baum und Eingabemaske" caption="Der FDD-Editor: Gerätebeschreibungen als Baum, bearbeitet in einer Maske." >}}
 {{< screenshot program="fdd-editor" name="catalog" alt="FDD editor with a device description as a tree and an edit form" caption="The FDD editor: device descriptions as a tree, edited in a form." >}}

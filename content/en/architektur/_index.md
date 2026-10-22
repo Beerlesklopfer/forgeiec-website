@@ -134,6 +134,9 @@ On the left the PLC program forgeiec_plc, the readers (anvild, Hearth, Studio) a
 
 The status record is binary and of fixed size (5152 bytes for up to 64 devices per segment). A reader judges freshness by its own clock: a record older than three seconds means a dead Tongs, and its devices count as offline.
 
+{{< screenshot program="studio" name="tongs-panel" alt="Tongs view with diagnosis and bus traffic" caption="In the Studio, a view per protocol with diagnosis and bus traffic is being built for this." status="wip" >}}
+
+
 </div>
 </section>
 

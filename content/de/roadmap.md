@@ -95,7 +95,7 @@ full: true
 <div class="prose-band">
 <!-- ENTWURF: Begründung zu AWL/IL vom Eigentümer bestätigen lassen. -->
 
-Die Anweisungsliste (AWL, englisch IL) ist in der dritten Ausgabe der IEC 61131-3 als veraltet gekennzeichnet. Ihr Einsatzgebiet decken Strukturierter Text (textuell) sowie Kontaktplan, Funktionsbausteinsprache und Ablaufsprache (grafisch) ab. AWL ist maschinennah und bräuchte einen eigenen Übersetzungsweg nach Assembler; er ist nicht geplant. <!-- ENTWURF: technische Begründung (Assembler-Pfad) vom Eigentümer bestätigt, Wortlaut prüfen --> ForgeIEC entwickelt AWL deshalb nicht weiter und übersetzt sie nicht.
+Die Anweisungsliste (AWL, englisch IL) ist nicht mehr Teil der aktuellen Ausgabe der IEC 61131-3 und abgekündigt. <!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen --> Ihr Einsatzgebiet decken Strukturierter Text (textuell) sowie Kontaktplan, Funktionsbausteinsprache und Ablaufsprache (grafisch) ab. AWL ist maschinennah und bräuchte einen eigenen Übersetzungsweg nach Assembler; er ist nicht geplant. <!-- ENTWURF: technische Begründung (Assembler-Pfad) vom Eigentümer bestätigt, Wortlaut prüfen --> ForgeIEC entwickelt AWL deshalb nicht weiter und übersetzt sie nicht.
 
 Fragen zur Reihenfolge oder zu einem Bus, den Sie brauchen? Schreiben Sie an [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io).
 

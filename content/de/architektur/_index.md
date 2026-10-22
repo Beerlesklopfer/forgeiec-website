@@ -133,6 +133,9 @@ Links das SPS-Programm forgeiec_plc, die Leser (anvild, Hearth, Studio) und anvi
 
 Der Statusdatensatz ist binär und hat feste Größe (5152 Byte für bis zu 64 Geräte je Segment). Ein Leser beurteilt die Frische an seiner eigenen Uhr: Ein Datensatz, der älter als drei Sekunden ist, gilt als tote Tongs, ihre Geräte als offline.
 
+{{< screenshot program="studio" name="tongs-panel" alt="Tongs-Ansicht mit Diagnose und Busverkehr" caption="Im Studio entsteht dafür eine Ansicht je Protokoll mit Diagnose und Busverkehr." status="wip" >}}
+
+
 </div>
 </section>
 

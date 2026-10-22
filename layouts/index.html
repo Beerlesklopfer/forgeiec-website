@@ -71,6 +71,9 @@
       </article>
       {{- end }}
     </div>
+    {{- with .screenshot }}
+    <div class="home-shot">{{ partial "screenshot.html" (dict "page" $ "program" .program "name" .name "alt" .alt "caption" .caption) }}</div>
+    {{- end }}
   </div>
 </section>
 {{- end }}

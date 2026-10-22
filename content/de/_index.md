@@ -51,6 +51,11 @@ solution:
         - "Modbus TCP und RTU verfügbar, LoRaWAN in Arbeit"
         - "Bedienoberfläche Hearth als Vorschau"
       href: "/plattform/tongs/"
+  screenshot:
+    program: "studio"
+    name: "editor-st"
+    alt: "ForgeIEC Studio mit einem Programm in Strukturiertem Text im Editor"
+    caption: "Der ST-Editor im Hauptfenster des Studios."
 
 rivet:
   eyebrow: "Rivet · Fernzugriff"

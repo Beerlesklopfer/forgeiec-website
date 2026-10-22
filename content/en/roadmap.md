@@ -96,7 +96,7 @@ full: true
 <div class="prose-band">
 <!-- ENTWURF: owner to confirm the IL rationale. -->
 
-Instruction List (IL) is marked as deprecated in the third edition of IEC 61131-3. Its uses are covered by Structured Text (textual) and by Ladder Diagram, Function Block Diagram and Sequential Function Chart (graphical). IL sits close to the machine level and would need its own translation path to assembly; that path is not planned. <!-- ENTWURF: technical reason (assembly path) from the owner, check wording --> ForgeIEC therefore does not develop IL further and does not compile it.
+Instruction List (IL) is no longer part of the current edition of IEC 61131-3 and is deprecated. <!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen --> Its uses are covered by Structured Text (textual) and by Ladder Diagram, Function Block Diagram and Sequential Function Chart (graphical). IL sits close to the machine level and would need its own translation path to assembly; that path is not planned. <!-- ENTWURF: technical reason (assembly path) from the owner, check wording --> ForgeIEC therefore does not develop IL further and does not compile it.
 
 Questions about the order, or about a bus you need? Write to [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io).
 

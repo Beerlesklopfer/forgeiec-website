@@ -51,6 +51,11 @@ solution:
         - "Modbus TCP and RTU available, LoRaWAN in progress"
         - "Hearth operator interface as a preview"
       href: "/plattform/tongs/"
+  screenshot:
+    program: "studio"
+    name: "editor-st"
+    alt: "ForgeIEC Studio with a Structured Text program in the editor"
+    caption: "The ST editor in the Studio's main window."
 
 rivet:
   eyebrow: "Rivet · remote access"
