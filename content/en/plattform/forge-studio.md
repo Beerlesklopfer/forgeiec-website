@@ -1,6 +1,6 @@
 ---
 title: "Forge Studio"
-description: "IEC 61131-3 development environment — ST today, the other four languages in progress; native Qt6 interface"
+description: "IEC 61131-3 development environment — ST today, LD/FBD/SFC in the next releases; native Qt6 interface"
 weight: 1
 ---
 
@@ -14,24 +14,26 @@ application.
 
 ---
 
-## IEC 61131-3: ST today, the other four in progress
+## IEC 61131-3: ST today, one language per release
 
-Structured Text is in productive use (pilot operation). The IL, FBD,
-LD and SFC editors are in progress; programs in these languages are
-**not compiled yet**.
+Structured Text is in productive use (pilot operation, release 0.2).
+Each release adds one language: **0.3 LD, 0.4 FBD, 0.5 SFC**.
+Programs in these languages are **not compiled yet**. IL is
+deprecated (IEC 61131-3 edition 3 deprecates it). See the
+[roadmap](/en/roadmap/).
 
 - **Structured Text (ST)** — {{< status "use" >}} High-level language with syntax highlighting,
   auto-completion, and Tree-sitter-based parsing; own compiler core
   that also handles the object-oriented extensions (METHOD,
   INTERFACE, EXTENDS)
-- **Instruction List (IL)** — {{< status "wip" >}} Assembly-like language with intelligent
-  editing and language switching to/from ST
-- **Function Block Diagram (FBD)** — {{< status "wip" >}} Graphical editor with
-  block library and drag-and-drop
-- **Ladder Diagram (LD)** — {{< status "wip" >}} Familiar representation for switching logic,
+- **Ladder Diagram (LD)** — {{< status "plan" "planned: 0.3" >}} Familiar representation for switching logic,
   wired directly on screen
-- **Sequential Function Chart (SFC)** — {{< status "wip" >}} Step sequence diagrams for
+- **Function Block Diagram (FBD)** — {{< status "plan" "planned: 0.4" >}} Graphical editor with
+  block library and drag-and-drop
+- **Sequential Function Chart (SFC)** — {{< status "plan" "planned: 0.5" >}} Step sequence diagrams for
   sequential control with transitions and actions
+- **Instruction List (IL)** — {{< status "rest" "deprecated" >}} not developed further and
+  not compiled
 
 ---
 

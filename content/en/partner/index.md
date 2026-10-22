@@ -93,8 +93,9 @@ missing.
 
 {{< components "studio" >}}
 
-- **FBD/LD/SFC editors** — today the focus is on ST. Graphical
-  languages need their own tree-sitter grammars + canvas renderers.
+- **LD, FBD and SFC editors** — ST is in use today; LD, FBD and SFC
+  are planned for releases 0.3, 0.4 and 0.5. Graphical languages need
+  their own tree-sitter grammars + canvas renderers.
 - **Vendor catalog** — over 1,100 device descriptions from Phoenix
   Contact, Beckhoff, Weidmüller, SALZ and others ship with it (as of
   22 Oct 2026). GSDML/EDS/ESI converters welcome.

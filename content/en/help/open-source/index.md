@@ -86,11 +86,14 @@ vendor-bound device catalogs and closed ecosystems.
 
 ### ForgeIEC Breaks This Monopoly
 
-ForgeIEC proves that an IEC 61131-3 development environment of industrial
-quality is possible as an open-source project:
+ForgeIEC shows that an IEC 61131-3 development environment is possible
+under an open-source licence (AGPL-3.0-or-later) — today as preview
+version 0.2:
 
-- All five IEC languages (ST, IL, FBD, LD, SFC)
-- Industrial bus systems (Modbus, EtherCAT, Profibus)
+- Structured Text (ST) in use; LD, FBD and SFC in releases 0.3, 0.4
+  and 0.5
+- Industrial bus systems (Modbus TCP/RTU; LoRaWAN in progress;
+  EtherCAT, PROFIBUS, EtherNet/IP as skeleton)
 - Real-time debugging and remote operation
 - Runs on standard Linux hardware
 - No vendor lock-in — open formats, open protocols

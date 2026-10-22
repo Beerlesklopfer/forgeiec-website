@@ -92,11 +92,14 @@ hohen Lizenzkosten, herstellergebundenen Gerätekatalogen und geschlossenen
 
 ### ForgeIEC bricht dieses Monopol auf
 
-ForgeIEC ist der Beweis, dass eine IEC 61131-3 Entwicklungsumgebung in
-Industriequalität als Open-Source-Projekt möglich ist:
+ForgeIEC zeigt, dass eine IEC 61131-3 Entwicklungsumgebung unter einer
+Open-Source-Lizenz (AGPL-3.0-or-later) möglich ist — heute als
+Vorabversion 0.2:
 
-- Alle fünf IEC-Sprachen (ST, IL, FBD, LD, SFC)
-- Industrielle Bussysteme (Modbus, EtherCAT, Profibus)
+- Strukturierter Text (ST) im Einsatz; LD, FBD und SFC in den
+  Releases 0.3, 0.4 und 0.5
+- Industrielle Bussysteme (Modbus TCP/RTU; LoRaWAN in Arbeit;
+  EtherCAT, PROFIBUS, EtherNet/IP als Gerüst)
 - Echtzeit-Debugging und Remote-Betrieb
 - Läuft auf Standard-Linux-Hardware
 - Kein Vendor-Lock-In — offene Formate, offene Protokolle

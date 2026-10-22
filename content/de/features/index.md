@@ -3,17 +3,17 @@ title: "Funktionen"
 summary: "Alle Funktionen von ForgeIEC im Überblick"
 ---
 
-## IEC 61131-3: ST heute, die übrigen vier in Arbeit
+## IEC 61131-3: ST heute, eine Sprache je Release
 
-Strukturierter Text ist im produktiven Einsatz (Pilotbetrieb); die
-Editoren für die übrigen vier Sprachen sind in Arbeit und werden noch
-nicht übersetzt.
+Strukturierter Text ist im produktiven Einsatz (Pilotbetrieb). LD,
+FBD und SFC folgen in den Releases 0.3, 0.4 und 0.5 und werden bis
+dahin nicht übersetzt; IL ist abgekündigt ([Roadmap](/de/roadmap/)).
 
 - **Strukturierter Text (ST)** {{< status "use" >}} — Syntax-Hervorhebung, Auto-Vervollständigung, Suchen & Ersetzen; eigener Compiler-Kern mit objektorientierten Erweiterungen
-- **Anweisungsliste (AWL)** {{< status "wip" >}}
-- **Funktionsbausteindiagramm (FBS)** {{< status "wip" >}} — grafischer Editor mit Baustein-Bibliothek
-- **Kontaktplan (KOP)** {{< status "wip" >}} — vertraute Darstellung für Schaltlogik
-- **Ablaufsprache (AS)** {{< status "wip" >}} — Schrittkettendiagramme für Sequenzsteuerungen
+- **Kontaktplan (KOP)** {{< status "plan" "geplant: 0.3" >}} — vertraute Darstellung für Schaltlogik
+- **Funktionsbausteindiagramm (FBS)** {{< status "plan" "geplant: 0.4" >}} — grafischer Editor mit Baustein-Bibliothek
+- **Ablaufsprache (AS)** {{< status "plan" "geplant: 0.5" >}} — Schrittkettendiagramme für Sequenzsteuerungen
+- **Anweisungsliste (AWL)** {{< status "rest" "abgekündigt" >}}
 
 ## Industrielle Bussysteme
 

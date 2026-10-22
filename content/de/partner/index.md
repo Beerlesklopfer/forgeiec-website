@@ -93,7 +93,8 @@ IPC-Wire-Format — der protokollspezifische Teil fehlt.
 
 {{< components "studio" >}}
 
-- **FBD/LD/SFC-Editoren** — heute liegt der Fokus auf ST. Grafische
+- **LD-, FBD- und SFC-Editoren** — heute ist ST im Einsatz; LD, FBD
+  und SFC sind für die Releases 0.3, 0.4 und 0.5 geplant. Grafische
   Sprachen brauchen eigene Tree-sitter-Grammatik + Canvas-Renderer.
 - **Vendor-Catalog-Pflege** — mitgeliefert sind über 1 100
   Gerätebeschreibungen von Phoenix Contact, Beckhoff, Weidmüller,

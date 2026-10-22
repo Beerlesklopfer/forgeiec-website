@@ -12,7 +12,7 @@ weight: 10
 
 ForgeIEC ist eine vollständige Plattform für industrielle
 Automatisierung — von der Programmierung bis zur Bedienung. Aktueller
-Stand: **Vorabversion 0.2**; im Pilotbetrieb bei der SoLaWi Ackervielfalt.
+Stand: **Vorabversion 0.2** (0.2.2); im Pilotbetrieb bei der SoLaWi Ackervielfalt.
 Jede
 Komponente trägt den Namen eines Schmiedewerkzeugs und hat einen
 klar umrissenen Auftrag. Komponenten sind eigenständige Daemonen
@@ -21,7 +21,7 @@ gRPC.
 
 | | Komponente | Auftrag | Stand |
 |:---:|---|---|---|
-| {{< comp-icon "studio" >}}   | **ForgeIEC Studio** | IEC-61131-3-IDE + Bus-Konfig + KI-Helfer | ST-Editor {{< status "use" >}}, IL/FBD/LD/SFC {{< status "wip" >}} |
+| {{< comp-icon "studio" >}}   | **ForgeIEC Studio** | IEC-61131-3-IDE + Bus-Konfig + KI-Helfer | ST-Editor {{< status "use" >}}, LD/FBD/SFC {{< status "plan" "geplant: 0.3/0.4/0.5" >}} |
 | {{< comp-icon "anvild" >}}   | **Anvil-Server (anvild)** | SPS-Runtime + Anvil-Bus (iceoryx2) zwischen den Prozessen | {{< status "use" >}} |
 | {{< comp-icon "tongs" >}}    | **tongs-***         | Feldbus-Bridges: Modbus TCP/RTU verfügbar, LoRaWAN in Arbeit (Schwerpunkt), EtherCAT / PROFIBUS / EtherNet/IP als Gerüst | {{< status "wip" "gemischt" >}} |
 | {{< comp-icon "hearth" >}}   | **Hearth**          | Bedienoberfläche (HMI), liest die Prozessdaten direkt vom Anvil-Bus | {{< status "wip" "Vorschau" >}} |
@@ -39,8 +39,9 @@ gRPC.
 
 Native C++/Qt6-IDE auf der Workstation (Linux; ein Windows-Build
 existiert, Installer auf Anfrage). Strukturierter Text (ST) mit
-eigenem, objektorientierungsfähigem Compiler-Kern; die Editoren für
-IL, FBD, LD und SFC sind in Arbeit und noch nicht kompilierbar.
+eigenem, objektorientierungsfähigem Compiler-Kern ist im Einsatz;
+LD, FBD und SFC sind für die Releases 0.3, 0.4 und 0.5 geplant
+([Roadmap](/de/roadmap/)), IL ist abgekündigt.
 Bus-Konfiguration, Live-Monitor,
 Oszilloskop, KI-Helfer eingebaut. Tree-sitter-basierte Syntax,
 gRPC-Anbindung an anvild, MCP-Server für LLM-Tooling.

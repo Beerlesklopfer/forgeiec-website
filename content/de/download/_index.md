@@ -4,9 +4,10 @@ summary: "Alle ForgeIEC-Komponenten — APT-Repository, Direkt-Downloads, Quellc
 ---
 
 {{< callout type="note" title="Stand: Vorabversion 0.2" >}}
-Alle Pakete sind Vorabversionen der Reihe 0.2. Im produktiven Einsatz
-(Pilotbetrieb) ist der ST-Editor; die Editoren für IL, FBD, LD und
-SFC sowie weitere Busse folgen.
+Alle Pakete sind Vorabversionen der Reihe 0.2 (aktuell 0.2.2). Im
+produktiven Einsatz (Pilotbetrieb) ist der ST-Editor. Je Release
+kommt eine IEC-Sprache hinzu: 0.3 LD, 0.4 FBD, 0.5 SFC; IL ist
+abgekündigt. Siehe [Roadmap](/de/roadmap/).
 {{< /callout >}}
 
 ## ForgeIEC-Komponenten im Überblick

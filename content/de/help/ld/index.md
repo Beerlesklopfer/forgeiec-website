@@ -3,6 +3,13 @@ title: "Ladder Diagram Editor (LD)"
 summary: "Stromlaufplan-Metapher: Power-Rails, Kontakte, Spulen"
 ---
 
+{{< callout type="warning" title="Geplant für Release 0.3" >}}
+LD ist für **Release 0.3** geplant und wird derzeit **noch nicht
+übersetzt**. Für lauffähige Programme nutzen Sie heute
+[Strukturierten Text (ST)](/de/help/st/). Siehe auch die
+[Roadmap](/de/roadmap/).
+{{< /callout >}}
+
 ## Überblick
 
 Ladder Diagram (LD) ist die älteste der drei grafischen IEC-61131-3-Sprachen

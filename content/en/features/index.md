@@ -3,16 +3,17 @@ title: "Features"
 summary: "All ForgeIEC features at a glance"
 ---
 
-## IEC 61131-3: ST today, the other four in progress
+## IEC 61131-3: ST today, one language per release
 
-Structured Text is in productive use (pilot operation); the editors
-for the other four languages are in progress and do not compile yet.
+Structured Text is in productive use (pilot operation). LD, FBD and
+SFC follow in releases 0.3, 0.4 and 0.5 and are not compiled until
+then; IL is deprecated ([roadmap](/en/roadmap/)).
 
 - **Structured Text (ST)** {{< status "use" >}} — syntax highlighting, auto-completion, search & replace; own compiler core with object-oriented extensions
-- **Instruction List (IL)** {{< status "wip" >}}
-- **Function Block Diagram (FBD)** {{< status "wip" >}} — graphical editor with block library
-- **Ladder Diagram (LD)** {{< status "wip" >}} — familiar representation for switching logic
-- **Sequential Function Chart (SFC)** {{< status "wip" >}} — step sequence diagrams for process control
+- **Ladder Diagram (LD)** {{< status "plan" "planned: 0.3" >}} — familiar representation for switching logic
+- **Function Block Diagram (FBD)** {{< status "plan" "planned: 0.4" >}} — graphical editor with block library
+- **Sequential Function Chart (SFC)** {{< status "plan" "planned: 0.5" >}} — step sequence diagrams for process control
+- **Instruction List (IL)** {{< status "rest" "deprecated" >}}
 
 ## Industrial Bus Systems
 

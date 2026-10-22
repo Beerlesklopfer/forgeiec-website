@@ -4,9 +4,10 @@ summary: "All ForgeIEC components — APT and RPM repositories, direct downloads
 ---
 
 {{< callout type="note" title="State: preview version 0.2" >}}
-All packages are preview versions of the 0.2 series. The ST editor is
-in productive use (pilot operation); the IL, FBD, LD and SFC editors
-and further buses follow.
+All packages are preview versions of the 0.2 series (currently
+0.2.2). The ST editor is in productive use (pilot operation). Each
+release adds one IEC language: 0.3 LD, 0.4 FBD, 0.5 SFC; IL is
+deprecated. See the [roadmap](/en/roadmap/).
 {{< /callout >}}
 
 ## ForgeIEC components at a glance

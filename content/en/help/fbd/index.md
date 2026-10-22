@@ -3,6 +3,12 @@ title: "Function Block Diagram Editor (FBD)"
 summary: "Graphic wiring of functions, function blocks, and variables"
 ---
 
+{{< callout type="warning" title="Planned for release 0.4" >}}
+FBD is planned for **release 0.4** and is **not compiled yet**. For
+runnable programs use [Structured Text (ST)](/en/help/st/) today.
+See also the [roadmap](/en/roadmap/).
+{{< /callout >}}
+
 ## Overview
 
 Function Block Diagram (FBD) is one of the three graphic IEC 61131-3

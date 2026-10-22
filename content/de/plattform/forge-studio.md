@@ -1,6 +1,6 @@
 ---
 title: "Forge Studio"
-description: "IEC 61131-3 Entwicklungsumgebung — ST heute, die übrigen vier Sprachen in Arbeit; native Qt6-Oberfläche"
+description: "IEC 61131-3 Entwicklungsumgebung — ST heute, LD/FBD/SFC in den nächsten Releases; native Qt6-Oberfläche"
 weight: 1
 ---
 
@@ -14,24 +14,26 @@ einer Anwendung.
 
 ---
 
-## IEC 61131-3: ST heute, die übrigen vier in Arbeit
+## IEC 61131-3: ST heute, eine Sprache je Release
 
-Strukturierter Text ist im produktiven Einsatz (Pilotbetrieb). Die
-Editoren für IL, FBD, LD und SFC sind in Arbeit; Programme in diesen
-Sprachen werden derzeit **noch nicht übersetzt**.
+Strukturierter Text ist im produktiven Einsatz (Pilotbetrieb, Release
+0.2). Je Release kommt eine Sprache hinzu: **0.3 LD, 0.4 FBD, 0.5
+SFC**. Programme in diesen Sprachen werden derzeit **noch nicht
+übersetzt**. IL ist abgekündigt (IEC 61131-3 Ausgabe 3 erklärt sie für
+veraltet). Siehe [Roadmap](/de/roadmap/).
 
 - **Strukturierter Text (ST)** — {{< status "use" >}} Hochsprache mit Syntax-Hervorhebung,
   Auto-Vervollständigung und Tree-sitter-basiertem Parsing; eigener
   Compiler-Kern, der auch die objektorientierten Erweiterungen
   (METHOD, INTERFACE, EXTENDS) beherrscht
-- **Anweisungsliste (AWL/IL)** — {{< status "wip" >}} Assembler-ähnliche Sprache mit intelligenter
-  Editierung und Sprachumschaltung von/zu ST
-- **Funktionsbausteindiagramm (FBS/FBD)** — {{< status "wip" >}} Grafischer Editor mit
-  Baustein-Bibliothek und Drag-and-Drop
-- **Kontaktplan (KOP/LD)** — {{< status "wip" >}} Vertraute Darstellung für Schaltlogik,
+- **Kontaktplan (KOP/LD)** — {{< status "plan" "geplant: 0.3" >}} Vertraute Darstellung für Schaltlogik,
   direkt am Bildschirm verdrahten
-- **Ablaufsprache (AS/SFC)** — {{< status "wip" >}} Schrittkettendiagramme für
+- **Funktionsbausteindiagramm (FBS/FBD)** — {{< status "plan" "geplant: 0.4" >}} Grafischer Editor mit
+  Baustein-Bibliothek und Drag-and-Drop
+- **Ablaufsprache (AS/SFC)** — {{< status "plan" "geplant: 0.5" >}} Schrittkettendiagramme für
   Sequenzsteuerungen mit Transitionen und Aktionen
+- **Anweisungsliste (AWL/IL)** — {{< status "rest" "abgekündigt" >}} wird nicht weiterentwickelt
+  und nicht übersetzt
 
 ---
 

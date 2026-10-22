@@ -7,7 +7,7 @@ weight: 10
 ## What the platform delivers
 
 ForgeIEC is a complete platform for industrial automation — from
-programming to operation. Current state: **preview version 0.2**,
+programming to operation. Current state: **preview version 0.2** (0.2.2),
 in pilot operation at the SoLaWi Ackervielfalt. Every component carries the name
 of a blacksmith's tool and has a clearly defined remit. Components
 are standalone daemons or applications, jointly running over
@@ -15,7 +15,7 @@ zero-copy IPC and gRPC.
 
 | | Component | Remit | Status |
 |:---:|---|---|---|
-| {{< comp-icon "studio" >}}   | **ForgeIEC Studio** | IEC 61131-3 IDE + bus config + AI assistant | ST editor {{< status "use" >}}, IL/FBD/LD/SFC {{< status "wip" >}} |
+| {{< comp-icon "studio" >}}   | **ForgeIEC Studio** | IEC 61131-3 IDE + bus config + AI assistant | ST editor {{< status "use" >}}, LD/FBD/SFC {{< status "plan" "planned: 0.3/0.4/0.5" >}} |
 | {{< comp-icon "anvild" >}}   | **Anvil server (anvild)** | PLC runtime + Anvil bus (iceoryx2) between the processes | {{< status "use" >}} |
 | {{< comp-icon "tongs" >}}    | **tongs-***         | Fieldbus bridges: Modbus TCP/RTU available, LoRaWAN in progress (focus), EtherCAT / PROFIBUS / EtherNet/IP as skeleton | {{< status "wip" "mixed" >}} |
 | {{< comp-icon "hearth" >}}   | **Hearth**          | Operator interface (HMI), reads process data directly from the Anvil bus | {{< status "wip" "preview" >}} |
@@ -33,8 +33,9 @@ zero-copy IPC and gRPC.
 
 Native C++/Qt6 IDE on the workstation (Linux; a Windows build
 exists, installer on request). Structured Text (ST) with an own,
-object-oriented-capable compiler core; the IL, FBD, LD and SFC
-editors are in progress and do not compile yet. Bus configuration,
+object-oriented-capable compiler core is in use; LD, FBD and SFC
+are planned for releases 0.3, 0.4 and 0.5
+([roadmap](/en/roadmap/)), IL is deprecated. Bus configuration,
 live monitor,
 oscilloscope, AI assistant built in. Tree-sitter syntax, gRPC link
 to anvild, MCP server for LLM tooling.
