@@ -22,5 +22,5 @@
 /* Diagrams keep a legible size on phones: the frame scrolls sideways instead of shrinking the text. */
 @media (max-width: 760px) {
   .arch .figure-frame { padding: .75rem; }
-  .arch .figure-frame .diagram { min-width: 820px; }
+  .arch .figure-frame .diagram { min-width: 940px; }
 }
