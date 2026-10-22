@@ -3,8 +3,44 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ block "title" . }}{{ with .Params.Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  {{- /* Title: home = "Site — description", others = "Page | Site". */ -}}
+  {{- $title := site.Title -}}
+  {{- if .IsHome -}}
+    {{- with site.Params.description }}{{ $title = printf "%s — %s" site.Title . }}{{ end -}}
+  {{- else if .Title -}}
+    {{- $title = printf "%s | %s" .Title site.Title -}}
+  {{- end }}
+  {{- /* Description: front matter, else plain-text summary (~155 chars), else site description. */ -}}
+  {{- $desc := "" -}}
+  {{- with .Description -}}
+    {{- $desc = . -}}
+  {{- else -}}
+    {{- $desc = .Summary | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace | truncate 155 "…" -}}
+  {{- end -}}
+  {{- if not $desc }}{{ $desc = site.Params.description | default "" }}{{ end -}}
+  {{- $locales := dict "de" "de_DE" "en" "en_US" "fr" "fr_FR" "es" "es_ES" "zh" "zh_CN" "ja" "ja_JP" "tr" "tr_TR" "ar" "ar_AR" }}
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $desc }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{- if .IsTranslated }}{{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+  {{- end }}
+  {{- range where .AllTranslations "Language.Lang" (index hugo.Sites 0).Language.Lang }}
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+  {{- end }}{{ end }}
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta property="og:locale" content="{{ index $locales .Language.Lang | default .Language.Lang }}">
+  {{- range .AllTranslations }}{{ if ne .Language.Lang $.Language.Lang }}
+  <meta property="og:locale:alternate" content="{{ index $locales .Language.Lang | default .Language.Lang }}">
+  {{- end }}{{ end }}
+  {{- /* og:image only when the page names an existing image in static/ via front matter `images`. */ -}}
+  {{- with .Params.images }}{{ with index . 0 }}{{ if fileExists (path.Join "static" .) }}
+  <meta property="og:image" content="{{ . | absURL }}">
+  {{- end }}{{ end }}{{ end }}
   {{ hugo.Generator }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
