@@ -1,0 +1,21 @@
+/* Engineering practice and Contribute pages */
+.stats { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); margin: 0; padding: 0; list-style: none; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.4rem; }
+.stat-value { display: block; font-size: clamp(1.9rem, 1.5rem + 1.2vw, 2.5rem); font-weight: 750; letter-spacing: -.02em; color: var(--heading); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat-label { display: block; margin-top: .35rem; color: var(--text-2); font-weight: 600; }
+.stat-source { display: block; margin-top: .5rem; color: var(--muted); font-size: .84rem; }
+.prose-band { max-width: var(--prose); }
+.prose-band > :last-child { margin-bottom: 0; }
+.prose-band h2:first-child, .prose-band h3:first-child { margin-top: 0; }
+.example-card { border-left: 4px solid var(--brand); }
+.example-card dl { margin: .5rem 0 0; display: grid; grid-template-columns: max-content 1fr; gap: .4rem 1rem; }
+.example-card dt { font-weight: 700; color: var(--heading); }
+.example-card dd { margin: 0; color: var(--text-2); }
+@media (max-width: 560px) { .example-card dl { grid-template-columns: 1fr; } .example-card dd { margin-bottom: .5rem; } }
+.gate-table td:first-child { white-space: nowrap; font-family: var(--font-mono); font-size: .9rem; }
+.ack-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .75rem; }
+.ack-list li { padding: .9rem 1.1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
+.ack-list strong { display: block; }
+.ack-list span { color: var(--text-2); font-size: .95rem; }
+.chip-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto; padding-top: .4rem; }
+@media (min-width: 1000px) { .steps--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
