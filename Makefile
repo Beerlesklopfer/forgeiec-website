@@ -8,7 +8,7 @@ DEPLOY_PATH ?= /var/www/forgeiec.io/public/
 DEPLOY_SSH  ?= $(DEPLOY_USER)@$(DEPLOY_HOST)
 
 .DEFAULT_GOAL := help
-.PHONY: help build serve deploy clean sync-schemas screenshots-missing screenshots-list
+.PHONY: help build check serve deploy clean sync-schemas screenshots-missing screenshots-list entwurf
 
 # Studio-Repo Root, in dem die Quell-XSDs liegen. Wird beim
 # sync-schemas-Target aus dem Submodule-Verzeichnis raus auf
@@ -21,6 +21,8 @@ help:
 	@echo ""
 	@echo "  make help     Zeigt diese Hilfe (Default-Target)"
 	@echo "  make build    Baut die statische Site nach public/ (mit Minify)"
+	@echo "  make check    Pruef-Build ohne und mit Drafts nach $(CHECK_DIR) (muss still sein)"
+	@echo "  make entwurf  Listet alle ENTWURF-Marker (offene Punkte fuer den Eigentuemer)"
 	@echo "  make serve    Lokaler Dev-Server mit Live-Reload"
 	@echo "                  (lauscht auf 0.0.0.0, Drafts inkludiert)"
 	@echo "  make deploy   Build + rsync nach $(DEPLOY_SSH):$(DEPLOY_PATH)"
@@ -38,6 +40,17 @@ help:
 # Build static site into public/
 build:
 	HUGO_ENV=production $(HUGO) --minify
+
+# Check build: must print nothing. Without drafts (what main publishes)
+# and with drafts (Impressum, Datenschutz, CLA). Output outside /tmp.
+CHECK_DIR ?= $(HOME)/.cache/forgeiec-build/check
+check:
+	$(HUGO) --quiet --minify --cleanDestinationDir -d $(CHECK_DIR)/public
+	$(HUGO) --quiet --minify --cleanDestinationDir --buildDrafts -d $(CHECK_DIR)/drafts
+
+# Open points for the owner (HTML comments "ENTWURF: ...").
+entwurf:
+	@grep -rn 'ENTWURF' content layouts
 
 # Local development server with live reload
 serve:
