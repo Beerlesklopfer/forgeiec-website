@@ -10,6 +10,7 @@ aliases:
 
 # Trademark Notice
 
+<!-- ENTWURF: The following sentence (non-commercial, volunteer work) contradicts the owner's facts (target customers machine/plant builders, commercial licence possible). It supports the request for contact instead of a cease-and-desist; whether it goes is a legal decision for the owner (audit W-06, question 2). Proposal: "ForgeIEC is developed by Jörg Bernau and released under AGPL-3.0-or-later; a commercial licence is available." -->
 ForgeIEC is a **non-commercial open-source project** with no
 revenue and no profit motive. It is released under the
 **AGPL-3.0-or-later** licence and is funded exclusively by the
@@ -113,7 +114,7 @@ matter of principle.
 
 ForgeIEC — open-source project
 Email: [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io)
-Source: [git.forgeiec.io/ForgeIEC](https://git.forgeiec.io/)
+Source code: access on request (AGPL-3.0-or-later)
 
 ---
 
