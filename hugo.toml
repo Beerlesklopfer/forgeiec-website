@@ -43,6 +43,12 @@ noClasses = false
       pageRef = "/plattform"
       weight = 10
     [[languages.de.menu.main]]
+      # Plain URL: the Rivet page comes from branch rivet-page.
+      identifier = "rivet"
+      name = "Rivet"
+      url = "/de/rivet/"
+      weight = 15
+    [[languages.de.menu.main]]
       identifier = "architektur"
       name = "Architektur"
       pageRef = "/architektur"
@@ -93,6 +99,12 @@ noClasses = false
       name = "Platform"
       pageRef = "/plattform"
       weight = 10
+    [[languages.en.menu.main]]
+      # Plain URL: the Rivet page comes from branch rivet-page.
+      identifier = "rivet"
+      name = "Rivet"
+      url = "/en/rivet/"
+      weight = 15
     [[languages.en.menu.main]]
       identifier = "architektur"
       name = "Architecture"

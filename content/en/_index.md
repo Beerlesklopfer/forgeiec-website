@@ -1,108 +1,160 @@
 ---
 title: "ForgeIEC"
+description: "IEC 61131-3 control software for machine and plant builders: no licence fee per device, no vendor lock-in. Preview version 0.2, in pilot operation."
+more: "Learn more"
+
+hero:
+  eyebrow: "IEC 61131-3 · Preview version 0.2"
+  title: "Your control system. No per-device licence, no vendor lock-in."
+  lead: "ForgeIEC is control software for machine and plant builders: program to IEC 61131-3, run on Linux industrial computers, connect field devices and operator panels. Open source – a commercial licence is available on request."
+  secondaryLabel: "Download"
+  secondaryHref: "/download/"
+  meta:
+    - "In pilot operation at a solidarity farm"
+    - "Linux, Windows build available"
+    - "Your control program stays yours"
+
+problem:
+  eyebrow: "The problem"
+  title: "Control software ties you down – to licences, vendors and services."
+  items:
+    - "With many suppliers the runtime licence costs money – per controller, again with every machine you ship."
+    - "Choosing a system ties your programs, hardware and know-how to one vendor's tools."
+    - "And remote maintenance often runs through open ports or through a third party's cloud."
+
+solution:
+  eyebrow: "The solution"
+  title: "One platform to program, run and connect."
+  lead: "ForgeIEC covers the path from the program to the field device – with open licences and on hardware you choose yourself."
+  cards:
+    - icon: "code"
+      kicker: "Program"
+      title: "Structured Text to IEC 61131-3"
+      text: "A dedicated editor with its own compiler core that also understands object-oriented blocks."
+      points:
+        - "ST in use today; FBD, LD, SFC and IL follow"
+        - "Manufacturers' device descriptions right in the project"
+      href: "/plattform/forge-studio/"
+    - icon: "cpu"
+      kicker: "Run"
+      title: "Runtime on industrial hardware"
+      text: "The runtime runs as a service on Linux computers with x86 or ARM. Programs reach the controller over the network."
+      points:
+        - "Watch variables live and record trends"
+        - "Updates as signed packages from the apt repository"
+      href: "/plattform/anvil/"
+    - icon: "plug"
+      kicker: "Connect"
+      title: "Field buses, radio and operator panels"
+      text: "Every protocol has its own bridge. If one fails, the rest keeps running."
+      points:
+        - "Modbus TCP and RTU available, LoRaWAN in progress"
+        - "Hearth operator interface as a preview"
+      href: "/plattform/tongs/"
+
+rivet:
+  eyebrow: "Rivet · remote access"
+  title: "Remote access to your machines – without an open port and without someone else's cloud."
+  lead: "Rivet connects a phone to the controller. A small gateway next to the controller builds the connection outwards by itself – no port is opened in the plant's network."
+  points:
+    - title: "No port forwarding"
+      text: "No public IP address, no DynDNS. Works behind CGNAT and on an LTE connection, too."
+    - title: "No third party in the data path"
+      text: "Gateway and server are our own infrastructure, no cloud or VPN provider in between. The server only passes the connection on encrypted and sees no content."
+    - title: "Only the released controller is reachable"
+      text: "The phone reaches only the released controller on the released ports. Other devices in the network stay unreachable."
+  linkLabel: "Rivet in detail"
+  href: "/rivet/"
+  status: "in development · pilot with solidarity farms"
+  caption: "The gateway builds the tunnel from inside; the server only brokers it."
+
+status:
+  eyebrow: "Honest status"
+  title: "What works today – and what does not yet."
+  lead: "ForgeIEC is a preview version (0.2). The ST editor is in productive use at the pilot customer; much else is in progress."
+  colArea: "Area"
+  colDetail: "What it means"
+  colState: "Status"
+  legendUse: "running at the pilot customer or available"
+  legendWip: "being developed, not finished"
+  legendPlan: "intended"
+  legendRest: "not in development at present"
+  rows:
+    - area: "Programming in ST"
+      detail: "Editor, own compiler core, transfer to the controller"
+      state: "use"
+    - area: "FBD, LD, SFC, IL"
+      detail: "Graphical and further languages: editors in progress, not compiled yet"
+      state: "wip"
+    - area: "Runtime on Linux"
+      detail: "Anvil server (anvild) for Debian and Ubuntu, signed packages"
+      state: "use"
+    - area: "Modbus TCP and RTU"
+      detail: "Connecting field devices via Modbus"
+      state: "use"
+      label: "available"
+    - area: "LoRaWAN"
+      detail: "Radio sensors for wide-area sites – our focus for the solidarity farms"
+      state: "wip"
+    - area: "EtherCAT, PROFIBUS, EtherNet/IP"
+      detail: "Skeleton in place, protocols in progress; further buses follow"
+      state: "wip"
+    - area: "Hearth operator interface"
+      detail: "Runs over the internal Anvil bus"
+      state: "wip"
+      label: "preview"
+    - area: "Rivet remote access"
+      detail: "Secure access from a phone without port forwarding"
+      state: "wip"
+      label: "in development · pilot"
+    - area: "Windows"
+      detail: "A Windows build exists and its CI runs; installer on request"
+      state: "wip"
+      label: "on request"
+    - area: "bellowsd OPC UA gateway"
+      detail: "Package stays in the apt repository, not being developed at present"
+      state: "rest"
+
+trust:
+  eyebrow: "Trust"
+  title: "Clear rules before you decide."
+  facts:
+    - icon: "scale"
+      title: "Licence"
+      text: "The Studio, the runtime daemon and the bus bridges are AGPL-3.0-or-later. What is linked into your project – generated code, runtime interfaces, libanvil – is Apache-2.0. A commercial licence is possible."
+    - icon: "alert"
+      title: "Not a replacement for a safety PLC"
+      text: "ForgeIEC is not a safety PLC and has no SIL or PL rating. Emergency stop and protective functions belong on safety equipment approved for that purpose."
+    - icon: "package"
+      title: "Linux and Windows"
+      text: "Linux packages come signed from an automated CI via the apt repository. A Windows build exists and its CI runs; the installer is available on request."
+    - icon: "chat"
+      title: "Support and commercial licence"
+      text: "On request. The source code is under AGPL; access to the repositories on request."
+
+faq:
+  title: "Licence questions"
+  disclaimer: "Information, not legal advice. The licence texts are authoritative."
+  items:
+    - q: "Do I have to disclose my PLC program?"
+      a: "No. The generated control code and the runtime interfaces linked into your project (runtime API, libanvil) are Apache-2.0. You may also build your own closed libraries on top of them. The Studio, the runtime daemon and the bus bridges are AGPL-3.0-or-later. A commercial licence is possible."
+    - q: "What applies if I modify ForgeIEC itself?"
+      a: "Changes to the Studio, the runtime daemon or the bus bridges fall under the AGPL: if you distribute the modified software or offer it over a network, you must make the source code of those changes available. If you do not want that, ask for a commercial licence."
+    - q: "Is there a licence fee per controller?"
+      a: "Not under the open licences. Support and a commercial licence are available on request."
+    - q: "Can I get the source code?"
+      a: "Yes. The source code is under AGPL; access to the repositories is available on request at blacksmith@forgeiec.io."
+
+proof:
+  eyebrow: "In use"
+  title: "Pilot operation at SoLaWi Ackervielfalt"
+  text: "SoLaWi Ackervielfalt, a solidarity farm, is ForgeIEC's pilot customer: its control programs are written in the ST editor, which is in productive use there. More solidarity farms will follow."
+
+cta:
+  title: "Let's talk about your machine."
+  text: "You build machines or plants and want to try ForgeIEC in a pilot project? Write what you want to control – Jörg Bernau replies personally."
+  secondaryLabel: "Go to download"
+  secondaryHref: "/download/"
 ---
-
-<div style="text-align:center; padding: 3rem 1rem;">
-
-# Forged for industry.
-
-**An IEC 61131-3 development environment built to industrial standards — open source, AI-native, no vendor lock-in.**
-
-[Download](/download/) · [Architecture](/help/ai/architecture/) · [News](/news/)
-
-</div>
-
----
-
-## What ForgeIEC delivers today
-
-| Area | Status |
-|---|---|
-| **All 5 IEC 61131-3 languages** — ST, IL, FBD, LD, SFC | productive |
-| **Multi-task scheduler** — real pthread parallelism | productive |
-| **Live diagnostics** — monitor + oscilloscope with trigger, CSV recording | productive |
-| **Bus system** — Modbus TCP productive, EtherCAT + Profibus + EtherNet/IP in progress | mixed |
-| **Manufacturer data as first-class** — FDDs with embedded PDFs + diagnostic-bit resolution | productive |
-| **AI assistant built-in** — ~180 typed MCP tools, 5 personas | productive |
-| **Team federation** — multiple workstations with Caretaker CA | MVP productive |
-| **HMI / OPC-UA bridge** via bellowsd | productive |
-| **Reproducible builds** — signed APT + RPM repositories, AGPL-3.0 | productive |
-
----
-
-## Three pillars
-
-### 🛠️ ForgeIEC Studio — the IDE
-
-Native C++/Qt6 application, all five IEC languages, bus
-configuration, live monitor, oscilloscope, AI assistant built-in.
-Multi-workstation federation via trust store + Caretaker model.
-No browser UI, no cloud dependency.
-
-### 🔥 anvild — the runtime
-
-Rust/Tokio daemon on the target PLC. Multi-task, deterministic
-scan cycles, gRPC connection to Studio, subprocess manager for
-bus bridges, automatic watchdog restart of crashed bridges.
-
-### 🔧 tongs-* — bus bridges
-
-One daemon per protocol. Uniform fault model, FDD-driven
-diagnostic bits, Anvil zero-copy IPC between bridge and runtime,
-bridges can crash + restart independently.
-
----
-
-## Why ForgeIEC?
-
-Industrial automation is a key technology — and access to
-professional tools is restricted by license costs and proprietary
-systems. ForgeIEC makes the value accessible to everyone.
-
-Three promises we keep:
-
-- **Open source (AGPL-3.0)** — source available on request (SSH key
-  enablement), build reproducible, updates via signed APT repository
-- **Vendor-neutral** — manufacturer data integrated as FDDs, no
-  proprietary device format, migration-capable
-- **Industrial safety** — 4-layer defence for force settings,
-  Confirmation State Machine for every write action, honest
-  sampling-limit model instead of marketing promises
-
-Read more in the
-[founding story](/news/die-forgeiec-geschichte/) — how a 2018
-OpenPLC fork became an independent platform.
-
----
-
-## Get started
-
-```bash
-# Add the signing key (once)
-sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
-  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
-
-# Add the repository source
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
-https://apt.forgeiec.io/trixie trixie main" \
-  | sudo tee /etc/apt/sources.list.d/forgeiec.list
-
-# Install editor + runtime
-sudo apt update
-sudo apt install forgeiec-studio forgeiec-anvil-server
-```
-
-Shown for Debian 13 (trixie). For Debian 12 (bookworm) or Ubuntu 24.04 (noble), replace both occurrences of `trixie`. All distributions, RPM and the other packages: [Download](/download/).
-
-First steps with the AI assistant: [Help](/help/ai/).
-
----
-
-<div style="text-align:center; padding: 2rem;">
-
-**Made for industry. Open by default.**
-
-blacksmith@forgeiec.io
-
-</div>
+<!-- The home page content lives entirely in the front matter (layouts/index.html). -->
+<!-- ENTWURF: licence FAQ (faq.items) must be read by a lawyer before publication; information, not legal advice. -->
