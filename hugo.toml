@@ -1,281 +1,130 @@
 baseURL = 'https://forgeiec.io/'
 title = 'ForgeIEC'
-theme = 'ananke'
 defaultContentLanguage = 'de'
 defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
 
-# News-Posts duerfen mit einem Datum am aktuellen Tag publiziert
-# werden, auch wenn die UTC-Zeit noch vor dem Mitternacht-Anker
-# liegt (Hugo wertet Datum ohne Uhrzeit als 00:00 UTC).
+# Only German and English are maintained. The content directories of
+# ar, es, fr, ja, tr and zh stay in the repository, but the languages
+# are not configured here and therefore not built (owner's decision,
+# 2026-10-22). To revive one, add its [languages.xx] block again.
+
+# News posts may be published with today's date even if UTC is still
+# before the midnight anchor (Hugo treats a date without time as 00:00 UTC).
 buildFuture = true
 
 [params]
-description = "IEC 61131-3 SPS-Entwicklungsumgebung"
+description = "Steuerungssoftware nach IEC 61131-3 für Maschinen- und Anlagenbauer"
+contact = "blacksmith@forgeiec.io"
+images = ["img/og.png"]
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[markup.highlight]
+noClasses = false
 
 # ---- Languages ----
 [languages]
 
   [languages.de]
   languageName = "Deutsch"
+  languageCode = "de-DE"
   weight = 1
   title = "ForgeIEC"
   contentDir = "content/de"
     [languages.de.params]
-    description = "IEC 61131-3 SPS-Entwicklungsumgebung für die Industrie"
+    description = "Steuerungssoftware nach IEC 61131-3 für Maschinen- und Anlagenbauer"
+    ctaLabel = "Pilotprojekt anfragen"
+    ctaSubject = "Pilotprojekt ForgeIEC"
     [[languages.de.menu.main]]
+      identifier = "plattform"
       name = "Plattform"
-      pageRef = "/plattform/"
+      pageRef = "/plattform"
       weight = 10
     [[languages.de.menu.main]]
-      name = "Download"
-      pageRef = "/download/"
-      weight = 15
-    [[languages.de.menu.main]]
-      name = "News"
-      pageRef = "/news/"
-      weight = 18
-    [[languages.de.menu.main]]
-      name = "Partner"
-      pageRef = "/partner/"
+      identifier = "architektur"
+      name = "Architektur"
+      pageRef = "/architektur"
       weight = 20
     [[languages.de.menu.main]]
-      name = "Hilfe"
-      pageRef = "/help/"
+      identifier = "download"
+      name = "Download"
+      pageRef = "/download"
       weight = 30
     [[languages.de.menu.main]]
-      name = "Kontakt"
-      url = "mailto:blacksmith@forgeiec.io"
+      identifier = "help"
+      name = "Hilfe"
+      pageRef = "/help"
       weight = 40
+    [[languages.de.menu.main]]
+      identifier = "entwickler"
+      name = "Entwickler"
+      pageRef = "/entwickler"
+      weight = 50
+    [[languages.de.menu.main]]
+      parent = "entwickler"
+      name = "Über den Entwickler"
+      pageRef = "/entwickler"
+      weight = 1
+    [[languages.de.menu.main]]
+      parent = "entwickler"
+      name = "Engineering-Praxis"
+      pageRef = "/entwickler/engineering-praxis"
+      weight = 2
+    [[languages.de.menu.main]]
+      parent = "entwickler"
+      name = "Mitmachen"
+      pageRef = "/entwickler/mitmachen"
+      weight = 3
 
   [languages.en]
   languageName = "English"
+  languageCode = "en-US"
   weight = 2
   title = "ForgeIEC"
   contentDir = "content/en"
     [languages.en.params]
-    description = "IEC 61131-3 PLC Development Environment for Industry"
+    description = "IEC 61131-3 control software for machine and plant builders"
+    ctaLabel = "Request a pilot"
+    ctaSubject = "ForgeIEC pilot project"
     [[languages.en.menu.main]]
+      identifier = "plattform"
       name = "Platform"
-      pageRef = "/plattform/"
+      pageRef = "/plattform"
       weight = 10
     [[languages.en.menu.main]]
+      identifier = "architektur"
+      name = "Architecture"
+      pageRef = "/architektur"
+      weight = 20
+    [[languages.en.menu.main]]
+      identifier = "download"
       name = "Download"
-      pageRef = "/download/"
-      weight = 15
+      pageRef = "/download"
+      weight = 30
     [[languages.en.menu.main]]
-      name = "News"
-      pageRef = "/news/"
-      weight = 18
-    [[languages.en.menu.main]]
-      name = "Partners"
-      pageRef = "/partner/"
-      weight = 20
-    [[languages.en.menu.main]]
-      name = "Reference"
-      pageRef = "/reference/"
-      weight = 25
-    [[languages.en.menu.main]]
+      identifier = "help"
       name = "Help"
-      pageRef = "/help/"
-      weight = 30
+      pageRef = "/help"
+      weight = 40
     [[languages.en.menu.main]]
-      name = "Contact"
-      url = "mailto:blacksmith@forgeiec.io"
-      weight = 40
-
-  [languages.fr]
-  languageName = "Francais"
-  weight = 3
-  title = "ForgeIEC"
-  contentDir = "content/fr"
-    [languages.fr.params]
-    description = "Environnement de developpement IEC 61131-3 pour l'industrie"
-    [[languages.fr.menu.main]]
-      name = "Plateforme"
-      pageRef = "/plattform/"
-      weight = 10
-    [[languages.fr.menu.main]]
-      name = "Telechargement"
-      pageRef = "/download/"
-      weight = 15
-    [[languages.fr.menu.main]]
-      name = "Actualites"
-      pageRef = "/news/"
-      weight = 18
-    [[languages.fr.menu.main]]
-      name = "Partenaires"
-      pageRef = "/partner/"
-      weight = 20
-    [[languages.fr.menu.main]]
-      name = "Aide"
-      pageRef = "/help/"
-      weight = 30
-    [[languages.fr.menu.main]]
-      name = "Contact"
-      url = "mailto:blacksmith@forgeiec.io"
-      weight = 40
-
-  [languages.es]
-  languageName = "Espanol"
-  weight = 4
-  title = "ForgeIEC"
-  contentDir = "content/es"
-    [languages.es.params]
-    description = "Entorno de desarrollo IEC 61131-3 para la industria"
-    [[languages.es.menu.main]]
-      name = "Plataforma"
-      pageRef = "/plattform/"
-      weight = 10
-    [[languages.es.menu.main]]
-      name = "Descargas"
-      pageRef = "/download/"
-      weight = 15
-    [[languages.es.menu.main]]
-      name = "Noticias"
-      pageRef = "/news/"
-      weight = 18
-    [[languages.es.menu.main]]
-      name = "Socios"
-      pageRef = "/partner/"
-      weight = 20
-    [[languages.es.menu.main]]
-      name = "Ayuda"
-      pageRef = "/help/"
-      weight = 30
-    [[languages.es.menu.main]]
-      name = "Contacto"
-      url = "mailto:blacksmith@forgeiec.io"
-      weight = 40
-
-  [languages.zh]
-  languageName = "中文"
-  weight = 5
-  title = "ForgeIEC"
-  contentDir = "content/zh"
-    [languages.zh.params]
-    description = "IEC 61131-3 工业自动化开发环境"
-    [[languages.zh.menu.main]]
-      name = "平台"
-      pageRef = "/plattform/"
-      weight = 10
-    [[languages.zh.menu.main]]
-      name = "下载"
-      pageRef = "/download/"
-      weight = 15
-    [[languages.zh.menu.main]]
-      name = "新闻"
-      pageRef = "/news/"
-      weight = 18
-    [[languages.zh.menu.main]]
-      name = "合作伙伴"
-      pageRef = "/partner/"
-      weight = 20
-    [[languages.zh.menu.main]]
-      name = "帮助"
-      pageRef = "/help/"
-      weight = 30
-    [[languages.zh.menu.main]]
-      name = "联系"
-      url = "mailto:blacksmith@forgeiec.io"
-      weight = 40
-
-  [languages.ja]
-  languageName = "日本語"
-  weight = 6
-  title = "ForgeIEC"
-  contentDir = "content/ja"
-    [languages.ja.params]
-    description = "IEC 61131-3 産業用開発環境"
-    [[languages.ja.menu.main]]
-      name = "プラットフォーム"
-      pageRef = "/plattform/"
-      weight = 10
-    [[languages.ja.menu.main]]
-      name = "ダウンロード"
-      pageRef = "/download/"
-      weight = 15
-    [[languages.ja.menu.main]]
-      name = "ニュース"
-      pageRef = "/news/"
-      weight = 18
-    [[languages.ja.menu.main]]
-      name = "パートナー"
-      pageRef = "/partner/"
-      weight = 20
-    [[languages.ja.menu.main]]
-      name = "ヘルプ"
-      pageRef = "/help/"
-      weight = 30
-    [[languages.ja.menu.main]]
-      name = "お問い合わせ"
-      url = "mailto:blacksmith@forgeiec.io"
-      weight = 40
-
-  [languages.tr]
-  languageName = "Türkçe"
-  weight = 7
-  title = "ForgeIEC"
-  contentDir = "content/tr"
-    [languages.tr.params]
-    description = "Endüstri için IEC 61131-3 geliştirme ortamı"
-    [[languages.tr.menu.main]]
-      name = "Platform"
-      pageRef = "/plattform/"
-      weight = 10
-    [[languages.tr.menu.main]]
-      name = "İndir"
-      pageRef = "/download/"
-      weight = 15
-    [[languages.tr.menu.main]]
-      name = "Haberler"
-      pageRef = "/news/"
-      weight = 18
-    [[languages.tr.menu.main]]
-      name = "Ortaklar"
-      pageRef = "/partner/"
-      weight = 20
-    [[languages.tr.menu.main]]
-      name = "Yardım"
-      pageRef = "/help/"
-      weight = 30
-    [[languages.tr.menu.main]]
-      name = "İletişim"
-      url = "mailto:blacksmith@forgeiec.io"
-      weight = 40
-
-  [languages.ar]
-  languageName = "العربية"
-  languageDirection = "rtl"
-  weight = 8
-  title = "ForgeIEC"
-  contentDir = "content/ar"
-    [languages.ar.params]
-    description = "بيئة تطوير IEC 61131-3 للصناعة"
-    [[languages.ar.menu.main]]
-      name = "المنصة"
-      pageRef = "/plattform/"
-      weight = 10
-    [[languages.ar.menu.main]]
-      name = "التنزيل"
-      pageRef = "/download/"
-      weight = 15
-    [[languages.ar.menu.main]]
-      name = "الأخبار"
-      pageRef = "/news/"
-      weight = 18
-    [[languages.ar.menu.main]]
-      name = "الشركاء"
-      pageRef = "/partner/"
-      weight = 20
-    [[languages.ar.menu.main]]
-      name = "المساعدة"
-      pageRef = "/help/"
-      weight = 30
-    [[languages.ar.menu.main]]
-      name = "اتصل بنا"
-      url = "mailto:blacksmith@forgeiec.io"
-      weight = 40
+      identifier = "entwickler"
+      name = "Developer"
+      pageRef = "/entwickler"
+      weight = 50
+    [[languages.en.menu.main]]
+      parent = "entwickler"
+      name = "About the developer"
+      pageRef = "/entwickler"
+      weight = 1
+    [[languages.en.menu.main]]
+      parent = "entwickler"
+      name = "Engineering practice"
+      pageRef = "/entwickler/engineering-praxis"
+      weight = 2
+    [[languages.en.menu.main]]
+      parent = "entwickler"
+      name = "Contribute"
+      pageRef = "/entwickler/mitmachen"
+      weight = 3
