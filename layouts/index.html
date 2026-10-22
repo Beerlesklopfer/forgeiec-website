@@ -6,7 +6,7 @@
 */ -}}
 {{- $p := .Params -}}
 {{- $mail := site.Params.contact | default "blacksmith@forgeiec.io" -}}
-{{- $ctaHref := printf "mailto:%s?subject=%s" $mail (site.Params.ctaSubject | urlquery) -}}
+{{- $ctaHref := site.Params.ctaHref | default (printf "mailto:%s?subject=%s" $mail (site.Params.ctaSubject | urlquery)) -}}
 
 {{/* ---- HERO ---- */}}
 {{- with $p.hero }}

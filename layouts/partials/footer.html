@@ -34,7 +34,11 @@
           {{ partial "page-link.html" (dict "path" "/impressum" "label" (i18n "impressum")) }}
           {{ partial "page-link.html" (dict "path" "/datenschutz" "label" (i18n "privacy")) }}
           {{ partial "page-link.html" (dict "path" "/markenrechtshinweis" "label" (i18n "trademark")) }}
+          {{- with or (site.GetPage "/kontakt") (site.GetPage "/contact") }}
+          <li><a href="{{ .RelPermalink }}">{{ i18n "contact" }}</a></li>
+          {{- else }}
           <li><a href="mailto:{{ $mail }}">{{ i18n "contact" }}</a></li>
+          {{- end }}
         </ul>
       </nav>
     </div>

@@ -1,6 +1,7 @@
 {{- $page := . -}}
 {{- $mail := site.Params.contact | default "blacksmith@forgeiec.io" -}}
-{{- $cta := printf "mailto:%s?subject=%s" $mail (site.Params.ctaSubject | urlquery) -}}
+{{- /* Pilot button: the contact form with the subject preselected (ctaHref in hugo.toml); mailto as fallback. */ -}}
+{{- $cta := site.Params.ctaHref | default (printf "mailto:%s?subject=%s" $mail (site.Params.ctaSubject | urlquery)) -}}
 <header class="site-header">
   <div class="container header-inner">
     <a href="{{ site.Home.RelPermalink }}" class="logo" aria-label="ForgeIEC — {{ i18n "home" }}">
