@@ -30,10 +30,10 @@ Editor zu starten.
 ### Editor & Sprachen
 
 - [Structured Text (ST)](/de/help/st/) — ST-Editor + Sprachfundamente, Bit-Zugriff, qualifizierte Pool-Referenzen
-- [Instruction List (IL)](/de/help/il/) — Akkumulator-basierte IEC-Sprache mit CR-Register
-- [Function Block Diagram (FBD)](/de/help/fbd/) — Grafische Verschaltung von Funktionen, Funktionsblöcken und Variablen
-- [Ladder Diagram (LD)](/de/help/ld/) — Stromlaufplan-Metapher: Power-Rails, Kontakte, Spulen
-- [Sequential Function Chart (SFC)](/de/help/sfc/) — Schritt-Übergangs-Modell für Ablaufsteuerungen und Modi-Maschinen
+- [Instruction List (IL)](/de/help/il/) — abgekündigt; Akkumulator-basierte IEC-Sprache mit CR-Register
+- [Function Block Diagram (FBD)](/de/help/fbd/) — geplant für 0.4; Grafische Verschaltung von Funktionen, Funktionsblöcken und Variablen
+- [Ladder Diagram (LD)](/de/help/ld/) — geplant für 0.3; Stromlaufplan-Metapher: Power-Rails, Kontakte, Spulen
+- [Sequential Function Chart (SFC)](/de/help/sfc/) — geplant für 0.5; Schritt-Übergangs-Modell für Ablaufsteuerungen und Modi-Maschinen
 
 ### Modell & Variablen
 
@@ -52,7 +52,7 @@ Editor zu starten.
 
 ### Allgemein
 
-- [Testabdeckung](/de/help/tests/) — 117 automatisierte Tests für den IEC-Sprachvorrat, Standard-Bausteine und Multi-Task-Threading
+- [Testabdeckung](/de/help/tests/) — 62 automatisierte Testprogramme für den IEC-Sprachvorrat, Standard-Bausteine und Multi-Task-Threading
 - [Open Source Philosophie](/de/help/open-source/) — Hintergrund: mehr als Software, ein gesellschaftlicher Gedanke
 
 ## Im Editor

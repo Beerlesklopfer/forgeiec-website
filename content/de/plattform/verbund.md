@@ -40,8 +40,9 @@ dem Werkzeug, dessen Arbeit er tut.
 | **Forge** | Entwurf | Die Entwicklungsumgebung. Hier entstehen Steuerungsprogramm, Variablen, Datentypen und die Bustopologie. |
 | **Anvil** | Laufzeit · Amboss | Wo geschlagen wird: die Steuerungslaufzeit auf dem Anlagenrechner — Aufseher, Rechenprozess und der Speicher dazwischen. |
 | **Tongs** | Verbinder · Zange | Fasst an, was heiß ist: die Hardware. Ein Prozess je Bussegment, je Feldbusprotokoll eine eigene Zange. |
-| **Bellows** | Brücke · Blasebalg | Bringt Luft von außen herein. Fremde Systeme holen Werte über OPC UA oder Modbus TCP. |
-| **Hearth** | Bedienung · Feuerstelle | Wo der Mensch steht. Anlagenbilder, Werte, Bedienelemente. |
+| **Bellows** | Brücke · Blasebalg | Bringt Luft von außen herein. Fremde Systeme holen Werte über OPC UA oder Modbus TCP. *Ruht derzeit — nicht in Entwicklung.* |
+| **Hearth** | Bedienung · Feuerstelle | Wo der Mensch steht. Anlagenbilder, Werte, Bedienelemente. *Vorschau.* |
+<!-- ENTWURF: Spark wird sonst nirgends genannt (Audit W-18); ob Spark öffentlich genannt wird, entscheidet der Eigentümer. -->
 | **Spark** | Weg · Funke | Springt über: der Weg zwischen Rechnern, wenn eine Anlage nicht auf einem Knoten läuft. |
 
 ---
@@ -61,10 +62,10 @@ flowchart TB
   subgraph NODE[" Ein Anlagenrechner "]
     T1["Zange<br/>Segment 1"]
     T2["Zange<br/>Segment 2"]
-    SUP["anvild<br/>Aufseher und Eigentümer<br/>aller Variablen"]
-    PLC["Rechenprozess<br/>fährt den Zyklus"]
+    SUP["Anvil-Server (anvild)<br/>Aufseher und Eigentümer<br/>aller Variablen"]
+    PLC["forgeiec_plc<br/>Rechenprozess, fährt den Zyklus"]
     SHM{{"Anvil-Schicht — geteilter Speicher<br/>Kanäle fester Größe, ohne Kopie"}}
-    B["bellowsd<br/>Brücke nach außen"]
+    B["bellowsd<br/>Brücke nach außen (ruht)"]
     H["hearth-server<br/>Bedienoberfläche"]
   end
 
@@ -81,9 +82,6 @@ flowchart TB
   SHM <--> H
   B <-->|"OPC UA"| EXT
 
-  style SHM fill:#F59E0B,stroke:#FBBF24,stroke-width:2px,color:#0F172A
-  style SUP fill:#334155,stroke:#94A3B8,color:#E2E8F0
-  style PLC fill:#334155,stroke:#94A3B8,color:#E2E8F0
 ```
 
 Die Zangen reden nach unten mit der Hardware und legen nach oben ab. Bellows und

@@ -7,6 +7,12 @@ components: [studio, anvild]
 
 {{< components "studio,anvild" >}}
 
+{{< callout type="note" title="Stand Mai 2026" >}}
+Die Zahlen in diesem Beitrag geben den Stand vom Mai 2026 wieder. Am
+22.10.2026 gezählt: über 200 typisierte MCP-Werkzeuge im Studio (205)
+und sechs Personas.
+{{< /callout >}}
+
 ## Warum das wichtig ist
 
 KI-Code-Assistenz ist im Software-Bereich angekommen — in der

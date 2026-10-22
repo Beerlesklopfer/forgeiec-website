@@ -149,7 +149,7 @@ curl -sk -X POST https://forgeiec-ws.local:7531/mcp/v1/rpc \
   }'
 ```
 
-Die Antwort enthält ca. 180 Tools, jedes mit:
+Die Antwort enthält über 200 Tools (205, gezählt am 22.10.2026), jedes mit:
 
 ```json
 {

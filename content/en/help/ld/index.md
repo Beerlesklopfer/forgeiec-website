@@ -3,6 +3,12 @@ title: "Ladder Diagram Editor (LD)"
 summary: "Circuit-diagram metaphor: power rails, contacts, coils"
 ---
 
+{{< callout type="warning" title="Planned for release 0.3" >}}
+LD is planned for **release 0.3** and is **not compiled yet**. For
+runnable programs use [Structured Text (ST)](/en/help/st/) today.
+See also the [roadmap](/en/roadmap/).
+{{< /callout >}}
+
 ## Overview
 
 Ladder Diagram (LD) is the oldest of the three graphic IEC 61131-3

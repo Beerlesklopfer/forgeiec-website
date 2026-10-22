@@ -1,6 +1,6 @@
 ---
 title: "Forge Studio"
-description: "IEC 61131-3 Entwicklungsumgebung — alle fünf Sprachen, native Qt6-Oberfläche"
+description: "IEC 61131-3 Entwicklungsumgebung — ST heute, LD/FBD/SFC in den nächsten Releases; native Qt6-Oberfläche"
 weight: 1
 ---
 
@@ -14,21 +14,27 @@ einer Anwendung.
 
 ---
 
-## Alle fünf IEC 61131-3 Sprachen
+## IEC 61131-3: ST heute, eine Sprache je Release
 
-Ein Editor für alle Sprachen — nahtlos umschalten, gemeinsame Variablen,
-einheitliche Projektstruktur:
+Strukturierter Text ist im produktiven Einsatz (Pilotbetrieb, Release
+0.2). Je Release kommt eine Sprache hinzu: **0.3 LD, 0.4 FBD, 0.5
+SFC**. Programme in diesen Sprachen werden derzeit **noch nicht
+übersetzt**. AWL (Anweisungsliste) ist nicht mehr Teil der aktuellen Ausgabe der IEC 61131-3 und abgekündigt; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler.
+<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+Siehe [Roadmap](/de/roadmap/).
 
-- **Strukturierter Text (ST)** — Hochsprache mit Syntax-Hervorhebung,
-  Auto-Vervollständigung und Tree-sitter-basiertem Parsing
-- **Anweisungsliste (AWL/IL)** — Assembler-ähnliche Sprache mit intelligenter
-  Editierung und Sprachumschaltung von/zu ST
-- **Funktionsbausteindiagramm (FBS/FBD)** — Grafischer Editor mit
-  Baustein-Bibliothek und Drag-and-Drop
-- **Kontaktplan (KOP/LD)** — Vertraute Darstellung für Schaltlogik,
+- **Strukturierter Text (ST)** — {{< status "use" >}} Hochsprache mit Syntax-Hervorhebung,
+  Auto-Vervollständigung und Tree-sitter-basiertem Parsing; eigener
+  Compiler-Kern, der auch die objektorientierten Erweiterungen
+  (METHOD, INTERFACE, EXTENDS) beherrscht
+- **Kontaktplan (KOP/LD)** — {{< status "plan" "geplant: 0.3" >}} Vertraute Darstellung für Schaltlogik,
   direkt am Bildschirm verdrahten
-- **Ablaufsprache (AS/SFC)** — Schrittkettendiagramme für
+- **Funktionsbausteindiagramm (FBS/FBD)** — {{< status "plan" "geplant: 0.4" >}} Grafischer Editor mit
+  Baustein-Bibliothek und Drag-and-Drop
+- **Ablaufsprache (AS/SFC)** — {{< status "plan" "geplant: 0.5" >}} Schrittkettendiagramme für
   Sequenzsteuerungen mit Transitionen und Aktionen
+- **Anweisungsliste (AWL/IL)** — {{< status "rest" "abgekündigt" >}} wird nicht weiterentwickelt
+  und nicht übersetzt
 
 ---
 
@@ -59,11 +65,12 @@ ist direkt in die Entwicklungsumgebung integriert:
 
 ## Verbindung zur Laufzeitumgebung
 
-Forge Studio kommuniziert über gRPC mit der Anvil-Laufzeitumgebung:
+Forge Studio kommuniziert über gRPC mit dem Anvil-Server (anvild):
 
-- **Kompilierung auf der Workstation** — Forge Studio erzeugt C-Code
-  direkt aus dem Projektmodell und überträgt nur das Ergebnis an
-  die SPS (kein externer Compiler in der Toolchain)
+- **Übersetzung in zwei Stufen** — das Studio übersetzt IEC-Code in
+  C++-Quelltext und schickt ihn verschlüsselt an die Steuerung; dort
+  baut die Runtime ihn mit g++ — die Steuerung braucht also `make`
+  und `g++`, aber keinen IEC-Compiler
 - **Verschlüsselter Upload** — AES-256-GCM-verschlüsselte Übertragung
   auf das Zielsystem
 - **Live-Debugging** — Variablen in Echtzeit beobachten und forcieren
@@ -94,8 +101,8 @@ Vollständige IEC-Standardbibliothek in einer SQLite-Datenbank:
 | **GUI-Framework** | Qt 6 Widgets |
 | **Syntax-Engine** | Tree-sitter |
 | **Kommunikation** | gRPC (protobuf) |
-| **Plattformen** | Linux x86_64, ARM64 |
-| **Lizenz** | AGPL-3.0 |
+| **Plattformen** | Linux x86_64/ARM64, Windows x64 (Installer auf Anfrage) |
+| **Lizenz** | AGPL-3.0-or-later (generierter Code: Apache-2.0) |
 
 ---
 

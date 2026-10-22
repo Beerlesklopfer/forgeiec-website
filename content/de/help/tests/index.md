@@ -1,27 +1,27 @@
 ---
 title: "Testabdeckung"
-summary: "Automatisierte Qualitätssicherung: 117 Tests prüfen den vollständigen IEC 61131-3 Sprachvorrat, alle Standard-Bausteine und das Multi-Task-Threading"
+summary: "Automatisierte Qualitätssicherung: 62 Testprogramme prüfen den ST-Sprachvorrat, die Standard-Bausteine und das Multi-Task-Threading"
 ---
 
 ForgeIEC wird durch eine umfassende automatisierte Test-Suite abgesichert.
-Jeder Commit wird vor dem Merge gegen **117 Unit-Tests** geprüft, die den
-vollständigen IEC 61131-3 Structured Text Sprachvorrat, alle
-Standard-Funktionsbausteine und das Multi-Task-Threading-System abdecken.
+Die CI führt **62 Testprogramme** aus (CTest-Einträge, gezählt am
+22.10.2026 in `tests/CMakeLists.txt`); sie decken den Structured-Text-
+Sprachvorrat, die Standard-Funktionsbausteine und das
+Multi-Task-Threading-System ab. Die drei wichtigsten Suiten:
 
 ## Test-Suiten im Überblick
 
 | Suite | Tests | Prüft |
 |-------|------:|--------|
-| **FStCompilerTest** | 101 | Vollständiger ST-Sprachvorrat |
-| **FStLibraryTest** | 8 | Alle 132 Standard-Bausteine (FBs + FCs) |
+| **FStCompilerTest** | 120 | ST-Sprachvorrat |
+| **FStLibraryTest** | 7 | Standard-Bausteine (FBs + FCs) |
 | **FCodeGeneratorThreadingTest** | 8 | Multi-Task-Scheduling + Lock-free Sync |
-| **Gesamt** | **117** | **0 Fehler** |
 
 ---
 
 ## 1. ST-Sprachvorrat (FStCompilerTest)
 
-101 Tests prüfen jeden unterstützten IEC 61131-3 Structured Text
+Die Tests prüfen jeden unterstützten IEC 61131-3 Structured Text
 Sprachkonstrukt. Jeder Test kompiliert ein ST-Fragment durch den
 FStCompiler und verifiziert den generierten C++-Code.
 
@@ -131,7 +131,7 @@ FStCompiler und verifiziert den generierten C++-Code.
 
 ## 2. Standard-Bibliothek (FStLibraryTest)
 
-8 datengetriebene Tests prüfen **alle 132 Blöcke** aus der
+Datengetriebene Tests prüfen die Blöcke aus der
 Standard-Bibliothek (`standard_library.sql`) automatisch.
 
 ### 2.1 Funktionsbausteine (13 FBs)

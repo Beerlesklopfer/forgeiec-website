@@ -2,43 +2,39 @@
 title: "From the first byte: the ForgeIEC story"
 date: 2026-05-13
 weight: 1
-summary: "How an OpenPLC fork became an independent IEC 61131-3 platform — and why"
-components: [studio, anvild, bellowsd, tongs]
+summary: "How a fork of OpenPLC became an independent IEC 61131-3 platform — and why"
+components: [studio, anvild, tongs]
 ---
 
-{{< components "studio,anvild,bellowsd,tongs" >}}
+{{< components "studio,anvild,tongs" >}}
 
-## 2018: The beginning — OpenPLC
+{{< callout type="note" title="Revised in October 2026" >}}
+This post describes the state of May 2026. In October 2026 it was
+brought up to date: matiec has been replaced, the security figures
+are unified, and the origin is described without a year.
+{{< /callout >}}
 
-The first commit in this repository is dated **14 June 2018**.
-Back then the project is not called ForgeIEC but **OpenPLC v3
-beta 1** — an open PLC runtime by **Thiago Alves**, written in
-C/C++ with a web-based configuration UI in Python/Flask.
+## The beginning — a fork of OpenPLC
 
-OpenPLC offers a clear value: you can run IEC 61131-3 code
-(Structured Text + the four other languages) on regular Linux
-hardware, without a commercial editor licence, without vendor
-lock-in. That was revolutionary. Modbus master, GPIO, Raspberry
-Pi support — all there.
+ForgeIEC started as a **fork of OpenPLC** — the open PLC runtime by
+**Thiago Alves** and its contributors, written in C/C++ with a
+web-based configuration UI in Python/Flask.
+<!-- ENTWURF: Year of the fork open — git shows the author's own work only from February 2026 (audit W-17); the owner says 2018. No year until there is evidence. -->
+
+OpenPLC offers a clear value: you can run IEC 61131-3 code on
+regular Linux hardware, without a commercial editor licence,
+without vendor lock-in. Modbus master, GPIO, Raspberry Pi
+support — all there.
 
 What OpenPLC does not have: a serious **editor**. The web UI is
 fine for small projects, but at industrial complexity it falls
 behind.
 
----
-
-## 2019–2024: The latency years
-
-Between 2019 and early 2025 not much happens: small bug fixes
-(Modbus buffer overflow, libmodbus fork, web-server tweaks),
-but no big leap. That is the reality of open-source projects —
-as long as nobody invests, it stagnates.
-
-In those years we learn: **the foundation holds**. The matiec
-compiler toolchain is solid, the IEC code generator works, the
-runtime runs reliably on x86 + ARM. What is missing is everything
-**around** it — editor, bus system, diagnostic tools,
-manufacturer-data integration.
+OpenPLC continues to be developed by its community; ForgeIEC takes
+over that foundation and builds on it. ForgeIEC has since replaced
+the matiec compiler with an **own, object-oriented-capable core**
+that translates ST into C++ and also handles METHOD, INTERFACE and
+EXTENDS.
 
 ---
 
@@ -101,8 +97,10 @@ legacy data structures.
 With the data model stable, the big-ticket sprints can land:
 
 - **2 May** — **per-variable safety flags** (cluster A): force,
-  monitor, HMI export gated individually per variable. Later
-  this becomes the 3-layer security architecture.
+  monitor, HMI export gated individually per variable. This later
+  becomes the force lock: locked three times — in codegen, in the
+  runtime and in the editor; for the AI a fourth lock in the MCP
+  server is added.
 - **8 May** — **MCP platform**: spec written, sprint MCP-1
   (prompts in QSettings).
 - **9 May** — **live diagnostic pipeline** — FB-member resolution,
@@ -121,19 +119,19 @@ federation, AI integration and verifiable security layers.
 
 ## Today, 13 May 2026: where we stand
 
-The platform is split into subsystems, each with its own spec
+The platform is split into seven building blocks, each with its own spec
 in the `documentation/architecture/` directory of the source
 tree:
 
 | Subsystem | Spec | Role |
 |---|---|---|
 | **ForgeIEC Studio** | `mcp-platform-v1.md` | IDE — editor + AI assistant + MCP server |
-| **anvild** | `anvil-platform-v2.md` | PLC runtime + plug-in platform + online change |
+| **Anvil server (anvild)** | `anvil-platform-v2.md` | PLC runtime + plug-in platform + online change |
 | **Anvil (IPC)** | (in anvil-platform-v2 §13) | Zero-copy shared memory between subsystems |
 | **tongs-* (bridges)** | `tongs-platform-v1.md` | Fieldbus plug-ins with fault model + FDD diag bits |
 | **Bus system** | `bus-system-v1.md` | Segments/devices/IEC access |
 | **Editor data model** | `editor-data-v1.md` | FAddressPool SSoT + .forge format |
-| **Codegen** | `codegen-v1.md` | C output + matiec interop |
+| **Codegen** | `codegen-v1.md` | own ST core → C++ |
 
 All specs RFC 2119 normative. Code + spec move together — every
 change passes through the same review process.
@@ -144,12 +142,12 @@ change passes through the same review process.
 
 | Others | ForgeIEC |
 |---|---|
-| Proprietary PLC IDEs | Fully open source (AGPL-3.0) |
+| Proprietary PLC IDEs | AGPL-3.0-or-later; your project (generated code, runtime API, libanvil) under Apache-2.0 |
 | Vendor lock-in for devices | Manufacturer FDDs as first-class citizens |
 | AI only as a code-completion plug-in | AI as an equal MCP client with audit log |
-| Force settings without protection layer | 4-layer defence per variable |
+| Force settings without protection layer | Force locked three times (codegen, runtime, editor), a fourth lock for the AI |
 | Monolithic runtime | Modular bridge family with separate daemons |
-| Closed-source binaries | Build from source reproducible, signed via APT |
+| Closed-source binaries | Signed packages from an automated CI; source code on request |
 
 ---
 
@@ -163,28 +161,26 @@ On the sprint plan:
   `team.export_setup` — last third of MCP-4b phase D
 - **Anvil platform v2**: online change during a running PLC cycle,
   plug-in architecture for custom boundary types
-- **Codegen v1 → v2**: migration of C code generation to
-  Rust+LLVM (rusty backend) — determinism guarantees + online-
-  change preparation
-- **Hearth** — the next subsystem block for IIoT subscribers
-  (Mosquitto cloud, time-series DB)
-- **Tongs EtherCAT, Tongs Profibus, Tongs EtherNet/IP** fully
-  implemented
+<!-- ENTWURF: The May plan listed a migration of code generation to Rust+LLVM (rusty) here. Whether that is still planned is the owner's decision (audit W-16); not mentioned until then. -->
+- **Hearth** — the operator interface; available today as a preview
+  over the Anvil bus
+- **Tongs LoRaWAN** (focus), then **Tongs EtherCAT, Tongs
+  Profibus, Tongs EtherNet/IP** fully implemented
 
 The common thread: **an open, honest platform** that can handle
 industrial reality — no marketing varnish, but load-bearing
 architecture decisions that live in the spec and are
-verifiable in the source.
+verifiable in the source code (access on request).
 
 ---
 
 ## Read on
 
-- [Architecture + Security](/help/ai/architecture/) — the depth
+- [Architecture + Security](/en/help/ai/architecture/) — the depth
   tour for auditors
-- [Download](/download/) — all components via the APT repository
+- [Download](/en/download/) — all components via the APT repository
 - Source tree: `ForgeIEC/forgeiec-studio` in the Forgejo — access
   once your SSH public key is enabled
 - Earliest roots:
-  [Thiago Alves' OpenPLC v3](https://www.openplcproject.com/) —
+  [OpenPLC by Thiago Alves](https://www.openplcproject.com/) —
   where it all began

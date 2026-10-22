@@ -58,7 +58,7 @@ standard prefers `AND`; some older code uses `&`.
 
 There are **no shift operators** in the operator set —
 `SHL`/`SHR`/`ROL`/`ROR` are functions, called like `SHL(IN, N)`.
-See the [Standard Library bit functions](../../../../../standard-library/) page
+See the [Standard Library bit functions](/en/reference/iec61131-3/standard-library/) page
 (stub) and the matiec emit-bug warning in `llm_signals` above.
 
 ## Examples

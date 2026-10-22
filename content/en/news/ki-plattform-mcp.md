@@ -7,6 +7,11 @@ components: [studio, anvild]
 
 {{< components "studio,anvild" >}}
 
+{{< callout type="note" title="As of May 2026" >}}
+The figures in this post reflect May 2026. Counted on 22 Oct 2026:
+over 200 typed MCP tools in the Studio (205) and six personas.
+{{< /callout >}}
+
 ## Why this matters
 
 AI code assistance is well established in the software world — not

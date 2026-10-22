@@ -4,15 +4,20 @@ description: "OPC UA Gateway — standardized machine communication for industry
 weight: 3
 ---
 
-## The Bellows — *In Development*
+## The Bellows — *resting*
 
 The bellows keep the fire alive and direct air where it is needed.
 **Bellows** is the OPC UA gateway of the ForgeIEC platform — the
 standardized interface between workshop and control room, between
 machine and supervisory system.
 
-> Bellows is in active development. The features described here
-> represent the planned scope.
+{{< callout type="note" title="Resting — not in development" >}}
+bellowsd is currently **not being developed**. The package
+`forgeiec-bellows-server` stays in the APT repository, without
+maintenance. [Hearth](../hearth/), which reads the process data
+directly from the Anvil bus, is the intended operator interface. The
+description below reflects the originally planned scope.
+{{< /callout >}}
 
 ---
 
@@ -24,7 +29,7 @@ implements this standard as an integral part of the ForgeIEC platform.
 
 ---
 
-## Planned Features
+## Originally Planned Scope
 
 ### OPC UA Server
 
@@ -50,7 +55,7 @@ implements this standard as an integral part of the ForgeIEC platform.
 ## Platform Integration
 
 Bellows will run as an independent bridge process — monitored and managed
-by `anvild`. Communication with the PLC core uses Anvil Technology
+by the Anvil server (anvild). Communication with the PLC core uses Anvil Technology
 (Zero-Copy Shared Memory), just like the fieldbus bridges.
 
 ```
@@ -59,7 +64,7 @@ Forge Studio  --->  anvild  --->  Bellows (OPC UA)  --->  SCADA/MES/Cloud
                     Anvil SHM
 ```
 
-**License:** AGPL-3.0
+**Licence:** AGPL-3.0-or-later
 
 ---
 

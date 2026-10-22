@@ -3,6 +3,13 @@ title: "Function Block Diagram Editor (FBD)"
 summary: "Grafische Verschaltung von Funktionen, Funktionsblöcken und Variablen"
 ---
 
+{{< callout type="warning" title="Geplant für Release 0.4" >}}
+FBD ist für **Release 0.4** geplant und wird derzeit **noch nicht
+übersetzt**. Für lauffähige Programme nutzen Sie heute
+[Strukturierten Text (ST)](/de/help/st/). Siehe auch die
+[Roadmap](/de/roadmap/).
+{{< /callout >}}
+
 ## Überblick
 
 Das Function Block Diagram (FBD) ist eine der drei grafischen IEC-61131-3-

@@ -12,26 +12,34 @@ ForgeIEC-Plattform: der Ort, an dem Quellcode auf Echtzeitausführung trifft.
 
 Anvil verwaltet den SPS-Scan-Zyklus, die Prozessabbilder und den
 Datenaustausch zwischen dem SPS-Programm und den Feldbus-Bridges. Der
-Laufzeit-Daemon `anvild` ist das Herzschlag-gebende Element jeder
-ForgeIEC-Installation.
+Laufzeit-Daemon, der **Anvil-Server (anvild)**, ist das Herzschlag-gebende
+Element jeder ForgeIEC-Installation. (Das Programm heißt seit
+September 2026 `anvil-server`, der Dienst `forgeiec-anvil-server.service`.)
 
 ---
 
 ## Architektur
 
 ```
-+--------------+         +------------+         +------------------+
-|              |         |            |         |                  |
-| SPS-Programm |<------->|  anvild    |<------->|  Modbus-Bridge   |--> Feldgeraete
-|  (IEC Code)  |  gRPC   |  (Daemon)  |  Anvil  |  EtherCAT-Bridge |--> Antriebe
-|              |         |            |  SHM    |  Profibus-Bridge  |--> Sensoren
-+--------------+         +------------+         |  OPC-UA-Bridge   |--> SCADA
-                                                +------------------+
-
-                         <-- Anvil -->
-                         Zero-Copy IPC
-                         Shared Memory
+ Workstation              Steuerung (Linux)
++-----------+  gRPC  +---------------------+
+|  Studio   |------->|  Anvil-Server       |  startet und überwacht
++-----------+        |  (anvild)           |-----------------------+
+                     +---------------------+                       |
+                                                                   v
+   +------------------+   Anvil-Bus (iceoryx2,   +------------------+
+   | forgeiec_plc     |<------------------------>| tongs-* Bridges  |--> Feldgeräte
+   | (SPS-Zyklus)     |   Zero-Copy Shared Mem.) | (je Segment ein  |
+   +------------------+            ^             |  Prozess)        |
+                                   |             +------------------+
+                             +-----------+
+                             |  Hearth   |  Bedienoberfläche (Vorschau)
+                             +-----------+
 ```
+
+Der SPS-Zyklus läuft als eigener Prozess `forgeiec_plc`; anvild
+startet ihn und die Bridges, nimmt die Befehle des Studios entgegen
+und überwacht alles.
 
 ---
 
@@ -108,13 +116,13 @@ Subprozesse:
 
 Die Kompilierung folgt einem zweistufigen Modell:
 
-1. **Workstation**: Forge Studio erzeugt den C-Quellcode direkt aus
-   dem Projektmodell — ohne externen IEC-Compiler
+1. **Workstation**: Forge Studio übersetzt den IEC-Code mit dem
+   eigenen Compiler-Kern in C++-Quelltext
 2. **Zielsystem**: `anvild` generiert ein plattformspezifisches Makefile
    und ruft `make` (g++) auf
 
 Auf dem Zielsystem werden lediglich `make`, `g++`, `libstdc++` und
-`librt` benötigt, um den generierten C-Code zur Laufzeit zu
+`librt` benötigt, um den generierten C++-Code zur Laufzeit zu
 kompilieren. Es wird bewusst kein zusätzlicher IEC-Compiler auf der
 Ziel-SPS installiert.
 
@@ -126,11 +134,11 @@ Ziel-SPS installiert.
 |-------------|------|
 | **Sprache** | Rust |
 | **Kommunikation** | gRPC (tonic/prost) |
-| **IPC** | Anvil Technology (Zero-Copy Shared Memory) |
+| **IPC** | Anvil-Bus (iceoryx2, Zero-Copy Shared Memory) |
 | **Konfiguration** | TOML |
 | **Plattformen** | x86_64, ARM64, ARMv7 (Linux) |
 | **Prozessmodell** | systemd-Daemon + Subprozesse |
-| **Lizenz** | AGPL-3.0 |
+| **Lizenz** | AGPL-3.0-or-later; Runtime-API, libanvil und generierter Code: Apache-2.0 |
 
 ---
 

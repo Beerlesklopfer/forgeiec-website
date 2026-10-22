@@ -7,6 +7,7 @@ description: "Hinweis zu Marken Dritter, die auf dieser Website erwähnt werden,
 
 # Markenrechtshinweis
 
+<!-- ENTWURF: Der folgende Satz (nicht-kommerziell, ehrenamtlich) widerspricht den Eigentümer-Fakten (Zielkunden Maschinen-/Anlagenbauer, kommerzielle Lizenz möglich). Er stützt die Bitte um Kontakt statt Abmahnung; ob er entfällt, ist eine juristische Entscheidung des Eigentümers (Audit W-06, Frage 2). Vorschlag: "ForgeIEC wird von Jörg Bernau entwickelt und unter AGPL-3.0-or-later veröffentlicht; eine kommerzielle Lizenz ist erhältlich." -->
 ForgeIEC ist ein **nicht-kommerzielles Open-Source-Projekt** ohne
 Umsatz und ohne Gewinnerzielungsabsicht. Es wird unter der
 **AGPL-3.0-or-later** veröffentlicht und finanziert sich
@@ -113,7 +114,7 @@ grundsätzlichen Erwägungen zurückweisen** werden.
 
 ForgeIEC — Open-Source-Projekt
 E-Mail: [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io)
-Quellcode: [git.forgeiec.io/ForgeIEC](https://git.forgeiec.io/)
+Quellcode: Einsicht auf Anfrage (AGPL-3.0-or-later)
 
 ---
 

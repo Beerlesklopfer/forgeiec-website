@@ -1,5 +1,5 @@
 ---
-title: "Sicherheits-Architektur in 3 Schichten"
+title: "Sicherheits-Architektur: Force dreifach gesperrt"
 date: 2026-05-08
 summary: "Force-Gate per Variable, Confirmation State Machine, Build-time-Gating — wie ForgeIEC verhindert dass eine KI oder ein Fehlklick reale Hardware bewegt"
 components: [studio, anvild]
@@ -15,8 +15,9 @@ Das bewegt am Ausgang **echte Hardware** — einen Motor, ein
 Ventil, eine Sicherheitsfunktion.
 
 ForgeIEC behandelt Force-Setzungen entsprechend: **per-Variable
-gegated, mit drei aufeinander aufbauenden Defense-Layern** in
-unabhängigen Subsystemen. Eine KI kann **nicht** forcen. Ein
+gegated und dreifach gesperrt** — beim Codegen, in der Runtime und im
+Editor, in unabhängigen Subsystemen; für die KI kommt eine vierte
+Sperre im MCP-Server hinzu. Eine KI kann **nicht** forcen. Ein
 Fehlklick im UI braucht zwei separate Confirms. Und ein
 Production-Build der Runtime hat die Force-Bridge gar nicht
 mitcompiliert.

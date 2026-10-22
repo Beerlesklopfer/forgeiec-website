@@ -3,6 +3,14 @@ title: "Instruction List Editor"
 summary: "IL editor: accumulator-based IEC 61131-3 language with CR register"
 ---
 
+{{< callout type="warning" title="Deprecated" >}}
+IL (instruction list) is no longer part of the current edition of IEC 61131-3 and is deprecated; it would also need its own translation path to assembler. In ForgeIEC, IL is **not developed further**
+and **not compiled**. For runnable programs use
+[Structured Text (ST)](/en/help/st/). See also the
+[roadmap](/en/roadmap/).
+{{< /callout >}}
+<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+
 ## Overview
 
 **Instruction List (IL)** is the assembler-like text language of

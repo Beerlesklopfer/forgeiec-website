@@ -1,5 +1,5 @@
 ---
-title: "Security architecture in 3 layers"
+title: "Security architecture: force locked three times"
 date: 2026-05-08
 summary: "Per-variable force gate, Confirmation State Machine, build-time gating — how ForgeIEC prevents an AI or a misclick from moving real hardware"
 components: [studio, anvild]
@@ -14,8 +14,10 @@ pinning an output pin to TRUE, independent of the program. This
 moves **real hardware** at the output — a motor, a valve, a
 safety function.
 
-ForgeIEC treats force settings accordingly: **per-variable gated,
-with three sequential defence layers** in independent subsystems.
+ForgeIEC treats force settings accordingly: **per-variable gated
+and locked three times** — in codegen, in the runtime and in the
+editor, in independent subsystems; for the AI a fourth lock in the
+MCP server is added.
 An AI **cannot** force. A misclick in the UI requires two
 separate confirmations. And a production runtime build does not
 even include the force bridge.

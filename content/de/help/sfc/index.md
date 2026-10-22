@@ -3,6 +3,13 @@ title: "Sequential Function Chart Editor (SFC)"
 summary: "Schritt-Übergangs-Modell für Ablaufsteuerungen und Modi-Maschinen"
 ---
 
+{{< callout type="warning" title="Geplant für Release 0.5" >}}
+SFC ist für **Release 0.5** geplant und wird derzeit **noch nicht
+übersetzt**. Für lauffähige Programme nutzen Sie heute
+[Strukturierten Text (ST)](/de/help/st/). Siehe auch die
+[Roadmap](/de/roadmap/).
+{{< /callout >}}
+
 ## Überblick
 
 Sequential Function Chart (SFC) ist die dritte grafische IEC-61131-3-Sprache

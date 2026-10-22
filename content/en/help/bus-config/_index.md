@@ -127,8 +127,8 @@ FVariable
   address: "%IX0.0"     ← physical, allocated by the pool
   scope:   anvil.Stachelbeere
   flags:
-    bellows_export: false    ← expose to HMI / OPC-UA?
-    force_enabled:  false    ← allowed to be forced? (4-layer gate)
+    bellows_export: false    ← expose to HMI / OPC-UA? (bellowsd is resting)
+    force_enabled:  false    ← allowed to be forced? (force lock)
     monitor_enabled: true
   busBinding:
     deviceId:       <UUID-of-Stachelbeere>
@@ -149,8 +149,8 @@ OFF:
   OPC-UA node + Modbus TCP server coil (HMI integration)
 - **`force_enabled`** — the `F` checkbox may be set in the GUI;
   without this flag, forcing is already disabled in the code
-  generator (layer 1 of the
-  [4-layer defence](/help/ai/security/))
+  generator (first stage of the [force lock](/en/help/ai/security/): locked
+  three times — codegen, runtime, editor; a fourth lock for the AI)
 - **`monitor_enabled`** — variable appears in the live monitor
   stream (otherwise only local in the PLC)
 
@@ -229,11 +229,12 @@ Detail schema:
 
 | Protocol | `protocol` value | Medium | Bridge | Status |
 |---|---|---|---|---|
-| Modbus TCP | `modbustcp` | Ethernet | `tongs-modbustcp` | productive |
-| Modbus RTU | `modbusrtu` | RS-485 | `tongs-modbusrtu` | planned |
-| EtherCAT | `ethercat` | Ethernet (DC) | `tongs-ethercat` | in progress |
-| Profibus DP | `profibus` | Fieldbus | `tongs-profibus` | in progress |
-| EtherNet/IP | `ethernetip` | Ethernet (CIP) | `tongs-ethernetip` | in progress |
+| Modbus TCP | `modbustcp` | Ethernet | `tongs-modbustcp` | {{< status "use" "available" >}} |
+| Modbus RTU | `modbusrtu` | RS-485 | `tongs-modbusrtu` | {{< status "use" "available" >}} |
+| LoRaWAN | — | wireless | `tongs-lorawan` | {{< status "wip" "in progress (focus)" >}} |
+| EtherCAT | `ethercat` | Ethernet (DC) | `tongs-ethercat` | {{< status "wip" "skeleton, in progress" >}} |
+| PROFIBUS DP | `profibus` | Fieldbus | `tongs-profibus` | {{< status "wip" "skeleton, in progress" >}} |
+| EtherNet/IP | `ethernetip` | Ethernet (CIP) | `tongs-ethernetip` | {{< status "wip" "skeleton, in progress" >}} |
 
 ---
 
@@ -245,6 +246,5 @@ Detail schema:
   as first-class
 - [Tongs bridge family](/news/tongs-bridges/) — fault model +
   bridge lifecycle
-- [Security model](/help/ai/security/) — 4-layer defence for
-  force settings
+- [Security model](/help/ai/security/) — the force lock
 - [`.forge` file format](../file-format/)

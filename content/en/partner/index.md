@@ -15,20 +15,26 @@ actively shape the future of automation.
 ## Our source repositories
 
 The code base lives in the **Forgejo** at `git.forgeiec.io`.
-The repositories are not publicly browsable. Access — read and
-write alike — goes through SSH: send us your SSH public key and we
-enable it. You can then review the code before applying.
+The repositories are not publicly browsable; the source code is
+under the AGPL, access on request. Access goes through SSH: send us
+your SSH public key and we enable it. You can then review the code
+before applying. Third-party contributions are accepted only once
+the Contributor License Agreement is in force.
 
-| Repository | What's inside | Forgejo |
-|---|---|---|
-| **forgeiec-studio** | C++/Qt6 IDE + bus config + MCP server | [git.forgeiec.io/ForgeIEC/forgeiec-studio](https://git.forgeiec.io/ForgeIEC/forgeiec-studio) |
-| **anvil** | Rust/Tokio PLC runtime + bridge subprocess manager | [git.forgeiec.io/ForgeIEC/anvil](https://git.forgeiec.io/ForgeIEC/anvil) |
-| **bellows** | OPC-UA / HMI gateway | [git.forgeiec.io/ForgeIEC/bellows](https://git.forgeiec.io/ForgeIEC/bellows) |
-| **forgeiec-website** | Hugo site you're reading right now | [git.forgeiec.io/ForgeIEC/forgeiec-website](https://git.forgeiec.io/ForgeIEC/forgeiec-website) |
+| Repository (`ssh://git@git.forgeiec.io/ForgeIEC/<name>.git`) | What's inside |
+|---|---|
+| **forgeiec-studio** | C++/Qt6 IDE + bus config + MCP server |
+| **anvil** | Rust/Tokio PLC runtime, the Anvil server (anvild) |
+| **tongs-core** and **tongs-*** | shared core of the bus bridges and one repository per protocol |
+| **hearth** | operator interface (HMI), preview |
+| **screen** | kiosk browser for operator panels |
+| **lib-forgeiecdom**, **forge-mcp** | project model library, MCP library |
+| **fdd-files** | device descriptions (FDD) |
+| **bellows** | OPC-UA / HMI gateway — resting |
+| **forgeiec-website** | the Hugo site you are reading right now |
 
-Each repo contains its own `documentation/architecture/`
-sub-directory or spec collection — anyone wanting to dive deeper
-finds the normative RFC 2119 specs at full length.
+The normative specifications live in the `forgeiec-studio`
+repository under `documentation/architecture/`.
 
 ---
 
@@ -71,48 +77,47 @@ where we are particularly looking for fellow builders:
 
 {{< components "tongs,anvild" >}}
 
+- **tongs-lorawan** — focus: wireless sensors for agriculture and
+  wide-area plants (in progress)
 - **tongs-ethercat** — DC sync, slave state machine, ENI XML
   import
 - **tongs-profibus** — DP master, GSD import toolchain
 - **tongs-ethernetip** — CIP connections, EDS import
 - **tongs-can** — CANopen + J1939
 
-Skeleton + fault model + IPC wire format are in place — the
-protocol-specific part is missing.
+For EtherCAT, PROFIBUS and EtherNet/IP the skeleton, fault model
+and IPC wire format are in place — the protocol-specific part is
+missing.
 
 ### 🛠️ Studio editor features
 
 {{< components "studio" >}}
 
-- **FBD/LD/SFC editors** — today the focus is on ST. Graphical
-  languages need their own tree-sitter grammars + canvas renderers.
-- **Vendor catalog** — FDDs for more manufacturers (today:
-  Weidmueller). GSDML/EDS/ESI converters welcome.
-- **Internationalisation** — Studio + website are translated into
-  EN/DE/FR/ES/ZH/JA/TR/AR; some languages are only machine
-  pre-filled.
+- **LD, FBD and SFC editors** — ST is in use today; LD, FBD and SFC
+  are planned for releases 0.3, 0.4 and 0.5. Graphical languages need
+  their own tree-sitter grammars + canvas renderers.
+- **Vendor catalog** — over 1,100 device descriptions from Phoenix
+  Contact, Beckhoff, Weidmüller, SALZ and others ship with it (as of
+  22 Oct 2026). GSDML/EDS/ESI converters welcome.
+- **Internationalisation** — translations of the Studio; the website
+  is currently maintained in German and English.
 
-### 🌬️ HMI integration (bellowsd)
+### 🏠 Operator interface (Hearth)
 
-{{< components "bellowsd" >}}
+{{< components "hearth" >}}
 
-- **OPC-UA companion specs** — bellowsd today supports generic
-  OPC-UA nodes. Companion-spec adapters (e.g. PackML, OPC-UA
-  Robotics) welcome.
-- **HMI frameworks** — `Hearth` is planned as the IIoT subscriber
-  layer. If you work with MQTT, time-series DBs (InfluxDB,
-  TimescaleDB) or Grafana pipelines, you can help shape the
-  architecture here.
+- **Hearth** — the operator interface reads the process data
+  directly from the Anvil bus and is available as a preview. If you
+  have experience with HMI design, alarming or trend recording, you
+  can help shape it.
 
-### 🔥 Runtime + determinism (anvild)
+### 🔥 Runtime + determinism (Anvil server, anvild)
 
 {{< components "anvild" >}}
 
 - **Real-time Linux tuning** — PREEMPT_RT kernel, CPU pinning,
   cache locality for sub-millisecond cycle times
-- **Rust+LLVM codegen (rusty)** — planned migration of the layer-1
-  codegen away from matiec/C output to Rust+LLVM. Determinism
-  guarantees + online-change preparation.
+<!-- ENTWURF: Item "Rust+LLVM codegen (rusty)" removed — matiec has been replaced; whether rusty is still planned is the owner's decision (audit W-16). -->
 - **Hardware targets** — Raspberry Pi, BeagleBone, industrial
   x86, ARM SBCs.
 
@@ -121,8 +126,9 @@ protocol-specific part is missing.
 {{< components "studio" >}}
 
 - **Tutorials** — from "first Knight Rider in 5 minutes" to
-  "complete machine control with OPC-UA + EtherCAT"
-- **Example projects** — today only 2 demos live in the tree
+  "complete machine control with Modbus and LoRaWAN"
+- **Example projects** — the Studio ships 11 examples today; more
+  from real-world practice are welcome
 - **Teaching curriculum** — universities wanting to use ForgeIEC
   as a teaching IDE. We deliver Studio for free; lecturers bring
   the IEC curriculum.

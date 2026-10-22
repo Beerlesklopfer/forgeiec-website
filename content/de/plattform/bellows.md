@@ -4,15 +4,20 @@ description: "OPC UA Gateway — standardisierte Maschinenkommunikation für die
 weight: 3
 ---
 
-## Der Blasebalg — *In Entwicklung*
+## Der Blasebalg — *ruht*
 
 Der Blasebalg hält das Feuer am Leben und bringt Luft dorthin, wo sie
 gebraucht wird. **Bellows** ist das OPC-UA-Gateway der ForgeIEC-Plattform —
 die standardisierte Schnittstelle zwischen Werkstatt und Leitstand,
 zwischen Maschine und übergeordnetem System.
 
-> Bellows befindet sich in aktiver Entwicklung. Die hier beschriebenen
-> Funktionen repräsentieren den geplanten Umfang.
+{{< callout type="note" title="Ruht — derzeit nicht in Entwicklung" >}}
+bellowsd wird derzeit **nicht weiterentwickelt**. Das Paket
+`forgeiec-bellows-server` bleibt im APT-Repository, ohne Wartung.
+Für die Bedienoberfläche ist [Hearth](../hearth/) vorgesehen, das die
+Prozessdaten direkt vom Anvil-Bus liest. Die folgende Beschreibung
+gibt den ursprünglich geplanten Umfang wieder.
+{{< /callout >}}
 
 ---
 
@@ -25,7 +30,7 @@ ForgeIEC-Plattform.
 
 ---
 
-## Geplante Funktionen
+## Ursprünglich geplanter Umfang
 
 ### OPC UA Server
 
@@ -51,7 +56,7 @@ ForgeIEC-Plattform.
 ## Integration in die Plattform
 
 Bellows wird als eigenständiger Bridge-Prozess laufen — überwacht und
-verwaltet von `anvild`. Die Kommunikation mit dem SPS-Kern erfolgt über
+verwaltet vom Anvil-Server (anvild). Die Kommunikation mit dem SPS-Kern erfolgt über
 Anvil Technology (Zero-Copy Shared Memory), genau wie bei den
 Feldbus-Bridges.
 
@@ -61,7 +66,7 @@ Forge Studio  --->  anvild  --->  Bellows (OPC UA)  --->  SCADA/MES/Cloud
                     Anvil SHM
 ```
 
-**Lizenz:** AGPL-3.0
+**Lizenz:** AGPL-3.0-or-later
 
 ---
 

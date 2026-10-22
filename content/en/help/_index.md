@@ -51,8 +51,9 @@ Segments, devices, variable binding and IEC address assignment.
 
 ### [Test Coverage](/help/tests/)
 
-117 automated tests verify the complete IEC 61131-3 language feature set,
-all 132 standard library blocks and the multi-task threading system.
+62 automated test programs (as of 22 Oct 2026) verify the IEC 61131-3
+language feature set, the standard library blocks and the multi-task
+threading system.
 
 ### [Open Source Philosophy](/help/open-source/)
 
@@ -63,10 +64,12 @@ that liberates knowledge and democratizes innovation.
 
 ## Getting Started
 
-ForgeIEC consists of two components:
+To get started you need two packages:
 
-1. **ForgeIEC Editor** (`forgeiec`) — The development environment on your workstation
-2. **ForgeIEC Daemon** (`anvild`) — The runtime system on the target PLC
+1. **ForgeIEC Studio** (`forgeiec-studio`, program `forgeiec`) — the development environment on your workstation
+2. **Anvil server (anvild)** (`forgeiec-anvil-server`, program `anvil-server`) — the runtime system on the target PLC
+
+All other components are listed on the [platform page](/en/plattform/).
 
 ### Installation from the ForgeIEC APT Repository
 
@@ -82,7 +85,7 @@ curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
 
 # Add repository source
 # (Debian 12 "bookworm" or Debian 13 "trixie" — match your system)
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/forgeiec.gpg] \
 https://apt.forgeiec.io/trixie trixie main" \
   | sudo tee /etc/apt/sources.list.d/forgeiec.list
 
@@ -106,14 +109,15 @@ no manual `.deb` files needed.
 
 | Component | Architectures | Debian/Ubuntu suites |
 |-----------|---------------|------------------|
-| Editor    | amd64, arm64  | bookworm, trixie, noble |
-| Daemon    | amd64, arm64  | bookworm, trixie, jammy, noble |
-| Bridges   | amd64, arm64  | bookworm, trixie, jammy, noble |
-| Hearth    | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Studio    | amd64, arm64  | bookworm, trixie, noble |
+| Anvil server + bridges | amd64, arm64, armhf | bookworm, trixie, jammy, noble |
+| Hearth (preview) | amd64, arm64, armhf | bookworm, trixie, jammy, noble |
 
-The HMI panel (`forgeiec-screen-*`) is additionally available as an
-RPM for AlmaLinux 9 and Fedora 44 at `rpm.forgeiec.io`. The full
-package/platform matrix is on the [download page](/download/).
+Studio, device descriptions, Hearth and the HMI panel are also
+available as RPMs for AlmaLinux 9 and Fedora 44 at `rpm.forgeiec.io`
+(the runtime not yet). A Windows build of the Studio exists; the
+installer is available on request. The full package/platform matrix
+is on the [download page](/en/download/).
 
 ### Contact
 

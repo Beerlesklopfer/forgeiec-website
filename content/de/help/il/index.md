@@ -3,6 +3,14 @@ title: "Instruction List Editor"
 summary: "IL-Editor: akkumulator-basierte IEC 61131-3 Sprache mit CR-Register"
 ---
 
+{{< callout type="warning" title="Abgekündigt" >}}
+AWL (Anweisungsliste) ist nicht mehr Teil der aktuellen Ausgabe der IEC 61131-3 und abgekündigt; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler. In ForgeIEC wird
+IL **nicht weiterentwickelt** und **nicht übersetzt**. Für lauffähige Programme
+nutzen Sie [Strukturierten Text (ST)](/de/help/st/). Siehe auch die
+[Roadmap](/de/roadmap/).
+{{< /callout >}}
+<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+
 ## Überblick
 
 **Instruction List (IL)** ist die assemblernahe Textsprache der
