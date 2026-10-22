@@ -1,0 +1,76 @@
+{{- /*
+  Screenshot or stub. Shared by the `screenshot` shortcode and templates.
+  Context: dict "page" "program" "name" ["version" "alt" "caption" "ratio" "status"]
+
+  Files: static/img/screenshots/<program>/<name>-<MAJOR>.<MINOR>.<PATCH>.(png|webp)
+  Without "version" the highest version wins (numeric per component;
+  .webp before .png of the same version). Without any file a marked
+  placeholder ("stub") is rendered in the same aspect ratio.
+*/ -}}
+{{- $page := .page -}}
+{{- $de := eq $page.Language.Lang "de" -}}
+{{- $program := .program -}}
+{{- $name := .name -}}
+{{- $alt := .alt -}}
+{{- if or (not $program) (not $name) }}{{ errorf "screenshot: 'program' and 'name' are required (%s)" $page.File.Path }}{{ end -}}
+{{- if not $alt }}{{ errorf "screenshot %s/%s: 'alt' is required (%s)" $program $name $page.File.Path }}{{ end -}}
+{{- $ratio := .ratio | default "16:10" -}}
+{{- $r := split $ratio ":" -}}
+{{- $rw := index $r 0 | default "16" -}}
+{{- $rh := index $r 1 | default "10" -}}
+{{- $dir := path.Join "static/img/screenshots" $program -}}
+{{- $pattern := printf `^%s-(\d+)\.(\d+)\.(\d+)\.(png|webp)$` (replaceRE `([.\-+])` `\$1` $name) -}}
+
+{{- /* Find the file */ -}}
+{{- $best := "" -}}{{- $bestKey := "" -}}{{- $bestVer := "" -}}
+{{- if fileExists $dir -}}
+  {{- range os.ReadDir $dir -}}
+    {{- if and (not .IsDir) (findRE $pattern .Name) -}}
+      {{- $parts := findRESubmatch $pattern .Name -}}
+      {{- $m := index $parts 0 -}}
+      {{- $ver := printf "%s.%s.%s" (index $m 1) (index $m 2) (index $m 3) -}}
+      {{- $extRank := cond (eq (index $m 4) "webp") "1" "0" -}}
+      {{- $key := printf "%06d%06d%06d%s" (int (index $m 1)) (int (index $m 2)) (int (index $m 3)) $extRank -}}
+      {{- $want := true -}}
+      {{- with $.version }}{{ if ne . $ver }}{{ $want = false }}{{ end }}{{ end -}}
+      {{- if and $want (gt $key $bestKey) -}}
+        {{- $best = .Name }}{{ $bestKey = $key }}{{ $bestVer = $ver -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $chip := "" -}}
+{{- with .status }}{{ $chip = partial "chip.html" (dict "s" .) }}{{ end -}}
+{{- $programLabel := index (dict "studio" "ForgeIEC Studio" "fdd-editor" "FDD-Editor" "hearth" "Hearth Studio" "hearth-server" "Hearth Server" "rivet" "Rivet" "anvil" "Anvil server") $program | default $program -}}
+
+{{- if $best -}}
+{{- $file := path.Join $dir $best -}}
+{{- $cfg := imageConfig $file -}}
+<figure class="shot">
+  <div class="shot-frame">
+    <img src="{{ printf "/img/screenshots/%s/%s" $program $best | relURL }}" width="{{ $cfg.Width }}" height="{{ $cfg.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  </div>
+  <figcaption>{{ with .caption }}{{ . | markdownify }} {{ end }}<span class="shot-version">{{ $programLabel }} {{ $bestVer }}</span>{{ with $chip }} {{ . }}{{ end }}</figcaption>
+</figure>
+{{- else -}}
+{{- printf "<!-- STUB screenshot: %s/%s -->" $program $name | safeHTML }}
+<figure class="shot shot--stub" data-stub="{{ $program }}/{{ $name }}">
+  <div class="shot-frame shot-placeholder" style="aspect-ratio: {{ $rw }} / {{ $rh }}" role="img" aria-label="{{ $alt }}">
+    <svg class="shot-window" viewBox="0 0 160 100" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet">
+      <rect x="1" y="1" width="158" height="98" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M1 15h158" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="10" cy="8" r="2.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="18" cy="8" r="2.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="26" cy="8" r="2.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
+    <div class="shot-stub-text">
+      <strong>{{ if $de }}Screenshot folgt{{ else }}Screenshot to follow{{ end }}</strong>
+      <code>{{ $program }}/{{ $name }}</code>
+    </div>
+  </div>
+  {{- if or .caption $chip }}
+  <figcaption>{{ with .caption }}{{ . | markdownify }}{{ end }}{{ with $chip }} {{ . }}{{ end }}</figcaption>
+  {{- end }}
+</figure>
+{{- end -}}
