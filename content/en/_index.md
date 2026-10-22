@@ -51,6 +51,14 @@ solution:
         - "Modbus TCP and RTU available, LoRaWAN in progress"
         - "Hearth operator interface as a preview"
       href: "/plattform/tongs/"
+    - icon: "doc"
+      kicker: "Document"
+      title: "Documentation lives inside the project"
+      text: "Every POU, variable and data type carries its own description in Markdown, stored in the same PLCopen XML file as the program – versioned, copied and shipped together with the code."
+      points:
+        - "Importing Structured Text turns your existing `(* … *)` comments into documentation"
+        - "Readable through the MCP interface, also for a locally hosted AI model"
+      href: "/plattform/forge-studio/#documentation"
   screenshot:
     program: "studio"
     name: "editor-st"

@@ -90,6 +90,13 @@ FBD/LD/SFC/IL are not compiled yet.
 | 14 | rivet/gateway-setup | Gateway web UI, setup: registration code, zone, mode (`client/templates/setup.html.tera`) | Rivet page |
 | 15 | rivet/gateway-overview | Gateway web UI, overview: address, certificate, uplink and portal state (`client/templates/overview.html.tera`) | Rivet page |
 | 16 | rivet/portal-phone-setup | Portal: add a phone with a QR code for the WireGuard app (`server/portal/gateways/templates/gateways/_phone_setup.html`) | Rivet page, home Rivet band |
+| 17 | studio/variables-documentation | Variables table with the "Documentation…" column, HMI label and reference designation (`FVariablesPanel.cpp`; source: widersprueche/06-doku-im-studio.md 4.3) | /plattform/forge-studio/#dokumentation |
+| 18 | studio/datatype-documentation | Data type dialog with the documentation field (`FDataTypeDialog.cpp`) | /plattform/forge-studio/#dokumentation |
+| 19 | studio/project-properties-description | Project → Properties…, tab "Description (Preview)" with rendered Markdown (`FProjectPropertiesDialog.cpp`) | /plattform/forge-studio/#dokumentation |
+| 20 | studio/ai-assistant-doc-persona | AI assistant dock, tab "Doc", the persona summarises a POU (read only) (`FAiAssistantDock.cpp`) | /plattform/forge-studio/#dokumentation |
+
+Not yet (the Studio functions do not work today, report 06 D-1/D-4): `studio/documentation-view`
+(Show Documentation with diagrams), `studio/mermaid-preview-dock`.
 
 ## Shortcode lines (de / en)
 
@@ -141,6 +148,18 @@ FBD/LD/SFC/IL are not compiled yet.
 
 {{< screenshot program="rivet" name="portal-phone-setup" alt="Rivet-Portal: Handy mit QR-Code für die WireGuard-App hinzufügen" caption="Handy hinzufügen: QR-Code mit der WireGuard-App scannen." >}}
 {{< screenshot program="rivet" name="portal-phone-setup" alt="Rivet portal: add a phone with a QR code for the WireGuard app" caption="Adding a phone: scan the QR code with the WireGuard app." >}}
+
+{{< screenshot program="studio" name="variables-documentation" alt="Variablentabelle mit der Spalte Dokumentation, HMI-Beschriftung und BMK" caption="Variablen: Dokumentation, HMI-Beschriftung und BMK je Variable." >}}
+{{< screenshot program="studio" name="variables-documentation" alt="Variable table with the documentation column, HMI label and reference designation" caption="Variables: documentation, HMI label and reference designation per variable." >}}
+
+{{< screenshot program="studio" name="datatype-documentation" alt="Datentyp-Dialog mit Feld für die Dokumentation" caption="Datentypen: die Dokumentation im Datentyp-Dialog." >}}
+{{< screenshot program="studio" name="datatype-documentation" alt="Data type dialog with a documentation field" caption="Data types: the documentation in the data type dialog." >}}
+
+{{< screenshot program="studio" name="project-properties-description" alt="Projekt-Eigenschaften mit gerenderter Markdown-Beschreibung" caption="Projekt → Eigenschaften: die Projektbeschreibung als gerendertes Markdown." >}}
+{{< screenshot program="studio" name="project-properties-description" alt="Project properties with the rendered Markdown description" caption="Project → Properties: the project description as rendered Markdown." >}}
+
+{{< screenshot program="studio" name="ai-assistant-doc-persona" alt="KI-Assistent, Reiter Doc, fasst eine POU zusammen" caption="KI-Assistent, Persona „Doc“: fasst eine POU zusammen (nur lesend)." >}}
+{{< screenshot program="studio" name="ai-assistant-doc-persona" alt="AI assistant, Doc tab, summarising a POU" caption="AI assistant, persona “Doc”: summarising a POU (read only)." >}}
 ```
 
 In templates (e.g. the home page) use the partial directly:

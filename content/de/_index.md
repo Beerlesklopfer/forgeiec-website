@@ -51,6 +51,14 @@ solution:
         - "Modbus TCP und RTU verfügbar, LoRaWAN in Arbeit"
         - "Bedienoberfläche Hearth als Vorschau"
       href: "/plattform/tongs/"
+    - icon: "doc"
+      kicker: "Dokumentieren"
+      title: "Die Dokumentation lebt im Projekt"
+      text: "Jede POU, jede Variable und jeder Datentyp trägt ihre eigene Beschreibung als Markdown, gespeichert in derselben PLCopen-XML-Datei wie das Programm – versioniert, kopiert und ausgeliefert mit dem Code."
+      points:
+        - "Beim ST-Import werden vorhandene `(* … *)`-Kommentare zur Dokumentation"
+        - "Über die MCP-Schnittstelle lesbar, auch für ein lokal betriebenes KI-Modell"
+      href: "/plattform/forge-studio/#dokumentation"
   screenshot:
     program: "studio"
     name: "editor-st"

@@ -81,6 +81,7 @@ full: true
 <tr><td>Hearth – Bedienoberfläche</td><td class="detail">Eigene Versionsnummer (Hearth Studio derzeit 0.2.0). Läuft über den internen Anvil-Bus.</td><td>{{< status "wip" "Vorschau" >}}</td></tr>
 <tr><td>Migration / Import</td><td class="detail">Nativer Import von CODESYS-Projekten (3 und 4). <!-- ENTWURF: genaue CODESYS-Versionen und Dateiformate vom Eigentümer klären --></td><td>{{< status "plan" "geplant, Release offen" >}}</td></tr>
 <tr><td>Migration heute</td><td class="detail">Import und Export von PLCopen-XML im Studio (Menü und KI-Werkzeuge).</td><td>{{< status "use" "verfügbar" >}}</td></tr>
+<tr><td>Dokumentation im Studio</td><td class="detail">Heute: Dokumentation als Markdown im Projekt, bearbeitbar an Variablen und Datentypen. Geplant: ein Bearbeitungsfeld für POU- und Projekt-Dokumentation, eine funktionierende Dokumentationsansicht mit Export, die Mermaid-Ansicht im Studio mit Daten aus dem Projekt und optional eine Prüfung der Dokumentationsabdeckung durch den KI-Assistenten. <!-- ENTWURF: offene Punkte aus widersprueche/06-doku-im-studio.md (D-1, D-4, D-5, Abdeckungsprüfung); keine Termine --></td><td>{{< status "plan" "geplant" >}}</td></tr>
 </tbody>
 </table>
 </div>

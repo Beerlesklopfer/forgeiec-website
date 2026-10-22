@@ -82,6 +82,7 @@ full: true
 <tr><td>Hearth – operator interface</td><td class="detail">Own version number (Hearth Studio currently 0.2.0). Runs over the internal Anvil bus.</td><td>{{< status "wip" "preview" >}}</td></tr>
 <tr><td>Migration / import</td><td class="detail">Native import of CODESYS projects (3 and 4). <!-- ENTWURF: owner to clarify exact CODESYS versions and file formats --></td><td>{{< status "plan" "planned, release open" >}}</td></tr>
 <tr><td>Migration today</td><td class="detail">Import and export of PLCopen XML in the Studio (menu and AI tools).</td><td>{{< status "use" "available" >}}</td></tr>
+<tr><td>Documentation in the Studio</td><td class="detail">Today: documentation as Markdown inside the project, editable on variables and data types. Planned: an editing field for POU and project documentation, a working documentation view with export, the Mermaid view in the Studio fed with data from the project and, optionally, a documentation coverage check by the AI assistant. <!-- ENTWURF: open points from widersprueche/06-doku-im-studio.md (D-1, D-4, D-5, coverage check); no dates --></td><td>{{< status "plan" "planned" >}}</td></tr>
 </tbody>
 </table>
 </div>

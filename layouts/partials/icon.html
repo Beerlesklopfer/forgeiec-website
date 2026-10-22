@@ -11,6 +11,7 @@
 {{- else if eq $n "windows" }}<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 12h17M12 4.5v15"/>
 {{- else if eq $n "chat" }}<path d="M4.5 5.5h15a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17h-1A1.5 1.5 0 0 1 3 15.5V7a1.5 1.5 0 0 1 1.5-1.5Z"/>
 {{- else if eq $n "package" }}<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>
+{{- else if eq $n "doc" }}<path d="M6.5 3h8l4 4v13.5a.5.5 0 0 1-.5.5h-11.5a.5.5 0 0 1-.5-.5V3.5a.5.5 0 0 1 .5-.5Z"/><path d="M14.5 3v4h4M9 11.5h6M9 15h6M9 18.5h3.5"/>
 {{- else if eq $n "lock" }}<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
 {{- else }}<circle cx="12" cy="12" r="9"/>
 {{- end }}

@@ -38,6 +38,55 @@ Siehe [Roadmap](/de/roadmap/).
 
 ---
 
+## Dokumentation im Projekt {#dokumentation}
+
+Die Dokumentation lebt im Projekt. Jede POU, jede Variable und jeder Datentyp trägt ihre eigene Beschreibung als Markdown, gespeichert in derselben PLCopen-XML-Datei wie das Programm. Was im Code steht, wird mit dem Code versioniert, kopiert und ausgeliefert, ohne Nebendokument, das veraltet. Beim Import von Structured Text übernimmt ForgeIEC Ihre vorhandenen `(* … *)`-Kommentare gleich als Dokumentation.
+
+Gespeichert wird nach IEC 61131-10 / PLCopen TC6: `<documentation><xhtml>` am jeweiligen Knoten, die Projektbeschreibung in `<contentHeader><Comment>`. Variablen tragen neben der Dokumentation eine HMI-Beschriftung und ein BMK nach IEC 81346, bis hinunter zum einzelnen Array-Element. Alle Texte sind über die MCP-Schnittstelle lesbar, so dass ein KI-Assistent, auch ein lokal betriebenes Modell, die Doku mitlesen kann.
+
+Aus Structured Text erzeugt ForgeIEC auf Anfrage ein Ablaufdiagramm im Mermaid-Format, das der KI-Assistent lesen und Ihnen zeigen kann.
+
+Der KI-Assistent (Persona „Doc“) liest das Projekt und schlägt Markdown-Dokumentation vor; er läuft auch mit einem lokalen Modell (LM Studio oder jeder OpenAI-kompatible Endpunkt).
+<!-- ENTWURF: stimmt erst voll nach Behebung der Studio-Issues D-1 bis D-3 -->
+
+<figure class="figure">
+
+```mermaid
+stateDiagram-v2
+    [*] --> Pruefen
+    Pruefen --> Bewaessern: feuchte < 30.0 AND NOT regen
+    Pruefen --> Pruefen: sonst
+    Bewaessern --> Pruefen: laufzeit.Q
+```
+
+<figcaption>Beispiel: So sieht ein Ablaufdiagramm im Format <code>stateDiagram-v2</code> aus, hier für das Bewässerungsprogramm von der Startseite. Von Hand geschrieben zur Veranschaulichung, keine Ausgabe des Studios; dargestellt mit dem Mermaid dieser Website.</figcaption>
+</figure>
+
+<div class="grid grid-2">
+<div>
+
+{{< screenshot program="studio" name="variables-documentation" alt="Variablentabelle mit der Spalte Dokumentation, HMI-Beschriftung und BMK" caption="Variablen: Dokumentation, HMI-Beschriftung und BMK je Variable." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="datatype-documentation" alt="Datentyp-Dialog mit Feld für die Dokumentation" caption="Datentypen: die Dokumentation im Datentyp-Dialog." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="project-properties-description" alt="Projekt-Eigenschaften mit gerenderter Markdown-Beschreibung" caption="Projekt → Eigenschaften: die Projektbeschreibung als gerendertes Markdown." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="ai-assistant-doc-persona" alt="KI-Assistent, Reiter Doc, fasst eine POU zusammen" caption="KI-Assistent, Persona „Doc“: fasst eine POU zusammen (nur lesend)." >}}
+
+</div>
+</div>
+
+---
+
 ## Syntax-Hervorhebung mit Tree-sitter
 
 Forge Studio verwendet Tree-sitter für inkrementelles Parsing des

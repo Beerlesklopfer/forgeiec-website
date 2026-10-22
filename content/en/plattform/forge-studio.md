@@ -38,6 +38,55 @@ See the [roadmap](/en/roadmap/).
 
 ---
 
+## Documentation in the project {#documentation}
+
+Documentation lives inside the project. Every POU, variable and data type carries its own description in Markdown, stored in the same PLCopen XML file as the program. It is versioned, copied and shipped together with the code, with no separate document that drifts out of date. When you import Structured Text, ForgeIEC turns your existing `(* … *)` comments into documentation.
+
+Storage follows IEC 61131-10 / PLCopen TC6: `<documentation><xhtml>` on each node, the project description in `<contentHeader><Comment>`. Besides its documentation, a variable carries an HMI label and an IEC 81346 reference designation, down to a single array element. All texts are readable through the MCP interface, so an AI assistant, including a locally hosted model, can read the documentation too.
+
+From Structured Text, ForgeIEC generates a flow diagram in Mermaid format on request, which the AI assistant can read and show you.
+
+The AI assistant (persona "Doc") reads the project and proposes Markdown documentation; it also runs with a local model (LM Studio or any OpenAI-compatible endpoint).
+<!-- ENTWURF: stimmt erst voll nach Behebung der Studio-Issues D-1 bis D-3 -->
+
+<figure class="figure">
+
+```mermaid
+stateDiagram-v2
+    [*] --> Check
+    Check --> Irrigate: moisture < 30.0 AND NOT rain
+    Check --> Check: otherwise
+    Irrigate --> Check: runtime.Q
+```
+
+<figcaption>Example: what a flow diagram in the <code>stateDiagram-v2</code> format looks like, here for the irrigation program from the home page. Written by hand as an illustration, not output of the Studio; rendered by this website's own copy of Mermaid.</figcaption>
+</figure>
+
+<div class="grid grid-2">
+<div>
+
+{{< screenshot program="studio" name="variables-documentation" alt="Variable table with the documentation column, HMI label and reference designation" caption="Variables: documentation, HMI label and reference designation per variable." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="datatype-documentation" alt="Data type dialog with a documentation field" caption="Data types: the documentation in the data type dialog." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="project-properties-description" alt="Project properties with the rendered Markdown description" caption="Project → Properties: the project description as rendered Markdown." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="ai-assistant-doc-persona" alt="AI assistant, Doc tab, summarising a POU" caption="AI assistant, persona “Doc”: summarising a POU (read only)." >}}
+
+</div>
+</div>
+
+---
+
 ## Syntax Highlighting with Tree-sitter
 
 Forge Studio uses Tree-sitter for incremental parsing of source code.
