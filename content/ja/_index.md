@@ -35,6 +35,28 @@ ForgeIECは、産業オートメーションのための完全な IEC 61131-3
 
 ---
 
+## はじめに
+
+```bash
+# 署名鍵を登録（初回のみ）
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# リポジトリを追加
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+# エディタとランタイムをインストール
+sudo apt update
+sudo apt install forgeiec-studio forgeiec-anvil-server
+```
+
+Debian 13 (trixie) の例です。Debian 12 (bookworm) または Ubuntu 24.04 (noble) では `trixie` を2か所とも置き換えてください。すべてのディストリビューション、RPM、その他のパッケージ：[ダウンロード](/download/)。
+
+---
+
 <div style="text-align:center; padding: 2rem;">
 
 **産業グレードのリリースが準備でき次第、詳細情報を公開します。**

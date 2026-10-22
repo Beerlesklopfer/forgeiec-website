@@ -78,11 +78,22 @@ OpenPLC fork became an independent platform.
 ## Get started
 
 ```bash
-# Editor + runtime from the signed APT repository
+# Add the signing key (once)
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# Add the repository source
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+# Install editor + runtime
+sudo apt update
 sudo apt install forgeiec-studio forgeiec-anvil-server
 ```
 
-Complete installation guide: [Download](/download/).
+Shown for Debian 13 (trixie). For Debian 12 (bookworm) or Ubuntu 24.04 (noble), replace both occurrences of `trixie`. All distributions, RPM and the other packages: [Download](/download/).
 
 First steps with the AI assistant: [Help](/help/ai/).
 

@@ -80,11 +80,22 @@ wie aus einem 2018er OpenPLC-Fork eine eigenständige Plattform wurde.
 ## Loslegen
 
 ```bash
-# Editor + Runtime aus signiertem APT-Repository
+# Signier-Schlüssel hinterlegen (einmalig)
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# Repository-Quelle eintragen
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+# Editor + Runtime installieren
+sudo apt update
 sudo apt install forgeiec-studio forgeiec-anvil-server
 ```
 
-Komplette Installations-Anleitung: [Download](/download/).
+Gezeigt für Debian 13 (trixie). Für Debian 12 (bookworm) oder Ubuntu 24.04 (noble) beide Vorkommen von `trixie` ersetzen. Alle Distributionen, RPM und die übrigen Pakete: [Download](/download/).
 
 Erste Schritte mit dem KI-Helfer: [Hilfe](/help/ai/).
 

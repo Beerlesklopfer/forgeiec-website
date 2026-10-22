@@ -37,6 +37,28 @@ Acik kaynak projesi olarak ForgeIEC topluluga aittir.
 
 ---
 
+## Başlarken
+
+```bash
+# İmza anahtarını ekleyin (bir kez)
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
+  | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
+
+# Depo kaynağını ekleyin
+echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+https://apt.forgeiec.io/trixie trixie main" \
+  | sudo tee /etc/apt/sources.list.d/forgeiec.list
+
+# Editör + çalışma zamanını kurun
+sudo apt update
+sudo apt install forgeiec-studio forgeiec-anvil-server
+```
+
+Debian 13 (trixie) için gösterilmiştir. Debian 12 (bookworm) veya Ubuntu 24.04 (noble) için `trixie` geçen iki yeri değiştirin. Tüm dağıtımlar, RPM ve diğer paketler: [İndir](/download/).
+
+---
+
 <div style="text-align:center; padding: 2rem;">
 
 **Enduestri kalitesinde bir sueruem hazir oldugunda
