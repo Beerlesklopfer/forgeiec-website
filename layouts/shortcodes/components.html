@@ -10,7 +10,7 @@
 {{- $names := split (.Get 0) "," -}}
 {{- $catalog := dict
     "studio"   (dict "label" "ForgeIEC Studio" "svg" "/img/components/studio.svg"   "icon" "")
-    "anvild"   (dict "label" "anvild"          "svg" "/img/components/anvild.svg"   "icon" "")
+    "anvild"   (dict "label" "Anvil server (anvild)"          "svg" "/img/components/anvild.svg"   "icon" "")
     "bellowsd" (dict "label" "bellowsd"        "svg" "/img/components/bellowsd.svg" "icon" "")
     "tongs"    (dict "label" "tongs-*"         "svg" ""                              "icon" "🔧")
     "hearth"   (dict "label" "Hearth"          "svg" ""                              "icon" "🏠")
@@ -19,7 +19,7 @@
     "anvil"    (dict "label" "Anvil (IPC)"     "svg" ""                              "icon" "📡")
 -}}
 <div class="component-badges">
-<span class="component-badges-label">Betrifft:</span>
+<span class="component-badges-label">{{ if eq .Page.Language.Lang "de" }}Betrifft:{{ else }}Affects:{{ end }}</span>
 {{- range $name := $names -}}
 {{- $key := trim $name " " -}}
 {{- $c := index $catalog $key -}}

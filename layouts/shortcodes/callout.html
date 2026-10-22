@@ -1,39 +1,16 @@
 {{- /*
-  Colored notice block. Used for symptom / solution / note / warning
-  styles in FAQ + how-to pages. Industrial colour code:
-    symptom  → red    (alarm)
-    solution → green  (ok)
-    note     → blue   (info)
-    warning  → orange (caution)
-
-  Palette is DARK-THEME: the site body is --iron (#0F172A) with light
-  text (--text). A light block background would inherit that light
-  text and render unreadable, so the tint is translucent and the
-  label carries the colour.
-
+  Notice block. Types: note (info), warning (caution), symptom (alarm),
+  solution (ok). Colours come from the theme tokens, so the block is
+  legible in light and dark mode.
   Usage:
-    {{< callout type="symptom" title="Symptom" >}}
-    ...markdown content...
-    {{< /callout >}}
+    {{< callout type="note" title="Hinweis" >}} markdown {{< /callout >}}
 */ -}}
-{{- $type    := .Get "type"  | default "note" -}}
-{{- $title   := .Get "title" | default "" -}}
-{{- $palette := dict
-    "symptom"  (dict "border" "#EF4444" "bg" "rgba(239, 68, 68, 0.09)"  "label" "#FCA5A5")
-    "solution" (dict "border" "#22C55E" "bg" "rgba(34, 197, 94, 0.09)"  "label" "#86EFAC")
-    "note"     (dict "border" "#06B6D4" "bg" "rgba(6, 182, 212, 0.09)"  "label" "#67E8F9")
-    "warning"  (dict "border" "#F59E0B" "bg" "rgba(245, 158, 11, 0.09)" "label" "#FBBF24")
--}}
-{{- $c := index $palette $type | default (index $palette "note") -}}
-<div style="border-left:.4em solid {{ $c.border }};
-            background:{{ $c.bg }};
-            padding:.9em 1.2em;
-            margin:1.5em 0;
-            border-radius:.25em;">
-{{- if $title }}
-<p style="margin:0 0 .5em 0; color:{{ $c.label }};
-          font-weight:600; letter-spacing:.06em;
-          text-transform:uppercase; font-size:.82em;">{{ $title }}</p>
+{{- $type  := .Get "type"  | default "note" -}}
+{{- $title := .Get "title" | default "" -}}
+{{- if not (in (slice "note" "warning" "symptom" "solution") $type) }}{{ $type = "note" }}{{ end -}}
+<div class="callout callout--{{ $type }}"{{ if or (eq $type "warning") (eq $type "symptom") }} role="note"{{ end }}>
+{{- with $title }}
+<p class="callout-title">{{ . }}</p>
 {{- end }}
 {{ .Inner | $.Page.RenderString }}
 </div>

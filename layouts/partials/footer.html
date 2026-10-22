@@ -1,23 +1,46 @@
-{{- $lang := site.Language.Lang -}}
-{{- $tmLabel := "Trademark Notice" -}}
-{{- if eq $lang "de" -}}{{- $tmLabel = "Markenrechtshinweis" -}}
-{{- else if eq $lang "fr" -}}{{- $tmLabel = "Mentions sur les marques" -}}
-{{- else if eq $lang "es" -}}{{- $tmLabel = "Aviso de marcas registradas" -}}
-{{- else if eq $lang "zh" -}}{{- $tmLabel = "商标声明" -}}
-{{- else if eq $lang "ja" -}}{{- $tmLabel = "商標に関する注意事項" -}}
-{{- else if eq $lang "tr" -}}{{- $tmLabel = "Marka Bilgilendirmesi" -}}
-{{- else if eq $lang "ar" -}}{{- $tmLabel = "إشعار العلامات التجارية" -}}
-{{- end -}}
+{{- $mail := site.Params.contact | default "blacksmith@forgeiec.io" -}}
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <span class="footer-logo"><span class="logo-icon">&#9881;</span> {{ .Site.Title }}</span>
-      <p class="footer-tagline">{{ .Site.Params.description }}</p>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="{{ site.Home.RelPermalink }}" class="logo">{{ partial "logo-mark.html" . }}<span class="logo-word">Forge<b>IEC</b></span></a>
+        <p>{{ i18n "footerTagline" }}</p>
+        <p><a href="mailto:{{ $mail }}">{{ $mail }}</a></p>
+      </div>
+      <nav class="footer-col" aria-labelledby="f-product">
+        <h2 id="f-product">{{ i18n "footerProduct" }}</h2>
+        <ul>
+          {{ partial "page-link.html" (dict "path" "/plattform" "label" (i18n "platform")) }}
+          {{ partial "page-link.html" (dict "path" "/architektur" "label" (i18n "architecture")) }}
+          {{ partial "page-link.html" (dict "path" "/download" "label" (i18n "download")) }}
+          {{ partial "page-link.html" (dict "path" "/news" "label" (i18n "news")) }}
+          {{ partial "page-link.html" (dict "path" "/help" "label" (i18n "help")) }}
+          {{ partial "page-link.html" (dict "path" "/partner" "label" (i18n "partner")) }}
+          <li><a href="/security/cra/">{{ i18n "security" }}</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-labelledby="f-dev">
+        <h2 id="f-dev">{{ i18n "footerDeveloper" }}</h2>
+        <ul>
+          {{ partial "page-link.html" (dict "path" "/entwickler" "label" (i18n "developerAbout")) }}
+          {{ partial "page-link.html" (dict "path" "/entwickler/engineering-praxis" "label" (i18n "engineering")) }}
+          {{ partial "page-link.html" (dict "path" "/entwickler/mitmachen" "label" (i18n "contribute")) }}
+          {{ partial "page-link.html" (dict "path" "/cla" "label" (i18n "cla")) }}
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-labelledby="f-legal">
+        <h2 id="f-legal">{{ i18n "footerLegal" }}</h2>
+        <ul>
+          {{ partial "page-link.html" (dict "path" "/impressum" "label" (i18n "impressum")) }}
+          {{ partial "page-link.html" (dict "path" "/datenschutz" "label" (i18n "privacy")) }}
+          {{ partial "page-link.html" (dict "path" "/markenrechtshinweis" "label" (i18n "trademark")) }}
+          <li><a href="mailto:{{ $mail }}">{{ i18n "contact" }}</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="footer-contact">
-      <p><strong>blacksmith@forgeiec.io</strong></p>
-      <p>&copy; {{ .Site.Title }} {{ now.Format "2006" }}</p>
-      <p class="footer-legal"><a href="{{ "markenrechtshinweis/" | relLangURL }}">{{ $tmLabel }}</a></p>
+    <div class="footer-bottom">
+      <span>&copy; {{ now.Format "2006" }} Jörg Bernau · ForgeIEC</span>
+      <span>AGPL-3.0-or-later · Apache-2.0</span>
     </div>
   </div>
 </footer>

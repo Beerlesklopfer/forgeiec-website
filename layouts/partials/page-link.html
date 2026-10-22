@@ -1,0 +1,9 @@
+{{- /*
+  Renders <li><a> to a content page only when that page is part of the
+  current build (drafts are absent unless --buildDrafts). Avoids links
+  to pages that do not exist.
+  Usage: {{ partial "page-link.html" (dict "path" "/impressum" "label" (i18n "impressum")) }}
+*/ -}}
+{{- with site.GetPage .path -}}
+<li><a href="{{ .RelPermalink }}">{{ $.label | default .LinkTitle }}</a></li>
+{{- end -}}

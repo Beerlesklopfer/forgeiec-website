@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.LanguageCode }}"{{ with site.Language.LanguageDirection }} dir="{{ . }}"{{ end }}>
+<html lang="{{ site.Language.Lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{- /* Theme before first paint: stored choice, else the OS preference (CSS). */}}
+  <script>(function(){var d=document.documentElement;d.className+=' js';try{var t=localStorage.getItem('forgeiec-theme');if(t==='light'||t==='dark'){d.setAttribute('data-theme',t);}}catch(e){}})();</script>
   {{- /* Title: home = "Site — description", others = "Page | Site". */ -}}
   {{- $title := site.Title -}}
   {{- if .IsHome -}}
@@ -18,7 +20,7 @@
     {{- $desc = .Summary | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace | truncate 155 "…" -}}
   {{- end -}}
   {{- if not $desc }}{{ $desc = site.Params.description | default "" }}{{ end -}}
-  {{- $locales := dict "de" "de_DE" "en" "en_US" "fr" "fr_FR" "es" "es_ES" "zh" "zh_CN" "ja" "ja_JP" "tr" "tr_TR" "ar" "ar_AR" }}
+  {{- $locales := dict "de" "de_DE" "en" "en_US" }}
   <title>{{ $title }}</title>
   <meta name="description" content="{{ $desc }}">
   <link rel="canonical" href="{{ .Permalink }}">
@@ -37,47 +39,40 @@
   {{- range .AllTranslations }}{{ if ne .Language.Lang $.Language.Lang }}
   <meta property="og:locale:alternate" content="{{ index $locales .Language.Lang | default .Language.Lang }}">
   {{- end }}{{ end }}
-  {{- /* og:image only when the page names an existing image in static/ via front matter `images`. */ -}}
-  {{- with .Params.images }}{{ with index . 0 }}{{ if fileExists (path.Join "static" .) }}
+  {{- /* og:image: the page's own `images` entry if it exists in static/, else the site default. */ -}}
+  {{- $img := "" -}}
+  {{- with .Params.images }}{{ with index . 0 }}{{ if fileExists (path.Join "static" .) }}{{ $img = . }}{{ end }}{{ end }}{{ end -}}
+  {{- if not $img }}{{ with site.Params.images }}{{ with index . 0 }}{{ if fileExists (path.Join "static" .) }}{{ $img = . }}{{ end }}{{ end }}{{ end }}{{ end -}}
+  {{- with $img }}
   <meta property="og:image" content="{{ . | absURL }}">
-  {{- end }}{{ end }}{{ end }}
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  {{- end }}
   {{ hugo.Generator }}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+  {{- $css := resources.Get "css/forge.css" }}
+  {{- if $css }}{{ $css = $css | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- else }}
   <link rel="stylesheet" href="{{ "css/forge.css" | relURL }}">
+  {{- end }}
   {{ block "head" . }}{{ end }}
 </head>
 <body>
+  <a class="skip-link" href="#main">{{ i18n "skip" }}</a>
   {{- partial "header.html" . -}}
-  <main>
+  <main id="main">
     {{- block "main" . }}{{ end -}}
   </main>
   {{- partial "footer.html" . -}}
+  <script src="{{ "js/site.js" | relURL }}" defer></script>
   {{- if .Store.Get "hasMermaid" }}
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: 'dark',
-      themeVariables: {
-        primaryColor: '#F59E0B',
-        primaryTextColor: '#0F1115',
-        primaryBorderColor: '#F59E0B',
-        lineColor: '#94A3B8',
-        secondaryColor: '#1E293B',
-        tertiaryColor: '#0F1115',
-        background: '#0F1115',
-        mainBkg: '#1E293B',
-        secondBkg: '#334155',
-        textColor: '#E2E8F0'
-      },
-      flowchart: { curve: 'basis', useMaxWidth: true },
-      sequence: { useMaxWidth: true },
-      gantt: { useMaxWidth: true }
-    });
-  </script>
+  {{- /* Self-hosted Mermaid (MIT), no CDN. Colours follow the active theme. */}}
+  <script src="{{ "js/vendor/mermaid.min.js" | relURL }}" defer></script>
+  <script src="{{ "js/diagrams.js" | relURL }}" defer></script>
   {{- end }}
 </body>
 </html>

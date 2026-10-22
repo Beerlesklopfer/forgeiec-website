@@ -1,0 +1,19 @@
+{{- /* Page header for every non-home page: breadcrumb, title, optional lead. */ -}}
+<header class="page-hero">
+  <div class="container">
+    {{- if not .IsHome }}
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ site.Home.RelPermalink }}">{{ i18n "home" }}</a>
+      {{- range .Ancestors.Reverse }}{{ if not .IsHome }}
+      <span aria-hidden="true">/</span><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{- end }}{{ end }}
+    </nav>
+    {{- end }}
+    {{- with .Params.eyebrow }}<span class="eyebrow">{{ . }}</span>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.lead }}<p class="lead">{{ . | markdownify }}</p>{{ end }}
+    {{- if and .IsPage (eq .Section "news") }}
+    <p class="page-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></p>
+    {{- end }}
+  </div>
+</header>
