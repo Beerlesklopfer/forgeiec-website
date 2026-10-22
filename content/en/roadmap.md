@@ -47,8 +47,8 @@ full: true
 <span class="tl-dot" aria-hidden="true"></span>
 <span class="tl-when">After that</span>
 <div class="tl-card">
-<h3><span class="tl-version">0.5</span> Sequential Function Chart (SFC)</h3>
-<p>Sequences of steps and transitions. Not compiled yet.</p>
+<h3><span class="tl-version">0.5</span> SFC (sequential function chart)</h3>
+<p>Sequences of steps and transitions – in the standard a set of structuring elements. Not compiled yet.</p>
 {{< status "plan" >}}
 </div>
 </li>
@@ -57,7 +57,7 @@ full: true
 <span class="tl-when">No version</span>
 <div class="tl-card">
 <h3>Instruction List (IL)</h3>
-<p>Deprecated – not coming. The reason is below.</p>
+<p>No longer part of the current standard – not coming. The reason is below.</p>
 {{< status "rest" "deprecated" >}}
 </div>
 </li>
@@ -94,9 +94,10 @@ full: true
 <h2>Why IL is not coming</h2>
 </div>
 <div class="prose-band">
-<!-- ENTWURF: owner to confirm the IL rationale. -->
 
-Instruction List (IL) is no longer part of the current edition of IEC 61131-3 and is deprecated. <!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen --> Its uses are covered by Structured Text (textual) and by Ladder Diagram, Function Block Diagram and Sequential Function Chart (graphical). IL sits close to the machine level and would need its own translation path to assembly; that path is not planned. <!-- ENTWURF: technical reason (assembly path) from the owner, check wording --> ForgeIEC therefore does not develop IL further and does not compile it.
+IL (instruction list) was deprecated in IEC 61131-3 edition 3 (2013) and is no longer part of the current edition, IEC 61131-3:2025 (published May 2025). ForgeIEC does not develop it; it would also need its own translation path to assembler. <!-- ENTWURF: Annex B der Norm einsehen, bevor es als Normaussage zitiert wird --> Its uses are covered by Structured Text (textual) and by Ladder Diagram and Function Block Diagram (graphical), with Sequential Function Chart as structuring elements.
+
+Sources: [IEC 61131-3:2025 abstract at AFNOR](https://www.boutique.afnor.org/en-gb/standard/iec-6113132025/programmable-controllers-part-3-programming-languages/xs304903/444755) · [Stefan Henneken: comparison of edition 3 and edition 4](https://stefanhenneken.net/2025/06/11/iec-61131-3-comparison-of-edition-3-and-edition-4/) · [Wikipedia: IEC 61131-3](https://en.wikipedia.org/wiki/IEC_61131-3)
 
 Questions about the order, or about a bus you need? Write to [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io).
 

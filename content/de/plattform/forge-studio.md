@@ -19,8 +19,8 @@ einer Anwendung.
 Strukturierter Text ist im produktiven Einsatz (Pilotbetrieb, Release
 0.2). Je Release kommt eine Sprache hinzu: **0.3 LD, 0.4 FBD, 0.5
 SFC**. Programme in diesen Sprachen werden derzeit **noch nicht
-übersetzt**. AWL (Anweisungsliste) ist nicht mehr Teil der aktuellen Ausgabe der IEC 61131-3 und abgekündigt; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler.
-<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+übersetzt**. AWL (Anweisungsliste) wurde mit der dritten Ausgabe der IEC 61131-3 (2013) abgekündigt und ist in der aktuellen Ausgabe, IEC 61131-3:2025 (erschienen im Mai 2025), nicht mehr enthalten. ForgeIEC entwickelt sie nicht; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler.
+<!-- ENTWURF: Annex B der Norm einsehen, bevor es als Normaussage zitiert wird -->
 Siehe [Roadmap](/de/roadmap/).
 
 - **Strukturierter Text (ST)** — {{< status "use" >}} Hochsprache mit Syntax-Hervorhebung,

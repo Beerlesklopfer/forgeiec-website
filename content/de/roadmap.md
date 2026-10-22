@@ -46,8 +46,8 @@ full: true
 <span class="tl-dot" aria-hidden="true"></span>
 <span class="tl-when">Danach</span>
 <div class="tl-card">
-<h3><span class="tl-version">0.5</span> Ablaufsprache (AS / SFC)</h3>
-<p>Schrittketten mit Schritten und Transitionen. Heute noch nicht übersetzbar.</p>
+<h3><span class="tl-version">0.5</span> SFC (Ablaufsprache / AS)</h3>
+<p>Schrittketten mit Schritten und Transitionen – in der Norm ein Satz von Strukturierungselementen. Heute noch nicht übersetzbar.</p>
 {{< status "plan" >}}
 </div>
 </li>
@@ -56,7 +56,7 @@ full: true
 <span class="tl-when">Keine Version</span>
 <div class="tl-card">
 <h3>Anweisungsliste (AWL / IL)</h3>
-<p>Abgekündigt – kommt nicht. Warum, steht unten.</p>
+<p>Nicht mehr Teil der aktuellen Norm – kommt nicht. Warum, steht unten.</p>
 {{< status "rest" "abgekündigt" >}}
 </div>
 </li>
@@ -93,9 +93,10 @@ full: true
 <h2>Warum AWL nicht kommt</h2>
 </div>
 <div class="prose-band">
-<!-- ENTWURF: Begründung zu AWL/IL vom Eigentümer bestätigen lassen. -->
 
-Die Anweisungsliste (AWL, englisch IL) ist nicht mehr Teil der aktuellen Ausgabe der IEC 61131-3 und abgekündigt. <!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen --> Ihr Einsatzgebiet decken Strukturierter Text (textuell) sowie Kontaktplan, Funktionsbausteinsprache und Ablaufsprache (grafisch) ab. AWL ist maschinennah und bräuchte einen eigenen Übersetzungsweg nach Assembler; er ist nicht geplant. <!-- ENTWURF: technische Begründung (Assembler-Pfad) vom Eigentümer bestätigt, Wortlaut prüfen --> ForgeIEC entwickelt AWL deshalb nicht weiter und übersetzt sie nicht.
+AWL (Anweisungsliste) wurde mit der dritten Ausgabe der IEC 61131-3 (2013) abgekündigt und ist in der aktuellen Ausgabe, IEC 61131-3:2025 (erschienen im Mai 2025), nicht mehr enthalten. ForgeIEC entwickelt sie nicht; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler. <!-- ENTWURF: Annex B der Norm einsehen, bevor es als Normaussage zitiert wird --> Ihr Einsatzgebiet decken Strukturierter Text (textuell) sowie Kontaktplan und Funktionsbausteinsprache (grafisch) ab, ergänzt um die Ablaufsprache als Strukturierungsmittel.
+
+Quellen: [IEC 61131-3:2025, Kurzbeschreibung bei AFNOR](https://www.boutique.afnor.org/en-gb/standard/iec-6113132025/programmable-controllers-part-3-programming-languages/xs304903/444755) · [Stefan Henneken: Vergleich von Edition 3 und Edition 4](https://stefanhenneken.net/2025/06/11/iec-61131-3-comparison-of-edition-3-and-edition-4/) · [Wikipedia: IEC 61131-3](https://en.wikipedia.org/wiki/IEC_61131-3)
 
 Fragen zur Reihenfolge oder zu einem Bus, den Sie brauchen? Schreiben Sie an [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io).
 

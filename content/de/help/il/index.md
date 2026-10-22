@@ -9,12 +9,12 @@ IL **nicht weiterentwickelt** und **nicht übersetzt**. Für lauffähige Program
 nutzen Sie [Strukturierten Text (ST)](/de/help/st/). Siehe auch die
 [Roadmap](/de/roadmap/).
 {{< /callout >}}
-<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+<!-- ENTWURF: Annex B der Norm einsehen, bevor es als Normaussage zitiert wird -->
 
 ## Überblick
 
 **Instruction List (IL)** ist die assemblernahe Textsprache der
-IEC 61131-3 und die historisch erste der fünf IEC-Sprachen. Programme
+IEC 61131-3 und die historisch erste ihrer Sprachen. AWL (Anweisungsliste) wurde mit der dritten Ausgabe der IEC 61131-3 (2013) abgekündigt und ist in der aktuellen Ausgabe, IEC 61131-3:2025 (erschienen im Mai 2025), nicht mehr enthalten. ForgeIEC entwickelt sie nicht; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler. Programme
 bestehen aus einer Folge von Instruktionen, die ein einzelnes
 internes **Akkumulator-Register** — das *Current Result* (`CR`) —
 manipulieren. Jede Zeile ist eine Anweisung der Form

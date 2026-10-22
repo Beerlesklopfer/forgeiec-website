@@ -9,12 +9,12 @@ and **not compiled**. For runnable programs use
 [Structured Text (ST)](/en/help/st/). See also the
 [roadmap](/en/roadmap/).
 {{< /callout >}}
-<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+<!-- ENTWURF: Annex B der Norm einsehen, bevor es als Normaussage zitiert wird -->
 
 ## Overview
 
 **Instruction List (IL)** is the assembler-like text language of
-IEC 61131-3 and historically the first of the five IEC languages.
+IEC 61131-3 and historically the first of its languages. IL (instruction list) was deprecated in IEC 61131-3 edition 3 (2013) and is no longer part of the current edition, IEC 61131-3:2025 (published May 2025). ForgeIEC does not develop it; it would also need its own translation path to assembler.
 Programs are sequences of instructions that manipulate a single
 internal **accumulator register** — the *Current Result* (`CR`). Each
 line is a statement of the form

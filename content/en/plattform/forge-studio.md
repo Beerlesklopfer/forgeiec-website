@@ -19,8 +19,8 @@ application.
 Structured Text is in productive use (pilot operation, release 0.2).
 Each release adds one language: **0.3 LD, 0.4 FBD, 0.5 SFC**.
 Programs in these languages are **not compiled yet**. 
-IL (instruction list) is no longer part of the current edition of IEC 61131-3 and is deprecated; it would also need its own translation path to assembler.
-<!-- ENTWURF: Ausgabe und Jahr der Norm vom Eigentümer belegen -->
+IL (instruction list) was deprecated in IEC 61131-3 edition 3 (2013) and is no longer part of the current edition, IEC 61131-3:2025 (published May 2025). ForgeIEC does not develop it; it would also need its own translation path to assembler.
+<!-- ENTWURF: Annex B der Norm einsehen, bevor es als Normaussage zitiert wird -->
 See the [roadmap](/en/roadmap/).
 
 - **Structured Text (ST)** — {{< status "use" >}} High-level language with syntax highlighting,
