@@ -33,7 +33,7 @@
 
     <div class="header-tools">
       <div class="lang-switch" role="group" aria-label="{{ i18n "langLabel" }}">
-      {{- range site.Languages }}
+      {{- range hugo.Sites }}{{ with .Language }}
         {{- $lang := .Lang }}
         {{- if eq $lang site.Language.Lang }}
         <span aria-current="true" lang="{{ $lang }}">{{ upper $lang }}</span>
@@ -41,9 +41,9 @@
           {{- $target := "" }}
           {{- range $page.Translations }}{{ if eq .Language.Lang $lang }}{{ $target = .RelPermalink }}{{ end }}{{ end }}
           {{- if not $target }}{{ $target = printf "/%s/" $lang }}{{ end }}
-        <a href="{{ $target }}" hreflang="{{ $lang }}" lang="{{ $lang }}" title="{{ .LanguageName }}">{{ upper $lang }}</a>
+        <a href="{{ $target }}" hreflang="{{ $lang }}" lang="{{ $lang }}" title="{{ .Label }}">{{ upper $lang }}</a>
         {{- end }}
-      {{- end }}
+      {{- end }}{{ end }}
       </div>
       <button type="button" class="icon-btn theme-toggle" aria-label="{{ i18n "themeToggle" }}" title="{{ i18n "themeToggle" }}">
         <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>

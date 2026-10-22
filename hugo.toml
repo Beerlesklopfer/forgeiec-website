@@ -28,8 +28,8 @@ noClasses = false
 [languages]
 
   [languages.de]
-  languageName = "Deutsch"
-  languageCode = "de-DE"
+  label = "Deutsch"
+  locale = "de-DE"
   weight = 1
   title = "ForgeIEC"
   contentDir = "content/de"
@@ -79,8 +79,8 @@ noClasses = false
       weight = 3
 
   [languages.en]
-  languageName = "English"
-  languageCode = "en-US"
+  label = "English"
+  locale = "en-US"
   weight = 2
   title = "ForgeIEC"
   contentDir = "content/en"

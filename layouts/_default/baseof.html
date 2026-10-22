@@ -53,7 +53,9 @@
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+  {{- /* Core design system plus page-specific parts (assets/css/parts/*.css), one file. */}}
   {{- $css := resources.Get "css/forge.css" }}
+  {{- with resources.Match "css/parts/*.css" }}{{ $css = slice $css | append . | resources.Concat "css/forge.css" }}{{ end }}
   {{- if $css }}{{ $css = $css | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   {{- else }}

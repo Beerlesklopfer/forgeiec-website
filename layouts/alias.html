@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ with site.LanguageCode }}{{ . }}{{ else }}en{{ end }}">
+<html lang="{{ site.Language.Lang }}">
 <head>
 <meta charset="utf-8">
 <title>{{ site.Title }} — IEC 61131-3 PLC Development Environment</title>
@@ -40,8 +40,8 @@ AI agent, LLM integration, MCP server.</p>
        indizieren sollen, und für User die nicht das Default trifft. */ -}}
 <h2>Sprachen / Languages</h2>
 <ul>
-{{- range site.Sites }}
-  <li><a href="{{ .Home.RelPermalink }}">{{ .Language.LanguageName | default .Language.Lang }}</a></li>
+{{- range hugo.Sites }}
+  <li><a href="{{ .Home.RelPermalink }}">{{ .Language.Label | default .Language.Lang }}</a></li>
 {{- end }}
 </ul>
 </body>
