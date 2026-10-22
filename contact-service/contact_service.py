@@ -295,17 +295,19 @@ def validate(data: dict, cfg: Config, now: float | None = None) -> ValidationRes
             return ""
         return value
 
-    name = text("name").strip()
-    email = text("email").strip()
+    raw_name, raw_email = text("name"), text("email")
+    raw_message = text("message")
+    name = raw_name.strip()
+    email = raw_email.strip()
     subject_type = text("subject-type").strip()
-    message = text("message").replace("\r\n", "\n").replace("\r", "\n").strip()
+    message = raw_message.replace("\r\n", "\n").replace("\r", "\n").strip()
     lang = text("lang").strip().lower()
     website = data.get("website", "")
 
     if "name" not in res.fields:
         if not name:
             res.fields["name"] = "required"
-        elif has_line_breaking_or_control(name):
+        elif has_line_breaking_or_control(raw_name):
             res.fields["name"] = "control_chars"
         elif len(name) > MAX_NAME:
             res.fields["name"] = "too_long"
@@ -313,7 +315,7 @@ def validate(data: dict, cfg: Config, now: float | None = None) -> ValidationRes
     if "email" not in res.fields:
         if not email:
             res.fields["email"] = "required"
-        elif has_line_breaking_or_control(email):
+        elif has_line_breaking_or_control(raw_email):
             res.fields["email"] = "control_chars"
         elif len(email) > MAX_EMAIL:
             res.fields["email"] = "too_long"
@@ -329,7 +331,7 @@ def validate(data: dict, cfg: Config, now: float | None = None) -> ValidationRes
     if "message" not in res.fields:
         if not message:
             res.fields["message"] = "required"
-        elif has_line_breaking_or_control(message, allow_newlines=True):
+        elif has_line_breaking_or_control(raw_message, allow_newlines=True):
             res.fields["message"] = "control_chars"
         elif len(message) < MIN_MESSAGE:
             res.fields["message"] = "too_short"
