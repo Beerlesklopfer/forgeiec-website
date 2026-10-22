@@ -1,0 +1,105 @@
+{{- /* System overview. Labels in the page language. Colours only via classes (theme tokens). */ -}}
+{{- $de := eq .page.Language.Lang "de" -}}
+{{- $id := .id -}}
+<svg class="diagram diagram--wide" viewBox="0 0 960 610" role="img" aria-labelledby="{{ $id }}-t" xmlns="http://www.w3.org/2000/svg">
+  <title id="{{ $id }}-t">{{ if $de }}Systemübersicht: Studio, Anvil-Server, SPS-Zyklus, Anvil-Bus, Tongs, Feldgeräte, Hearth und Rivet{{ else }}System overview: Studio, Anvil server, PLC cycle, Anvil bus, Tongs, field devices, Hearth and Rivet{{ end }}</title>
+  <defs>
+    <marker id="{{ $id }}-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="{{ $id }}-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead-accent" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+  <!-- Studio -->
+  <rect class="box" x="40" y="20" width="300" height="70" rx="10"/>
+  <text class="t-b" x="60" y="50">ForgeIEC Studio</text>
+  <text class="t-sm" x="60" y="72">{{ if $de }}Arbeitsplatz: ST-Editor, Compiler, Diagnose{{ else }}workstation: ST editor, compiler, diagnosis{{ end }}</text>
+
+  <!-- gRPC -->
+  <line class="line" x1="185" y1="92" x2="185" y2="166" marker-start="url(#{{ $id }}-a)" marker-end="url(#{{ $id }}-a)"/>
+  <text class="t-sm" x="196" y="126">gRPC</text>
+  <text class="t-sm" x="196" y="143">{{ if $de }}Projekt, Monitor, Parameter{{ else }}project, monitor, parameters{{ end }}</text>
+
+  <!-- Controller zone -->
+  <rect class="zone" x="20" y="112" width="720" height="368" rx="14"/>
+  <text class="t-sm t-b" x="722" y="136" text-anchor="end">{{ if $de }}STEUERUNG · Industrie-PC{{ else }}CONTROLLER · industrial PC{{ end }}</text>
+
+  <!-- anvild -->
+  <rect class="box-accent" x="40" y="170" width="290" height="76" rx="10"/>
+  <text class="t-b" x="60" y="200">{{ if $de }}Anvil-Server (anvild){{ else }}Anvil server (anvild){{ end }}</text>
+  <text class="t-sm" x="60" y="222">{{ if $de }}baut das Programm, startet und überwacht{{ else }}builds the program, starts and supervises{{ end }}</text>
+
+  <!-- starts arrow -->
+  <line class="line" x1="332" y1="208" x2="416" y2="208" marker-end="url(#{{ $id }}-a)"/>
+  <text class="t-sm" x="345" y="198">{{ if $de }}startet{{ else }}starts{{ end }}</text>
+
+  <!-- forgeiec_plc -->
+  <rect class="box" x="420" y="170" width="300" height="76" rx="10"/>
+  <text class="t-b" x="440" y="200">forgeiec_plc</text>
+  <text class="t-sm" x="440" y="222">{{ if $de }}SPS-Zyklus, eigener Prozess{{ else }}PLC cycle, own process{{ end }}</text>
+
+  <!-- Anvil bus: data lane -->
+  <rect class="box-2" x="40" y="282" width="680" height="36" rx="8"/>
+  <text class="t-b" x="56" y="305">{{ if $de }}Anvil-Bus{{ else }}Anvil bus{{ end }}</text>
+  <text class="t-sm" x="310" y="305">{{ if $de }}iceoryx2-Speicher · Prozessdaten · Status · Diagnose{{ else }}iceoryx2 memory · process data · status · diagnosis{{ end }}</text>
+  <!-- Tongs-Bus lane -->
+  <rect class="box-accent" x="40" y="326" width="680" height="34" rx="8"/>
+  <text class="t-b" x="56" y="348">Tongs-Bus</text>
+  <text class="t-sm" x="150" y="348">{{ if $de }}Steuerebene auf dem Anvil-Bus · anvild ist der einzige Master{{ else }}control plane on the Anvil bus · anvild is the only master{{ end }}</text>
+
+  <!-- verticals from anvild and plc -->
+  <line class="line" x1="110" y1="248" x2="110" y2="280" marker-start="url(#{{ $id }}-a)" marker-end="url(#{{ $id }}-a)"/>
+  <line class="line-accent" x1="290" y1="248" x2="290" y2="324" marker-end="url(#{{ $id }}-b)"/>
+  <line class="line" x1="570" y1="248" x2="570" y2="280" marker-start="url(#{{ $id }}-a)" marker-end="url(#{{ $id }}-a)"/>
+
+  <!-- Tongs row -->
+  <rect class="box" x="40" y="392" width="150" height="64" rx="10"/>
+  <text class="t-b" x="54" y="418">tongs-modbus</text>
+  <text class="t-sm" x="54" y="440">TCP / RTU</text>
+  <rect class="box" x="202" y="392" width="150" height="64" rx="10"/>
+  <text class="t-b" x="216" y="418">tongs-lorawan</text>
+  <text class="t-sm" x="216" y="440">{{ if $de }}in Arbeit{{ else }}in progress{{ end }}</text>
+  <rect class="box" x="364" y="392" width="176" height="64" rx="10"/>
+  <text class="t-b" x="378" y="418">tongs-…</text>
+  <text class="t-sm" x="378" y="440">{{ if $de }}ein Prozess je Segment{{ else }}one process per segment{{ end }}</text>
+  <rect class="box" x="552" y="392" width="168" height="64" rx="10"/>
+  <text class="t-b" x="566" y="418">Hearth</text>
+  <text class="t-sm" x="566" y="440">{{ if $de }}HMI, Vorschau{{ else }}HMI, preview{{ end }}</text>
+
+  <!-- connectors tongs to bus (both lanes) -->
+  <line class="line" x1="115" y1="362" x2="115" y2="390" marker-start="url(#{{ $id }}-a)"/>
+  <line class="line" x1="277" y1="362" x2="277" y2="390" marker-start="url(#{{ $id }}-a)"/>
+  <line class="line" x1="452" y1="362" x2="452" y2="390" marker-start="url(#{{ $id }}-a)"/>
+  <line class="line" x1="636" y1="362" x2="636" y2="390" marker-start="url(#{{ $id }}-a)"/>
+
+  <!-- Field row -->
+  <line class="line" x1="115" y1="458" x2="115" y2="512" marker-start="url(#{{ $id }}-a)" marker-end="url(#{{ $id }}-a)"/>
+  <line class="line" x1="277" y1="458" x2="277" y2="512" marker-start="url(#{{ $id }}-a)" marker-end="url(#{{ $id }}-a)"/>
+  <line class="line" x1="452" y1="458" x2="452" y2="512" marker-start="url(#{{ $id }}-a)" marker-end="url(#{{ $id }}-a)"/>
+  <line class="line" x1="636" y1="458" x2="636" y2="512" marker-end="url(#{{ $id }}-a)"/>
+  <text class="t-sm" x="646" y="500">{{ if $de }}Web{{ else }}web{{ end }}</text>
+  <rect class="box-2" x="40" y="514" width="500" height="70" rx="10"/>
+  <text class="t-b" x="56" y="542">{{ if $de }}Feldgeräte{{ else }}Field devices{{ end }}</text>
+  <text class="t-sm" x="56" y="564">{{ if $de }}Modbus · LoRaWAN-Sensoren · EtherCAT, PROFIBUS, EtherNet/IP{{ else }}Modbus · LoRaWAN sensors · EtherCAT, PROFIBUS, EtherNet/IP{{ end }}</text>
+  <rect class="box-2" x="552" y="514" width="168" height="70" rx="10"/>
+  <text class="t-b" x="566" y="542">Browser</text>
+  <text class="t-sm" x="566" y="564">{{ if $de }}Panel, Tablet{{ else }}panel, tablet{{ end }}</text>
+
+  <!-- Rivet column -->
+  <text class="t-sm t-b" x="770" y="40">{{ if $de }}FERNZUGRIFF · Rivet{{ else }}REMOTE ACCESS · Rivet{{ end }}</text>
+  <text class="t-sm" x="770" y="58">{{ if $de }}in Entwicklung{{ else }}in development{{ end }}</text>
+  <rect class="box" x="770" y="76" width="170" height="60" rx="10"/>
+  <text class="t-b" x="784" y="102">{{ if $de }}Handy{{ else }}Phone{{ end }}</text>
+  <text class="t-sm" x="784" y="122">{{ if $de }}WireGuard-App{{ else }}WireGuard app{{ end }}</text>
+  <line class="line" x1="855" y1="138" x2="855" y2="182" marker-end="url(#{{ $id }}-a)"/>
+  <rect class="box" x="770" y="184" width="170" height="74" rx="10"/>
+  <text class="t-b" x="784" y="210">{{ if $de }}Rivet-Server{{ else }}Rivet server{{ end }}</text>
+  <text class="t-sm" x="784" y="230">{{ if $de }}feste IP, vermittelt{{ else }}fixed IP, brokers{{ end }}</text>
+  <text class="t-sm" x="784" y="248">{{ if $de }}sieht keine Inhalte{{ else }}sees no content{{ end }}</text>
+  <line class="line" x1="855" y1="342" x2="855" y2="262" marker-end="url(#{{ $id }}-a)"/>
+  <text class="t-sm" x="862" y="298">{{ if $de }}nur{{ else }}outgoing{{ end }}</text>
+  <text class="t-sm" x="862" y="314">{{ if $de }}ausgehend{{ else }}only{{ end }}</text>
+  <rect class="box" x="770" y="344" width="170" height="74" rx="10"/>
+  <text class="t-b" x="784" y="370">{{ if $de }}Rivet-Gateway{{ else }}Rivet gateway{{ end }}</text>
+  <text class="t-sm" x="784" y="390">{{ if $de }}im LAN neben der{{ else }}in the LAN next to{{ end }}</text>
+  <text class="t-sm" x="784" y="408">{{ if $de }}Steuerung{{ else }}the controller{{ end }}</text>
+  <line class="line" x1="768" y1="381" x2="742" y2="381" marker-end="url(#{{ $id }}-a)"/>
+</svg>
