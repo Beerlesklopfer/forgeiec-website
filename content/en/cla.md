@@ -1,11 +1,10 @@
 ---
-title: "Contributor License Agreement"
+title: "ForgeIEC Contributor License Agreement"
+linkTitle: "CLA"
 date: 2026-10-22
 draft: true
 description: "The ForgeIEC Contributor License Agreement (CLA) for contributions to any ForgeIEC repository. Draft, not yet in force."
 ---
-
-# ForgeIEC Contributor License Agreement
 
 {{< callout type="warning" title="Draft — legal review required" >}}
 This text is a proposal. It has not yet been reviewed by a lawyer, it is

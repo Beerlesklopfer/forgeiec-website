@@ -5,8 +5,6 @@ draft: false
 description: "Hinweis zu Marken Dritter, die auf dieser Website erwähnt werden, sowie Aufforderung zur vorherigen Kontaktaufnahme statt Abmahnung."
 ---
 
-# Markenrechtshinweis
-
 <!-- ENTWURF: Der folgende Satz (nicht-kommerziell, ehrenamtlich) widerspricht den Eigentümer-Fakten (Zielkunden Maschinen-/Anlagenbauer, kommerzielle Lizenz möglich). Er stützt die Bitte um Kontakt statt Abmahnung; ob er entfällt, ist eine juristische Entscheidung des Eigentümers (Audit W-06, Frage 2). Vorschlag: "ForgeIEC wird von Jörg Bernau entwickelt und unter AGPL-3.0-or-later veröffentlicht; eine kommerzielle Lizenz ist erhältlich." -->
 ForgeIEC ist ein **nicht-kommerzielles Open-Source-Projekt** ohne
 Umsatz und ohne Gewinnerzielungsabsicht. Es wird unter der
