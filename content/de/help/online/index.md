@@ -52,7 +52,7 @@ Editor zu starten.
 
 ### Allgemein
 
-- [Testabdeckung](/de/help/tests/) — 117 automatisierte Tests für den IEC-Sprachvorrat, Standard-Bausteine und Multi-Task-Threading
+- [Testabdeckung](/de/help/tests/) — 62 automatisierte Testprogramme für den IEC-Sprachvorrat, Standard-Bausteine und Multi-Task-Threading
 - [Open Source Philosophie](/de/help/open-source/) — Hintergrund: mehr als Software, ein gesellschaftlicher Gedanke
 
 ## Im Editor

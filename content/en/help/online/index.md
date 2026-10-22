@@ -52,7 +52,7 @@ the editor.
 
 ### General
 
-- [Test coverage](/en/help/tests/) — 117 automated tests for the IEC language feature set, standard blocks and multi-task threading
+- [Test coverage](/en/help/tests/) — 62 automated test programs for the IEC language feature set, standard blocks and multi-task threading
 - [Open Source philosophy](/en/help/open-source/) — background: more than software, a societal idea
 
 ## In the editor

@@ -265,7 +265,7 @@ Multiple Caretakers possible. Conflict resolution via monotonic
 | Audit log | append-only JSONL, no delete path |
 | Audit fields | timestamp, tool, args, choice, called_by |
 | Codegen determinism | byte-identical POUS.c per `.forge` |
-| Test coverage | 117+ tests, IEC language + 132 library blocks + multi-task + persist + force |
+| Test coverage | 62 test programs (as of 22 Oct 2026): IEC language, library blocks, multi-task, persist, force |
 | Jitter test | physical measurement against baseline |
 
 ---

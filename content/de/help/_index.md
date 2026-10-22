@@ -57,8 +57,9 @@ Segmente, Devices, Variablen-Binding und IEC-Adressvergabe.
 
 ### [Testabdeckung](/help/tests/)
 
-117 automatisierte Tests prüfen den vollständigen IEC 61131-3 Sprachvorrat,
-alle 132 Standard-Bausteine und das Multi-Task-Threading-System.
+62 automatisierte Testprogramme (Stand 22.10.2026) prüfen den
+IEC-61131-3-Sprachvorrat, die Standard-Bausteine und das
+Multi-Task-Threading-System.
 
 ### [Open Source Philosophie](/help/open-source/)
 
@@ -69,10 +70,12 @@ eine Bewegung, die Wissen befreit und Innovation demokratisiert.
 
 ## Erste Schritte
 
-ForgeIEC besteht aus zwei Komponenten:
+Für den Einstieg brauchen Sie zwei Pakete:
 
-1. **ForgeIEC Editor** (`forgeiec`) — Die Entwicklungsumgebung auf Ihrer Workstation
-2. **ForgeIEC Daemon** (`anvild`) — Das Laufzeitsystem auf der Ziel-SPS
+1. **ForgeIEC Studio** (`forgeiec-studio`, Programm `forgeiec`) — die Entwicklungsumgebung auf Ihrer Workstation
+2. **Anvil-Server (anvild)** (`forgeiec-anvil-server`, Programm `anvil-server`) — das Laufzeitsystem auf der Ziel-SPS
+
+Alle weiteren Komponenten stehen auf der [Plattform-Seite](/de/plattform/).
 
 ### Installation aus dem ForgeIEC APT-Repository
 
@@ -81,14 +84,14 @@ ForgeIEC wird als signiertes Debian-Repository unter
 auf jeder Workstation bzw. Ziel-SPS:
 
 ```bash
-# Signier-Schluessel hinterlegen
+# Signier-Schlüssel hinterlegen
 sudo install -d -m 0755 /etc/apt/keyrings
 curl -fsSL https://apt.forgeiec.io/forgeiec.gpg \
   | sudo tee /etc/apt/keyrings/forgeiec.gpg >/dev/null
 
 # Repository-Quelle eintragen
 # (Debian 12 "bookworm" bzw. Debian 13 "trixie" — passend zum System)
-echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/forgeiec.gpg] \
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/forgeiec.gpg] \
 https://apt.forgeiec.io/trixie trixie main" \
   | sudo tee /etc/apt/sources.list.d/forgeiec.list
 
@@ -113,15 +116,15 @@ Lebenszyklus — es ist keine manuelle `.deb`-Datei nötig.
 
 | Komponente | Architekturen | Debian-/Ubuntu-Suites |
 |------------|---------------|------------------|
-| Editor     | amd64, arm64  | bookworm, trixie, noble |
-| Daemon     | amd64, arm64  | bookworm, trixie, jammy, noble |
-| Bridges    | amd64, arm64  | bookworm, trixie, jammy, noble |
-| Hearth     | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Studio     | amd64, arm64  | bookworm, trixie, noble |
+| Anvil-Server + Bridges | amd64, arm64, armhf | bookworm, trixie, jammy, noble |
+| Hearth (Vorschau) | amd64, arm64, armhf | bookworm, trixie, jammy, noble |
 
-Das Bedien-Panel (`forgeiec-screen-*`) gibt es zusätzlich als RPM
-für AlmaLinux 9 und Fedora 44 unter `rpm.forgeiec.io`. Die
-vollständige Paket-/Plattform-Matrix steht auf der
-[Download-Seite](/download/).
+Studio, Gerätebeschreibungen, Hearth und das Bedien-Panel gibt es
+zusätzlich als RPM für AlmaLinux 9 und Fedora 44 unter
+`rpm.forgeiec.io` (die Runtime noch nicht). Ein Windows-Build des
+Studios existiert; den Installer gibt es auf Anfrage. Die vollständige
+Paket-/Plattform-Matrix steht auf der [Download-Seite](/de/download/).
 
 ### Kontakt
 
