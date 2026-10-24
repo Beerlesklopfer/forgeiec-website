@@ -44,7 +44,7 @@ Connexion à un démon **anvild** et diagnostic IPC.
 | **Host**         | Nom d'hôte ou IP de l'automate. Par défaut `localhost`. |
 | **Port**         | Port gRPC d'anvild. Par défaut `50051`. |
 | **User**         | Nom d'utilisateur pour l'authentification par token. |
-| **Anvil Debug**  | Niveau de diagnostic IPC (`Off`, `Errors only`, `Verbose`). Ajoute des statistiques supplémentaires au journal anvild — utile pour traquer la dérive de topic Iceoryx en production. |
+| **Anvil Debug**  | Niveau de diagnostic IPC (`Off`, `Errors only`, `Verbose`). Ajoute des statistiques supplémentaires au journal anvild — utile pour traquer la dérive de topic Anvil en production. |
 
 De plus : **Auto-Connect on start** se connecte automatiquement au
 dernier anvild connecté avec succès au démarrage de l'éditeur — pratique

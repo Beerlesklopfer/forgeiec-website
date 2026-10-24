@@ -1,6 +1,6 @@
 ---
 title: "Tongs"
-description: "Fieldbus Bridges — Modbus TCP/RTU, EtherCAT, Profibus as independent processes"
+description: "Fieldbus bridges — Modbus TCP/RTU, LoRaWAN, EtherCAT, PROFIBUS, EtherNet/IP as independent processes"
 weight: 6
 ---
 
@@ -17,16 +17,20 @@ PLC core.
 
 | Protocol | Bridge | Medium | Status |
 |----------|--------|--------|--------|
-| **Modbus TCP** | `tongs-modbustcp` | Ethernet | Available |
-| **Modbus RTU** | `tongs-modbusrtu` | RS-485 (serial) | Available |
-| **EtherCAT** | `tongs-ethercat` | Ethernet (real-time) | In Development |
-| **Profibus DP** | `tongs-profibus` | Serial (fieldbus) | In Development |
+| **Modbus TCP** | `tongs-modbustcp` | Ethernet | {{< status "use" "available" >}} |
+| **Modbus RTU** | `tongs-modbusrtu` | RS-485 (serial) | {{< status "use" "available" >}} |
+| **LoRaWAN** | `tongs-lorawan` | Wireless (sensors for agriculture and wide-area plants) | {{< status "wip" "in progress (focus)" >}} |
+| **EtherCAT** | `tongs-ethercat` | Ethernet (real-time) | {{< status "wip" "skeleton, in progress" >}} |
+| **PROFIBUS DP** | `tongs-profibus` | Serial (fieldbus) | {{< status "wip" "skeleton, in progress" >}} |
+| **EtherNet/IP** | `tongs-ethernetip` | Ethernet | {{< status "wip" "skeleton, in progress" >}} |
+
+<!-- ENTWURF: According to audit W-14 the forgeiec-anvil-server package ships no tongs-modbusrtu; the owner calls Modbus RTU available. Check delivery. -->
 
 ---
 
 ## Architecture: One Process per Segment
 
-Each bridge runs as an independent process. `anvild` starts, monitors,
+Each bridge runs as an independent process. The Anvil server (anvild) starts, monitors,
 and restarts bridges automatically. A bridge crash affects neither the
 PLC core nor other bridges.
 
@@ -125,12 +129,19 @@ slave_id = 1
 |----------|-------|
 | **Language** | Rust |
 | **Modbus Crate** | tokio-modbus 0.17 |
-| **IPC** | Anvil Technology (Zero-Copy Shared Memory) |
+| **IPC** | Anvil bus (iceoryx2, zero-copy shared memory) |
 | **Process Model** | One daemon per active segment |
 | **Platforms** | x86_64, ARM64, ARMv7 (Linux) |
-| **License** | AGPL-3.0 |
+| **Licence** | AGPL-3.0-or-later |
 
 ---
+
+## Screens
+
+{{< screenshot program="studio" name="network" alt="Network picture with interfaces, buses and devices" caption="The network picture: interfaces, the buses on them, the devices on the buses." >}}
+
+{{< screenshot program="studio" name="device" alt="Device drawing with lit status lamps and properties" caption="Device view: the drawing from the device description, lamps lit by live values." >}}
+
 
 <div style="text-align:center; padding: 2rem;">
 

@@ -1,19 +1,19 @@
 ---
-title: "Bibliothek (Funktionsbloecke + Funktionen)"
-summary: "IEC 61131-3 Standard-Bibliothek + ForgeIEC-Erweiterungen + benutzerdefinierte Bloecke"
+title: "Bibliothek (Funktionsblöcke + Funktionen)"
+summary: "IEC 61131-3 Standard-Bibliothek + ForgeIEC-Erweiterungen + benutzerdefinierte Blöcke"
 ---
 
-## Ueberblick
+## Überblick
 
 Die ForgeIEC-Bibliothek ist die zentrale Sammlung aller wiederverwendbaren
 Bausteine, die ein Anwendungsprogramm in einem `.forge`-Projekt aufrufen
-kann — sowohl die nach IEC 61131-3 standardisierten Funktionsbloecke
+kann — sowohl die nach IEC 61131-3 standardisierten Funktionsblöcke
 und Funktionen als auch projekt-eigene und ForgeIEC-spezifische
 Erweiterungen.
 
 Sie wird angezeigt im **Library-Panel** (Standard-Andockstelle: rechte
-Seitenleiste). Druecken Sie **F1** im Library-Panel, um direkt diese Seite
-zu oeffnen.
+Seitenleiste). Drücken Sie **F1** im Library-Panel, um direkt diese Seite
+zu öffnen.
 
 ```
 Library
@@ -22,8 +22,8 @@ Library
 +-- User Library                (projekt-eigene Bausteine)
 ```
 
-Die Bibliothek hat heute **knapp 100 Bloecke** und **gut 30 Funktionen**.
-Jeder Eintrag traegt:
+Die Bibliothek hat heute **knapp 100 Blöcke** und **gut 30 Funktionen**.
+Jeder Eintrag trägt:
 
   - **Name** (z.B. `TON`, `JK_FF`)
   - **Pin-Liste** (Inputs + Outputs mit Typ + Position)
@@ -35,14 +35,14 @@ Jeder Eintrag traegt:
 
 ### Standard Function Blocks
 
-| Gruppe | Bloecke |
+| Gruppe | Blöcke |
 |---|---|
-| **Bistable** | `SR`, `RS` — Setze/Ruecksetze mit Vorrang |
+| **Bistable** | `SR`, `RS` — Setze/Rücksetze mit Vorrang |
 | **Edge Detection** | `R_TRIG`, `F_TRIG` — steigende/fallende Flanke |
-| **Counters** | `CTU`, `CTD`, `CTUD` — Zaehler vorwaerts / rueckwaerts / beides |
+| **Counters** | `CTU`, `CTD`, `CTUD` — Zähler vorwärts / rückwärts / beides |
 | **Timers** | `TON`, `TOF`, `TP` — Einschalt-/Ausschaltverzoegerung / Impulszeit |
 | **Motion** | Profile, Rampen, Trajektorien (in Vorbereitung) |
-| **Signal Generation** | Generator-FBs fuer Test- und Pruefsignale |
+| **Signal Generation** | Generator-FBs für Test- und Prüfsignale |
 | **Function Manipulators** | Hold, Latch, History |
 | **Closed-Loop Control** | PID, Hysterese, Zwei-Punkt |
 | **Application** *(ForgeIEC)* | `JK_FF`, `DEBOUNCE` — anwendungsnahe Bausteine, die sich in der Praxis als „universell hilfreich" erwiesen haben |
@@ -62,25 +62,25 @@ Jeder Eintrag traegt:
 
 ### User Library
 
-Eigene Funktionsbloecke und Funktionen aus dem laufenden Projekt — alles,
+Eigene Funktionsblöcke und Funktionen aus dem laufenden Projekt — alles,
 was als `FUNCTION_BLOCK` oder `FUNCTION` deklariert wurde, wandert
-automatisch in diese Kategorie und kann genauso wie die Standard-Bloecke
-ueberall im Projekt aufgerufen werden.
+automatisch in diese Kategorie und kann genauso wie die Standard-Blöcke
+überall im Projekt aufgerufen werden.
 
 ## Library-Panel — Bedienung
 
 | Aktion | Effekt |
 |---|---|
-| **Suche** (Lupe oben) | Filtert die Tree-Ansicht nach Block-Namen — findet `TON` ueber Eingabe von `to`. |
-| **Doppelklick** auf einen Block | Oeffnet die Block-Hilfe in einem Detail-Panel mit Pin-Beschreibung + Code-Beispiel. |
-| **Drag** auf den ST-Editor | Fuegt den Block-Aufruf an der Cursor-Position ein, inklusive Instanz-Deklaration in der lokalen `VAR_INST`-Sektion. |
-| **Rechtsklick** > „Insert Call..." | Genauso wie Drag, aber via Kontextmenue. |
-| **F1** auf einem Block | Oeffnet diese Seite. |
+| **Suche** (Lupe oben) | Filtert die Tree-Ansicht nach Block-Namen — findet `TON` über Eingabe von `to`. |
+| **Doppelklick** auf einen Block | Öffnet die Block-Hilfe in einem Detail-Panel mit Pin-Beschreibung + Code-Beispiel. |
+| **Drag** auf den ST-Editor | Fügt den Block-Aufruf an der Cursor-Position ein, inklusive Instanz-Deklaration in der lokalen `VAR_INST`-Sektion. |
+| **Rechtsklick** > „Insert Call..." | Genauso wie Drag, aber via Kontextmenü. |
+| **F1** auf einem Block | Öffnet diese Seite. |
 
 ## Beispiel 1 — Tasterentprellung mit `DEBOUNCE`
 
-`DEBOUNCE` filtert kurze Stoerimpulse aus einem mechanischen Tasterkontakt
-heraus. `Q` wechselt erst, wenn `IN` ueber die gesamte `T_Debounce`-Dauer
+`DEBOUNCE` filtert kurze Störimpulse aus einem mechanischen Tasterkontakt
+heraus. `Q` wechselt erst, wenn `IN` über die gesamte `T_Debounce`-Dauer
 stabil bleibt — sowohl bei steigender als auch bei fallender Flanke.
 
 ### Pin-Layout
@@ -94,7 +94,7 @@ stabil bleibt — sowohl bei steigender als auch bei fallender Flanke.
 ### Code-Beispiel
 
 PROGRAM-Body, der einen Drucktaster auf `%IX0.0` entprellt und das
-entprellte Signal als single-shot Flanke an einen Selbsthalte-Schuetz
+entprellte Signal als single-shot Flanke an einen Selbsthalte-Schütz
 weitergibt:
 
 ```text
@@ -124,11 +124,11 @@ END_PROGRAM
 `DEBOUNCE` ist intern aus zwei `TON`-Bausteinen aufgebaut (high und low
 Richtung) — einer schaltet `Q` erst nach `T_Debounce` aktivem `IN` auf
 TRUE, der andere erst nach `T_Debounce` inaktivem `IN` auf FALSE. Das macht
-den Filter symmetrisch: weder Kontakt-Bouncing beim Druecken noch beim
-Loslassen erzeugt einen Stoerimpuls.
+den Filter symmetrisch: weder Kontakt-Bouncing beim Drücken noch beim
+Loslassen erzeugt einen Störimpuls.
 
 > **Typischer Einsatz:** mechanische Taster, Endschalter, kontaktbehaftete
-> Sensoren. Fuer „Single-Shot pro Tastendruck" — wie oben — schalten Sie
+> Sensoren. Für „Single-Shot pro Tastendruck" — wie oben — schalten Sie
 > einen `R_TRIG` an `Q` nach.
 
 ## Beispiel 2 — Selbsthaltung mit Mode-Umschalter (`JK_FF`)
@@ -149,12 +149,12 @@ Logik selbst zusammenstecken muss.
 | `K`          | INPUT  | `BOOL` | „Reset" (zwingt `Q` auf FALSE solange aktiv) |
 | `Q`          | OUTPUT | `BOOL` | Aktueller Zustand |
 | `Q_N`        | OUTPUT | `BOOL` | Negierter Zustand (`NOT Q`) |
-| `xStable`    | OUTPUT | `BOOL` | TRUE waehrend `xButton` ueber `tDebounce` stabil ist |
+| `xStable`    | OUTPUT | `BOOL` | TRUE während `xButton` über `tDebounce` stabil ist |
 
 ### Code-Beispiel
 
 Eine Lampensteuerung mit drei Tastern: `T1` schaltet die Lampe um (Toggle),
-`T_Mains` erzwingt sie an (z.B. „Hauptlicht ueberall AN"), `T_Off` schaltet
+`T_Mains` erzwingt sie an (z.B. „Hauptlicht überall AN"), `T_Off` schaltet
 alles aus:
 
 ```text
@@ -176,18 +176,18 @@ relay_lamp := fbToggle.Q;
 END_PROGRAM
 ```
 
-Die Wahrheits-Tabelle der `J`/`K`-Eingaenge:
+Die Wahrheits-Tabelle der `J`/`K`-Eingänge:
 
 | `J` | `K` | Verhalten |
 |---|---|---|
 | FALSE | FALSE | Toggle bei jedem entprellten Tastendruck |
-| TRUE  | FALSE | Q := TRUE (Set, ueberschreibt Toggle) |
-| FALSE | TRUE  | Q := FALSE (Reset, ueberschreibt Toggle) |
+| TRUE  | FALSE | Q := TRUE (Set, überschreibt Toggle) |
+| FALSE | TRUE  | Q := FALSE (Reset, überschreibt Toggle) |
 | TRUE  | TRUE  | undefiniert — vermeiden |
 
 `xStable` kann genutzt werden, um „Taster wird gerade gehalten"-Logik zu
-implementieren (z.B. eine LED, die das Druecken visualisiert ohne auf den
-Toggle-Effekt warten zu muessen).
+implementieren (z.B. eine LED, die das Drücken visualisiert ohne auf den
+Toggle-Effekt warten zu müssen).
 
 ## Library-Sync zwischen Editor und PLC
 
@@ -203,11 +203,11 @@ Verbindungsaufbau. Bei Drift erscheint ein Hinweis im Output-Panel; die
 Reaktion ist konfigurierbar:
 
   - `Preferences > Library > Auto-Push` aus (Default): manueller Push
-    ueber `Tools > Sync Library`. Schuetzt eine produktive Runtime davor,
-    versehentlich von einem aelteren Editor-Stand ueberschrieben zu
+    über `Tools > Sync Library`. Schützt eine produktive Runtime davor,
+    versehentlich von einem älteren Editor-Stand überschrieben zu
     werden.
   - `Preferences > Library > Auto-Push` an: bei jedem Drift schickt der
-    Editor seine Library-Version automatisch — nuetzlich in Entwicklungs-
+    Editor seine Library-Version automatisch — nützlich in Entwicklungs-
     Setups, wo nur ein Programmierer arbeitet.
 
 ## ForgeIEC-Erweiterungen
@@ -223,8 +223,8 @@ als universell hilfreich erwiesen hat:
 
 Diese Bausteine liegen in der Kategorie *Standard Function Blocks /
 Application* und sind durch das `isStandard: true`-Flag in der JSON-
-Source als „nicht-deletbar" markiert (d.h. sie koennen nicht versehentlich
-ueber das Library-Panel geloescht werden).
+Source als „nicht-deletbar" markiert (d.h. sie können nicht versehentlich
+über das Library-Panel gelöscht werden).
 
 ## Eigene Bausteine in die User-Library
 
@@ -238,7 +238,7 @@ landet automatisch unter **User Library**. Reihenfolge der Sichtbarkeit:
 
 Wenn Sie einen Baustein in mehreren Projekten verwenden wollen, kopieren
 Sie die POU per `File > Export POU...` als `.forge-pou`-Datei und
-importieren Sie sie im Zielprojekt — eine projektuebergreifende
+importieren Sie sie im Zielprojekt — eine projektübergreifende
 „Workspace-Library" gibt es heute noch nicht (im Backlog).
 
 ## Verwandte Themen

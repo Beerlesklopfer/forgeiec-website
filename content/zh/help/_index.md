@@ -76,12 +76,12 @@ sudo apt install forgeiec-anvil-server
 
 ### 支持的平台
 
-| 组件     | 架构          | Debian 版本      |
+| 组件     | 架构          | Debian/Ubuntu 版本 |
 |----------|---------------|------------------|
-| 编辑器   | amd64, arm64  | bookworm, trixie |
-| 守护进程 | amd64, arm64  | bookworm, trixie |
-| Bridges  | amd64, arm64  | bookworm, trixie |
-| Hearth   | amd64, arm64  | bookworm, trixie |
+| 编辑器   | amd64, arm64  | bookworm, trixie, noble |
+| 守护进程 | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Bridges  | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Hearth   | amd64, arm64  | bookworm, trixie, jammy, noble |
 
 ### 联系
 

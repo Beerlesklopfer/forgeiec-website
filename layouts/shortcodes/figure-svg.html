@@ -1,0 +1,21 @@
+{{- /*
+  Inline SVG diagram from layouts/partials/diagrams/<name>.html with a
+  caption and a text alternative (the shortcode body, markdown).
+  Usage:
+    {{< figure-svg name="system-overview" caption="..." >}}
+    Text alternative: what the picture shows, in sentences.
+    {{< /figure-svg >}}
+*/ -}}
+{{- $name := .Get "name" -}}
+{{- $id := printf "dg-%s" $name -}}
+<figure class="figure" aria-labelledby="{{ $id }}-cap">
+  <div class="figure-frame">
+    {{ partial (printf "diagrams/%s.html" $name) (dict "page" .Page "id" $id) }}
+  </div>
+  <figcaption id="{{ $id }}-cap">{{ .Get "caption" | markdownify }}</figcaption>
+  {{- with .Inner }}
+  <details class="figure-alt"><summary>{{ if eq $.Page.Language.Lang "de" }}Bildbeschreibung als Text{{ else }}Text description of the diagram{{ end }}</summary>
+  {{ . | $.Page.RenderString }}
+  </details>
+  {{- end }}
+</figure>

@@ -1,33 +1,37 @@
 ---
 title: "Tongs"
-description: "Feldbus-Bridges — Modbus TCP/RTU, EtherCAT, Profibus als eigenstaendige Prozesse"
+description: "Feldbus-Bridges — Modbus TCP/RTU, LoRaWAN, EtherCAT, PROFIBUS, EtherNet/IP als eigenständige Prozesse"
 weight: 6
 ---
 
 ## Die Zange
 
-Die Zange greift ins Feuer und holt das gluehende Werkstueck heraus.
+Die Zange greift ins Feuer und holt das glühende Werkstück heraus.
 **Tongs** sind die Feldbus-Bridges der ForgeIEC-Plattform — sie greifen
 in die industrielle Peripherie und bringen Prozessdaten sicher zum
 SPS-Kern.
 
 ---
 
-## Unterstuetzte Protokolle
+## Unterstützte Protokolle
 
 | Protokoll | Bridge | Medium | Status |
 |-----------|--------|--------|--------|
-| **Modbus TCP** | `tongs-modbustcp` | Ethernet | Verfuegbar |
-| **Modbus RTU** | `tongs-modbusrtu` | RS-485 (seriell) | Verfuegbar |
-| **EtherCAT** | `tongs-ethercat` | Ethernet (Echtzeit) | In Entwicklung |
-| **Profibus DP** | `tongs-profibus` | Seriell (Feldbus) | In Entwicklung |
+| **Modbus TCP** | `tongs-modbustcp` | Ethernet | {{< status "use" "verfügbar" >}} |
+| **Modbus RTU** | `tongs-modbusrtu` | RS-485 (seriell) | {{< status "use" "verfügbar" >}} |
+| **LoRaWAN** | `tongs-lorawan` | Funk (Sensorik für Landwirtschaft und weitläufige Anlagen) | {{< status "wip" "in Arbeit (Schwerpunkt)" >}} |
+| **EtherCAT** | `tongs-ethercat` | Ethernet (Echtzeit) | {{< status "wip" "Gerüst, in Arbeit" >}} |
+| **PROFIBUS DP** | `tongs-profibus` | Seriell (Feldbus) | {{< status "wip" "Gerüst, in Arbeit" >}} |
+| **EtherNet/IP** | `tongs-ethernetip` | Ethernet | {{< status "wip" "Gerüst, in Arbeit" >}} |
+
+<!-- ENTWURF: Laut Audit W-14 liefert das Paket forgeiec-anvil-server kein tongs-modbusrtu aus; der Eigentümer nennt Modbus RTU verfügbar. Auslieferung prüfen. -->
 
 ---
 
 ## Architektur: Ein Prozess pro Segment
 
-Jede Bridge laeuft als eigenstaendiger Prozess. `anvild` startet, ueberwacht
-und restartet Bridges automatisch. Ein Absturz einer Bridge beeintraechtigt
+Jede Bridge läuft als eigenständiger Prozess. Der Anvil-Server (anvild) startet, überwacht
+und restartet Bridges automatisch. Ein Absturz einer Bridge beeinträchtigt
 weder den SPS-Kern noch andere Bridges.
 
 ```
@@ -38,8 +42,8 @@ anvild
   +-- tongs-profibus  --config config.toml --segment pb1
 ```
 
-Die Kommunikation zwischen `anvild` und den Bridges erfolgt ueber
-Anvil Technology (Zero-Copy Shared Memory). Jedes Segment erhaelt
+Die Kommunikation zwischen `anvild` und den Bridges erfolgt über
+Anvil Technology (Zero-Copy Shared Memory). Jedes Segment erhält
 seinen eigenen IPC-Kanal.
 
 ---
@@ -63,17 +67,17 @@ Bussysteme
 
 ---
 
-## Geraeteerkennung
+## Geräteerkennung
 
-Der integrierte Netzwerk-Scanner erkennt Feldgeraete automatisch:
+Der integrierte Netzwerk-Scanner erkennt Feldgeräte automatisch:
 
 - **ICMP Ping-Scan** — Erreichbare Hosts im Subnetz ermitteln
-- **Port-Scan** — Modbus-Port (502) und weitere Dienste pruefen
-- **Register-Scan** — Modbus-Register auslesen und Geraetetyp identifizieren
-- **FDD-Geraetekatalog** — Bekannte Geraete anhand ihrer Register-Signaturen
+- **Port-Scan** — Modbus-Port (502) und weitere Dienste prüfen
+- **Register-Scan** — Modbus-Register auslesen und Gerätetyp identifizieren
+- **FDD-Gerätekatalog** — Bekannte Geräte anhand ihrer Register-Signaturen
   zuordnen
 
-Gefundene Geraete landen im Scanner-Pool und koennen per Drag-and-Drop
+Gefundene Geräte landen im Scanner-Pool und können per Drag-and-Drop
 einem Segment zugeordnet werden.
 
 ---
@@ -82,7 +86,7 @@ einem Segment zugeordnet werden.
 
 IEC-Adressen (`%IX`, `%QW`, `%MD` etc.) werden global und kollisionsfrei
 vergeben. Bestehende Adressen in globalen Variablenlisten werden
-beruecksichtigt. Die zugehoerigen VAR_ANVIL-Transportbloecke werden
+berücksichtigt. Die zugehörigen VAR_ANVIL-Transportblöcke werden
 automatisch generiert.
 
 ---
@@ -91,8 +95,8 @@ automatisch generiert.
 
 Jede Variable hat eine eindeutige Richtung:
 
-- **in** (Subscribe/Read) — Bridge liest vom Feldgeraet, SPS empfaengt
-- **out** (Publish/Write) — SPS sendet, Bridge schreibt zum Feldgeraet
+- **in** (Subscribe/Read) — Bridge liest vom Feldgerät, SPS empfängt
+- **out** (Publish/Write) — SPS sendet, Bridge schreibt zum Feldgerät
 
 Es gibt kein "inout". Die Bridge filtert: nur "in"-Variablen werden
 gelesen (Modbus FC3), nur "out"-Variablen werden geschrieben
@@ -102,7 +106,7 @@ gelesen (Modbus FC3), nur "out"-Variablen werden geschrieben
 
 ## Konfiguration
 
-Segmente und Geraete werden in `config.toml` konfiguriert:
+Segmente und Geräte werden in `config.toml` konfiguriert:
 
 ```toml
 [[bus_segments]]
@@ -128,12 +132,19 @@ slave_id = 1
 |-------------|------|
 | **Sprache** | Rust |
 | **Modbus-Crate** | tokio-modbus 0.17 |
-| **IPC** | Anvil Technology (Zero-Copy Shared Memory) |
+| **IPC** | Anvil-Bus (iceoryx2, Zero-Copy Shared Memory) |
 | **Prozessmodell** | Ein Daemon pro aktivem Segment |
 | **Plattformen** | x86_64, ARM64, ARMv7 (Linux) |
-| **Lizenz** | AGPL-3.0 |
+| **Lizenz** | AGPL-3.0-or-later |
 
 ---
+
+## Ansichten
+
+{{< screenshot program="studio" name="network" alt="Netzbild mit Schnittstellen, Bussen und Geräten" caption="Das Netzbild: Schnittstellen, Busse darauf, Geräte daran." >}}
+
+{{< screenshot program="studio" name="device" alt="Gerätezeichnung mit leuchtenden Statuslampen und Eigenschaften" caption="Geräteansicht: die Zeichnung aus der Gerätebeschreibung, Lampen mit Live-Werten." >}}
+
 
 <div style="text-align:center; padding: 2rem;">
 

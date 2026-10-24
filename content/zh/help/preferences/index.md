@@ -41,7 +41,7 @@ Preferences
 | **Host**         | PLC 主机名或 IP。默认 `localhost`。 |
 | **Port**         | anvild 的 gRPC 端口。默认 `50051`。 |
 | **User**         | 用于令牌认证的用户名。 |
-| **Anvil Debug**  | IPC 诊断级别（`Off`、`Errors only`、`Verbose`）。在 anvild 日志中增加额外统计信息 —— 有助于在生产环境中排查 Iceoryx 主题漂移。 |
+| **Anvil Debug**  | IPC 诊断级别（`Off`、`Errors only`、`Verbose`）。在 anvild 日志中增加额外统计信息 —— 有助于在生产环境中排查 Anvil 主题漂移。 |
 
 此外：**Auto-Connect on start** 会在编辑器启动时自动连接到
 最近一次成功连接的 anvild —— 在专用工程笔记本上很方便。

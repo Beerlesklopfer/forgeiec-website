@@ -3,6 +3,12 @@ title: "Sequential Function Chart Editor (SFC)"
 summary: "Step-transition model for sequential control and mode machines"
 ---
 
+{{< callout type="warning" title="Planned for release 0.5" >}}
+SFC is planned for **release 0.5** and is **not compiled yet**. For
+runnable programs use [Structured Text (ST)](/en/help/st/) today.
+See also the [roadmap](/en/roadmap/).
+{{< /callout >}}
+
 ## Overview
 
 Sequential Function Chart (SFC) is the third graphic IEC 61131-3

@@ -93,7 +93,7 @@ Token rotation:
 | Path | Format | Rotation |
 |---|---|---|
 | `~/.config/ForgeIEC/mcp_audit.log` | JSONL append-only | none (manual trim if needed) |
-| `journalctl -u anvild` | systemd journal | systemd defaults |
+| `journalctl -u forgeiec-anvil-server` | systemd journal | systemd defaults |
 | `journalctl -u bellowsd` | systemd journal | systemd defaults |
 | Studio logs | stderr + `editor.recent_logs` MCP tool (500-entry ring) | volatile |
 
@@ -165,7 +165,7 @@ Returns, among others:
 ### anvild health
 
 ```bash
-systemctl is-active anvild
+systemctl is-active forgeiec-anvil-server
 systemctl is-active bellowsd
 ```
 
@@ -197,8 +197,10 @@ Prometheus/Grafana integration: cron-poll `server_info` +
 
 ### Variable "sticks"
 
-See [FAQ](/help/faq/stuck-variables-shm/). Stale iceoryx2 SHM. Fix:
-`systemctl restart anvild` (since v0.1.0+ auto cleanup at startup).
+See [FAQ](/help/faq/stuck-variables-shm/). Stale Anvil SHM. Fix:
+restart the PLC runtime (`Stop` + `Start` or
+`Build → Compile and Upload`) — Anvil reaps the segments of dead
+nodes by itself. Do not delete SHM files by hand.
 
 ### Build mismatch
 
@@ -208,7 +210,7 @@ version. Security risk. Fix:
 
 ```bash
 sudo apt install --reinstall forgeiec-studio
-sudo systemctl restart anvild
+sudo systemctl restart forgeiec-anvil-server
 ```
 
 ### Deploy fails
@@ -217,7 +219,7 @@ sudo systemctl restart anvild
 g++ stderr. If `Auto-start failed: Runtime binary not found`:
 
 ```bash
-journalctl -u anvild -n 50 --no-pager
+journalctl -u forgeiec-anvil-server -n 50 --no-pager
 ```
 
 Typically: missing C toolchain on the PLC target, or disk full.

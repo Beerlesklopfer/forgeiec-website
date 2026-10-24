@@ -1,0 +1,47 @@
+{{- /* The planes on the Anvil bus (wiki Architecture §1). */ -}}
+{{- $de := eq .page.Language.Lang "de" -}}
+{{- $id := .id -}}
+<svg class="diagram" viewBox="0 0 960 400" role="img" aria-labelledby="{{ $id }}-t" xmlns="http://www.w3.org/2000/svg">
+  <title id="{{ $id }}-t">{{ if $de }}Die Ebenen auf dem Anvil-Bus: Prozessdaten, Status, Diagnose, Steuerung{{ else }}The planes on the Anvil bus: process data, status, diagnosis, control{{ end }}</title>
+  <defs>
+    <marker id="{{ $id }}-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="{{ $id }}-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead-accent" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+  <!-- left participants -->
+  <rect class="box" x="20" y="30" width="210" height="120" rx="10"/>
+  <text class="t-b" x="38" y="82">{{ if $de }}SPS-Programm{{ else }}PLC program{{ end }}</text>
+  <text class="t-sm" x="38" y="104">forgeiec_plc</text>
+  <rect class="box" x="20" y="172" width="210" height="116" rx="10"/>
+  <text class="t-b" x="38" y="222">{{ if $de }}Leser{{ else }}Readers{{ end }}</text>
+  <text class="t-sm" x="38" y="244">anvild, Hearth, Studio</text>
+  <rect class="box-accent" x="20" y="310" width="210" height="64" rx="10"/>
+  <text class="t-b" x="38" y="336">anvild</text>
+  <text class="t-sm" x="38" y="356">{{ if $de }}einziger Master{{ else }}the only master{{ end }}</text>
+
+  <!-- right participant -->
+  <rect class="box-2" x="730" y="30" width="210" height="344" rx="10"/>
+  <text class="t-b" x="748" y="190">Tongs</text>
+  <text class="t-sm" x="748" y="212">{{ if $de }}ein Prozess je Segment{{ else }}one process per segment{{ end }}</text>
+
+  <!-- 1 outputs -->
+  <line class="line" x1="234" y1="70" x2="726" y2="70" marker-end="url(#{{ $id }}-a)"/>
+  <text class="t-b mono" x="260" y="60">Anvil/&lt;GROUP&gt;</text>
+  <text class="t-sm" x="260" y="90">{{ if $de }}Prozessdaten: Ausgänge, zyklisch{{ else }}process data: outputs, cyclic{{ end }}</text>
+  <!-- 2 inputs -->
+  <line class="line" x1="726" y1="124" x2="234" y2="124" marker-end="url(#{{ $id }}-a)"/>
+  <text class="t-b mono" x="260" y="114">Anvil/&lt;GROUP&gt;/bridge</text>
+  <text class="t-sm" x="260" y="144">{{ if $de }}Prozessdaten: Eingänge{{ else }}process data: inputs{{ end }}</text>
+  <!-- 3 status -->
+  <line class="line" x1="726" y1="206" x2="234" y2="206" marker-end="url(#{{ $id }}-a)"/>
+  <text class="t-b mono" x="260" y="196">Anvil/status/&lt;segment&gt;</text>
+  <text class="t-sm" x="260" y="226">{{ if $de }}Zustand jedes Geräts, mindestens 1 × pro Sekunde{{ else }}state of every device, at least once a second{{ end }}</text>
+  <!-- 4 diag -->
+  <line class="line" x1="726" y1="262" x2="234" y2="262" marker-end="url(#{{ $id }}-a)"/>
+  <text class="t-b mono" x="260" y="252">Anvil/diag/&lt;segment&gt;</text>
+  <text class="t-sm" x="260" y="282">{{ if $de }}Diagnosewerte aus der Gerätebeschreibung (FDD){{ else }}diagnostic values from the device description (FDD){{ end }}</text>
+  <!-- 5 control -->
+  <line class="line-accent" x1="234" y1="342" x2="726" y2="342" marker-start="url(#{{ $id }}-b)" marker-end="url(#{{ $id }}-b)"/>
+  <text class="t-b mono" x="260" y="332">Anvil/tongsbus</text>
+  <text class="t-sm" x="260" y="362">{{ if $de }}Steuerung: Adressen, Herzschlag, Parameter, Befehle — nie Prozesswerte{{ else }}control: addresses, heartbeat, parameters, commands — never process values{{ end }}</text>
+</svg>

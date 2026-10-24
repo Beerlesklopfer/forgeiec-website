@@ -1,0 +1,43 @@
+{{- /* Rivet: phone -> server <- gateway (outgoing) -> controller. Context: dict page id. */ -}}
+{{- $de := eq .page.Language.Lang "de" -}}
+{{- $id := .id -}}
+<svg class="diagram diagram--large" viewBox="0 0 480 430" role="img" aria-labelledby="{{ $id }}-t {{ $id }}-d">
+  <title id="{{ $id }}-t">{{ if $de }}Rivet: Verbindungsweg{{ else }}Rivet: connection path{{ end }}</title>
+  <desc id="{{ $id }}-d">{{ if $de }}Das Handy verbindet sich mit dem Rivet-Server. Das Gateway im lokalen Netz baut selbst eine ausgehende Verbindung zum Server auf. Der Server reicht die verschlüsselte Verbindung durch diesen Tunnel an das Gateway weiter, das nur die freigegebene Steuerung erreicht.{{ else }}The phone connects to the Rivet server. The gateway in the local network builds an outgoing connection to the server itself. The server passes the encrypted connection through this tunnel to the gateway, which reaches only the released controller.{{ end }}</desc>
+  <defs>
+    <marker id="{{ $id }}-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrowhead"/></marker>
+    <marker id="{{ $id }}-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrowhead-accent"/></marker>
+  </defs>
+  <text x="16" y="24" class="t-sm t-b">INTERNET</text>
+  <!-- phone -->
+  <rect x="24" y="48" width="120" height="96" rx="14" class="box"/>
+  <rect x="70" y="60" width="28" height="48" rx="5" class="box-2"/>
+  <text x="84" y="128" text-anchor="middle" class="t-b">{{ if $de }}Handy{{ else }}Phone{{ end }}</text>
+  <!-- server -->
+  <rect x="300" y="40" width="160" height="112" rx="12" class="box"/>
+  <text x="380" y="78" text-anchor="middle" class="t-b">Rivet-Server</text>
+  <text x="380" y="100" text-anchor="middle" class="t-sm">{{ if $de }}feste IP-Adresse{{ else }}fixed IP address{{ end }}</text>
+  <text x="380" y="120" text-anchor="middle" class="t-sm">{{ if $de }}sieht keine Inhalte{{ else }}sees no content{{ end }}</text>
+  <!-- phone -> server -->
+  <path d="M146 96 H296" class="line" marker-end="url(#{{ $id }}-a)"/>
+  <text x="221" y="86" text-anchor="middle" class="t-sm">WireGuard / HTTPS</text>
+  <!-- LAN zone -->
+  <rect x="12" y="214" width="456" height="200" rx="14" class="zone"/>
+  <text x="28" y="240" class="t-sm t-b">{{ if $de }}LOKALES NETZ DER ANLAGE{{ else }}LOCAL NETWORK OF THE PLANT{{ end }}</text>
+  <!-- gateway -->
+  <rect x="300" y="262" width="160" height="96" rx="12" class="box-accent"/>
+  <text x="380" y="300" text-anchor="middle" class="t-b">Rivet-Gateway</text>
+  <text x="380" y="322" text-anchor="middle" class="t-sm">{{ if $de }}nur ausgehend{{ else }}outgoing only{{ end }}</text>
+  <!-- gateway -> server (outgoing) -->
+  <path d="M380 260 V156" class="line-accent" marker-end="url(#{{ $id }}-b)"/>
+  <text x="368" y="190" text-anchor="end" class="t-sm t-b dg-accent-text">{{ if $de }}baut den Tunnel{{ else }}builds the tunnel{{ end }}</text>
+  <text x="368" y="207" text-anchor="end" class="t-sm t-b dg-accent-text">{{ if $de }}von innen auf{{ else }}from inside{{ end }}</text>
+  <!-- controller -->
+  <rect x="24" y="262" width="150" height="96" rx="12" class="box"/>
+  <text x="99" y="300" text-anchor="middle" class="t-b">{{ if $de }}Steuerung{{ else }}Controller{{ end }}</text>
+  <text x="99" y="322" text-anchor="middle" class="t-sm">{{ if $de }}freigegebener Port{{ else }}released port{{ end }}</text>
+  <path d="M296 310 H178" class="line" marker-end="url(#{{ $id }}-a)"/>
+  <!-- other devices -->
+  <rect x="24" y="372" width="230" height="30" rx="8" class="box-2" stroke-dasharray="4 4"/>
+  <text x="139" y="392" text-anchor="middle" class="t-sm">{{ if $de }}andere Geräte: unerreichbar{{ else }}other devices: unreachable{{ end }}</text>
+</svg>

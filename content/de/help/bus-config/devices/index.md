@@ -1,22 +1,22 @@
 ---
 title: "Bus-Devices"
-summary: "Konfiguration eines Geraets innerhalb eines Bus-Segments — FDD-Integration, Module, Status-Variablen, per-Device-Overrides"
+summary: "Konfiguration eines Geräts innerhalb eines Bus-Segments — FDD-Integration, Module, Status-Variablen, per-Device-Overrides"
 ---
 
 {{< components "studio,tongs,anvild" >}}
 
 ## Was ist ein Device?
 
-Ein **Bus-Device** ist **ein einzelnes Geraet innerhalb eines
+Ein **Bus-Device** ist **ein einzelnes Gerät innerhalb eines
 Segments** — Modbus-TCP-Slave (E/A-Block, Frequenzumrichter),
 EtherCAT-Slave (Servo-Achse, I/O-Koppler), Profibus-DP-Slave oder
-EtherNet/IP-Adapter. Pro Device fuehrt der Bridge-Daemon eine
+EtherNet/IP-Adapter. Pro Device führt der Bridge-Daemon eine
 logische Verbindung, polled die konfigurierten Register und
-publiziert die Daten ueber **Anvil-Zero-Copy-IPC** an die
+publiziert die Daten über **Anvil-Zero-Copy-IPC** an die
 PLC-Runtime.
 
-Ein Device kann **modular** sein: ein Buskoppler (Slot 0) traegt
-1..N I/O-Module in den Slots 1..N. Kompaktgeraete ohne Erweiterungs-
+Ein Device kann **modular** sein: ein Buskoppler (Slot 0) trägt
+1..N I/O-Module in den Slots 1..N. Kompaktgeräte ohne Erweiterungs-
 Slots haben eine leere `modules`-Liste — die Variablen liegen
 dann direkt am Slot 0.
 
@@ -24,24 +24,24 @@ dann direkt am Slot 0.
 
 ## FDD-Integration
 
-Statt jedes Geraet manuell zu beschreiben, importieren Sie eine
+Statt jedes Gerät manuell zu beschreiben, importieren Sie eine
 **Hersteller-FDD** beim Anlegen. ForgeIEC Studio:
 
 1. Liest `<Identification>`, `<DiagnosticDecode>`, `<ModuleProtocol>`,
    `<Document>` aus der FDD
 2. Zeigt das **eingebettete PDF-Datenblatt** im Documents-Tab des
    Properties-Panels
-3. Fuellt **Status-Variablen** aus den Diagnose-Bit-Definitionen
+3. Füllt **Status-Variablen** aus den Diagnose-Bit-Definitionen
 4. Filtert den **Module-Picker** so dass nur kompatible Module
    sichtbar sind (per `<ModuleProtocol>`-Match)
 
 Im `catalogRef`-Feld des Devices steht der Verweis auf die
-verwendete FDD. Sie koennen eine FDD austauschen (z.B.
+verwendete FDD. Sie können eine FDD austauschen (z.B.
 `weidmueller/UR20-FBC-PN-IRT-V2` → `-V3`), behalten aber alle
-I/O-Variablen-Bindings — die Identitaet haengt an der `deviceId`-
+I/O-Variablen-Bindings — die Identität hängt an der `deviceId`-
 UUID, nicht am Hersteller-Eintrag.
 
-Eigene FDDs anlegen ueber `File → New FDD` (Diagnostics-Tab +
+Eigene FDDs anlegen über `File → New FDD` (Diagnostics-Tab +
 Documents-Tab im FDD-Editor).
 
 Mehr zum FDD-System: [News-Eintrag](/news/catalog-fdd/).
@@ -55,23 +55,23 @@ Die Struct-Definition liegt in
 Device im `.forge`-Projekt als `<fi:device>` unter
 `<fi:segment>` (siehe [Bus-Konfiguration](../)).
 
-### Identitaet + Adressierung
+### Identität + Adressierung
 
 | Feld | Typ | Bedeutung |
 |---|---|---|
-| `deviceId` | UUID | Stabiler Primaerschluessel — automatisch beim Anlegen, ueberlebt Hostname-Rename und IP-Wechsel. Haelt damit alle Variablen-Bindings stabil. |
-| `hostname` | String | User-sichtbares Label (`"Stachelbeere"`, `"Maibeere"`). **Ist** Teil des IEC-Namespaces (`anvil.<Segment>.Stachelbeere.<...>`). DHCP-sicher, aber **kein** Primaerschluessel. |
-| `ipAddress` | String (IP) | IP-Adresse (Modbus TCP / EtherNet/IP). Leer fuer Geraete ohne IP (EtherCAT-Slaves identifizieren sich ueber Bus-Position). |
+| `deviceId` | UUID | Stabiler Primärschlüssel — automatisch beim Anlegen, überlebt Hostname-Rename und IP-Wechsel. Hält damit alle Variablen-Bindings stabil. |
+| `hostname` | String | User-sichtbares Label (`"Stachelbeere"`, `"Maibeere"`). **Ist** Teil des IEC-Namespaces (`anvil.<Segment>.Stachelbeere.<...>`). DHCP-sicher, aber **kein** Primärschlüssel. |
+| `ipAddress` | String (IP) | IP-Adresse (Modbus TCP / EtherNet/IP). Leer für Geräte ohne IP (EtherCAT-Slaves identifizieren sich über Bus-Position). |
 | `port` | Int | TCP-Port. Default `502` (Modbus TCP). |
 | `slaveId` | Int | Modbus-Slave-ID (1..247). Bei TCP meist `1`. |
-| `catalogRef` | String | Verweis auf den FDD-Katalogeintrag, z.B. `"weidmueller/UR20-FBC-PN-IRT-V2"`. Treibt Module-Picker + Diagnose-Bit-Aufloesung. |
+| `catalogRef` | String | Verweis auf den FDD-Katalogeintrag, z.B. `"weidmueller/UR20-FBC-PN-IRT-V2"`. Treibt Module-Picker + Diagnose-Bit-Auflösung. |
 | `description` | String | Frei-Text (`"Bewaesserungsventil Sued"`). |
 
 ### Module (Slots)
 
 | Feld | Typ | Bedeutung |
 |---|---|---|
-| `modules` | Liste `FBusModuleConfig` | I/O-Module des Geraets. Slot 0 = Koppler / Kompaktgeraet, Slots 1..N = Erweiterungs-Module. Pro Modul: `slotIndex`, `catalogRef`, `name`, `baseAddress`, `settings`. |
+| `modules` | Liste `FBusModuleConfig` | I/O-Module des Geräts. Slot 0 = Koppler / Kompaktgerät, Slots 1..N = Erweiterungs-Module. Pro Modul: `slotIndex`, `catalogRef`, `name`, `baseAddress`, `settings`. |
 
 Bei modularen Couplern kommt jedes Modul mit seiner eigenen
 FDD-Datei daher — wieder mit Diagnose-Bits + Datenblatt. Der
@@ -80,14 +80,14 @@ versteht.
 
 ### Per-Device-Overrides
 
-Ueberschreiben — nur fuer **dieses** Device — die entsprechenden
+Überschreiben — nur für **dieses** Device — die entsprechenden
 Werte des Segments. `0` bzw. leerer String bedeutet *vom Segment
 erben*. Im Properties-Panel meist unter *Advanced Overrides*
 eingeklappt.
 
 | Feld | Typ | Bedeutung |
 |---|---|---|
-| `mac` | String `AA:BB:CC:DD:EE:FF` | MAC-Adresse fuer statisches ARP / Identitaetskontrolle. Schuetzt vor IP-Klau bei DHCP-Geraeten. |
+| `mac` | String `AA:BB:CC:DD:EE:FF` | MAC-Adresse für statisches ARP / Identitätskontrolle. Schützt vor IP-Klau bei DHCP-Geräten. |
 | `endianness` | Enum | `"ABCD"` (Big-Endian, IEC-Default), `"DCBA"` (Word-Swap), `"BADC"` (Byte-Swap), `"CDAB"` (beide). Leer = vom Segment erben. |
 | `timeoutOverrideMs` | Int (ms) | Per-Device-Timeout. `0` = Segment-Timeout. |
 | `retryCount` | Int | Wiederholungen pro Request. `0` = Segment-Default. |
@@ -96,8 +96,8 @@ eingeklappt.
 
 ### Device-spezifische Settings
 
-Im `settings`-Map (Key/Value) liegen Werte die nur fuer dieses
-Geraet oder seinen Geraetetyp Sinn ergeben — z.B. ein Schwellenwert
+Im `settings`-Map (Key/Value) liegen Werte die nur für dieses
+Gerät oder seinen Gerätetyp Sinn ergeben — z.B. ein Schwellenwert
 eines Frequenzumrichters oder ein bevorzugter Modbus-Funktionscode.
 
 ---
@@ -107,25 +107,25 @@ eines Frequenzumrichters oder ein bevorzugter Modbus-Funktionscode.
 | Aktion | Wirkung |
 |---|---|
 | **Einfach-Klick** auf einen Device-Knoten | `FPropertiesPanel` zeigt alle Felder als Inline-Editoren — Allgemein, Override-Block, Diagnose-Bits mit Live-Werten, Status-Tabelle. |
-| **Doppelklick** | Modal-Dialog `FBusDeviceDialog`. Im Edit-Modus ist der "Import aus Katalog"-Button gesperrt, damit ein nachtraeglicher FDD-Import keine bestehenden I/O-Variablen-Bindings ueberschreibt. |
+| **Doppelklick** | Modal-Dialog `FBusDeviceDialog`. Im Edit-Modus ist der "Import aus Katalog"-Button gesperrt, damit ein nachträglicher FDD-Import keine bestehenden I/O-Variablen-Bindings überschreibt. |
 
 ---
 
 ## Status-Variablen (read-only)
 
-Jedes Device veroeffentlicht zur Laufzeit eine Status-Struktur.
+Jedes Device veröffentlicht zur Laufzeit eine Status-Struktur.
 Diese Werte zeigt das Properties-Panel als **read-only Tabelle** —
 die Bridge schreibt sie, der ST-Code liest sie. Auf der ST-Seite
-sind sie unter `anvil.<Segment>.<Device>.Status.<Var>` zugaenglich:
+sind sie unter `anvil.<Segment>.<Device>.Status.<Var>` zugänglich:
 
 | Status-Variable | Typ | Bedeutung |
 |---|---|---|
-| `xOnline` | `BOOL` | Geraet aktuell erreichbar (letzter Request hat geantwortet) |
+| `xOnline` | `BOOL` | Gerät aktuell erreichbar (letzter Request hat geantwortet) |
 | `eState` | `INT` | Zustands-Enum: 0=offline, 1=connecting, 2=online, 3=error |
 | `wErrorCount` | `WORD` | Fehlgeschlagene Requests seit Bridge-Start |
 | `sLastErrorMsg` | `STRING` | Letzte Fehlermeldung (Timeout, Modbus-Exception, ...) |
 
-Zusaetzlich erscheinen alle Bits aus der **FDD-`<DiagnosticDecode>`**-
+Zusätzlich erscheinen alle Bits aus der **FDD-`<DiagnosticDecode>`**-
 Sektion als typsichere Status-Member — z.B. `WireBreak`,
 `ShortCircuit`, `OverTemperature`. Bedeutung + Schweregrad sieht
 das Properties-Panel mehrsprachig (DE/EN) aus der FDD.
@@ -141,7 +141,7 @@ END_IF;
 ```
 
 KI-Helfer-Diagnose-Loop via MCP `catalog.diag_bits` liefert die
-aufgeloeste Bedeutung dieser Bits in Klartext.
+aufgelöste Bedeutung dieser Bits in Klartext.
 
 ---
 
@@ -181,20 +181,20 @@ base_address = 0
 
 Effekt:
 
-- Die 8 Eingaenge erscheinen im Adress-Pool als `%IX0.0..%IX0.7`
+- Die 8 Eingänge erscheinen im Adress-Pool als `%IX0.0..%IX0.7`
   mit `deviceId=0e5d5537-...`, `moduleSlot=1`, `modbusAddress=0..7`
-- Die 8 Ausgaenge analog mit `moduleSlot=2`
+- Die 8 Ausgänge analog mit `moduleSlot=2`
 - ST-Zugriff: `anvil.Halle1.Stachelbeere.IO.DI_1` /
   `anvil.Halle1.Stachelbeere.IO.DO_1`
 - Diagnose-Bits aus der FDD: `Status.WireBreak`,
-  `Status.ShortCircuit`, etc. — typsicher, mehrsprachig erklaert
+  `Status.ShortCircuit`, etc. — typsicher, mehrsprachig erklärt
 
 ---
 
 ## Verwandte Themen
 
 - [Bus-Segmente](../segments/) — das Netz in dem das Device lebt
-- [Bus-Konfiguration — Schema-Ueberblick](../) — 5-Level-Namespace,
+- [Bus-Konfiguration — Schema-Überblick](../) — 5-Level-Namespace,
   XML-Persistenz
 - [Catalog + FDD-System](/news/catalog-fdd/) — Hersteller-Daten +
   Diagnose-Bit-Resolver

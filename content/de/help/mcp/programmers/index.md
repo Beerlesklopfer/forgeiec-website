@@ -1,25 +1,25 @@
 ---
-title: "MCP fuer Applikationsingenieure"
-summary: "Wie der ForgeIEC-Studio-MCP-Server von aussen angesprochen wird — Aufruf, Auth, Beispiele"
+title: "MCP für Applikationsingenieure"
+summary: "Wie der ForgeIEC-Studio-MCP-Server von außen angesprochen wird — Aufruf, Auth, Beispiele"
 ---
 
 ## Zielpublikum
 
 Sie sind Applikationsingenieur und wollen den MCP-Server von ForgeIEC
-Studio **direkt aufrufen**, statt nur ueber den Chat-Reiter im Studio
-selbst zu arbeiten. Typische Einsatzfaelle:
+Studio **direkt aufrufen**, statt nur über den Chat-Reiter im Studio
+selbst zu arbeiten. Typische Einsatzfälle:
 
 - Mit einem **kleinen Skript** (z.B. Shell, Python, PowerShell)
   wiederkehrende Aktionen automatisieren — etwa abends alle
   Projektdateien testkompilieren
-- Eine **eigene Pruef-Routine** anstossen — z.B. nach jedem Deploy
+- Eine **eigene Prüf-Routine** anstoßen — z.B. nach jedem Deploy
   einen festen Diagnose-Loop fahren
 - Ein anderes **Werkzeug** anbinden — z.B. ein Excel- oder
   Auswertungs-Programm das Live-Werte abholt
 - Verstehen wie der Server intern reagiert wenn etwas **schief
   geht** und ein eigener Aufruf-Pfad gebraucht wird
 
-Diese Seite gibt die Protokoll-Details + ablauffaehige Beispiele
+Diese Seite gibt die Protokoll-Details + ablauffähige Beispiele
 mit `curl` (standard auf Linux + Windows).
 
 ---
@@ -45,17 +45,17 @@ listChanged: true`.
 
 ## Endpunkte
 
-Der ForgeIEC-MCP-Server hoert standardmaessig auf:
+Der ForgeIEC-MCP-Server hört standardmäßig auf:
 
 | Pfad | Methode | Zweck |
 |---|---|---|
-| `/mcp/v1/info` | GET | Health-Check (kein Auth noetig) |
-| `/mcp/v1/manifest` | GET | Statisches Manifest (Spec-konform fuer Discovery) |
+| `/mcp/v1/info` | GET | Health-Check (kein Auth nötig) |
+| `/mcp/v1/manifest` | GET | Statisches Manifest (Spec-konform für Discovery) |
 | `/mcp/v1/rpc` | POST | JSON-RPC 2.0 Wire-Endpoint |
-| `/mcp/v1/events` | GET (SSE) | Server-Sent-Events fuer asynchrone Push-Updates (z.B. Live-Monitor-Stream) |
+| `/mcp/v1/events` | GET (SSE) | Server-Sent-Events für asynchrone Push-Updates (z.B. Live-Monitor-Stream) |
 
 Default-Port: **7531** (siehe [IT-Seite](/help/mcp/it/) wenn Sie
-das aendern muessen).
+das ändern müssen).
 
 Lokal-only-Bind (`127.0.0.1`) wenn kein Profil mit `acceptsInboundMcp
 = true` existiert; sonst `0.0.0.0` und Auth zwingend.
@@ -64,7 +64,7 @@ Lokal-only-Bind (`127.0.0.1`) wenn kein Profil mit `acceptsInboundMcp
 
 ## Authentifizierung
 
-ForgeIEC unterstuetzt **zwei Stufen**:
+ForgeIEC unterstützt **zwei Stufen**:
 
 ### Bearer-Token
 
@@ -77,13 +77,13 @@ curl -k https://forgeiec-ws.local:7531/mcp/v1/info \
      -H "Authorization: Bearer <ihr-token-hier>"
 ```
 
-`-k` weil das Server-Cert selbst-signiert ist (siehe naechster
-Abschnitt fuer Trust-Setup).
+`-k` weil das Server-Cert selbst-signiert ist (siehe nächster
+Abschnitt für Trust-Setup).
 
 ### mTLS (Mutual TLS, optional)
 
 Wenn Sie ein Team-Setup haben (Caretaker hat Member-Certs ausgestellt),
-koennen Sie statt Bearer mit einem Client-Cert anmelden:
+können Sie statt Bearer mit einem Client-Cert anmelden:
 
 ```bash
 curl https://forgeiec-ws.local:7531/mcp/v1/info \
@@ -98,7 +98,7 @@ Der Server akzeptiert dann **entweder** Bearer **oder** Client-Cert.
 
 ## initialize-Aufruf
 
-Erst die Server-Identitaet abrufen:
+Erst die Server-Identität abrufen:
 
 ```bash
 curl -sk -X POST https://forgeiec-ws.local:7531/mcp/v1/rpc \
@@ -116,7 +116,7 @@ curl -sk -X POST https://forgeiec-ws.local:7531/mcp/v1/rpc \
   }'
 ```
 
-Response (gekuerzt):
+Response (gekürzt):
 
 ```json
 {
@@ -132,7 +132,7 @@ Response (gekuerzt):
 ```
 
 `instructions` ist **wichtig**: Hier steht ForgeIEC's Sicherheits-
-Modell, der empfohlene Diagnose-Loop und der Anti-Loop-Hint fuer
+Modell, der empfohlene Diagnose-Loop und der Anti-Loop-Hint für
 LLM-Clients. Wenn Sie einen Client schreiben, **leiten Sie das in
 die System-Prompt-Schicht weiter**.
 
@@ -149,7 +149,7 @@ curl -sk -X POST https://forgeiec-ws.local:7531/mcp/v1/rpc \
   }'
 ```
 
-Die Antwort enthaelt ca. 80 Tools, jedes mit:
+Die Antwort enthält über 200 Tools (205, gezählt am 22.10.2026), jedes mit:
 
 ```json
 {
@@ -159,10 +159,10 @@ Die Antwort enthaelt ca. 80 Tools, jedes mit:
 }
 ```
 
-Zur menschen-lesbaren Uebersicht ueber alle Tools rufen Sie
+Zur menschen-lesbaren Übersicht über alle Tools rufen Sie
 `forge.help` (gruppiert nach Familie) oder `forge.help_for(name)`
 (detailliert pro Tool) auf — letzteres ist gedacht damit ein LLM
-sich selbst weiterbilden kann ohne dass Sie ihn briefen muessen.
+sich selbst weiterbilden kann ohne dass Sie ihn briefen müssen.
 
 ---
 
@@ -230,7 +230,7 @@ Bei Fehler:
 ```
 
 Die `error`-Codes sind alle `FORGE_ERR_<KIND>` (nicht generische
-HTTP-Codes) — siehe naechster Abschnitt.
+HTTP-Codes) — siehe nächster Abschnitt.
 
 ---
 
@@ -273,16 +273,16 @@ curl -sk -X POST https://forgeiec-ws.local:7531/mcp/v1/rpc \
 ```
 
 Die Response von `editor.confirm` ist das **Ergebnis des
-urspruenglich aufgerufenen Tools** (das Tool wird auf der Server-
+ursprünglich aufgerufenen Tools** (das Tool wird auf der Server-
 Seite resumed). Es bedeutet: Sie sehen jetzt das `add_variable`-
-Result, nicht eine Confirm-Bestaetigung.
+Result, nicht eine Confirm-Bestätigung.
 
 `choice = "cancel"` bricht ab → `FORGE_ERR_USER_CANCELED`.
 
 Timeout: 5 Minuten Default; danach `choice = "timeout"`.
 
-Pending-Confirmations koennen ueber `editor.pending_confirmations`
-abgefragt werden — nuetzlich wenn Ihr Client die `id` verliert.
+Pending-Confirmations können über `editor.pending_confirmations`
+abgefragt werden — nützlich wenn Ihr Client die `id` verliert.
 
 ---
 
@@ -292,19 +292,19 @@ Die wichtigsten:
 
 | Code | Bedeutung |
 |---|---|
-| `FORGE_ERR_NO_PROJECT` | Kein Projekt geoeffnet |
+| `FORGE_ERR_NO_PROJECT` | Kein Projekt geöffnet |
 | `FORGE_ERR_NOT_FOUND` | POU/Variable/Topic existiert nicht |
 | `FORGE_ERR_ALREADY_EXISTS` | Doppelter Name |
 | `FORGE_ERR_INVALID_INPUT` | Pflichtfeld fehlt oder Format falsch |
 | `FORGE_ERR_PERMISSION_DENIED` | Write-Tool in Default-Build, oder mTLS-Cert nicht in peers.toml |
 | `FORGE_ERR_CONFIRMATION_REQUIRED` | State-Machine wartet auf editor.confirm |
-| `FORGE_ERR_USER_CANCELED` | Operator hat "cancel" gewaehlt |
-| `FORGE_ERR_IN_PROGRESS` | Async-Operation (z.B. deploy) laeuft schon |
-| `FORGE_ERR_TIMEOUT` | Wait-Limit ueberschritten (z.B. Oszi-Trigger) |
+| `FORGE_ERR_USER_CANCELED` | Operator hat "cancel" gewählt |
+| `FORGE_ERR_IN_PROGRESS` | Async-Operation (z.B. deploy) läuft schon |
+| `FORGE_ERR_TIMEOUT` | Wait-Limit überschritten (z.B. Oszi-Trigger) |
 | `FORGE_ERR_BRIDGE_INVOKE_FAILED` | Interner Bug — bitte als Bug melden |
 
 Jeder Error hat typischerweise ein `remediation.next_steps`-Feld
-mit konkreten Vorschlaegen — werten Sie das in Ihrem Client aus
+mit konkreten Vorschlägen — werten Sie das in Ihrem Client aus
 und zeigen Sie es dem Nutzer.
 
 ---
@@ -344,10 +344,10 @@ call '{"jsonrpc":"2.0","id":3,"method":"tools/call",
 
 ---
 
-## SSE-Stream fuer Live-Werte
+## SSE-Stream für Live-Werte
 
 `monitor.subscribe` registriert einen Watch + returnt eine
-`stream_id`. Der eigentliche Wert-Push laeuft ueber den SSE-
+`stream_id`. Der eigentliche Wert-Push läuft über den SSE-
 Endpoint `/mcp/v1/events`:
 
 ```bash
@@ -365,13 +365,14 @@ Stoppen via `monitor.unsubscribe(stream_id)`.
 ## Eigene Tools dazu schreiben?
 
 **Aktuell:** Das Tool-Set von ForgeIEC Studio ist **hartkodiert** —
-es gibt **keine Plug-in-API** fuer User-defined Tools im Server-
+es gibt **keine Plug-in-API** für User-defined Tools im Server-
 Prozess. Wenn Sie eine Aktion brauchen die noch fehlt:
 
 - **Schreiben Sie ein Issue** mit Use-Case
 - **Fork + Pull-Request** ist explizit willkommen — die Tool-
   Registrierung ist in `editor/src/runtime/FMcpServer.cpp` an einer
-  Stelle pro Familie (z.B. `registerProjectExtraTools`)
+  Stelle pro Familie (z.B. `registerProjectExtraTools`). Für den
+  Repo-Zugriff schicken Sie uns vorher Ihren SSH-Public-Key
 - **Alternativ ein zweiter MCP-Server** der ForgeIEC's MCP nutzt
   und seine eigene Tool-Liste anbietet (Aggregator-Pattern)
 
@@ -384,5 +385,6 @@ Sprint.
 
 - [IT-Sicht](/help/mcp/it/) — wie deployen + monitoren
 - [Architektur-Tiefe](/help/ai/architecture/) — Spec-Details + Standards
-- [Source-Repository](https://github.com/joergbernau/ForgeIEC)
-- [Zurueck zur MCP-Uebersicht](/help/mcp/)
+- Source-Repository: `ForgeIEC/forgeiec-studio` im Forgejo —
+  Zugriff nach Freischaltung Ihres SSH-Public-Keys
+- [Zurück zur MCP-Übersicht](/help/mcp/)

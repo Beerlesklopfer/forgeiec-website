@@ -1,0 +1,22 @@
+{{- /* Hero illustration: an ST program in the editor plus a status strip. Decorative. */ -}}
+{{- $de := eq .lang "de" -}}
+<figure class="code-window mt-0" aria-label="{{ if $de }}Illustration: ein Programm in Strukturiertem Text (ST){{ else }}Illustration: a program in Structured Text (ST){{ end }}">
+  <div class="cw-bar"><span></span><span></span><span></span><b>{{ if $de }}Bewaesserung.st{{ else }}Irrigation.st{{ end }} — ForgeIEC Studio</b></div>
+<pre class="cw-code"><code><span class="k">PROGRAM</span> {{ if $de }}Bewaesserung{{ else }}Irrigation{{ end }}
+<span class="k">VAR</span>
+  {{ if $de }}feuchte {{ else }}moisture{{ end }} : <span class="t">REAL</span>;  <span class="c">(* {{ if $de }}Bodensensor, %{{ else }}soil sensor, %{{ end }} *)</span>
+  {{ if $de }}regen   {{ else }}rain    {{ end }} : <span class="t">BOOL</span>;
+  {{ if $de }}ventil  {{ else }}valve   {{ end }} : <span class="t">BOOL</span>;
+  {{ if $de }}laufzeit{{ else }}runTime {{ end }} : <span class="t">TON</span>;
+<span class="k">END_VAR</span>
+
+{{ if $de }}laufzeit{{ else }}runTime{{ end }}(IN := {{ if $de }}feuchte{{ else }}moisture{{ end }} &lt; <span class="n">30.0</span> <span class="k">AND NOT</span> {{ if $de }}regen{{ else }}rain{{ end }},
+{{ if $de }}         {{ else }}        {{ end }}PT := <span class="n">T#20m</span>);
+{{ if $de }}ventil{{ else }}valve{{ end }} := {{ if $de }}laufzeit{{ else }}runTime{{ end }}.IN <span class="k">AND NOT</span> {{ if $de }}laufzeit{{ else }}runTime{{ end }}.Q;
+<span class="k">END_PROGRAM</span></code></pre>
+  <div class="cw-status">
+    <span class="cw-dot"></span>{{ if $de }}Runtime verbunden{{ else }}Runtime connected{{ end }}
+    <span class="cw-sep">·</span>Modbus TCP
+    <span class="cw-sep">·</span>LoRaWAN
+  </div>
+</figure>

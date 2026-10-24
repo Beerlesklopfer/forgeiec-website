@@ -84,6 +84,11 @@ Element trägt <code>xmlns="<em>URI</em>"</code> matching.</p>
   <td><code>https://forgeiec.io/v2/sanitize-map</code></td>
   <td><code>&lt;renameMap&gt;</code> + rename[original, sanitized, reason] (Identifier-Sanitize beim Import)</td>
 </tr>
+<tr>
+  <td><a class="dl" href="forgeiec-v2-hearth.xsd">v2-hearth.xsd</a></td>
+  <td><em>ohne Namensraum</em></td>
+  <td><code>&lt;hearth-project&gt;</code> — Anlagendatei: <code>&lt;hearth-head&gt;</code> (Vorrat) + <code>&lt;hearth-body&gt;</code> (Bildschirme, Menüs)</td>
+</tr>
 </table>
 
 <p><strong>Lizenz:</strong> alle ForgeIEC-v2-XSDs unter AGPL-3.0-or-later.</p>
@@ -107,7 +112,7 @@ Pass B (Extension):  pro &lt;addData name="URI"&gt;
 </code></pre>
 
 <p>Implementiert in ForgeIEC's <code>FXsdValidator</code> (libxml2 FFI).
-Spec: <a href="https://forgeiec.io/de/news/plcopen-import-export/">PLCopen-IE-1 Sprint-Spec</a>.</p>
+Dateiformat: <a href="/de/help/file-format/">Projekt-Dateiformat</a>.</p>
 
 <h2>Bekannte Non-Konformanz von <code>.forge</code>-Dateien</h2>
 

@@ -1,5 +1,5 @@
 ---
-title: "Sicherheits-Architektur in 3 Schichten"
+title: "Sicherheits-Architektur: Force dreifach gesperrt"
 date: 2026-05-08
 summary: "Force-Gate per Variable, Confirmation State Machine, Build-time-Gating — wie ForgeIEC verhindert dass eine KI oder ein Fehlklick reale Hardware bewegt"
 components: [studio, anvild]
@@ -9,14 +9,15 @@ components: [studio, anvild]
 
 ## Worum es geht
 
-In der Automatisierung ist der gefaehrlichste Befehl der **Force**:
-ein Output-Pin manuell auf TRUE pinnen, unabhaengig vom Programm.
+In der Automatisierung ist der gefährlichste Befehl der **Force**:
+ein Output-Pin manuell auf TRUE pinnen, unabhängig vom Programm.
 Das bewegt am Ausgang **echte Hardware** — einen Motor, ein
 Ventil, eine Sicherheitsfunktion.
 
 ForgeIEC behandelt Force-Setzungen entsprechend: **per-Variable
-gegated, mit drei aufeinander aufbauenden Defense-Layern** in
-unabhaengigen Subsystemen. Eine KI kann **nicht** forcen. Ein
+gegated und dreifach gesperrt** — beim Codegen, in der Runtime und im
+Editor, in unabhängigen Subsystemen; für die KI kommt eine vierte
+Sperre im MCP-Server hinzu. Eine KI kann **nicht** forcen. Ein
 Fehlklick im UI braucht zwei separate Confirms. Und ein
 Production-Build der Runtime hat die Force-Bridge gar nicht
 mitcompiliert.
@@ -32,21 +33,21 @@ Force-Bridge:
 
 - Im Variables-Tab gibt es eine `F`-Checkbox pro Variable
 - Default: AUS (force nicht erlaubt)
-- Anschalten ist eine Modell-Aenderung, die das Projekt dirty
+- Anschalten ist eine Modell-Änderung, die das Projekt dirty
   macht → muss gespeichert + neu deployed werden
 
 Damit ist die Force-Berechtigung am **Quellcode** verankert.
-Operator + Audit koennen genau sehen welche Variablen
+Operator + Audit können genau sehen welche Variablen
 forcierbar sind.
 
 ---
 
 ## Layer 2 — anvild RPC
 
-Die anvild-Runtime prueft beim `ForceVariable`-gRPC-Endpoint den
+Die anvild-Runtime prüft beim `ForceVariable`-gRPC-Endpoint den
 Build-Mode der laufenden PLC-Binary. Wenn die Binary **nicht**
 mit Force-Bridge gebaut wurde, lehnt anvild Force-Anfragen ab —
-unabhaengig davon was das UI sagt.
+unabhängig davon was das UI sagt.
 
 Production-Builds der Runtime werden ohne `-DFORCING_ENABLED`
 ausgeliefert. Selbst wenn ein Angreifer Studio kompromittiert,
@@ -58,37 +59,37 @@ der Code-Pfad nicht existiert.
 ## Layer 3 — Editor-UI
 
 Die F-Checkbox wird **automatisch greyout** wenn die PLC-Binary
-kein Force unterstuetzt. Plus: die Build-Mode-Information laeuft
+kein Force unterstützt. Plus: die Build-Mode-Information läuft
 durch `anvild::server_info` zum Editor — `editor_build.
 force_available` ist `true|false`.
 
-Operator sieht im UI sofort: hier laeuft eine sichere
-Production-Binary, Force ist nicht moeglich. Kein
+Operator sieht im UI sofort: hier läuft eine sichere
+Production-Binary, Force ist nicht möglich. Kein
 „Klick-und-hoffen"-Trial-and-Error.
 
 ---
 
 ## Layer 4 — MCP
 
-Fuer die **KI-Schicht** gibt es eine vierte Schicht obendrauf:
+Für die **KI-Schicht** gibt es eine vierte Schicht obendrauf:
 es gibt **kein** `force.*`-MCP-Tool, weder im Default-Build noch
 im Override-Build. Eine KI kann den `forced=true|false`-Status
 **lesen** (per `monitor.snapshot`), aber **nicht setzen**.
 
-Begruendung in der Spec (mcp-platform-v1 §7.4): „Ein KI-Agent
-darf solche Side-Effects nicht selbsttaetig ausloesen — selbst
-wenn er glaubt es waere richtig."
+Begründung in der Spec (mcp-platform-v1 §7.4): „Ein KI-Agent
+darf solche Side-Effects nicht selbsttätig auslösen — selbst
+wenn er glaubt es wäre richtig."
 
 ---
 
-## Plus: Confirmation State Machine fuer alle Aenderungen
+## Plus: Confirmation State Machine für alle Änderungen
 
-Force ist nur die strengste Variante. Generell laeuft **jede
+Force ist nur die strengste Variante. Generell läuft **jede
 schreibende Aktion** der KI durch eine State Machine:
 
-1. Tool-Aufruf liefert `FORGE_ERR_CONFIRMATION_REQUIRED` zurueck
+1. Tool-Aufruf liefert `FORGE_ERR_CONFIRMATION_REQUIRED` zurück
 2. Operator sieht im Chat: was passieren soll + Kontext
-3. Bestaetigung via `editor.confirm` setzt den Tool-Lauf fort
+3. Bestätigung via `editor.confirm` setzt den Tool-Lauf fort
 4. Audit-Log mit Zeitstempel, Tool, Args, Choice
 
 ```
@@ -120,7 +121,7 @@ Taster nach DIN EN ISO 13850.
   Editor-seitige Force-greyout-Logik
 
 Plus Architektur-Spec: `documentation/architecture/mcp-platform-v1.md`
-§9 (Sicherheits-Modell) + tongs-platform-v1 §5 (Fault-Model fuer
+§9 (Sicherheits-Modell) + tongs-platform-v1 §5 (Fault-Model für
 Bus-Bridges).
 
 ---
@@ -132,7 +133,7 @@ Bus-Bridges).
 | Produktiv-SPS, KI nur lesend | Standard-APT-Install, kein Override-Flag |
 | Entwicklung mit Force-Test | Force-Variablen einzeln F-checken, Dev-Build der Runtime |
 | Tausch-Werkstatt: Cert-Lifecycle automatisierbar | Danger-Mode pro Persona — siehe [Bedienung](/help/ai/chat/) |
-| Test-Loop ohne UI-Klick fuer 50 Variablen | Danger-Mode + erhoehtes Tool-Turn-Limit |
+| Test-Loop ohne UI-Klick für 50 Variablen | Danger-Mode + erhöhtes Tool-Turn-Limit |
 | Lehrling einlernen | Trainee-Persona, immer alle Confirms |
 
 ---

@@ -3,19 +3,27 @@ title: "Download"
 summary: "Alle ForgeIEC-Komponenten — APT-Repository, Direkt-Downloads, Quellcode"
 ---
 
-## ForgeIEC-Komponenten im Ueberblick
+{{< callout type="note" title="Stand: Vorabversion 0.2" >}}
+Alle Pakete sind Vorabversionen der Reihe 0.2 (aktuell 0.2.2). Im
+produktiven Einsatz (Pilotbetrieb) ist der ST-Editor. Je Release
+kommt eine IEC-Sprache hinzu: 0.3 LD, 0.4 FBD, 0.5 SFC; IL ist
+abgekündigt. Siehe [Roadmap](/de/roadmap/).
+{{< /callout >}}
+
+## ForgeIEC-Komponenten im Überblick
 
 ForgeIEC besteht aus mehreren Komponenten. Welche Sie brauchen,
-haengt von Ihrer Rolle:
+hängt von Ihrer Rolle:
 
 | Rolle | Komponente | Wo installieren |
 |---|---|---|
 | **SPS-Programmierer / Anwender** | `forgeiec-studio` | Workstation |
-| **Inbetriebnehmer** | `forgeiec-anvil-server` (liefert `anvild`) | Ziel-SPS |
-| **HMI / OPC-UA-Anbindung** | `forgeiec-bellows-server` (liefert `bellowsd`) | Ziel-SPS oder eigener Host |
-| **Modbus-TCP** | im Paket `forgeiec-anvil-server` enthalten | Ziel-SPS |
-| **Profibus / EtherCAT / EthernetIP** | ebenfalls in `forgeiec-anvil-server` | Ziel-SPS |
+| **Inbetriebnehmer** | `forgeiec-anvil-server` — der Anvil-Server (anvild); Dienst `forgeiec-anvil-server.service`, Programm `anvil-server` | Ziel-SPS |
+| **Modbus TCP** | im Paket `forgeiec-anvil-server` enthalten | Ziel-SPS |
+| **EtherCAT / PROFIBUS / EtherNet/IP** | Gerüst, ebenfalls in `forgeiec-anvil-server` — Protokoll in Arbeit | Ziel-SPS |
+| **Bedienoberfläche (HMI, Vorschau)** | `forgeiec-hearth-server` | Ziel-SPS |
 | **Bedien-Panel** | `forgeiec-screen-wayland` oder `-xorg` | Panel-Hardware |
+| **OPC-UA-Gateway** | `forgeiec-bellows-server` — *ruht, ohne Wartung* | — |
 
 ---
 
@@ -23,8 +31,9 @@ haengt von Ihrer Rolle:
 
 ForgeIEC wird als signiertes Debian-Repository unter
 `apt.forgeiec.io` und als signiertes RPM-Repository unter
-`rpm.forgeiec.io` bereitgestellt. Einrichtung ist einmalig pro
-Workstation bzw. Ziel-SPS — waehlen Sie Ihre Distribution aus:
+`rpm.forgeiec.io` bereitgestellt — signierte Pakete aus einer
+automatisierten CI. Einrichtung ist einmalig pro Workstation bzw.
+Ziel-SPS — wählen Sie Ihre Distribution aus:
 
 {{< distro-install >}}
 
@@ -33,130 +42,158 @@ Danach Komponenten einzeln installieren:
 ```bash
 # Workstation
 sudo apt install forgeiec-studio          # ForgeIEC Studio
-sudo apt install forgeiec-fdd-data        # Geraetebeschreibungen (empfohlen)
+sudo apt install forgeiec-fdd-data        # Gerätebeschreibungen (empfohlen)
 
 # Ziel-SPS
-sudo apt install forgeiec-anvil-server    # PLC-Runtime (anvild + alle tongs-*)
-sudo apt install forgeiec-bellows-server  # HMI-Gateway (bellowsd)
+sudo apt install forgeiec-anvil-server    # SPS-Runtime (Anvil-Server + alle tongs-*)
+sudo apt install forgeiec-hearth-server   # Bedienoberfläche (Vorschau)
 
 # Bedien-Panel
 sudo apt install forgeiec-screen-wayland  # Kiosk unter Wayland
 sudo apt install forgeiec-screen-xorg     # Kiosk unter X11
 ```
 
-Auf RPM-Systemen heissen die Befehle `sudo dnf install …` bei sonst
-gleichen Paketnamen.
+Auf RPM-Systemen heißen die Befehle `sudo dnf install …` bei sonst
+gleichen Paketnamen — welche Pakete es dort gibt, zeigt die Tabelle
+unten (die Runtime noch nicht).
 
 Die Bus-Bridges (`tongs-modbustcp`, `tongs-ethercat`, `tongs-profibus`,
 `tongs-ethernetip`) sind **keine** eigenen Pakete — sie liegen im Paket
-`forgeiec-anvil-server` und werden von `anvild` gestartet.
+`forgeiec-anvil-server` und werden vom Anvil-Server gestartet.
+
+Das Paket `forgeiec-bellows-server` (OPC-UA-Gateway) liegt weiter im
+APT-Repository, **ruht aber** — es wird derzeit nicht entwickelt und
+nicht gewartet.
 
 Updates folgen dem normalen `apt update && apt upgrade`-Zyklus —
-keine manuellen `.deb`-Dateien noetig.
+keine manuellen `.deb`-Dateien nötig.
 
 ---
 
-## Unterstuetzte Plattformen
+## Unterstützte Plattformen
 
 ### Debian / Ubuntu (`apt.forgeiec.io`)
 
 | Paket | Architekturen | Suites |
 |---|---|---|
 | `forgeiec-studio` | amd64, arm64 | bookworm, trixie, noble |
-| `forgeiec-fdd-data` | architekturunabhaengig | bookworm, trixie, noble |
-| `forgeiec-anvil-server` | amd64, arm64 | bookworm, trixie, jammy, noble |
-| `forgeiec-bellows-server` | amd64, arm64 | bookworm, trixie, jammy, noble |
+| `forgeiec-fdd-data` | architekturunabhängig | bookworm, trixie, noble |
+| `forgeiec-anvil-server` | amd64, arm64, armhf | bookworm, trixie, jammy, noble |
+| `forgeiec-hearth-server` | amd64, arm64, armhf | bookworm, trixie, jammy, noble |
 | `forgeiec-screen-wayland` | amd64, arm64 | bullseye, bookworm, trixie, jammy, noble |
 | `forgeiec-screen-xorg` | amd64, arm64 | bullseye, bookworm, trixie, jammy, noble |
-| `hearth-server` | amd64, arm64 | bookworm, trixie, jammy, noble |
+| `forgeiec-bellows-server` (ruht) | amd64, arm64, armhf | bookworm, trixie, jammy, noble |
 
 Suite-Zuordnung: `bullseye` = Debian 11, `bookworm` = Debian 12,
 `trixie` = Debian 13, `jammy` = Ubuntu 22.04, `noble` = Ubuntu 24.04.
+`armhf` (ARMv7) gibt es für die Runtime, Hearth und die
+Gerätebeschreibungen.
 
 ### Enterprise Linux / Fedora (`rpm.forgeiec.io`)
 
-| Paket | Architektur | Distributionen |
+| Paket | Architekturen | Distributionen |
 |---|---|---|
+| `forgeiec-studio` | x86_64, aarch64 | AlmaLinux 9 (`el9`), Fedora 44 |
+| `forgeiec-fdd-data` | x86_64, aarch64 | AlmaLinux 9 (`el9`), Fedora 44 |
+| `forgeiec-hearth-server` | x86_64 | AlmaLinux 9 (`el9`) |
 | `forgeiec-screen-wayland` | x86_64 | AlmaLinux 9 (`el9`), Fedora 44 |
 | `forgeiec-screen-xorg` | x86_64 | AlmaLinux 9 (`el9`), Fedora 44 |
 
-Die RPM-Auslieferung ist neu und umfasst derzeit nur das Bedien-Panel.
-ForgeIEC Studio und die Runtime folgen, sobald ihre RPM-Slots stabil sind.
+**Runtime als RPM: noch nicht verfügbar.** `forgeiec-anvil-server`
+gibt es derzeit nur als Debian-Paket.
 
-Es gibt **zwei verschiedene Signierschluessel**: `forgeiec.gpg` (ed25519)
-fuer apt und `forgeiec-rpm.asc` (RSA-4096) fuer rpm. Der Unterschied ist
+<!-- ENTWURF: RPM-Tabelle nach Audit W-09 (Messung el9/x86_64, el9/aarch64, fedora-44/aarch64); fedora-44/x86_64 wurde im Audit nicht einzeln aufgeführt. Vor Veröffentlichung gegen rpm.forgeiec.io prüfen. -->
+
+Es gibt **zwei verschiedene Signierschlüssel**: `forgeiec.gpg` (ed25519)
+für apt und `forgeiec-rpm.asc` (RSA-4096) für rpm. Der Unterschied ist
 nicht kosmetisch — RHEL 9 liefert `rpm` 4.16, dessen interner PGP-Parser
 ed25519 nicht verifizieren kann.
 
-arm64 auf der RPM-Seite fehlt bewusst: der Cross-Compile-Pfad der CI ist
-an Debian-Pakete gebunden, die es auf Enterprise Linux nicht gibt.
+### Windows
 
-**Windows-Build** von ForgeIEC Studio: in Vorbereitung. Bis dahin
-laeuft das Studio unter Linux nativ oder per WSL2 auf Windows-
-Workstations.
+Einen Windows-Build von ForgeIEC Studio gibt es, die Windows-CI läuft.
+Einen öffentlichen Download gibt es noch nicht — den Installer
+erhalten Sie **auf Anfrage** an blacksmith@forgeiec.io.
 
 ---
 
-## Direkt-Downloads (Release-Tarballs)
+## Quellcode
 
-Wer kein APT-Repository nutzen kann oder mag — z.B. fuer Air-Gap-
-Workstations — kann die einzelnen Releases direkt von der
-Repository-Seite herunterladen:
+Der Quellcode steht unter der AGPL-3.0-or-later (der in Ihr Projekt
+gelinkte Teil unter Apache-2.0). **Die Repositories sind nicht
+öffentlich einsehbar** — Einsicht auf Anfrage: Schicken Sie Ihren
+SSH-Public-Key an blacksmith@forgeiec.io, wir schalten ihn frei.
+Danach stehen Ihnen unter anderem diese Repositories offen:
 
-- **ForgeIEC-Studio-Quellcode**:
-  [GitHub](https://github.com/Beerlesklopfer/ForgeIEC-Studio) /
-  [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio)
-- **anvild + Bridges**:
-  [Forgejo](https://git.forgeiec.io/ForgeIEC/anvil)
-- **bellowsd**:
-  [Forgejo](https://git.forgeiec.io/ForgeIEC/bellows)
-- **Webseiten-Quellcode**:
-  [GitHub](https://github.com/Beerlesklopfer/forgeiec-website) /
-  [Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-website)
+- **ForgeIEC Studio**: `ForgeIEC/forgeiec-studio`
+- **Anvil-Server (anvild)**: `ForgeIEC/anvil`
+- **Tongs (Bus-Bridges)**: `ForgeIEC/tongs-core` und je Protokoll `ForgeIEC/tongs-*`
+- **Hearth**: `ForgeIEC/hearth`
+- **bellowsd** (ruht): `ForgeIEC/bellows`
+- **Webseite**: `ForgeIEC/forgeiec-website`
 
-Pro Release sind signierte `.deb`-Pakete + Source-Tarballs am
-GitHub/Forgejo-Release-Tag angehaengt.
+Die normativen Spezifikationen liegen im Repository
+`forgeiec-studio` unter `documentation/architecture/`.
 
 ---
 
 ## Bauen aus dem Quellcode
 
 ```bash
-# Repository klonen (mit Submodules)
-git clone --recurse-submodules https://github.com/Beerlesklopfer/ForgeIEC-Studio.git
-cd ForgeIEC-Studio
+# Repository klonen (mit Submodules) — nur über SSH, nach
+# Freischaltung Ihres SSH-Public-Keys
+git clone --recurse-submodules ssh://git@git.forgeiec.io/ForgeIEC/forgeiec-studio.git
+cd forgeiec-studio
 
-# Studio + alle Daemons bauen
-cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j$(nproc)
+# Studio bauen
+cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j$(nproc)
 
 # Deployen auf das lokale System
 ./deploy.sh all
 ```
 
-Voraussetzungen:
+Voraussetzungen (Debian 12/13, Ubuntu 24.04), so wie die CI sie
+installiert:
 
-- Debian 12/13 oder Ubuntu 24.04+
-- `build-essential cmake qt6-base-dev qt6-declarative-dev libtomlplusplus-dev`
-- Rust 1.85+ (via rustup)
+```bash
+sudo apt install build-essential cmake ninja-build pkg-config git \
+  qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-tools-dev-tools \
+  libqt6svg6-dev libqt6sql6-sqlite libqt6charts6-dev libqt6opengl6-dev \
+  libgl-dev libssl-dev libre2-dev libargon2-dev libsqlite3-dev libxml2-dev \
+  libtomlplusplus-dev libprotobuf-dev protobuf-compiler \
+  libgrpc++-dev protobuf-compiler-grpc \
+  forgeiec-libforge-mcp-dev   # aus dem ForgeIEC-APT-Repository
+# Debian 13 zusätzlich: qt6-svg-plugins
+```
+
+Maßgeblich ist die Paketliste in `.forgejo/workflows/linux.yml` im
+Repository.
 
 ---
 
-## Demo-Projekte
+## Beispielprojekte
 
-Mit ForgeIEC Studio ausgelieferte Beispiel-Projekte:
+Mit ForgeIEC Studio ausgelieferte Beispiele (Studio: `File -> Open Example`):
 
-| Projekt | Zweck |
+| Beispiel | Inhalt |
 |---|---|
-| `knight_rider.forge` | Klassischer Lauflicht-Test fuer Bellows-LEDs |
-| weitere folgen | … |
-
-Zu finden im Studio unter `File -> Open Example`.
+| Blinky | Blinklicht mit TON/TOF |
+| Star-Delta Reversing Starter | Stern-Dreieck-Wendeschaltung |
+| Knight Rider | Lauflicht, 16 Bit |
+| Traffic Light | Ampelsteuerung |
+| PID Controller | PID-Temperaturregelung (Funktion) |
+| Weekly Timer | Wochenschaltuhr (Funktionsbaustein) |
+| FOC Demo | Feldorientierte Regelung, 3-Phasen-Umrichter |
+| Tankanlage | Tankanlage mit Hearth-Bedienoberfläche |
+| Conveyor Pick & Place | Förderband mit Greifer |
+| Compressor Station | Kompressorstation |
+| Axis Control | Achssteuerung mit verschachteltem STRUCT |
 
 ---
 
-## Naechste Schritte
+## Nächste Schritte
 
-- [Erste Schritte mit ForgeIEC Studio](/help/)
-- [KI-Helfer einrichten](/help/ai/)
-- [Bus-Konfiguration](/help/bus-config/)
-- [News + Release-Notes](/news/)
+- [Erste Schritte mit ForgeIEC Studio](/de/help/)
+- [KI-Helfer einrichten](/de/help/ai/)
+- [Bus-Konfiguration](/de/help/bus-config/)
+- [News + Release-Notes](/de/news/)

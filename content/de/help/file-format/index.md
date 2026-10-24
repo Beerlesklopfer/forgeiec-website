@@ -3,12 +3,12 @@ title: "Projekt-Dateiformat (.forge)"
 summary: "Aufbau der ForgeIEC-Projektdatei: PLCopen-XML mit ForgeIEC-Erweiterungen"
 ---
 
-## Ueberblick
+## Überblick
 
-Eine ForgeIEC-Projektdatei traegt die Endung **`.forge`** (Alt-Endung
+Eine ForgeIEC-Projektdatei trägt die Endung **`.forge`** (Alt-Endung
 `.forgeiec` wird beim Laden weiterhin akzeptiert) und ist ein normales
 **PLCopen-TC6-XML-Dokument** mit einigen ForgeIEC-spezifischen
-Erweiterungen, die ueber den standardkonformen `<addData>`-Mechanismus
+Erweiterungen, die über den standardkonformen `<addData>`-Mechanismus
 eingeklinkt sind. Die Datei ist UTF-8-kodiert, mensch-lesbar, in beliebigem
 XML-Editor diff-bar und in Git versionierbar.
 
@@ -42,12 +42,12 @@ XML-Editor diff-bar und in Git versionierbar.
 | `companyName` | Erzeuger-Werkzeug — bei ForgeIEC immer `"ForgeIEC"` |
 | `creationDateTime` | ISO-8601-Zeitstempel der ersten Erstellung |
 | `productVersion` | Editor-Version, mit der das Projekt geschrieben wurde |
-| `author` | Frei waehlbarer Autor-Name |
+| `author` | Frei wählbarer Autor-Name |
 | `name` | Projektname (UI-Label, kein Dateiname) |
 
 ## `<types>` — Bibliothek + POUs
 
-Enthaelt drei Sektionen:
+Enthält drei Sektionen:
 
 ### `<dataTypes>`
 
@@ -79,7 +79,7 @@ Alle Programm-Organisations-Einheiten:
 Jede POU hat `<interface>` (Variablen-Deklarationen, gegliedert in
 `<inputVars>`, `<outputVars>`, `<inOutVars>`, `<localVars>`,
 `<externalVars>`, `<tempVars>`) und einen `<body>`, der den ST-Quellcode
-in einem `<ST>`-Element traegt.
+in einem `<ST>`-Element trägt.
 
 ```xml
 <pou name="PLC_PRG" pouType="program">
@@ -98,7 +98,7 @@ in einem `<ST>`-Element traegt.
 
 ### Spezielle POU-Typen (ForgeIEC-Erweiterung)
 
-ForgeIEC kennt fuenf Listenformen, die als POU mit eigenem `pouType`
+ForgeIEC kennt fünf Listenformen, die als POU mit eigenem `pouType`
 gespeichert werden:
 
 | pouType            | Zweck |
@@ -124,8 +124,8 @@ gespeichert werden:
 </instances>
 ```
 
-`interval` setzt die Zykluszeit. Mehrere Tasks sind moeglich; jede Task
-fuehrt eine oder mehrere Programm-Instanzen aus.
+`interval` setzt die Zykluszeit. Mehrere Tasks sind möglich; jede Task
+führt eine oder mehrere Programm-Instanzen aus.
 
 ## `<addData>` — ForgeIEC-Erweiterungen
 
@@ -136,7 +136,7 @@ nutzt mehrere Namespaces:
 |---|---|
 | `https://forgeiec.io/v2/bus-config`  | Bus-Segmente + Devices ([Detail](/help/bus-config/)) |
 | `https://forgeiec.io/v2/address-pool`| Adress-Pool: located variables, Bus-Bindings, Tags |
-| `https://forgeiec.io/v2/monitoring`  | UI-Status: welche Variablen werden live ueberwacht |
+| `https://forgeiec.io/v2/monitoring`  | UI-Status: welche Variablen werden live überwacht |
 
 Ein typischer Aufbau:
 
@@ -156,14 +156,14 @@ Ein typischer Aufbau:
 
 `handleUnknown="discard"` ist die PLCopen-Direktive: ein Werkzeug, das
 diesen Block nicht versteht, darf ihn ignorieren — die Datei bleibt
-trotzdem ein gueltiges PLCopen-XML.
+trotzdem ein gültiges PLCopen-XML.
 
 ### Adress-Pool
 
-Der Adress-Pool ist **die einzige Quelle der Wahrheit** fuer die
-Variablen einer Anlage. Jeder Eintrag hat als **Primaerschluessel die
+Der Adress-Pool ist **die einzige Quelle der Wahrheit** für die
+Variablen einer Anlage. Jeder Eintrag hat als **Primärschlüssel die
 IEC-Adresse** (`%IX0.0`, `%QW3`, …) — Name, Tags und Bus-Bindings sind
-Beschreiber, die sich aendern koennen, ohne die Identitaet zu brechen.
+Beschreiber, die sich ändern können, ohne die Identität zu brechen.
 
 ```xml
 <addData>
@@ -183,7 +183,7 @@ Beschreiber, die sich aendern koennen, ohne die Identitaet zu brechen.
 
 | Attribut | Pflicht | Bedeutung |
 |---|---|---|
-| `address`        | ja  | IEC-Adresse — Primaerschluessel im Pool |
+| `address`        | ja  | IEC-Adresse — Primärschlüssel im Pool |
 | `name`           | nein | Programmer-sichtbarer Name (`T_1`, `Motor_Run`) |
 | `anvilGroup`     | nein | Anvil-IPC-Gruppe (Hardware-Kanal) |
 | `gvlNamespace`   | nein | GVL-Zuordnung (Editor-seitige Gruppierung) |
@@ -196,7 +196,7 @@ Beschreiber, die sich aendern koennen, ohne die Identitaet zu brechen.
 Eine Variable kann **mehrere Tags gleichzeitig** tragen (z. B. sowohl
 `anvilGroup="Pfirsich"` als auch `hmiGroup="Pfirsich"`). Damit der
 ST-Compiler die Bellows-Schreibweise `Bellows.Pfirsich.T_1` akzeptiert,
-muss zusaetzlich der **HMI-Export fuer die jeweilige Gruppe aktiv
+muss zusätzlich der **HMI-Export für die jeweilige Gruppe aktiv
 geschaltet** sein — sonst bleibt das `hmiGroup`-Tag ein reiner
 Beschreiber ohne Wirkung auf die Code-Generierung.
 
@@ -204,14 +204,14 @@ Beschreiber ohne Wirkung auf die Code-Generierung.
 TODO (Backlog):
   1. Eigene Doku-Seite zum Bellows-Export-Schalter (genaue Bedingung:
      per-Variable-Flag vs. HmiVarList-Aktivierung).
-  2. ST-Compiler: Validierungs-Pass ergaenzen, der einen Verweis auf
+  2. ST-Compiler: Validierungs-Pass ergänzen, der einen Verweis auf
      ein inaktives Bellows-Tag mit einem klaren Compile-Fehler ablehnt.
 -->
 
 
 ## ST-Sprachvorrat (Body-Inhalt)
 
-Der `<ST>`-Body enthaelt den IEC 61131-3 Structured-Text-Code als
+Der `<ST>`-Body enthält den IEC 61131-3 Structured-Text-Code als
 xhtml-Wrapper. ForgeIEC erweitert den Sprachvorrat um zwei Komfort-Features:
 
 ### Bit-Zugriff auf ANY_BIT-Typen
@@ -224,11 +224,11 @@ bButtons.0 := IN_Buttons.0 OR Bellows.Pfirsich.T_1;
 OUT_Valves.3 := jk[3].Q;
 ```
 
-Wird vom Compiler in saubere Bit-Maskierung uebersetzt.
+Wird vom Compiler in saubere Bit-Maskierung übersetzt.
 
 ### 3-Level qualifizierte Variablen
 
-`<Category>.<Group>.<Variable>` greift auf Pool-Eintraege zu, ohne
+`<Category>.<Group>.<Variable>` greift auf Pool-Einträge zu, ohne
 GVLs explizit zu deklarieren:
 
 | Category-Prefix  | Quelle |
@@ -236,30 +236,30 @@ GVLs explizit zu deklarieren:
 | `Anvil.X.Y`      | Pool-Variable mit `anvilGroup="X"` |
 | `Bellows.X.Y`    | Pool-Variable mit `hmiGroup="X"` |
 | `GVL.X.Y`        | Pool-Variable mit `gvlNamespace="X"` |
-| `HMI.X.Y`        | Synonym fuer `Bellows.X.Y` |
+| `HMI.X.Y`        | Synonym für `Bellows.X.Y` |
 | `POOL.X.Y`       | beliebiger Tag |
 
-`Anvil.X.Y` und `Bellows.X.Y` koennen unabhaengig voneinander auf zwei
-verschiedene Pool-Eintraege zeigen — der Compiler emittiert getrennte
-C-Symbole, sobald die Pool-Eintraege unterschiedliche IEC-Adressen
+`Anvil.X.Y` und `Bellows.X.Y` können unabhängig voneinander auf zwei
+verschiedene Pool-Einträge zeigen — der Compiler emittiert getrennte
+C-Symbole, sobald die Pool-Einträge unterschiedliche IEC-Adressen
 tragen.
 
-## Migration / Kompatibilitaet
+## Migration / Kompatibilität
 
 * Dateiendung: `.forge` ist die kanonische Endung. `.forgeiec` (alte
   Schreibweise) wird beim Laden weiterhin akzeptiert; beim Speichern
   schreibt der Editor `.forge`.
-* Das XML-Format ist abwaerts-kompatibel: aeltere ForgeIEC-Versionen
-  ignorieren neue `<addData>`-Bloecke (`handleUnknown="discard"`) und
-  oeffnen die Datei trotzdem.
-* Standard-PLCopen-Werkzeuge oeffnen den Standard-Teil (`<types>`,
+* Das XML-Format ist abwärts-kompatibel: ältere ForgeIEC-Versionen
+  ignorieren neue `<addData>`-Blöcke (`handleUnknown="discard"`) und
+  öffnen die Datei trotzdem.
+* Standard-PLCopen-Werkzeuge öffnen den Standard-Teil (`<types>`,
   `<instances>`) korrekt; die ForgeIEC-Erweiterungen fehlen dort,
   bleiben beim Speichern aber erhalten, wenn das Werkzeug
-  `<addData>`-Bloecke ungelesen durchschleift.
+  `<addData>`-Blöcke ungelesen durchschleift.
 
 ## Verwandte Themen
 
 * [Bus-Konfiguration](/help/bus-config/) — Detailschema `fi:busConfig`,
-  Geraete- und Modul-Definitionen.
+  Geräte- und Modul-Definitionen.
 * [Testabdeckung](/help/tests/) — automatisierte Tests, die das Format
   round-trip-stabil halten.

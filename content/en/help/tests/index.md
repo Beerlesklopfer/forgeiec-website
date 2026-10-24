@@ -1,27 +1,27 @@
 ---
 title: "Test Coverage"
-summary: "Automated quality assurance: 117 tests verify the complete IEC 61131-3 language feature set, all standard blocks, and the multi-task threading system"
+summary: "Automated quality assurance: 62 test programs verify the ST language feature set, the standard blocks and the multi-task threading system"
 ---
 
 ForgeIEC is backed by a comprehensive automated test suite.
-Every commit is verified against **117 unit tests** before merging, covering
-the complete IEC 61131-3 Structured Text language feature set, all
-standard function blocks, and the multi-task threading system.
+The CI runs **62 test programs** (CTest entries, counted on
+22 Oct 2026 in `tests/CMakeLists.txt`); they cover the Structured Text
+language feature set, the standard function blocks and the multi-task
+threading system. The three main suites:
 
 ## Test Suites at a Glance
 
 | Suite | Tests | Verifies |
 |-------|------:|----------|
-| **FStCompilerTest** | 101 | Complete ST language feature set |
-| **FStLibraryTest** | 8 | All 132 standard blocks (FBs + FCs) |
+| **FStCompilerTest** | 120 | ST language feature set |
+| **FStLibraryTest** | 7 | Standard blocks (FBs + FCs) |
 | **FCodeGeneratorThreadingTest** | 8 | Multi-task scheduling + lock-free sync |
-| **Total** | **117** | **0 failures** |
 
 ---
 
 ## 1. ST Language Feature Set (FStCompilerTest)
 
-101 tests verify every supported IEC 61131-3 Structured Text
+The tests verify every supported IEC 61131-3 Structured Text
 language construct. Each test compiles an ST fragment through the
 FStCompiler and verifies the generated C++ code.
 
@@ -197,7 +197,7 @@ Each IEC standard FB is instantiated and called:
 
 ## 2. Standard Library (FStLibraryTest)
 
-8 data-driven tests verify **all 132 blocks** from the
+Data-driven tests verify the blocks from the
 standard library (`standard_library.sql`) automatically.
 
 ### 2.1 Function Blocks (13 FBs)
@@ -289,7 +289,7 @@ language feature set as supported by ForgeIEC:
 - All operators (arithmetic, comparison, boolean, bit shift)
 - All control structures (IF, FOR, WHILE, REPEAT, CASE)
 - All literal types (integer, real, bool, string, time)
-- All standard FBs and FCs (132 blocks)
+- The standard FBs and FCs
 - Array and struct access
 - GVL-qualified variables
 - Cross-task synchronization (atomics + double-buffer)

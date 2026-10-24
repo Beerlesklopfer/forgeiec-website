@@ -1,0 +1,6 @@
+{{- /*
+  Status chip in plain words, never colour only.
+  Usage: {{< status "use" >}}  states: use | wip | plan | rest
+  Optional second argument overrides the label: {{< status "wip" "Gerüst" >}}
+*/ -}}
+{{- partial "chip.html" (dict "s" (.Get 0 | default "plan") "label" (.Get 1)) -}}

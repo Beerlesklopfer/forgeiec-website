@@ -1,0 +1,10 @@
+# Current program versions in the repositories, used by `make screenshots-list`
+# to flag outdated screenshots. One line per program: <program> <version> <source>
+# Update when a program's version changes. Measured 2026-10-22.
+studio        0.2.0  forgeiec-studio CMakeLists.txt project(ForgeIEC VERSION …)
+fdd-editor    0.2.0  forgeiec-studio CMakeLists.txt (built with the Studio)
+anvil         0.2.2  anvil Cargo.toml [package] version
+tongs         0.2.2  tongs-core Cargo.toml workspace version
+hearth        0.2.0  hearth-studio CMakeLists.txt project(HearthStudio VERSION …)
+hearth-server 0.2.1  hearth-studio hearth/Cargo.toml version
+rivet         0.1.0  forgeiec-rivet client/Cargo.toml version (branch development)

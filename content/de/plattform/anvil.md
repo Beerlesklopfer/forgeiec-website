@@ -6,32 +6,40 @@ weight: 2
 
 ## Der Amboss
 
-In jeder Schmiede ist der Amboss das zentrale Werkstueck — hier wird geformt,
-gehaertet und veredelt. **Anvil** ist die Laufzeitumgebung der
-ForgeIEC-Plattform: der Ort, an dem Quellcode auf Echtzeitausfuehrung trifft.
+In jeder Schmiede ist der Amboss das zentrale Werkstück — hier wird geformt,
+gehärtet und veredelt. **Anvil** ist die Laufzeitumgebung der
+ForgeIEC-Plattform: der Ort, an dem Quellcode auf Echtzeitausführung trifft.
 
 Anvil verwaltet den SPS-Scan-Zyklus, die Prozessabbilder und den
 Datenaustausch zwischen dem SPS-Programm und den Feldbus-Bridges. Der
-Laufzeit-Daemon `anvild` ist das Herzschlag-gebende Element jeder
-ForgeIEC-Installation.
+Laufzeit-Daemon, der **Anvil-Server (anvild)**, ist das Herzschlag-gebende
+Element jeder ForgeIEC-Installation. (Das Programm heißt seit
+September 2026 `anvil-server`, der Dienst `forgeiec-anvil-server.service`.)
 
 ---
 
 ## Architektur
 
 ```
-+--------------+         +------------+         +------------------+
-|              |         |            |         |                  |
-| SPS-Programm |<------->|  anvild    |<------->|  Modbus-Bridge   |--> Feldgeraete
-|  (IEC Code)  |  gRPC   |  (Daemon)  |  Anvil  |  EtherCAT-Bridge |--> Antriebe
-|              |         |            |  SHM    |  Profibus-Bridge  |--> Sensoren
-+--------------+         +------------+         |  OPC-UA-Bridge   |--> SCADA
-                                                +------------------+
-
-                         <-- Anvil -->
-                         Zero-Copy IPC
-                         Shared Memory
+ Workstation              Steuerung (Linux)
++-----------+  gRPC  +---------------------+
+|  Studio   |------->|  Anvil-Server       |  startet und überwacht
++-----------+        |  (anvild)           |-----------------------+
+                     +---------------------+                       |
+                                                                   v
+   +------------------+   Anvil-Bus (iceoryx2,   +------------------+
+   | forgeiec_plc     |<------------------------>| tongs-* Bridges  |--> Feldgeräte
+   | (SPS-Zyklus)     |   Zero-Copy Shared Mem.) | (je Segment ein  |
+   +------------------+            ^             |  Prozess)        |
+                                   |             +------------------+
+                             +-----------+
+                             |  Hearth   |  Bedienoberfläche (Vorschau)
+                             +-----------+
 ```
+
+Der SPS-Zyklus läuft als eigener Prozess `forgeiec_plc`; anvild
+startet ihn und die Bridges, nimmt die Befehle des Studios entgegen
+und überwacht alles.
 
 ---
 
@@ -39,11 +47,11 @@ ForgeIEC-Installation.
 
 Der SPS-Kern arbeitet in einem deterministischen Scan-Zyklus:
 
-1. **Eingaben lesen** — Prozessabbild aus den Feldbus-Bridges uebernehmen
-2. **Programm ausfuehren** — IEC-Code abarbeiten
+1. **Eingaben lesen** — Prozessabbild aus den Feldbus-Bridges übernehmen
+2. **Programm ausführen** — IEC-Code abarbeiten
 3. **Ausgaben schreiben** — Ergebnisse an die Bridges verteilen
 
-Der Zyklus laeuft mit konfigurierbarer Zykluszeit. Anvil garantiert
+Der Zyklus läuft mit konfigurierbarer Zykluszeit. Anvil garantiert
 deterministisches Verhalten ohne dynamische Speicherallokation im Hot Path.
 
 ---
@@ -51,7 +59,7 @@ deterministisches Verhalten ohne dynamische Speicherallokation im Hot Path.
 ## Anvil Technology -- Zero-Copy IPC
 
 Der Datenaustausch zwischen `anvild` und den Protocol-Bridges erfolgt
-ueber **Anvil Technology** — einen hochperformanten IPC-Kanal auf Basis
+über **Anvil Technology** — einen hochperformanten IPC-Kanal auf Basis
 von Zero-Copy Shared Memory:
 
 - **Mikrosekunden-Latenz** — keine Serialisierung, keine Kopien
@@ -83,22 +91,22 @@ VAR_GLOBAL SUBSCRIBE 'Sensoren'
 END_VAR
 ```
 
-Die PUBLISH/SUBSCRIBE-Schluesselwoerter sind eine ForgeIEC-Erweiterung des
+Die PUBLISH/SUBSCRIBE-Schlüsselwörter sind eine ForgeIEC-Erweiterung des
 IEC 61131-3 Standards. Der Compiler erzeugt automatisch die Anvil-Anbindung.
-Im Editor werden die zugehoerigen VAR_ANVIL-Bloecke automatisch generiert
+Im Editor werden die zugehörigen VAR_ANVIL-Blöcke automatisch generiert
 und synchronisiert.
 
 ---
 
 ## Bridge-Management
 
-`anvild` startet, ueberwacht und verwaltet alle Feldbus-Bridges als
+`anvild` startet, überwacht und verwaltet alle Feldbus-Bridges als
 Subprozesse:
 
-- **Ein Prozess pro Segment** — Isolation und unabhaengiger Betrieb
-- **Automatischer Neustart** — abgestuerzte Bridges werden erkannt und
+- **Ein Prozess pro Segment** — Isolation und unabhängiger Betrieb
+- **Automatischer Neustart** — abgestürzte Bridges werden erkannt und
   neu gestartet
-- **Konfiguration via TOML** — `config.toml` definiert Segmente, Geraete
+- **Konfiguration via TOML** — `config.toml` definiert Segmente, Geräte
   und Verbindungsparameter
 - **gRPC-Schnittstelle** — Forge Studio steuert den Daemon remote
 
@@ -108,14 +116,14 @@ Subprozesse:
 
 Die Kompilierung folgt einem zweistufigen Modell:
 
-1. **Workstation**: Forge Studio erzeugt den C-Quellcode direkt aus
-   dem Projektmodell — ohne externen IEC-Compiler
+1. **Workstation**: Forge Studio übersetzt den IEC-Code mit dem
+   eigenen Compiler-Kern in C++-Quelltext
 2. **Zielsystem**: `anvild` generiert ein plattformspezifisches Makefile
    und ruft `make` (g++) auf
 
 Auf dem Zielsystem werden lediglich `make`, `g++`, `libstdc++` und
-`librt` benoetigt, um den generierten C-Code zur Laufzeit zu
-kompilieren. Es wird bewusst kein zusaetzlicher IEC-Compiler auf der
+`librt` benötigt, um den generierten C++-Code zur Laufzeit zu
+kompilieren. Es wird bewusst kein zusätzlicher IEC-Compiler auf der
 Ziel-SPS installiert.
 
 ---
@@ -126,13 +134,18 @@ Ziel-SPS installiert.
 |-------------|------|
 | **Sprache** | Rust |
 | **Kommunikation** | gRPC (tonic/prost) |
-| **IPC** | Anvil Technology (Zero-Copy Shared Memory) |
+| **IPC** | Anvil-Bus (iceoryx2, Zero-Copy Shared Memory) |
 | **Konfiguration** | TOML |
 | **Plattformen** | x86_64, ARM64, ARMv7 (Linux) |
 | **Prozessmodell** | systemd-Daemon + Subprozesse |
-| **Lizenz** | AGPL-3.0 |
+| **Lizenz** | AGPL-3.0-or-later; Runtime-API, libanvil und generierter Code: Apache-2.0 |
 
 ---
+
+## Ansichten
+
+{{< screenshot program="studio" name="plc-stats" alt="Laufzeitstatistik der Steuerung im Studio" caption="Laufzeitstatistik: Zustand, Programm, Laufzeit und Zykluswerte, live." >}}
+
 
 <div style="text-align:center; padding: 2rem;">
 

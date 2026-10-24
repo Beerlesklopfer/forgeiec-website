@@ -3,16 +3,16 @@ title: "Einstellungen (Preferences)"
 summary: "Zentraler Konfigurationsdialog des Editors: Editor, Runtime, PLC, AI Assistant"
 ---
 
-## Ueberblick
+## Überblick
 
-Der **Preferences-Dialog** ist die zentrale Anlaufstelle fuer alle
-editor-globalen Einstellungen — alles, was nicht zum geoeffneten Projekt
-gehoert, sondern den Editor selbst, die Verbindung zu einer Runtime und
+Der **Preferences-Dialog** ist die zentrale Anlaufstelle für alle
+editor-globalen Einstellungen — alles, was nicht zum geöffneten Projekt
+gehört, sondern den Editor selbst, die Verbindung zu einer Runtime und
 das Verhalten beim Upload betrifft.
 
-Geoeffnet wird der Dialog ueber **`Edit > Preferences...`** (in einigen
-Themes auch unter `Tools > Preferences...`). Druecken Sie **F1** im
-Dialog, um direkt diese Seite zu oeffnen.
+Geöffnet wird der Dialog über **`Edit > Preferences...`** (in einigen
+Themes auch unter `Tools > Preferences...`). Drücken Sie **F1** im
+Dialog, um direkt diese Seite zu öffnen.
 
 ```
 Preferences
@@ -30,7 +30,7 @@ Text-Eingabe-Feldern.
 | Feld | Bedeutung |
 |---|---|
 | **Font**         | Schriftfamilie. Vorgefiltert auf monospace-Schriften (Empfehlung: `JetBrains Mono`, `Cascadia Code`, `Consolas`). |
-| **Font size**    | Schriftgroesse in Punkt. Default `10`. |
+| **Font size**    | Schriftgröße in Punkt. Default `10`. |
 | **Tab width**    | Anzahl Leerzeichen pro Tab-Stop. Default `4`. |
 | **Show line numbers** | Zeigt links neben dem Code-Editor laufende Zeilennummern. |
 
@@ -42,16 +42,16 @@ Verbindung zu einem **anvild**-Daemon und IPC-Diagnose.
 |---|---|
 | **Host**         | Hostname oder IP der PLC. Default `localhost`. |
 | **Port**         | gRPC-Port von anvild. Default `50051`. |
-| **User**         | Benutzername fuer die Token-Authentifizierung. |
-| **Anvil Debug**  | IPC-Diagnose-Stufe (`Off`, `Errors only`, `Verbose`). Schreibt zusaetzliche Stats in den anvild-Log — nuetzlich, um Iceoryx-Topic-Drift in Production zu finden. |
+| **User**         | Benutzername für die Token-Authentifizierung. |
+| **Anvil Debug**  | IPC-Diagnose-Stufe (`Off`, `Errors only`, `Verbose`). Schreibt zusätzliche Stats in den anvild-Log — nützlich, um Anvil-Topic-Drift in Production zu finden. |
 
-Zusaetzlich: **Auto-Connect on start** verbindet sich beim Editor-Start
+Zusätzlich: **Auto-Connect on start** verbindet sich beim Editor-Start
 automatisch mit dem zuletzt erfolgreich verbundenen anvild — sinnvoll
 auf einem dedizierten Engineering-Laptop.
 
 Der **Network Scanner**-Block in derselben Lasche scannt das LAN nach
-Modbus-TCP-Geraeten (Port 502) und ForgeIEC-Runtimes (Port 50051) und
-fuegt Treffer in die Bus-Konfiguration ein.
+Modbus-TCP-Geräten (Port 502) und ForgeIEC-Runtimes (Port 50051) und
+fügt Treffer in die Bus-Konfiguration ein.
 
 ## PLC
 
@@ -60,28 +60,28 @@ Steuert, was nach einem **Upload** auf der PLC passiert.
 | Feld | Bedeutung |
 |---|---|
 | **Compile Mode** | `Development` (Live-Monitoring + Forcing aktiv) oder `Production` (gestripptes Binary, ohne Debug-Bridges — Sicherheits-Boundary). |
-| **PLC autostart**| Startet die PLC-Runtime automatisch nach erfolgreichem Upload, ohne den Bestaetigungsdialog. |
-| **Persist enabled** | Aktiviert das periodische Speichern von `VAR_PERSIST`/`RETAIN`-Variablen nach `/var/lib/anvil/persistent.dat`. Werte ueberleben einen Neustart der Runtime. |
-| **Persist polling interval** | Intervall in Sekunden zwischen den automatischen Speichervorgaengen (Default `5 s`). |
+| **PLC autostart**| Startet die PLC-Runtime automatisch nach erfolgreichem Upload, ohne den Bestätigungsdialog. |
+| **Persist enabled** | Aktiviert das periodische Speichern von `VAR_PERSIST`/`RETAIN`-Variablen nach `/var/lib/anvil/persistent.dat`. Werte überleben einen Neustart der Runtime. |
+| **Persist polling interval** | Intervall in Sekunden zwischen den automatischen Speichervorgängen (Default `5 s`). |
 | **Monitor history** | Anzahl Samples pro Variable im Oszilloskop-Recorder (Default `1000`). |
-| **Monitor interval**| Abtast-Intervall in Millisekunden fuer das Live-Monitoring (Default `100 ms`). |
+| **Monitor interval**| Abtast-Intervall in Millisekunden für das Live-Monitoring (Default `100 ms`). |
 
 ## Library
 
-Sync-Verhalten fuer die Standard-Library zwischen Editor-Ressource und
-PLC-seitigem Library-Pfad — siehe [Library](../library/) fuer das volle
+Sync-Verhalten für die Standard-Library zwischen Editor-Ressource und
+PLC-seitigem Library-Pfad — siehe [Library](../library/) für das volle
 Drift-Modell. Zwei Modi:
 
   - **Auto-Push aus** (Default) — der Editor zeigt nur einen Hinweis im
     Output-Panel, wenn beim Connect ein Drift erkannt wird. Push erfolgt
-    manuell ueber `Tools > Sync Library`.
+    manuell über `Tools > Sync Library`.
   - **Auto-Push an** — der Editor schickt die lokale Library-Version
-    automatisch, sobald ein Drift erkannt wird. Nuetzlich in einem
+    automatisch, sobald ein Drift erkannt wird. Nützlich in einem
     Single-Programmer-Setup.
 
 ## AI Assistant
 
-Optionale Code-Vervollstaendigung gegen einen lokalen, OpenAI-kompatiblen
+Optionale Code-Vervollständigung gegen einen lokalen, OpenAI-kompatiblen
 LLM-Server (LM Studio, Ollama, llama.cpp, vLLM).
 
 | Feld | Bedeutung |
@@ -94,19 +94,19 @@ LLM-Server (LM Studio, Ollama, llama.cpp, vLLM).
 ## UX-State (automatisch persistiert)
 
 Folgende Felder werden **ohne** Preferences-Dialog im Hintergrund
-gespeichert, damit der Editor beim naechsten Start in dem Zustand
-oeffnet, in dem Sie ihn verlassen haben:
+gespeichert, damit der Editor beim nächsten Start in dem Zustand
+öffnet, in dem Sie ihn verlassen haben:
 
   - Fenster-Geometrie + Window-State (`windowGeometry`, `windowState`)
   - Splitter- und Header-Positionen (`splitterState`, `headerState`)
-  - Hoehe des Output-Panels (`outputPanelHeight`)
-  - Letztes geoeffnetes Projekt (`lastProject`) und Recent-Files-Liste
+  - Höhe des Output-Panels (`outputPanelHeight`)
+  - Letztes geöffnetes Projekt (`lastProject`) und Recent-Files-Liste
   - Session-Zustand: offene POU-Tabs, aktiver Tab, Cursor- und
     Scroll-Position pro POU
 
 ## Speicherort der Settings
 
-Die Settings liegen ueber Qts `QSettings` plattform-spezifisch:
+Die Settings liegen über Qts `QSettings` plattform-spezifisch:
 
 | Plattform | Pfad |
 |---|---|
@@ -114,15 +114,15 @@ Die Settings liegen ueber Qts `QSettings` plattform-spezifisch:
 | **Linux**   | `~/.config/ForgeIEC/ForgeIEC Studio.conf` |
 | **macOS**   | `~/Library/Preferences/io.forgeiec.studio.plist` |
 
-Loeschen dieser Datei / dieses Registry-Schluessels setzt alle
-Einstellungen auf Default zurueck — nuetzlich nach einem fehlgeschlagenen
+Löschen dieser Datei / dieses Registry-Schlüssels setzt alle
+Einstellungen auf Default zurück — nützlich nach einem fehlgeschlagenen
 Upgrade.
 
 ## Geplante Erweiterungen
 
 Im Backlog (Cluster R Phase 3): das Output-Panel bekommt eigene
-Severity-Farben (Error rot, Warning gelb, Info weiss) und eine
-einstellbare Schriftgroesse. Beide Optionen werden dann hier in einer
+Severity-Farben (Error rot, Warning gelb, Info weiß) und eine
+einstellbare Schriftgröße. Beide Optionen werden dann hier in einer
 neuen Lasche `Output` auftauchen.
 
 ## Verwandte Themen

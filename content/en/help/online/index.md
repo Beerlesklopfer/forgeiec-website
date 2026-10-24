@@ -30,10 +30,10 @@ the editor.
 ### Editor & languages
 
 - [Structured Text (ST)](/en/help/st/) — ST editor + language foundations, bit access, qualified pool references
-- [Instruction List (IL)](/en/help/il/) — accumulator-based IEC language with CR register
-- [Function Block Diagram (FBD)](/en/help/fbd/) — graphical wiring of functions, function blocks and variables
-- [Ladder Diagram (LD)](/en/help/ld/) — power-rail metaphor: contacts and coils
-- [Sequential Function Chart (SFC)](/en/help/sfc/) — step-transition model for sequencers and mode machines
+- [Instruction List (IL)](/en/help/il/) — deprecated; accumulator-based IEC language with CR register
+- [Function Block Diagram (FBD)](/en/help/fbd/) — planned for 0.4; graphical wiring of functions, function blocks and variables
+- [Ladder Diagram (LD)](/en/help/ld/) — planned for 0.3; power-rail metaphor: contacts and coils
+- [Sequential Function Chart (SFC)](/en/help/sfc/) — planned for 0.5; step-transition model for sequencers and mode machines
 
 ### Model & variables
 
@@ -52,7 +52,7 @@ the editor.
 
 ### General
 
-- [Test coverage](/en/help/tests/) — 117 automated tests for the IEC language feature set, standard blocks and multi-task threading
+- [Test coverage](/en/help/tests/) — 62 automated test programs for the IEC language feature set, standard blocks and multi-task threading
 - [Open Source philosophy](/en/help/open-source/) — background: more than software, a societal idea
 
 ## In the editor

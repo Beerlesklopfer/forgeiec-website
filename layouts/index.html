@@ -1,14 +1,198 @@
 {{ define "main" }}
+{{- /*
+  Home page for decision makers. All text lives in the front matter of
+  content/<lang>/_index.md (keys: hero, problem, solution, rivet, status,
+  trust, faq, proof, cta) so that de and en stay structurally identical.
+*/ -}}
+{{- $p := .Params -}}
+{{- $mail := site.Params.contact | default "blacksmith@forgeiec.io" -}}
+{{- $ctaHref := site.Params.ctaHref | default (printf "mailto:%s?subject=%s" $mail (site.Params.ctaSubject | urlquery)) -}}
 
 {{/* ---- HERO ---- */}}
+{{- with $p.hero }}
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="container hero-content">
-    <h1 class="hero-title">{{ .Title }}</h1>
-    <div class="hero-body">
-      {{ .Content }}
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow">{{ .eyebrow }}</span>
+      <h1>{{ .title }}</h1>
+      <p class="hero-lead">{{ .lead | markdownify }}</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ $ctaHref }}">{{ site.Params.ctaLabel }}</a>
+        <a class="btn btn-secondary" href="{{ .secondaryHref | relLangURL }}">{{ .secondaryLabel }}</a>
+      </div>
+      <p class="hero-meta">
+        {{- range .meta }}
+        <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ . }}</span>
+        {{- end }}
+      </p>
+    </div>
+    <div class="hero-visual">
+      {{ partial "home-visual.html" (dict "lang" $.Language.Lang "v" .visual) }}
     </div>
   </div>
 </section>
+{{- end }}
+
+{{/* ---- PROBLEM ---- */}}
+{{- with $p.problem }}
+<section class="band band--tight" aria-labelledby="h-problem">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">{{ .eyebrow }}</span>
+      <h2 id="h-problem">{{ .title }}</h2>
+    </div>
+    <ol class="problem-list">
+      {{- range $i, $s := .items }}
+      <li><span class="num" aria-hidden="true">{{ add $i 1 }}</span><span>{{ $s | markdownify }}</span></li>
+      {{- end }}
+    </ol>
+  </div>
+</section>
+{{- end }}
+
+{{/* ---- SOLUTION ---- */}}
+{{- with $p.solution }}
+<section class="band band--soft" aria-labelledby="h-solution">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ .eyebrow }}</span>
+      <h2 id="h-solution">{{ .title }}</h2>
+      <p>{{ .lead | markdownify }}</p>
+    </div>
+    <div class="grid {{ if eq (len .cards) 4 }}grid-cards-4{{ else }}grid-3{{ end }}">
+      {{- range .cards }}
+      <article class="card">
+        <div class="card-icon">{{ partial "icon.html" .icon }}</div>
+        <p class="card-kicker">{{ .kicker }}</p>
+        <h3>{{ .title }}</h3>
+        <p>{{ .text | markdownify }}</p>
+        {{- with .points }}<ul>{{ range . }}<li>{{ . | markdownify }}</li>{{ end }}</ul>{{ end }}
+        {{- with .href }}<a class="card-link" href="{{ . | relLangURL }}">{{ $.Params.more }} <span class="arrow" aria-hidden="true"></span></a>{{ end }}
+      </article>
+      {{- end }}
+    </div>
+    {{- with .screenshot }}
+    <div class="home-shot">{{ partial "screenshot.html" (dict "page" $ "program" .program "name" .name "alt" .alt "caption" .caption) }}</div>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{/* ---- RIVET ---- */}}
+{{- with $p.rivet }}
+<section class="band" aria-labelledby="h-rivet">
+  <div class="container split rivet-split">
+    <div>
+      <span class="eyebrow">{{ .eyebrow }}</span>
+      <h2 id="h-rivet">{{ .title }}</h2>
+      <p class="lead">{{ .lead | markdownify }}</p>
+      <ul class="facts">
+        {{- range .points }}
+        <li>{{ partial "icon.html" "check" }}<div><strong>{{ .title }}</strong><span>{{ .text | markdownify }}</span></div></li>
+        {{- end }}
+      </ul>
+      <p class="mt-2 btn-row">
+        <a class="btn btn-secondary" href="{{ .href | relLangURL }}">{{ .linkLabel }} <span class="arrow" aria-hidden="true"></span></a>
+        {{ partial "chip.html" (dict "s" "wip" "label" .status) }}
+      </p>
+    </div>
+    <figure class="figure mt-0" aria-labelledby="dg-rivet-home-cap">
+      <div class="figure-frame">{{ partial "diagrams/rivet-flow.html" (dict "page" $ "id" "dg-rivet-home") }}</div>
+      <figcaption id="dg-rivet-home-cap">{{ .caption | markdownify }}</figcaption>
+    </figure>
+  </div>
+</section>
+{{- end }}
+
+{{/* ---- STATUS ---- */}}
+{{- with $p.status }}
+<section class="band band--soft" aria-labelledby="h-status">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ .eyebrow }}</span>
+      <h2 id="h-status">{{ .title }}</h2>
+      <p>{{ .lead | markdownify }}</p>
+    </div>
+    <table class="status-table">
+      <thead><tr><th scope="col">{{ .colArea }}</th><th scope="col">{{ .colDetail }}</th><th scope="col">{{ .colState }}</th></tr></thead>
+      <tbody>
+        {{- range .rows }}
+        <tr>
+          <td>{{ .area | markdownify }}</td>
+          <td class="detail">{{ .detail | markdownify }}</td>
+          <td>{{ partial "chip.html" (dict "s" .state "label" .label) }}</td>
+        </tr>
+        {{- end }}
+      </tbody>
+    </table>
+    <p class="legend">
+      <span class="legend-item">{{ partial "chip.html" (dict "s" "use") }} {{ .legendUse }}</span>
+      <span class="legend-item">{{ partial "chip.html" (dict "s" "wip") }} {{ .legendWip }}</span>
+      <span class="legend-item">{{ partial "chip.html" (dict "s" "plan") }} {{ .legendPlan }}</span>
+      <span class="legend-item">{{ partial "chip.html" (dict "s" "rest") }} {{ .legendRest }}</span>
+    </p>
+    {{- with .roadmapHref }}<p class="mt-2"><a class="btn btn-secondary" href="{{ . | relLangURL }}">{{ $p.status.roadmapLabel }} <span class="arrow" aria-hidden="true"></span></a></p>{{ end }}
+  </div>
+</section>
+{{- end }}
+
+{{/* ---- TRUST + FAQ ---- */}}
+{{- with $p.trust }}
+<section class="band" aria-labelledby="h-trust">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">{{ .eyebrow }}</span>
+      <h2 id="h-trust">{{ .title }}</h2>
+      <ul class="facts mt-2">
+        {{- range .facts }}
+        <li>{{ partial "icon.html" .icon }}<div><strong>{{ .title }}</strong><span>{{ .text | markdownify }}</span></div></li>
+        {{- end }}
+      </ul>
+    </div>
+    <div>
+      <!-- ENTWURF: Lizenz-FAQ ist ein Entwurf (Information, keine Rechtsberatung) und muss von einem Anwalt gelesen werden. -->
+      <h3 class="faq-title">{{ $p.faq.title }}</h3>
+      <div class="faq">
+        {{- range $i, $q := $p.faq.items }}{{ with $q }}
+        <details{{ if eq $i 0 }} open{{ end }}>
+          <summary>{{ .q }}</summary>
+          <div class="faq-body">{{ .a | markdownify }}</div>
+        </details>
+        {{- end }}{{ end }}
+      </div>
+      <p class="disclaimer">{{ $p.faq.disclaimer | markdownify }}</p>
+    </div>
+  </div>
+</section>
+{{- end }}
+
+{{/* ---- PROOF ---- */}}
+{{- with $p.proof }}
+<section class="band band--soft band--tight" aria-labelledby="h-proof">
+  <div class="container">
+    <span class="eyebrow">{{ .eyebrow }}</span>
+    <h2 id="h-proof">{{ .title }}</h2>
+    <p class="proof">{{ .text | markdownify }}</p>
+  </div>
+</section>
+{{- end }}
+
+{{/* ---- NEXT STEP ---- */}}
+{{- with $p.cta }}
+<section class="band" aria-labelledby="h-cta">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2 id="h-cta">{{ .title }}</h2>
+        <p>{{ .text | markdownify }}</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ $ctaHref }}">{{ site.Params.ctaLabel }}</a>
+        <a class="btn btn-secondary" href="{{ .secondaryHref | relLangURL }}">{{ .secondaryLabel }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{{- end }}
 
 {{ end }}

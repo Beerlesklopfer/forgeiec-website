@@ -3,10 +3,18 @@ title: "Instruction List Editor"
 summary: "IL-Editor: akkumulator-basierte IEC 61131-3 Sprache mit CR-Register"
 ---
 
-## Ueberblick
+{{< callout type="warning" title="Abgekündigt" >}}
+AWL (Anweisungsliste) ist nicht mehr Teil der aktuellen Ausgabe der IEC 61131-3 und abgekündigt; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler. In ForgeIEC wird
+IL **nicht weiterentwickelt** und **nicht übersetzt**. Für lauffähige Programme
+nutzen Sie [Strukturierten Text (ST)](/de/help/st/). Siehe auch die
+[Roadmap](/de/roadmap/).
+{{< /callout >}}
+<!-- ENTWURF: Annex B der Norm einsehen, bevor es als Normaussage zitiert wird -->
+
+## Überblick
 
 **Instruction List (IL)** ist die assemblernahe Textsprache der
-IEC 61131-3 und die historisch erste der fuenf IEC-Sprachen. Programme
+IEC 61131-3 und die historisch erste ihrer Sprachen. AWL (Anweisungsliste) wurde mit der dritten Ausgabe der IEC 61131-3 (2013) abgekündigt und ist in der aktuellen Ausgabe, IEC 61131-3:2025 (erschienen im Mai 2025), nicht mehr enthalten. ForgeIEC entwickelt sie nicht; sie bräuchte außerdem einen eigenen Übersetzungsweg nach Assembler. Programme
 bestehen aus einer Folge von Instruktionen, die ein einzelnes
 internes **Akkumulator-Register** — das *Current Result* (`CR`) —
 manipulieren. Jede Zeile ist eine Anweisung der Form
@@ -18,7 +26,7 @@ manipulieren. Jede Zeile ist eine Anweisung der Form
 und liest oder schreibt entweder den Akkumulator selbst oder eine
 externe Variable.
 
-In ForgeIEC wird IL ueber den `FIlEditor` editiert — Layout und Tooling
+In ForgeIEC wird IL über den `FIlEditor` editiert — Layout und Tooling
 sind analog zum [ST-Editor](../st/) aufgebaut.
 
 ## Editor-Layout
@@ -43,15 +51,15 @@ Online-Mode + Inline-Wert-Overlay funktionieren identisch zum ST-Editor.
 
 ## Akkumulator-Modell
 
-Der Akkumulator (`CR`) haelt das Zwischenergebnis der laufenden
+Der Akkumulator (`CR`) hält das Zwischenergebnis der laufenden
 Auswertung. Eine typische Sequenz:
 
-  1. `LD x` — laedt `x` in den Akkumulator (`CR := x`)
-  2. `AND y` — verknuepft den Akkumulator mit `y` (`CR := CR AND y`)
+  1. `LD x` — lädt `x` in den Akkumulator (`CR := x`)
+  2. `AND y` — verknüpft den Akkumulator mit `y` (`CR := CR AND y`)
   3. `ST z` — speichert den Akkumulator nach `z` (`z := CR`)
 
 Damit ist IL eine **stack-freie, ein-Register-Maschine** — sehr nahe an
-den frueher dominierenden Mikrocontroller-Plattformen, fuer die die
+den früher dominierenden Mikrocontroller-Plattformen, für die die
 Sprache 1993 standardisiert wurde.
 
 ## Wichtigste Operatoren
@@ -59,13 +67,13 @@ Sprache 1993 standardisiert wurde.
 | Gruppe | Operatoren | Wirkung |
 |---|---|---|
 | **Laden / Speichern** | `LD`, `LDN`, `ST`, `STN` | Akkumulator setzen / nach Variable speichern (`N` = negiert) |
-| **Set / Reset** | `S`, `R` | Bit setzen / ruecksetzen (BOOL-Variable, falls `CR` = TRUE) |
-| **Bit-Logik** | `AND`, `OR`, `XOR`, `NOT` | Akkumulator mit Operand verknuepfen |
+| **Set / Reset** | `S`, `R` | Bit setzen / rücksetzen (BOOL-Variable, falls `CR` = TRUE) |
+| **Bit-Logik** | `AND`, `OR`, `XOR`, `NOT` | Akkumulator mit Operand verknüpfen |
 | **Arithmetik** | `ADD`, `SUB`, `MUL`, `DIV`, `MOD` | Akkumulator + Operand → Akkumulator |
 | **Vergleich** | `GT`, `GE`, `EQ`, `NE`, `LE`, `LT` | Vergleichsergebnis nach `CR` |
 | **Sprung** | `JMP`, `JMPC`, `JMPCN` | Sprung zu Label (`C` = wenn `CR` = TRUE) |
 | **Aufruf** | `CAL`, `CALC`, `CALCN` | Funktionsblock-Instanz aufrufen |
-| **Rueckkehr** | `RET`, `RETC`, `RETCN` | POU verlassen |
+| **Rückkehr** | `RET`, `RETC`, `RETCN` | POU verlassen |
 
 ## Modifier
 
@@ -73,11 +81,11 @@ Ein Operator kann durch Suffix-Modifier verfeinert werden:
 
 | Modifier | Bedeutung |
 |---|---|
-| `N` | **Negation** des Operanden (`LDN x` laedt `NOT x`) |
+| `N` | **Negation** des Operanden (`LDN x` lädt `NOT x`) |
 | `C` | **Conditional** — Operation nur, wenn `CR` = TRUE (`JMPC label`) |
-| `(`...`)` | **Klammer-Modifier** — Auswertung verzoegern, bis `)` schliesst |
+| `(`...`)` | **Klammer-Modifier** — Auswertung verzögern, bis `)` schließt |
 
-Die Klammer-Form ermoeglicht zusammengesetzte Ausdruecke ohne
+Die Klammer-Form ermöglicht zusammengesetzte Ausdrücke ohne
 Zwischen-Variablen:
 
 ```
@@ -96,16 +104,16 @@ ST ist heute die Default-Wahl. IL bleibt sinnvoll, wenn:
     in den meisten matiec-Backends 1:1 auf Maschinen-Befehle ab, ohne
     Zwischen-Optimierungen.
   - **Altsysteme** kompatibel zu pflegen sind (S5/S7-AWL-portierte Logik,
-    aelterer ABB-/Beckhoff-Bestand).
-  - **Sehr knappe Logik-Bloecke** — Selbsthaltungen, Verriegelungen,
-    Edge-Conditions sind in IL oft zwei Zeilen kuerzer als in ST.
+    älterer ABB-/Beckhoff-Bestand).
+  - **Sehr knappe Logik-Blöcke** — Selbsthaltungen, Verriegelungen,
+    Edge-Conditions sind in IL oft zwei Zeilen kürzer als in ST.
 
-Fuer alles andere ist ST lesbarer und einfacher zu warten.
+Für alles andere ist ST lesbarer und einfacher zu warten.
 
-## Code-Beispiel — Selbsthaltung mit Schliesser/Oeffner
+## Code-Beispiel — Selbsthaltung mit Schließer/Öffner
 
-Klassische **Schuetz-Selbsthaltung** in IL: Tastendruck `start` schaltet
-das Schuetz `K1` an, der Stop-Taster `stop` (Oeffner, low-aktiv)
+Klassische **Schütz-Selbsthaltung** in IL: Tastendruck `start` schaltet
+das Schütz `K1` an, der Stop-Taster `stop` (Öffner, low-aktiv)
 schaltet ab. Logik:
 
 ```
@@ -130,10 +138,10 @@ END_PROGRAM
 ```
 
 Vier Instruktionen, ein Register, kein temp-Speicher. Genau die
-Konstruktionen, fuer die IL urspruenglich entworfen wurde.
+Konstruktionen, für die IL ursprünglich entworfen wurde.
 
 ## Verwandte Themen
 
-- [Structured Text](../st/) — die Pascal-aehnliche Schwester-Sprache
-- [Bibliothek](../library/) — Funktionsbloecke, die per `CAL` aufrufbar sind
+- [Structured Text](../st/) — die Pascal-ähnliche Schwester-Sprache
+- [Bibliothek](../library/) — Funktionsblöcke, die per `CAL` aufrufbar sind
 - [Projekt-Dateiformat](../file-format/) — IL-Body in `<body><IL>...`

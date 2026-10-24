@@ -98,6 +98,11 @@ Variables tab.
 
 ---
 
+## Screens
+
+{{< screenshot program="studio" name="ai-assistant" alt="AI assistant dock with one tab per persona" caption="The AI assistant: one tab per persona." >}}
+
+
 <div style="text-align:center; padding: 2rem;">
 
 **The AI is a tool. You decide.**

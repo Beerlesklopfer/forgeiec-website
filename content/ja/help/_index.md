@@ -79,12 +79,12 @@ sudo apt install forgeiec-anvil-server
 
 ### 対応プラットフォーム
 
-| コンポーネント | アーキテクチャ | Debianコードネーム |
+| コンポーネント | アーキテクチャ | Debian/Ubuntu スイート |
 |----------------|----------------|---------------------|
-| エディタ       | amd64, arm64   | bookworm, trixie    |
-| デーモン       | amd64, arm64   | bookworm, trixie    |
-| Bridges        | amd64, arm64   | bookworm, trixie    |
-| Hearth         | amd64, arm64   | bookworm, trixie    |
+| エディタ       | amd64, arm64   | bookworm, trixie, noble    |
+| デーモン       | amd64, arm64   | bookworm, trixie, jammy, noble    |
+| Bridges        | amd64, arm64   | bookworm, trixie, jammy, noble    |
+| Hearth         | amd64, arm64   | bookworm, trixie, jammy, noble    |
 
 ### お問い合わせ
 

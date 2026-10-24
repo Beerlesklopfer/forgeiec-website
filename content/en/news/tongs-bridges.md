@@ -26,10 +26,14 @@ family**.
 
 | Daemon | Protocol | Status |
 |---|---|---|
-| `tongs-modbustcp` | Modbus TCP master + slave mode | productive |
-| `tongs-ethercat` | EtherCAT master with DC sync | in progress |
-| `tongs-profibus` | Profibus DP/PA | planned |
-| `tongs-ethernetip` | EtherNet/IP CIP | planned |
+| `tongs-modbustcp` | Modbus TCP master + slave mode | available |
+| `tongs-modbusrtu` | Modbus RTU | available |
+| `tongs-lorawan` | LoRaWAN | in progress (focus) |
+| `tongs-ethercat` | EtherCAT master with DC sync | skeleton, in progress |
+| `tongs-profibus` | Profibus DP/PA | skeleton, in progress |
+| `tongs-ethernetip` | EtherNet/IP CIP | skeleton, in progress |
+
+*Status updated in October 2026.*
 
 All run under the **same** anvild subprocess manager. Lifecycle,
 logging, auto-restart — shared, not re-invented per protocol.
@@ -124,7 +128,7 @@ IEC access in ST code with a clear 5-level namespace:
 
 ## Plus: Anvil ABI probe — no more version roulette
 
-Tongs bridges talk to anvild via **iceoryx2 shared memory**. With
+Tongs bridges talk to anvild via **Anvil shared memory**. With
 mixed versions between anvild + bridge, **silently inconsistent
 data** used to be possible — bridge writes ABI variant A, anvild
 reads variant B, nobody notices.

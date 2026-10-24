@@ -80,12 +80,12 @@ aucun fichier `.deb` manuel n'est necessaire.
 
 ### Plateformes supportees
 
-| Composant | Architectures | Versions Debian  |
+| Composant | Architectures | Suites Debian/Ubuntu |
 |-----------|---------------|------------------|
-| Editeur   | amd64, arm64  | bookworm, trixie |
-| Daemon    | amd64, arm64  | bookworm, trixie |
-| Bridges   | amd64, arm64  | bookworm, trixie |
-| Hearth    | amd64, arm64  | bookworm, trixie |
+| Editeur   | amd64, arm64  | bookworm, trixie, noble |
+| Daemon    | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Bridges   | amd64, arm64  | bookworm, trixie, jammy, noble |
+| Hearth    | amd64, arm64  | bookworm, trixie, jammy, noble |
 
 ### Contact
 

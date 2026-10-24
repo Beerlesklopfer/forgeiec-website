@@ -1,43 +1,43 @@
 ---
-title: "Anvil Technology\u00ae"
+title: "Anvil bus"
 summary: "Your data is forged on our anvil"
 ---
 
-## Anvil Technology\u00ae: Heart of Every Forge
+## Anvil: heart of every forge
 
 In every forge, the anvil is the central workpiece — where metal is shaped,
-hardened and refined. **Anvil Technology\u00ae** is the intermediate layer between the
+hardened and refined. **Anvil** is the intermediate layer between the
 PLC runtime and the fieldbus bridges. This is where your process data
 is forged: received, transformed and distributed to the right recipients.
 
-Anvil uses a proprietary zero-copy shared memory transport
-for inter-process communication. No serialization, no copies, no compromises.
+Anvil uses a zero-copy shared memory transport based on iceoryx2
+for communication between the processes. No serialization, no copies, no compromises.
 
 ---
 
 ## Architecture
 
 ```
-┌──────────────┐         ┌────────────┐         ┌──────────────────┐
-│              │         │            │         │                  │
-│ PLC Program  │◄───────►│  anvild  │◄───────►│  Modbus Bridge   │──► Field Devices
-│  (IEC Code)  │  gRPC   │  (Daemon)  │  Anvil  │  EtherCAT Bridge │──► Drives
-│              │         │            │ Anvil   │  Profibus Bridge  │──► Sensors
-└──────────────┘         └────────────┘         │  OPC-UA Bridge   │──► SCADA
-                                                └──────────────────┘
-
-                         ◄── Anvil ──►
-                         Zero-Copy IPC
-                         Shared Memory
+ Workstation              Controller (Linux)
++-----------+  gRPC  +---------------------+
+|  Studio   |------->|  Anvil server       |  starts and supervises
++-----------+        |  (anvild)           |-----------------------+
+                     +---------------------+                       |
+                                                                   v
+   +------------------+   Anvil bus (iceoryx2,   +------------------+
+   | forgeiec_plc     |<------------------------>| tongs-* bridges  |--> field devices
+   | (PLC cycle)      |   zero-copy shared mem.) | (one process     |
+   +------------------+                          |  per segment)    |
+                                                 +------------------+
 ```
 
-Data exchange between `anvild` and the protocol bridges runs through
-**Anvil Technology\u00ae** — a high-performance IPC channel based on zero-copy shared memory.
+Data exchange between the PLC cycle (`forgeiec_plc`), the Anvil server (anvild) and the protocol bridges runs through
+**Anvil** — a high-performance IPC channel based on zero-copy shared memory.
 Each segment gets its own communication channel.
 
 ---
 
-## Why Anvil Technology\u00ae?
+## Why Anvil?
 
 ### Microsecond Latency
 
@@ -49,9 +49,9 @@ memory — the receiver reads directly.
 |--------|----------------|--------|
 | TCP Socket | 50–200 us | 2–4 |
 | Unix Socket | 10–50 us | 2 |
-| **Anvil Technology\u00ae** | **< 1 us** | **0** |
+| **Anvil** | **< 1 us** | **0** |
 
-### Industrial Grade
+### Built for operation
 
 - Deterministic behavior — no dynamic memory allocation in the hot path
 - Lock-free algorithms — no blocking, no deadlocks
@@ -60,7 +60,7 @@ memory — the receiver reads directly.
 
 ### PUBLISH/SUBSCRIBE in the IEC Program
 
-Anvil Technology\u00ae integrates seamlessly into IEC 61131-3 programming:
+Anvil integrates seamlessly into IEC 61131-3 programming:
 
 ```iec
 VAR_GLOBAL PUBLISH 'Motors'
@@ -81,15 +81,16 @@ standard. The compiler automatically generates the Anvil bindings.
 
 ## Supported Protocols
 
-Anvil Technology\u00ae connects the PLC program to all industrial fieldbuses:
+Anvil connects the PLC program to the fieldbus bridges:
 
 | Protocol | Bridge | Status |
 |----------|--------|--------|
-| **Modbus TCP** | `tongs-modbustcp` | Available |
-| **Modbus RTU** | `tongs-modbusrtu` | Available |
-| **EtherCAT** | `tongs-ethercat` | In Development |
-| **Profibus DP** | `tongs-profibus` | In Development |
-| **OPC-UA** | `tongs-opcua` | Planned |
+| **Modbus TCP** | `tongs-modbustcp` | {{< status "use" "available" >}} |
+| **Modbus RTU** | `tongs-modbusrtu` | {{< status "use" "available" >}} |
+| **LoRaWAN** | `tongs-lorawan` | {{< status "wip" "in progress (focus)" >}} |
+| **EtherCAT** | `tongs-ethercat` | {{< status "wip" "skeleton, in progress" >}} |
+| **PROFIBUS DP** | `tongs-profibus` | {{< status "wip" "skeleton, in progress" >}} |
+| **EtherNet/IP** | `tongs-ethernetip` | {{< status "wip" "skeleton, in progress" >}} |
 
 Each bridge runs as an independent process. `anvild` starts, monitors
 and restarts bridges automatically. A bridge crash affects neither the PLC
@@ -99,7 +100,7 @@ nor other bridges.
 
 ## Technical Details
 
-- **IPC Framework**: Anvil Technology\u00ae (proprietary zero-copy shared memory)
+- **IPC Framework**: Anvil bus (iceoryx2, zero-copy shared memory)
 - **Architecture**: One publisher/subscriber channel per bus segment
 - **Data Format**: Raw IEC variables — no serialization, no overhead
 - **Platforms**: x86_64, ARM64, ARMv7 (Linux)
@@ -109,7 +110,7 @@ nor other bridges.
 
 <div style="text-align:center; padding: 2rem;">
 
-**Anvil Technology\u00ae — Where data is forged into control commands.**
+**Anvil — Where data is forged into control commands.**
 
 blacksmith@forgeiec.io
 

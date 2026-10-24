@@ -1,0 +1,19 @@
+{{- /*
+  Screenshot of a program screen, or a marked placeholder until the file exists.
+  Usage:
+    {{< screenshot program="studio" name="editor-st"
+        alt="…" caption="…" >}}
+  Params: program, name (required), alt (required), caption, version
+  (exact file version; default: highest found), ratio (default 16:10),
+  status (use|wip|plan|rest → chip after the caption).
+  Files and scheme: static/img/screenshots/README.md
+*/ -}}
+{{- partial "screenshot.html" (dict
+    "page" .Page
+    "program" (.Get "program")
+    "name" (.Get "name")
+    "version" (.Get "version")
+    "alt" (.Get "alt")
+    "caption" (.Get "caption")
+    "ratio" (.Get "ratio")
+    "status" (.Get "status")) -}}

@@ -124,10 +124,19 @@ the load-bearing details are at
 The same release also includes `anvild` auto-cleanup. What used to
 slow down occasional commissioning sessions as "variable sticks
 despite fresh deploy" is now simply
-`sudo systemctl restart anvild` — the daemon cleans up stale
+`sudo systemctl restart forgeiec-anvil-server` — the daemon cleans up stale
 shared-memory segments on startup.
 
 Background + fix documented: [FAQ entry](/help/faq/stuck-variables-shm/).
+
+{{< callout type="note" title="Addendum" >}}
+The blanket cleanup at anvild startup has since been removed again:
+it tore away the shared segments of **live** peers (bellowsd,
+hearth, tongs-*). Cleanup is now done by the Anvil layer,
+selectively per dead node; as a user you simply restart the PLC
+runtime. Current state in the
+[FAQ entry](/help/faq/stuck-variables-shm/).
+{{< /callout >}}
 
 ---
 
@@ -149,9 +158,8 @@ Background + fix documented: [FAQ entry](/help/faq/stuck-variables-shm/).
 - [MCP for application engineers](/help/mcp/programmers/)
 - [MCP for IT + operations](/help/mcp/it/)
 
-Source repositories:
-[GitHub](https://github.com/Beerlesklopfer/ForgeIEC-Studio) /
-[Forgejo](https://git.forgeiec.io/ForgeIEC/forgeiec-studio).
+Source repository: `ForgeIEC/forgeiec-studio` in the Forgejo at
+`git.forgeiec.io` — access once your SSH public key is enabled.
 
 ---
 

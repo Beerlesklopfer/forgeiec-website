@@ -5,8 +5,8 @@ summary: "Gemeinsam die Zukunft der Automatisierung schmieden"
 
 ## Partnerschaft bei ForgeIEC
 
-ForgeIEC ist ein Open-Source-Projekt, das von der Ueberzeugung lebt,
-dass industrielle Automatisierung fuer alle zugaenglich sein muss.
+ForgeIEC ist ein Open-Source-Projekt, das von der Überzeugung lebt,
+dass industrielle Automatisierung für alle zugänglich sein muss.
 Wir suchen Partner, die diese Vision teilen und bereit sind, die
 Zukunft der Automatisierung aktiv mitzugestalten.
 
@@ -14,22 +14,28 @@ Zukunft der Automatisierung aktiv mitzugestalten.
 
 ## Unsere Source-Repositories
 
-ForgeIEC ist auf **GitHub** und **Forgejo** (`git.forgeiec.io`)
-gespiegelt. Bewerber koennen die Code-Basis vor einer Bewerbung
-durchsehen, und die `★`-Zahl auf GitHub gibt einen ersten Eindruck
-von der Community-Aufmerksamkeit.
+Die Code-Basis liegt im **Forgejo** unter `git.forgeiec.io`.
+Die Repositories sind nicht öffentlich einsehbar; der Quellcode steht
+unter der AGPL, Einsicht auf Anfrage. Der Zugriff läuft über SSH:
+Sie schicken uns Ihren SSH-Public-Key, wir schalten ihn frei. Danach
+können Sie den Code vor einer Bewerbung durchsehen. Beiträge Dritter
+werden erst angenommen, wenn die Contributor License Agreement in
+Kraft ist.
 
-| Repository | Was drin ist | GitHub | Forgejo |
-|---|---|---|---|
-| **ForgeIEC-Studio** | C++/Qt6 IDE + Bus-Konfig + MCP-Server | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/ForgeIEC-Studio?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/ForgeIEC-Studio) | [git.forgeiec.io/ForgeIEC/forgeiec-studio](https://git.forgeiec.io/ForgeIEC/forgeiec-studio) |
-| **anvil-server** | Rust/Tokio PLC-Runtime + Bridge-Subprozess-Manager | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/anvil-server?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/anvil-server) | [git.forgeiec.io/ForgeIEC/anvil](https://git.forgeiec.io/ForgeIEC/anvil) |
-| **bellows-server** | OPC-UA/HMI-Gateway | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/bellows-server?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/bellows-server) | [git.forgeiec.io/ForgeIEC/bellows](https://git.forgeiec.io/ForgeIEC/bellows) |
-| **forgeiec-website** | Hugo-Site die Sie gerade lesen | [![Stars](https://img.shields.io/github/stars/Beerlesklopfer/forgeiec-website?style=flat-square&logo=github&color=F59E0B)](https://github.com/Beerlesklopfer/forgeiec-website) | [git.forgeiec.io/ForgeIEC/forgeiec-website](https://git.forgeiec.io/ForgeIEC/forgeiec-website) |
+| Repository (`ssh://git@git.forgeiec.io/ForgeIEC/<name>.git`) | Was drin ist |
+|---|---|
+| **forgeiec-studio** | C++/Qt6-IDE + Bus-Konfig + MCP-Server |
+| **anvil** | Rust/Tokio-SPS-Runtime, der Anvil-Server (anvild) |
+| **tongs-core** und **tongs-*** | gemeinsamer Kern der Bus-Bridges und je Protokoll ein Repository |
+| **hearth** | Bedienoberfläche (HMI), Vorschau |
+| **screen** | Kiosk-Browser für Bedienpanels |
+| **lib-forgeiecdom**, **forge-mcp** | Projektmodell-Bibliothek, MCP-Bibliothek |
+| **fdd-files** | Gerätebeschreibungen (FDD) |
+| **bellows** | OPC-UA-/HMI-Gateway — ruht |
+| **forgeiec-website** | die Hugo-Seite, die Sie gerade lesen |
 
-Jedes Repo enthaelt ein eigenes `documentation/architecture/`-
-Unterverzeichnis bzw. eine Spec-Sammlung — wer dort tiefer
-einsteigen will, findet die normativen RFC-2119-Specs in voller
-Laenge.
+Die normativen Spezifikationen liegen im Repository
+`forgeiec-studio` unter `documentation/architecture/`.
 
 ---
 
@@ -37,12 +43,12 @@ Laenge.
 
 ### Nachgewiesenes Open-Source-Engagement
 
-Bewerber muessen bereits bewiesen haben, dass sie den Gedanken von
-Open Source unterstuetzen. Das bedeutet:
+Bewerber müssen bereits bewiesen haben, dass sie den Gedanken von
+Open Source unterstützen. Das bedeutet:
 
-- **Nachweisbare Beitraege** zu bestehenden Open-Source-Projekten
+- **Nachweisbare Beiträge** zu bestehenden Open-Source-Projekten
   (Commits, Pull Requests, Bug Reports, Dokumentation)
-- **Oeffentliches Profil** auf Plattformen wie GitHub, GitLab oder
+- **Öffentliches Profil** auf Plattformen wie GitHub, GitLab oder
   Codeberg
 - **Aktive Teilnahme** an Open-Source-Communities — nicht nur
   Nutzung, sondern Mitgestaltung
@@ -57,63 +63,62 @@ nicht zu unserer Philosophie.
   Entscheidungen
 - **Zusammenarbeit** — Code Reviews, gemeinsame Architektur-
   Diskussionen, geteiltes Wissen
-- **Qualitaet** — Dokumentierte Tests, sauberer Code,
-  industrietaugliche Zuverlaessigkeit
+- **Qualität** — Dokumentierte Tests, sauberer Code,
+  industrietaugliche Zuverlässigkeit
 - **Langfristigkeit** — Partnerschaft ist kein Sprint, sondern ein
   Marathon
 
 ---
 
-## Bereiche in denen wir konkret Unterstuetzung suchen
+## Bereiche in denen wir konkret Unterstützung suchen
 
-Wenn die Voraussetzungen oben fuer Sie passen — hier sind die
+Wenn die Voraussetzungen oben für Sie passen — hier sind die
 Subsysteme an denen wir besonders nach Mitstreitern suchen:
 
 ### 🔧 Bus-Bridges (tongs-*)
 
 {{< components "tongs,anvild" >}}
 
+- **tongs-lorawan** — Schwerpunkt: Funk-Sensorik für Landwirtschaft
+  und weitläufige Anlagen (in Arbeit)
 - **tongs-ethercat** — DC-Sync, Slave-State-Machine, ENI-XML-Import
 - **tongs-profibus** — DP-Master, GSD-Import-Toolchain
 - **tongs-ethernetip** — CIP-Connections, EDS-Import
 - **tongs-can** — CANopen + J1939
 
-Skeleton + Fault-Model + IPC-Wire-Format stehen — der protokoll-
-spezifische Teil fehlt.
+Für EtherCAT, PROFIBUS und EtherNet/IP stehen Gerüst, Fault-Model und
+IPC-Wire-Format — der protokollspezifische Teil fehlt.
 
 ### 🛠️ Studio-Editor-Features
 
 {{< components "studio" >}}
 
-- **FBD/LD/SFC-Editoren** — heute liegt der Fokus auf ST. Grafische
+- **LD-, FBD- und SFC-Editoren** — heute ist ST im Einsatz; LD, FBD
+  und SFC sind für die Releases 0.3, 0.4 und 0.5 geplant. Grafische
   Sprachen brauchen eigene Tree-sitter-Grammatik + Canvas-Renderer.
-- **Vendor-Catalog-Pflege** — FDDs fuer weitere Hersteller (heute:
-  Weidmueller). GSDML/EDS/ESI-Konverter sind willkommen.
-- **Internationalisierung** — Studio + Website werden nach
-  EN/DE/FR/ES/ZH/JA/TR/AR uebersetzt; manche Sprachen sind nur
-  maschinell vorbefuellt.
+- **Vendor-Catalog-Pflege** — mitgeliefert sind über 1 100
+  Gerätebeschreibungen von Phoenix Contact, Beckhoff, Weidmüller,
+  SALZ u. a. (Stand 22.10.2026). GSDML/EDS/ESI-Konverter sind
+  willkommen.
+- **Internationalisierung** — Übersetzungen des Studios; die Webseite
+  wird derzeit auf Deutsch und Englisch gepflegt.
 
-### 🌬️ HMI-Anbindung (bellowsd)
+### 🏠 Bedienoberfläche (Hearth)
 
-{{< components "bellowsd" >}}
+{{< components "hearth" >}}
 
-- **OPC-UA-Companion-Specs** — bellowsd unterstuetzt heute generische
-  OPC-UA-Knoten. Companion-Spec-Adapter (z.B. PackML,
-  OPC-UA-Robotics) sind willkommen.
-- **HMI-Frameworks** — `Hearth` ist als IIoT-Subscriber-Layer in
-  Planung. Wer mit MQTT, Time-Series-DBs (InfluxDB, TimescaleDB)
-  oder Grafana-Pipelines arbeitet, kann hier Architektur
+- **Hearth** — die Bedienoberfläche liest die Prozessdaten direkt vom
+  Anvil-Bus und ist als Vorschau verfügbar. Wer Erfahrung mit
+  HMI-Gestaltung, Alarmierung oder Trendaufzeichnung hat, kann hier
   mitgestalten.
 
-### 🔥 Runtime + Determinismus (anvild)
+### 🔥 Runtime + Determinismus (Anvil-Server, anvild)
 
 {{< components "anvild" >}}
 
 - **Real-Time-Linux-Tuning** — PREEMPT_RT-Kernel, CPU-Pinning,
-  Cache-Locality fuer Sub-Millisekunden-Cycle-Times
-- **Rust+LLVM-Codegen (rusty)** — geplante Migration der Layer-1-
-  Codegen weg von matiec/C-Output hin zu Rust+LLVM. Determinismus-
-  Garantien + Online-Change-Vorbereitung.
+  Cache-Locality für Sub-Millisekunden-Cycle-Times
+<!-- ENTWURF: Punkt "Rust+LLVM-Codegen (rusty)" entfernt — matiec ist abgelöst, ob rusty noch Plan ist, entscheidet der Eigentümer (Audit W-16). -->
 - **Hardware-Targets** — Raspberry Pi, BeagleBone, industrielle
   x86, ARM-SBCs.
 
@@ -122,8 +127,9 @@ spezifische Teil fehlt.
 {{< components "studio" >}}
 
 - **Tutorials** — von „erstes Knight-Rider in 5 Minuten" bis
-  „komplette Maschinensteuerung mit OPC-UA + EtherCAT"
-- **Beispiel-Projekte** — heute liegen nur 2 Demos im Tree
+  „komplette Maschinensteuerung mit Modbus und LoRaWAN"
+- **Beispiel-Projekte** — heute liefert das Studio 11 Beispiele mit;
+  weitere aus der Praxis sind willkommen
 - **Lehr-Curriculum** — Hochschulen die ForgeIEC als Lehr-IDE
   einsetzen wollen. Wir liefern Studio kostenlos, Dozenten bringen
   IEC-Curriculum.
@@ -134,9 +140,9 @@ spezifische Teil fehlt.
 
 ### Zugang zur ForgeIEC-Plattform
 
-- Fruehzeitiger Zugriff auf neue Features und Entwicklungszweige
+- Frühzeitiger Zugriff auf neue Features und Entwicklungszweige
 - Direkter Draht zum Kernteam
-- Moeglichkeit, die Roadmap aktiv mitzugestalten
+- Möglichkeit, die Roadmap aktiv mitzugestalten
 
 ### Gemeinsame Entwicklung
 
@@ -147,8 +153,8 @@ spezifische Teil fehlt.
 ### Technischer Support
 
 - Priorisierte Fehlerbehebung
-- Architektur-Beratung fuer eigene Erweiterungen
-- Unterstuetzung bei der Integration in bestehende Systeme
+- Architektur-Beratung für eigene Erweiterungen
+- Unterstützung bei der Integration in bestehende Systeme
 
 ---
 
@@ -157,19 +163,19 @@ spezifische Teil fehlt.
 ### Technologie-Partner
 
 Hersteller von Automatisierungskomponenten, die ihre Hardware in
-ForgeIEC integrieren moechten. Gemeinsame Treiberentwicklung,
-Geraetekonfigurationen und Testverfahren.
+ForgeIEC integrieren möchten. Gemeinsame Treiberentwicklung,
+Gerätekonfigurationen und Testverfahren.
 
 ### Integrations-Partner
 
-Systemintegratoren und Ingenieursbueros, die ForgeIEC in
-Kundenprojekten einsetzen. Praxiswissen fliesst zurueck in die
+Systemintegratoren und Ingenieursbüros, die ForgeIEC in
+Kundenprojekten einsetzen. Praxiswissen fließt zurück in die
 Entwicklung.
 
 ### Bildungs-Partner
 
-Hochschulen und Ausbildungsstaetten, die ForgeIEC in der Lehre
-verwenden. Freier Zugang fuer den Bildungsbereich — die naechste
+Hochschulen und Ausbildungsstätten, die ForgeIEC in der Lehre
+verwenden. Freier Zugang für den Bildungsbereich — die nächste
 Generation von Automatisierungstechnikern sollte mit offenen
 Werkzeugen lernen.
 
@@ -181,18 +187,19 @@ Stand 2026-05: noch keine externen Partner — die Plattform ist im
 Aufbau-Sprint, Partner-Onboarding kommt sobald die ersten Subsystem-
 APIs (Bridge-SDK, FDD-Format) stabilisiert sind.
 
-Wenn Sie zu den ersten gehoeren wollen: siehe „Bewerbung" unten.
+Wenn Sie zu den ersten gehören wollen: siehe „Bewerbung" unten.
 
 ---
 
 ## Bewerbung
 
-Sie moechten Partner werden? Schreiben Sie uns mit:
+Sie möchten Partner werden? Schreiben Sie uns mit:
 
 - Beschreibung Ihrer Organisation
-- Links zu Ihren Open-Source-Beitraegen
-- Ihre Motivation fuer eine Partnerschaft
-- Konkreter Bereich, in dem Sie beitragen moechten
+- Links zu Ihren Open-Source-Beiträgen
+- Ihre Motivation für eine Partnerschaft
+- Konkreter Bereich, in dem Sie beitragen möchten
+- Ihren SSH-Public-Key, wenn Sie den Code vorab durchsehen wollen
 
 ---
 

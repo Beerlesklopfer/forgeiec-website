@@ -1,6 +1,6 @@
 ---
 title: "Forge Studio"
-description: "IEC 61131-3 development environment — all five languages, native Qt6 interface"
+description: "IEC 61131-3 development environment — ST today, LD/FBD/SFC in the next releases; native Qt6 interface"
 weight: 1
 ---
 
@@ -14,21 +14,75 @@ application.
 
 ---
 
-## All Five IEC 61131-3 Languages
+## IEC 61131-3: ST today, one language per release
 
-One editor for all languages — seamless switching, shared variables,
-unified project structure:
+Structured Text is in productive use (pilot operation, release 0.2).
+Each release adds one language: **0.3 LD, 0.4 FBD, 0.5 SFC**.
+Programs in these languages are **not compiled yet**. 
+IL (instruction list) was deprecated in IEC 61131-3 edition 3 (2013) and is no longer part of the current edition, IEC 61131-3:2025 (published May 2025). ForgeIEC does not develop it; it would also need its own translation path to assembler.
+<!-- ENTWURF: Annex B der Norm einsehen, bevor es als Normaussage zitiert wird -->
+See the [roadmap](/en/roadmap/).
 
-- **Structured Text (ST)** — High-level language with syntax highlighting,
-  auto-completion, and Tree-sitter-based parsing
-- **Instruction List (IL)** — Assembly-like language with intelligent
-  editing and language switching to/from ST
-- **Function Block Diagram (FBD)** — Graphical editor with
-  block library and drag-and-drop
-- **Ladder Diagram (LD)** — Familiar representation for switching logic,
+- **Structured Text (ST)** — {{< status "use" >}} High-level language with syntax highlighting,
+  auto-completion, and Tree-sitter-based parsing; own compiler core
+  that also handles the object-oriented extensions (METHOD,
+  INTERFACE, EXTENDS)
+- **Ladder Diagram (LD)** — {{< status "plan" "planned: 0.3" >}} Familiar representation for switching logic,
   wired directly on screen
-- **Sequential Function Chart (SFC)** — Step sequence diagrams for
+- **Function Block Diagram (FBD)** — {{< status "plan" "planned: 0.4" >}} Graphical editor with
+  block library and drag-and-drop
+- **Sequential Function Chart (SFC)** — {{< status "plan" "planned: 0.5" >}} Step sequence diagrams for
   sequential control with transitions and actions
+- **Instruction List (IL)** — {{< status "rest" "deprecated" >}} not developed further and
+  not compiled
+
+---
+
+## Documentation in the project {#documentation}
+
+Documentation lives inside the project. Every POU, variable and data type carries its own description in Markdown, stored in the same PLCopen XML file as the program. It is versioned, copied and shipped together with the code, with no separate document that drifts out of date. When you import Structured Text, ForgeIEC turns your existing `(* … *)` comments into documentation.
+
+Storage follows IEC 61131-10 / PLCopen TC6: `<documentation><xhtml>` on each node, the project description in `<contentHeader><Comment>`. Besides its documentation, a variable carries an HMI label and an IEC 81346 reference designation, down to a single array element. All texts are readable through the MCP interface, so an AI assistant, including a locally hosted model, can read the documentation too.
+
+From Structured Text, ForgeIEC generates a flow diagram in Mermaid format on request, which the AI assistant can read and show you.
+
+The AI assistant (persona "Doc") reads the project and proposes Markdown documentation; it also runs with a local model (LM Studio or any OpenAI-compatible endpoint).
+<!-- ENTWURF: stimmt erst voll nach Behebung der Studio-Issues D-1 bis D-3 -->
+
+<figure class="figure">
+
+```mermaid
+stateDiagram-v2
+    [*] --> ValveClosed
+    ValveClosed --> ValveOpen: moisture < 30.0 AND NOT rain
+    ValveOpen --> ValveClosed: runtime.Q OR rain
+```
+
+<figcaption>Example: what a flow diagram in the <code>stateDiagram-v2</code> format looks like, here for the irrigation program from the home page. Written by hand as an illustration, not output of the Studio; rendered by this website's own copy of Mermaid.</figcaption>
+</figure>
+
+<div class="grid grid-2">
+<div>
+
+{{< screenshot program="studio" name="variables-documentation" alt="Variable table with the documentation column, HMI label and reference designation" caption="Variables: documentation, HMI label and reference designation per variable." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="datatype-documentation" alt="Data type dialog with a documentation field" caption="Data types: the documentation in the data type dialog." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="project-properties-description" alt="Project properties with the rendered Markdown description" caption="Project → Properties: the project description as rendered Markdown." >}}
+
+</div>
+<div>
+
+{{< screenshot program="studio" name="ai-assistant-doc-persona" alt="AI assistant, Doc tab, summarising a POU" caption="AI assistant, persona “Doc”: summarising a POU (read only)." >}}
+
+</div>
+</div>
 
 ---
 
@@ -59,10 +113,12 @@ is integrated directly into the development environment:
 
 ## Connection to the Runtime Environment
 
-Forge Studio communicates via gRPC with the Anvil runtime environment:
+Forge Studio communicates via gRPC with the Anvil server (anvild):
 
-- **Compilation on the workstation** — the IEC compiler (iec2c) runs
-  locally, only the generated C code is transferred to the PLC
+- **Two-stage translation** — the Studio translates IEC code into
+  C++ source and sends it encrypted to the controller; there the
+  runtime builds it with g++ — so the controller needs `make` and
+  `g++`, but no IEC compiler
 - **Encrypted upload** — AES-256-GCM encrypted transfer to the
   target system
 - **Live debugging** — watch and force variables in real time
@@ -93,10 +149,25 @@ Complete IEC standard library in a SQLite database:
 | **GUI Framework** | Qt 6 Widgets |
 | **Syntax Engine** | Tree-sitter |
 | **Communication** | gRPC (protobuf) |
-| **Platforms** | Linux x86_64, ARM64 |
-| **License** | AGPL-3.0 |
+| **Platforms** | Linux x86_64/ARM64, Windows x64 (installer on request) |
+| **Licence** | AGPL-3.0-or-later (generated code: Apache-2.0) |
 
 ---
+
+## Screens
+
+{{< screenshot program="studio" name="editor-st" alt="ForgeIEC Studio with a Structured Text program in the editor" caption="The ST editor in the Studio's main window." >}}
+
+{{< screenshot program="studio" name="variables" alt="Project variable list with filter bar" caption="Variables: filter by text, type, range and tag." >}}
+
+{{< screenshot program="studio" name="library" alt="Block library with categories and documentation" caption="Library: blocks by category, search includes the documentation." >}}
+
+{{< screenshot program="studio" name="oscilloscope" alt="Oscilloscope showing several variable traces" caption="Oscilloscope: timing, analog and normalized view." >}}
+
+{{< screenshot program="fdd-editor" name="catalog" alt="FDD editor with a device description as a tree and an edit form" caption="The FDD editor: device descriptions as a tree, edited in a form." >}}
+
+{{< screenshot program="studio" name="editor-sfc" alt="Sequential Function Chart (SFC) editor, planned for version 0.5" caption="Sequential Function Chart (SFC): planned for version 0.5, programs are not compiled yet." status="plan" >}}
+
 
 <div style="text-align:center; padding: 2rem;">
 

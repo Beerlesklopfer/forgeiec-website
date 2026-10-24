@@ -43,7 +43,7 @@ Conexión a un demonio **anvild** y diagnóstico IPC.
 | **Host**         | Hostname o IP del PLC. Predeterminado `localhost`. |
 | **Puerto**         | Puerto gRPC de anvild. Predeterminado `50051`. |
 | **Usuario**         | Nombre de usuario para autenticación por token. |
-| **Anvil Debug**  | Nivel de diagnóstico IPC (`Off`, `Errors only`, `Verbose`). Añade estadísticas adicionales al log de anvild — útil para rastrear desviaciones de tópicos Iceoryx en producción. |
+| **Anvil Debug**  | Nivel de diagnóstico IPC (`Off`, `Errors only`, `Verbose`). Añade estadísticas adicionales al log de anvild — útil para rastrear desviaciones de tópicos Anvil en producción. |
 
 Adicionalmente: **Auto-Connect on start** se conecta automáticamente al
 último anvild conectado con éxito al iniciar el editor — práctico en un

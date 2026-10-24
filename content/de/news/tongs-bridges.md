@@ -11,13 +11,13 @@ components: [studio, tongs, anvild]
 
 Eine SPS-Plattform ist nur so gut wie ihre Feldbus-Anbindung. Aber
 jeder Bus ist anders: Modbus-TCP hat keine echte Diagnose, EtherCAT
-hat einen vollstaendig getakteten Slave-Zustandsautomat, Profibus
+hat einen vollständig getakteten Slave-Zustandsautomat, Profibus
 hat seine eigenen Fault-Klassen, EthernetIP hat CIP-Connections.
 
-**Tongs** loest das mit einer **Plug-in-Familie**: pro Protokoll
+**Tongs** löst das mit einer **Plug-in-Familie**: pro Protokoll
 ein eigener Daemon, gesteuert von anvild, mit einer **einheitlichen
 Fault-Schicht** und **strukturierten Diagnose-Bits** aus den
-Geraete-FDDs. Statt eines Mega-Drivers mit allen Protokollen
+Geräte-FDDs. Statt eines Mega-Drivers mit allen Protokollen
 drin gibt es eine **modulare Komponenten-Familie**.
 
 ---
@@ -26,10 +26,14 @@ drin gibt es eine **modulare Komponenten-Familie**.
 
 | Daemon | Protokoll | Status |
 |---|---|---|
-| `tongs-modbustcp` | Modbus TCP Master + Slave-Mode | produktiv |
-| `tongs-ethercat` | EtherCAT-Master mit DC-Sync | in Arbeit |
-| `tongs-profibus` | Profibus DP/PA | geplant |
-| `tongs-ethernetip` | EtherNet/IP CIP | geplant |
+| `tongs-modbustcp` | Modbus TCP Master + Slave-Mode | verfügbar |
+| `tongs-modbusrtu` | Modbus RTU | verfügbar |
+| `tongs-lorawan` | LoRaWAN | in Arbeit (Schwerpunkt) |
+| `tongs-ethercat` | EtherCAT-Master mit DC-Sync | Gerüst, in Arbeit |
+| `tongs-profibus` | Profibus DP/PA | Gerüst, in Arbeit |
+| `tongs-ethernetip` | EtherNet/IP CIP | Gerüst, in Arbeit |
+
+*Status aktualisiert im Oktober 2026.*
 
 Alle laufen unter dem **gleichen** anvild-Subprozess-Manager.
 Lifecycle, Logging, Auto-Restart — gemeinsam, nicht pro Protokoll
@@ -40,19 +44,19 @@ neu erfunden.
 ## Einheitliches Fault-Modell
 
 Spec `tongs-platform-v1.md` §5 definiert eine **gemeinsame
-Fault-Stufung** ueber alle Bridges:
+Fault-Stufung** über alle Bridges:
 
 | Stufe | Bedeutung |
 |---|---|
-| `OK` | Geraet kommuniziert, keine Stoerungen |
-| `WARN` | Funktional, aber Diagnose-Bits zeigen Vor-Stoerung |
-| `FAULT` | Geraet kommuniziert, aber Schutzfunktion ausgeloest |
-| `OFFLINE` | Geraet antwortet nicht |
+| `OK` | Gerät kommuniziert, keine Störungen |
+| `WARN` | Funktional, aber Diagnose-Bits zeigen Vor-Störung |
+| `FAULT` | Gerät kommuniziert, aber Schutzfunktion ausgelöst |
+| `OFFLINE` | Gerät antwortet nicht |
 | `UNKNOWN` | Bus-Status nicht ermittelbar (z.B. Scanner aus) |
 
 Wird **einheitlich** in Studio + anvild gemeldet — egal ob das
 darunter Modbus, EtherCAT oder Profibus ist. Operator muss nicht
-fuer jeden Bus eine eigene Fehler-Tabelle lernen.
+für jeden Bus eine eigene Fehler-Tabelle lernen.
 
 Aufruf via MCP: `bellows.protocol_status` liefert pro Segment den
 aktuellen Fault-Stand inklusive Diagnose-Bits.
@@ -67,7 +71,7 @@ Bei Hersteller-Geraten (z.B. Weidmueller-Busklemmen) gibt es
 - Bit 0: Modul fehlt
 - Bit 1: Kurzschluss am Ausgang
 - Bit 2: Drahtbruch
-- Bit 3: Versorgungsspannung ausserhalb Spec
+- Bit 3: Versorgungsspannung außerhalb Spec
 - …
 
 Diese Bits stehen im **FDD** (Field Device Description) des
@@ -76,7 +80,7 @@ Herstellers. ForgeIEC Studio:
 1. Importiert die FDDs (auch mit eingebettetem PDF-Datenblatt)
 2. Parsed die `<DiagnosticDecode>`-Sektionen
 3. Stellt pro Bit Bedeutung + Schweregrad in Studio-Diagnose-Tab dar
-4. Macht die aufgeloesten Bits per `catalog.diag_bits` MCP-Tool
+4. Macht die aufgelösten Bits per `catalog.diag_bits` MCP-Tool
    abrufbar
 
 KI-Diagnose-Loop: „Warum schaltet `Motor_Bereit` nicht?" → KI ruft
@@ -90,8 +94,8 @@ Ausgang 3".
 
 Architektur-Vorteil: **Crashed eine Bridge nicht den ganzen
 Master**. Wenn die EtherCAT-Bridge gegen einen frischen Slave-
-Bug laeuft und stirbt, laufen Modbus + Profibus + die PLC-Logik
-ungestoert weiter. anvild startet den abgestuerzten Bridge-Daemon
+Bug läuft und stirbt, laufen Modbus + Profibus + die PLC-Logik
+ungestört weiter. anvild startet den abgestürzten Bridge-Daemon
 automatisch neu.
 
 Das ist anders als bei monolithischen Runtimes wo ein Treiber-
@@ -127,8 +131,8 @@ IEC-Zugriff im ST-Code mit klarem 5-Level-Namespace:
 
 ## Plus: Anvil ABI-Probe — kein Versions-Roulette mehr
 
-Tongs-Bridges sprechen mit anvild ueber **iceoryx2-Shared-Memory**.
-Bei Versionsmischung zwischen anvild + Bridge konnten frueher
+Tongs-Bridges sprechen mit anvild über **Anvil-Shared-Memory**.
+Bei Versionsmischung zwischen anvild + Bridge konnten früher
 **still inkonsistente Daten** auftreten — Bridge schreibt eine
 ABI-Variante A, anvild liest Variante B, niemand bemerkt es.
 
@@ -151,8 +155,8 @@ sofort eine **Studio-Warnung** mit konkretem Versions-Vergleich
   Git-LFS
 - `6774397` — FDD-Editor: Diagnostics-Tab + Documents-Tab
 - `7653cc5`, `9b17adc` — Anvil-ABI-Probe Layer 3a/3b
-- `21759e7` — MCP-4a Remote-Bind macht Bus-Diagnose ueber Distanz
-  moeglich
+- `21759e7` — MCP-4a Remote-Bind macht Bus-Diagnose über Distanz
+  möglich
 
 Spec: `documentation/architecture/tongs-platform-v1.md`
 + `bus-system-v1.md` + `anvil-platform-v2.md` §13.
@@ -163,10 +167,10 @@ Spec: `documentation/architecture/tongs-platform-v1.md`
 
 | Setup | Was Sie konfigurieren |
 |---|---|
-| Modbus-TCP an einer SPS | `tongs-modbustcp` + Geraet im Bus-Tab anlegen |
+| Modbus-TCP an einer SPS | `tongs-modbustcp` + Gerät im Bus-Tab anlegen |
 | Mehrere Protokolle gemischt | je ein `tongs-*` pro Protokoll, anvild orchestriert |
 | Diagnose im laufenden Betrieb | `bellows.protocol_status` per MCP oder im Studio-Bus-Panel |
-| Geraet wechseln (Stachelbeere → Birne) | FDD austauschen, regenerieren, deployen |
+| Gerät wechseln (Stachelbeere → Birne) | FDD austauschen, regenerieren, deployen |
 
 ---
 

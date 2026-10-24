@@ -21,7 +21,7 @@ You switch between them as tabs in the AI panel.
 
 ---
 
-## The five personas
+## The six personas
 
 ### Blacksmith Master — the foreman
 
@@ -61,6 +61,16 @@ You switch between them as tabs in the AI panel.
   no code touching, no deploy.
 - **Typical question:** "Why does `Motor_Ready` stay FALSE during
   startup? Look at the last 5 seconds on the oscilloscope."
+
+### Team Lead — the coordinator
+
+- **When to choose?** When a larger task should be split across
+  several personas.
+- **What may it do?** **Read** project, library, catalogue and live
+  values, split the task into sub-tasks, hand them to Blacksmith
+  Master, Reviewer, Doc and Monitor, and consolidate their results.
+- **What may it NOT do?** Change code itself, deploy or control the
+  runtime.
 
 ### Trainee — for onboarding and first contact
 

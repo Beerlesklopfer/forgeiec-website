@@ -43,7 +43,7 @@ Connection to an **anvild** daemon and IPC diagnostics.
 | **Host**         | PLC hostname or IP. Default `localhost`. |
 | **Port**         | anvild gRPC port. Default `50051`. |
 | **User**         | User name for token authentication. |
-| **Anvil Debug**  | IPC diagnostic level (`Off`, `Errors only`, `Verbose`). Adds extra stats to the anvild log — useful to track down Iceoryx topic drift in production. |
+| **Anvil Debug**  | IPC diagnostic level (`Off`, `Errors only`, `Verbose`). Adds extra stats to the anvild log — useful to track down Anvil topic drift in production. |
 
 In addition: **Auto-Connect on start** automatically connects to the
 last successfully connected anvild on editor startup — handy on a

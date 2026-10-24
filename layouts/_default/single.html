@@ -1,16 +1,12 @@
 {{ define "main" }}
-
-{{/* Same hero layout as home + section landings — keeps CID consistent
-     across every page type (single posts, help sub-pages, partner,
-     download details, etc.). */}}
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="container hero-content">
-    <h1 class="hero-title">{{ .Title }}</h1>
-    <div class="hero-body">
-      {{ .Content }}
-    </div>
-  </div>
-</section>
-
+{{ partial "page-hero.html" . }}
+{{- if .Params.full }}
+{{ .Content }}
+{{- else }}
+<div class="container page-body">
+  <article class="prose{{ if .Params.wide }} prose--wide{{ end }}">
+    {{ .Content }}
+  </article>
+</div>
+{{- end }}
 {{ end }}
