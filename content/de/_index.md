@@ -6,7 +6,7 @@ more: "Mehr erfahren"
 hero:
   eyebrow: "IEC 61131-3 · Vorabversion 0.2"
   title: "Ihre Steuerung. Ohne Gerätelizenz, ohne Herstellerbindung."
-  lead: "ForgeIEC ist Steuerungssoftware für Maschinen- und Anlagenbauer: programmieren nach IEC 61131-3, auf Linux-Industrierechnern betreiben, Feldgeräte und Bedienung anbinden. Freie Software (AGPL-3.0-or-later)."
+  lead: "ForgeIEC verbindet, was bei anderen freien Systemen einzeln zusammengesucht werden muss: Programmierung nach IEC 61131-3, Laufzeit auf Linux-Rechnern, grafische Bedienoberflächen, Anbindung an Modbus, EtherNet/IP, EtherCAT und PROFIBUS sowie einen selbst betriebenen Fernzugriff. Freie Software (AGPL-3.0-or-later)."
   secondaryLabel: "Download"
   secondaryHref: "/download/"
   meta:

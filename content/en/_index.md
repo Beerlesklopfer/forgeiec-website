@@ -6,7 +6,7 @@ more: "Learn more"
 hero:
   eyebrow: "IEC 61131-3 · Preview version 0.2"
   title: "Your control system. No per-device licence, no vendor lock-in."
-  lead: "ForgeIEC is control software for machine and plant builders: program to IEC 61131-3, run on Linux industrial computers, connect field devices and operator panels. Free software (AGPL-3.0-or-later)."
+  lead: "ForgeIEC brings together what other free systems leave you to assemble piece by piece: programming to IEC 61131-3, a runtime on Linux computers, graphical operator screens, connections to Modbus, EtherNet/IP, EtherCAT and PROFIBUS, and self-hosted remote access. Free software (AGPL-3.0-or-later)."
   secondaryLabel: "Download"
   secondaryHref: "/download/"
   meta:
