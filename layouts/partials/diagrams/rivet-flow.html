@@ -3,7 +3,7 @@
 {{- $id := .id -}}
 <svg class="diagram diagram--large" viewBox="0 0 480 430" role="img" aria-labelledby="{{ $id }}-t {{ $id }}-d">
   <title id="{{ $id }}-t">{{ if $de }}Rivet: Verbindungsweg{{ else }}Rivet: connection path{{ end }}</title>
-  <desc id="{{ $id }}-d">{{ if $de }}Das Handy verbindet sich mit dem Rivet-Server. Das Gateway im lokalen Netz baut selbst eine ausgehende Verbindung zum Server auf. Der Server reicht die verschlüsselte Verbindung durch diesen Tunnel an das Gateway weiter, das nur die freigegebene Steuerung erreicht.{{ else }}The phone connects to the Rivet server. The gateway in the local network builds an outgoing connection to the server itself. The server passes the encrypted connection through this tunnel to the gateway, which reaches only the released controller.{{ end }}</desc>
+  <desc id="{{ $id }}-d">{{ if $de }}Das Handy verbindet sich mit dem Vermittlungsserver. Das Gateway im lokalen Netz baut selbst eine ausgehende Verbindung zum Server auf. Der Server reicht die verschlüsselte Verbindung durch diesen Tunnel an das Gateway weiter, das nur die freigegebene Steuerung erreicht.{{ else }}The phone connects to the relay server. The gateway in the local network builds an outgoing connection to the server itself. The server passes the encrypted connection through this tunnel to the gateway, which reaches only the released controller.{{ end }}</desc>
   <defs>
     <marker id="{{ $id }}-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrowhead"/></marker>
     <marker id="{{ $id }}-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrowhead-accent"/></marker>
@@ -15,9 +15,9 @@
   <text x="84" y="128" text-anchor="middle" class="t-b">{{ if $de }}Handy{{ else }}Phone{{ end }}</text>
   <!-- server -->
   <rect x="300" y="40" width="160" height="112" rx="12" class="box"/>
-  <text x="380" y="78" text-anchor="middle" class="t-b">Rivet-Server</text>
+  <text x="380" y="78" text-anchor="middle" class="t-b">{{ if $de }}Vermittlungsserver{{ else }}Relay server{{ end }}</text>
   <text x="380" y="100" text-anchor="middle" class="t-sm">{{ if $de }}feste IP-Adresse{{ else }}fixed IP address{{ end }}</text>
-  <text x="380" y="120" text-anchor="middle" class="t-sm">{{ if $de }}sieht keine Inhalte{{ else }}sees no content{{ end }}</text>
+  <text x="380" y="120" text-anchor="middle" class="t-sm">{{ if $de }}selbst betrieben{{ else }}self-hosted{{ end }}</text>
   <!-- phone -> server -->
   <path d="M146 96 H296" class="line" marker-end="url(#{{ $id }}-a)"/>
   <text x="221" y="86" text-anchor="middle" class="t-sm">WireGuard / HTTPS</text>

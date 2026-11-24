@@ -67,19 +67,19 @@ solution:
 
 rivet:
   eyebrow: "Rivet · Fernzugriff"
-  title: "Fernzugriff auf Ihre Maschinen – ohne offenen Port und ohne fremde Cloud."
-  lead: "Rivet verbindet das Handy mit der Steuerung. Ein kleines Gateway neben der Steuerung baut die Verbindung selbst nach außen auf – im Netz der Anlage wird kein Port geöffnet."
+  title: "Fernzugriff auf die eigene Anlage – ohne offenen Port, ohne Hersteller-Cloud, selbst betrieben."
+  lead: "Rivet verbindet das Handy mit der Steuerung. Ein kleines Gateway neben der Steuerung baut die Verbindung selbst nach außen auf – im Netz der Anlage wird kein Port geöffnet. Freie Software (AGPL-3.0-or-later), die jede Gemeinschaft selbst betreiben soll."
   points:
     - title: "Keine Portfreigabe"
       text: "Keine öffentliche IP-Adresse, kein DynDNS. Funktioniert auch hinter CGNAT und am LTE-Anschluss."
-    - title: "Kein Dritter im Datenpfad"
-      text: "Gateway und Server sind eigene Infrastruktur, kein Cloud- oder VPN-Anbieter dazwischen. Der Server reicht die Verbindung nur verschlüsselt weiter und sieht keine Inhalte."
+    - title: "Der Server gehört in die eigene Hand"
+      text: "Kein Cloud- oder VPN-Anbieter dazwischen. Wer den Vermittlungsserver betreibt, dem muss man vertrauen: Über ihn läuft der gesamte Verkehr. Deshalb soll jede Gemeinschaft ihn selbst betreiben können."
     - title: "Nur die freigegebene Steuerung ist erreichbar"
       text: "Das Handy erreicht nur die freigegebene Steuerung auf den freigegebenen Ports. Andere Geräte im Netz bleiben unerreichbar."
   linkLabel: "Rivet im Detail"
   href: "/rivet/"
-  status: "in Entwicklung · Pilot mit SoLaWis"
-  caption: "Das Gateway baut den Tunnel von innen auf; der Server vermittelt nur."
+  status: "Machbarkeitsnachweis im Pilotbetrieb bei einer SoLaWi"
+  caption: "Das Gateway baut den Tunnel von innen auf; der Vermittlungsserver verbindet Handy und Gateway."
 
 status:
   eyebrow: "Ehrlicher Stand"

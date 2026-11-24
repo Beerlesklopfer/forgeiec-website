@@ -67,19 +67,19 @@ solution:
 
 rivet:
   eyebrow: "Rivet · remote access"
-  title: "Remote access to your machines – without an open port and without someone else's cloud."
-  lead: "Rivet connects a phone to the controller. A small gateway next to the controller builds the connection outwards by itself – no port is opened in the plant's network."
+  title: "Remote access to your own plant – without an open port, without a vendor cloud, self-hosted."
+  lead: "Rivet connects a phone to the controller. A small gateway next to the controller builds the connection outwards by itself – no port is opened in the plant's network. Free software (AGPL-3.0-or-later) that every community should be able to run itself."
   points:
     - title: "No port forwarding"
       text: "No public IP address, no DynDNS. Works behind CGNAT and on an LTE connection, too."
-    - title: "No third party in the data path"
-      text: "Gateway and server are our own infrastructure, no cloud or VPN provider in between. The server only passes the connection on encrypted and sees no content."
+    - title: "The server belongs in your own hands"
+      text: "No cloud or VPN provider in between. Whoever runs the relay server has to be trusted: all traffic passes through it. That is why every community should be able to run it themselves."
     - title: "Only the released controller is reachable"
       text: "The phone reaches only the released controller on the released ports. Other devices in the network stay unreachable."
   linkLabel: "Rivet in detail"
   href: "/rivet/"
-  status: "in development · pilot with solidarity farms"
-  caption: "The gateway builds the tunnel from inside; the server only brokers it."
+  status: "proof of concept in pilot operation at a solidarity farm"
+  caption: "The gateway builds the tunnel from inside; the relay server connects phone and gateway."
 
 status:
   eyebrow: "Honest status"
