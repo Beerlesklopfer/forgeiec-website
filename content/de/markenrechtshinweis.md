@@ -112,7 +112,7 @@ grundsätzlichen Erwägungen zurückweisen** werden.
 
 ForgeIEC — Open-Source-Projekt
 E-Mail: [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io)
-Quellcode: Einsicht auf Anfrage (AGPL-3.0-or-later)
+Quellcode: öffentlich unter git.forgeiec.io/ForgeIEC (AGPL-3.0-or-later)
 
 ---
 

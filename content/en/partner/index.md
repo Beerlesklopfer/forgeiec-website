@@ -15,10 +15,8 @@ actively shape the future of automation.
 ## Our source repositories
 
 The code base lives in the **Forgejo** at `git.forgeiec.io`.
-The repositories are not publicly browsable; the source code is
-under the AGPL, access on request. Access goes through SSH: send us
-your SSH public key and we enable it. You can then review the code
-before applying. Third-party contributions are accepted only once
+The repositories are public; the source code is under the AGPL.
+You can review the code before applying. Third-party contributions are accepted only once
 the Contributor License Agreement is in force.
 
 | Repository (`ssh://git@git.forgeiec.io/ForgeIEC/<name>.git`) | What's inside |

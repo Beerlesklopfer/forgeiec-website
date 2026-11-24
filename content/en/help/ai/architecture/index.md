@@ -344,10 +344,8 @@ Full list: `project_open_backlog.md` (internal).
 
 The ForgeIEC tools and services are licensed under
 AGPL-3.0-or-later. The generated control code, the runtime API
-headers and the libanvil library are licensed under Apache-2.0; a
-commercial licence is available. Source available on request — the
-Forgejo repositories are not publicly accessible; access is granted
-once your SSH public key has been enabled. Signed packages from an
+headers and the libanvil library are licensed under Apache-2.0. The
+source code is public at git.forgeiec.io/ForgeIEC. Signed packages from an
 automated CI — signed APT repository for Debian/Ubuntu, signed RPM
 repository for AlmaLinux 9 and Fedora 44.
 

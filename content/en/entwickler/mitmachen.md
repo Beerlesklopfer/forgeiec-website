@@ -22,7 +22,7 @@ ForgeIEC is IEC 61131-3 control software: a Studio for programming, a runtime on
 <div class="card">
 <p class="card-kicker">In short</p>
 <ul>
-<li>source code under AGPL-3.0-or-later, access on request</li>
+<li>source code under AGPL-3.0-or-later, public</li>
 <li>Rust for the runtime and the bridges, C++ with Qt 6 for the Studio</li>
 <li>every change passes the same quality gates</li>
 <li>third-party contributions only once the CLA is in force</li>
@@ -89,7 +89,7 @@ ForgeIEC is IEC 61131-3 control software: a Studio for programming, a runtime on
 </div>
 <ol class="steps steps--5">
 <li><h3>Get in touch</h3><p>A mail to blacksmith@forgeiec.io: who you are, what you can do and which area attracts you.</p></li>
-<li><h3>Get access</h3><p>The source code is under AGPL-3.0-or-later; the repositories are not public, access is given on request.</p></li>
+<li><h3>Get access</h3><p>The source code is under AGPL-3.0-or-later and public at git.forgeiec.io/ForgeIEC.</p></li>
 <li><h3>Read the wiki</h3><p>The entry point is the page “Architecture”: processes, repositories, the class and dependency tree and “Where do I change what?”.</p></li>
 <li><h3>Start from the template</h3><p>The example Tongs <code>tongs-example</code> and the wiki page “Creating a Tongs” show everything a new bridge needs.</p></li>
 <li><h3>Pass the gates</h3><p>Every change passes the quality gates; code, commits, issues and the wiki are in English.</p></li>
@@ -105,7 +105,7 @@ ForgeIEC is IEC 61131-3 control software: a Studio for programming, a runtime on
 
 ## The Contributor License Agreement
 
-ForgeIEC is offered under AGPL-3.0-or-later and, in addition, under a commercial licence. That is only possible while the author holds all rights in the code. Contributions therefore need a Contributor License Agreement (CLA): you sign once, stay the author of your contribution and grant a non-exclusive right of use. The text: {{< page-link path="/cla" text="Contributor License Agreement" >}}.
+ForgeIEC is licensed under AGPL-3.0-or-later; parts meant to be linked into your projects under Apache-2.0. To keep the licensing unambiguous, contributions need a Contributor License Agreement (CLA): you sign once, stay the author of your contribution and grant a non-exclusive right of use. The text: {{< page-link path="/cla" text="Contributor License Agreement" >}}.
 
 <!-- ENTWURF: the CLA is not yet reviewed by a lawyer and not in force; the link above appears only once the CLA page is published (draft removed). -->
 

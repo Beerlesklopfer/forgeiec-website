@@ -6,7 +6,7 @@ more: "Learn more"
 hero:
   eyebrow: "IEC 61131-3 · Preview version 0.2"
   title: "Your control system. No per-device licence, no vendor lock-in."
-  lead: "ForgeIEC is control software for machine and plant builders: program to IEC 61131-3, run on Linux industrial computers, connect field devices and operator panels. Open source – a commercial licence is available on request."
+  lead: "ForgeIEC is control software for machine and plant builders: program to IEC 61131-3, run on Linux industrial computers, connect field devices and operator panels. Free software (AGPL-3.0-or-later)."
   secondaryLabel: "Download"
   secondaryHref: "/download/"
   meta:
@@ -136,7 +136,7 @@ trust:
   facts:
     - icon: "scale"
       title: "Licence"
-      text: "The Studio, the runtime daemon and the bus bridges are AGPL-3.0-or-later. What is linked into your project – generated code, runtime interfaces, libanvil – is Apache-2.0. A commercial licence is possible."
+      text: "The Studio, the runtime daemon and the bus bridges are AGPL-3.0-or-later. What is linked into your project – generated code, runtime interfaces, libanvil – is Apache-2.0."
     - icon: "alert"
       title: "Not a replacement for a safety PLC"
       text: "ForgeIEC is not a safety PLC and has no SIL or PL rating. Emergency stop and protective functions belong on safety equipment approved for that purpose."
@@ -144,8 +144,8 @@ trust:
       title: "Linux and Windows"
       text: "Linux packages come signed from an automated CI via the apt repository. A Windows build exists and its CI runs; the installer is available on request."
     - icon: "chat"
-      title: "Support and commercial licence"
-      text: "On request. The source code is under AGPL; access to the repositories on request."
+      title: "Source code"
+      text: "The source code is public at git.forgeiec.io/ForgeIEC, as free software under AGPL-3.0-or-later."
 
 faq:
   title: "Licence questions"
@@ -156,9 +156,9 @@ faq:
     - q: "What applies if I modify ForgeIEC itself?"
       a: "Changes to the Studio, the runtime daemon or the bus bridges fall under the AGPL: if you distribute the modified software or offer it over a network, you must make the source code of those changes available. If you do not want that, ask for a commercial licence."
     - q: "Is there a licence fee per controller?"
-      a: "Not under the open licences. Support and a commercial licence are available on request."
+      a: "No. ForgeIEC is free software; there are no licence fees."
     - q: "Can I get the source code?"
-      a: "Yes. The source code is under AGPL; access to the repositories is available on request at blacksmith@forgeiec.io."
+      a: "Yes. The source code is public at git.forgeiec.io/ForgeIEC, as free software under AGPL-3.0-or-later."
 
 proof:
   eyebrow: "In use"

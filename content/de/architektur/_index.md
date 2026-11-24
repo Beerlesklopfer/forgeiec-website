@@ -238,7 +238,7 @@ Zur Sicherheit auf der Maschine: Der Anvil-Transport lässt nur Prozesse der Ben
 </table>
 </div>
 
-Quellcode unter AGPL-3.0-or-later; Einblick auf Anfrage. Die Entwickler-Dokumentation (Wiki von tongs-core mit Architektur, Abhängigkeitsbaum und „Wo ändere ich was“) ist noch nicht öffentlich — Zugang ebenfalls auf Anfrage an [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io).
+Quellcode unter AGPL-3.0-or-later, öffentlich unter git.forgeiec.io/ForgeIEC. Die Entwickler-Dokumentation (Wiki von tongs-core mit Architektur, Abhängigkeitsbaum und „Wo ändere ich was“) ist noch nicht öffentlich — Zugang ebenfalls auf Anfrage an [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io).
 
 </div>
 </section>

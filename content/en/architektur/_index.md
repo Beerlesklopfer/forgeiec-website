@@ -239,7 +239,7 @@ On security on the machine: the Anvil transport admits only processes of anvild'
 </table>
 </div>
 
-Source code under AGPL-3.0-or-later; access on request. The developer documentation (the tongs-core wiki with architecture, dependency tree and "where do I change what") is not public yet — access on request as well, at [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io).
+Source code under AGPL-3.0-or-later, public at git.forgeiec.io/ForgeIEC. The developer documentation (the tongs-core wiki with architecture, dependency tree and "where do I change what") is not public yet — access on request as well, at [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io).
 
 </div>
 </section>

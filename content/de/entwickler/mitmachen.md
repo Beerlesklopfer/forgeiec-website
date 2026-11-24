@@ -88,7 +88,7 @@ ForgeIEC ist Steuerungssoftware nach IEC 61131-3: ein Studio zum Programmieren, 
 </div>
 <ol class="steps steps--5">
 <li><h3>Melden</h3><p>Eine Mail an blacksmith@forgeiec.io: wer Sie sind, was Sie können und welcher Bereich Sie reizt.</p></li>
-<li><h3>Zugang erhalten</h3><p>Der Quellcode steht unter AGPL-3.0-or-later; die Repositories sind nicht öffentlich, Zugang gibt es auf Anfrage.</p></li>
+<li><h3>Zugang erhalten</h3><p>Der Quellcode steht unter AGPL-3.0-or-later und ist öffentlich unter git.forgeiec.io/ForgeIEC.</p></li>
 <li><h3>Das Wiki lesen</h3><p>Einstieg ist die Seite „Architecture“: Prozesse, Repositories, Klassen- und Abhängigkeitsbaum und „Where do I change what?“.</p></li>
 <li><h3>Mit der Vorlage beginnen</h3><p>Die Beispiel-Zange <code>tongs-example</code> und die Wiki-Seite „Creating a Tongs“ zeigen alles, was eine neue Brücke braucht.</p></li>
 <li><h3>Die Tore bestehen</h3><p>Jede Änderung besteht die Qualitätstore; Code, Commits, Issues und Wiki sind englisch.</p></li>
@@ -104,7 +104,7 @@ ForgeIEC ist Steuerungssoftware nach IEC 61131-3: ein Studio zum Programmieren, 
 
 ## Die Contributor License Agreement
 
-ForgeIEC wird unter AGPL-3.0-or-later und zusätzlich unter einer kommerziellen Lizenz angeboten. Das geht nur, solange alle Rechte am Code beim Autor liegen. Beiträge brauchen deshalb eine Contributor License Agreement (CLA): Sie unterschreiben einmal, bleiben Urheber Ihres Beitrags und räumen ein einfaches Nutzungsrecht ein. Den Text finden Sie unter {{< page-link path="/cla" text="Contributor License Agreement" >}}.
+ForgeIEC steht unter AGPL-3.0-or-later; einbindbare Teile unter Apache-2.0. Damit die Lizenzlage eindeutig bleibt, brauchen Beiträge eine Contributor License Agreement (CLA): Sie unterschreiben einmal, bleiben Urheber Ihres Beitrags und räumen ein einfaches Nutzungsrecht ein. Den Text finden Sie unter {{< page-link path="/cla" text="Contributor License Agreement" >}}.
 
 <!-- ENTWURF: Die CLA ist noch nicht anwaltlich geprüft und nicht in Kraft; der Link oben erscheint erst, wenn die CLA-Seite veröffentlicht ist (draft entfernt). -->
 

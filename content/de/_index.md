@@ -6,7 +6,7 @@ more: "Mehr erfahren"
 hero:
   eyebrow: "IEC 61131-3 · Vorabversion 0.2"
   title: "Ihre Steuerung. Ohne Gerätelizenz, ohne Herstellerbindung."
-  lead: "ForgeIEC ist Steuerungssoftware für Maschinen- und Anlagenbauer: programmieren nach IEC 61131-3, auf Linux-Industrierechnern betreiben, Feldgeräte und Bedienung anbinden. Open Source – eine kommerzielle Lizenz gibt es auf Anfrage."
+  lead: "ForgeIEC ist Steuerungssoftware für Maschinen- und Anlagenbauer: programmieren nach IEC 61131-3, auf Linux-Industrierechnern betreiben, Feldgeräte und Bedienung anbinden. Freie Software (AGPL-3.0-or-later)."
   secondaryLabel: "Download"
   secondaryHref: "/download/"
   meta:
@@ -136,7 +136,7 @@ trust:
   facts:
     - icon: "scale"
       title: "Lizenz"
-      text: "Studio, Laufzeit-Dienst und Busbrücken stehen unter AGPL-3.0-or-later. Was in Ihr Projekt eingebunden wird – generierter Code, Laufzeit-Schnittstellen, libanvil – steht unter Apache-2.0. Eine kommerzielle Lizenz ist möglich."
+      text: "Studio, Laufzeit-Dienst und Busbrücken stehen unter AGPL-3.0-or-later. Was in Ihr Projekt eingebunden wird – generierter Code, Laufzeit-Schnittstellen, libanvil – steht unter Apache-2.0."
     - icon: "alert"
       title: "Kein Ersatz für eine Sicherheitssteuerung"
       text: "ForgeIEC ist keine Sicherheits-SPS und hat keine SIL- oder PL-Einstufung. Not-Halt und Schutzfunktionen gehören auf dafür zugelassene Sicherheitstechnik."
@@ -144,8 +144,8 @@ trust:
       title: "Linux und Windows"
       text: "Linux-Pakete kommen signiert aus einer automatisierten CI über das apt-Repository. Ein Windows-Build existiert und seine CI läuft; den Installer gibt es auf Anfrage."
     - icon: "chat"
-      title: "Support und kommerzielle Lizenz"
-      text: "Auf Anfrage. Der Quellcode steht unter AGPL; Zugang zu den Repositories auf Anfrage."
+      title: "Quellcode"
+      text: "Der Quellcode ist öffentlich unter git.forgeiec.io/ForgeIEC, als freie Software unter AGPL-3.0-or-later."
 
 faq:
   title: "Häufige Fragen zur Lizenz"
@@ -156,9 +156,9 @@ faq:
     - q: "Was gilt, wenn ich ForgeIEC selbst verändere?"
       a: "Änderungen am Studio, am Laufzeit-Dienst oder an den Busbrücken fallen unter die AGPL: Geben Sie die veränderte Software weiter oder bieten Sie sie über ein Netzwerk an, müssen Sie den Quellcode dieser Änderungen zugänglich machen. Wer das nicht möchte, fragt nach einer kommerziellen Lizenz."
     - q: "Fallen Lizenzgebühren pro Steuerung an?"
-      a: "Unter den offenen Lizenzen nicht. Support und eine kommerzielle Lizenz gibt es auf Anfrage."
+      a: "Nein. ForgeIEC ist freie Software; Lizenzgebühren fallen nicht an."
     - q: "Bekomme ich den Quellcode?"
-      a: "Ja. Der Quellcode steht unter AGPL; den Zugang zu den Repositories gibt es auf Anfrage an blacksmith@forgeiec.io."
+      a: "Ja. Der Quellcode ist öffentlich unter git.forgeiec.io/ForgeIEC, als freie Software unter AGPL-3.0-or-later."
 
 proof:
   eyebrow: "Im Einsatz"

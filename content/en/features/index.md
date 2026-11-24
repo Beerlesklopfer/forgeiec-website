@@ -82,5 +82,5 @@ user-defined blocks.
 No runtime licence per controller, no vendor lock-in. The tools and
 services are licensed under AGPL-3.0-or-later; the generated control
 code, the runtime API headers and libanvil under Apache-2.0. A
-commercial licence is available. Runs on Linux; a Windows build of
+Runs on Linux; a Windows build of
 the Studio exists (installer on request).

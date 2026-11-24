@@ -82,5 +82,5 @@ benutzerdefinierte Bausteine.
 Keine Laufzeitlizenz pro Steuerung, kein Vendor-Lock-In. Die Werkzeuge
 und Dienste stehen unter AGPL-3.0-or-later; der generierte
 Steuerungscode, die Runtime-API-Header und libanvil unter Apache-2.0.
-Eine kommerzielle Lizenz ist erhältlich. Läuft auf Linux; ein
+Läuft auf Linux; ein
 Windows-Build des Studios existiert (Installer auf Anfrage).

@@ -15,10 +15,8 @@ Zukunft der Automatisierung aktiv mitzugestalten.
 ## Unsere Source-Repositories
 
 Die Code-Basis liegt im **Forgejo** unter `git.forgeiec.io`.
-Die Repositories sind nicht öffentlich einsehbar; der Quellcode steht
-unter der AGPL, Einsicht auf Anfrage. Der Zugriff läuft über SSH:
-Sie schicken uns Ihren SSH-Public-Key, wir schalten ihn frei. Danach
-können Sie den Code vor einer Bewerbung durchsehen. Beiträge Dritter
+Die Repositories sind öffentlich; der Quellcode steht unter der AGPL.
+Sie können den Code vor einer Bewerbung durchsehen. Beiträge Dritter
 werden erst angenommen, wenn die Contributor License Agreement in
 Kraft ist.
 

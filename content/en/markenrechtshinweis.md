@@ -112,7 +112,7 @@ matter of principle.
 
 ForgeIEC — open-source project
 Email: [blacksmith@forgeiec.io](mailto:blacksmith@forgeiec.io)
-Source code: access on request (AGPL-3.0-or-later)
+Source code: public at git.forgeiec.io/ForgeIEC (AGPL-3.0-or-later)
 
 ---
 

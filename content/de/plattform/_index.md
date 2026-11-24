@@ -162,8 +162,7 @@ verbunden werden — mehrere Workstations sehen ihre Anlagen.
 AGPL-3.0-or-later. **Ihr Projekt gehört Ihnen**: der generierte
 Steuerungscode, die Runtime-API-Header und die Bibliothek libanvil
 stehen unter Apache-2.0 — Sie dürfen darauf eigene, geschlossene
-Bibliotheken bauen. Wer die AGPL nicht akzeptieren kann, erhält eine
-kommerzielle Lizenz.
+Bibliotheken bauen.
 
 Der Quellcode steht unter der AGPL; Einsicht auf Anfrage
 (Freischaltung per SSH-Schlüssel, siehe [Partner](/de/partner/)).
