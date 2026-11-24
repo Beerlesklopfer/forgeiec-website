@@ -152,9 +152,9 @@ faq:
   disclaimer: "Information, keine Rechtsberatung. Maßgeblich sind die Lizenztexte."
   items:
     - q: "Muss ich mein SPS-Programm offenlegen?"
-      a: "Nein. Der generierte Steuerungscode und die Laufzeit-Schnittstellen, die in Ihr Projekt eingebunden werden (Runtime-API, libanvil), stehen unter Apache-2.0. Sie dürfen darauf auch eigene, geschlossene Bibliotheken bauen. Das Studio, der Laufzeit-Dienst und die Busbrücken stehen unter AGPL-3.0-or-later. Eine kommerzielle Lizenz ist möglich."
+      a: "Nein. Der generierte Steuerungscode und die Laufzeit-Schnittstellen, die in Ihr Projekt eingebunden werden (Runtime-API, libanvil), stehen unter Apache-2.0. Sie dürfen darauf auch eigene, geschlossene Bibliotheken bauen. Das Studio, der Laufzeit-Dienst und die Busbrücken stehen unter AGPL-3.0-or-later."
     - q: "Was gilt, wenn ich ForgeIEC selbst verändere?"
-      a: "Änderungen am Studio, am Laufzeit-Dienst oder an den Busbrücken fallen unter die AGPL: Geben Sie die veränderte Software weiter oder bieten Sie sie über ein Netzwerk an, müssen Sie den Quellcode dieser Änderungen zugänglich machen. Wer das nicht möchte, fragt nach einer kommerziellen Lizenz."
+      a: "Änderungen am Studio, am Laufzeit-Dienst oder an den Busbrücken fallen unter die AGPL: Geben Sie die veränderte Software weiter oder bieten Sie sie über ein Netzwerk an, müssen Sie den Quellcode dieser Änderungen zugänglich machen."
     - q: "Fallen Lizenzgebühren pro Steuerung an?"
       a: "Nein. ForgeIEC ist freie Software; Lizenzgebühren fallen nicht an."
     - q: "Bekomme ich den Quellcode?"

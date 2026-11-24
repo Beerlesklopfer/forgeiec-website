@@ -152,9 +152,9 @@ faq:
   disclaimer: "Information, not legal advice. The licence texts are authoritative."
   items:
     - q: "Do I have to disclose my PLC program?"
-      a: "No. The generated control code and the runtime interfaces linked into your project (runtime API, libanvil) are Apache-2.0. You may also build your own closed libraries on top of them. The Studio, the runtime daemon and the bus bridges are AGPL-3.0-or-later. A commercial licence is possible."
+      a: "No. The generated control code and the runtime interfaces linked into your project (runtime API, libanvil) are Apache-2.0. You may also build your own closed libraries on top of them. The Studio, the runtime daemon and the bus bridges are AGPL-3.0-or-later."
     - q: "What applies if I modify ForgeIEC itself?"
-      a: "Changes to the Studio, the runtime daemon or the bus bridges fall under the AGPL: if you distribute the modified software or offer it over a network, you must make the source code of those changes available. If you do not want that, ask for a commercial licence."
+      a: "Changes to the Studio, the runtime daemon or the bus bridges fall under the AGPL: if you distribute the modified software or offer it over a network, you must make the source code of those changes available."
     - q: "Is there a licence fee per controller?"
       a: "No. ForgeIEC is free software; there are no licence fees."
     - q: "Can I get the source code?"
