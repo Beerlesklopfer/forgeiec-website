@@ -3,7 +3,7 @@ title: "Rivet"
 date: 2026-10-22
 draft: false
 wide: true
-description: "Rivet: Fernzugriff vom Handy auf Steuerungen im lokalen Netz, ohne Portfreigabe und ohne fremde Cloud. Status: in Entwicklung, Pilot mit solidarischen Landwirtschaften."
+description: "Rivet: freier Fernzugriff vom Handy auf Anlagen im lokalen Netz, ohne Portfreigabe und ohne Hersteller-Cloud, zum Selbstbetrieb durch Gemeinschaften. Stand: Machbarkeitsnachweis im Pilotbetrieb bei einer Solidarischen Landwirtschaft."
 ---
 
 <style>
@@ -46,16 +46,20 @@ description: "Rivet: Fernzugriff vom Handy auf Steuerungen im lokalen Netz, ohne
 
 <div class="rv">
 
-## Ihre Anlage vom Handy aus bedienen – ohne offene Tür ins Firmennetz {#nutzen}
+## Die Anlage vom Handy aus bedienen – ohne IT-Abteilung, ohne Hersteller-Cloud {#nutzen}
 
-<p class="rv-lead">Rivet verbindet das Handy einer berechtigten Person mit einer Steuerung im lokalen Netz.
-Vor Ort muss dafür keine Portfreigabe eingerichtet werden, und es ist kein fremder Cloud-Anbieter
-im Spiel.</p>
+<p class="rv-lead">Rivet verbindet das Handy einer berechtigten Person mit einer Anlage im lokalen Netz,
+zum Beispiel einer Bewässerungssteuerung. Vor Ort ist keine Portfreigabe nötig, auch nicht am
+Mobilfunkanschluss auf dem Acker. Rivet ist freie Software (AGPL-3.0-or-later); den Server dafür soll jede
+Gemeinschaft selbst betreiben können.</p>
 
-{{< callout type="warning" title="Status: in Entwicklung" >}}
-Rivet ist noch kein fertiges Produkt. Der Code entsteht, erprobt wird er bisher auf einem Testserver.
-Der erste vorgesehene Einsatz: Solidarische Landwirtschaften (SoLaWis) wollen damit ihre
-Bewässerungssteuerung vom Handy aus bedienen.
+{{< callout type="warning" title="Stand: Machbarkeitsnachweis im Pilotbetrieb" >}}
+Seit September 2026 bedient die SoLaWi Ackervielfalt ihre Bewässerungssteuerung über Rivet vom Handy aus,
+angebunden per Mobilfunk. Gateway, Vermittlungsserver und Portal laufen dafür bisher auf einem einzigen Server
+des Entwicklers: „läuft bei mir“. Der Code ist mit einem KI-Programmierwerkzeug nach eigener Architektur und
+Spezifikation entstanden, mit automatischen Tests und drei Codeprüfungen. Was noch fehlt, bevor andere ihn
+betreiben: ein einfacher Installationsweg für den eigenen Server, Härtung, Nachweise und die gründliche eigene
+Durchsicht. Ziel ist „gründlich geprüft, läuft bei euch“.
 {{< /callout >}}
 
 <div class="rv-cards">
@@ -66,17 +70,19 @@ unterwegs erreichen will, stellt sie meist direkt ins Internet oder bindet sich 
 </div>
 <div class="rv-card">
 <h3>Die Lösung</h3>
-<p>Ein kleines Gateway vor Ort baut die Verbindung <strong>von innen nach außen</strong> zu unserem Server auf.
-Das Handy erreicht über diesen Weg nur die Dienste, die Sie im Portal freigegeben haben, sonst nichts.</p>
+<p>Ein kleines Gateway vor Ort baut die Verbindung <strong>von innen nach außen</strong> zu einem
+Vermittlungsserver auf. Das Handy erreicht über diesen Weg nur die Dienste, die im Portal freigegeben sind,
+sonst nichts.</p>
 </div>
 <div class="rv-card">
-<h3>Was Sie in der Hand behalten</h3>
-<p>Sie legen im Portal fest, welche Handys welche Anlage erreichen. Ein gesperrtes Handy ist in Sekunden
-draußen. Der Schlüssel eines Handys entsteht auf dem Handy und verlässt es nicht.</p>
+<h3>Wem man vertrauen muss</h3>
+<p>Wer den Vermittlungsserver betreibt, dem muss man vertrauen: Über ihn läuft der gesamte Verkehr, und er
+verwaltet Schlüssel, Zertifikate und Freigaben. Deshalb soll jede Gemeinschaft ihn selbst betreiben können.
+Der private Schlüssel eines Handys entsteht auf dem Handy und verlässt es nicht.</p>
 </div>
 </div>
 
-<figure class="rv-fig" role="img" aria-label="Handy, ForgeIEC-Server, Gateway und Steuerung: das Gateway baut die Verbindung von innen zum Server auf">
+<figure class="rv-fig" role="img" aria-label="Handy, Vermittlungsserver, Gateway und Steuerung: das Gateway baut die Verbindung von innen zum Server auf">
 <svg class="rv-h" viewBox="0 0 800 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" font-size="15" fill="currentColor">
   <defs>
     <marker id="rv-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
@@ -87,8 +93,8 @@ draußen. Der Schlüssel eines Handys entsteht auf dem Handy und verlässt es ni
   <rect x="10" y="78" width="130" height="58" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
   <text x="75" y="112" text-anchor="middle" font-weight="600">Handy</text>
   <rect x="226" y="78" width="150" height="58" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
-  <text x="301" y="104" text-anchor="middle" font-weight="600">ForgeIEC-</text>
-  <text x="301" y="122" text-anchor="middle" font-weight="600">Server</text>
+  <text x="301" y="104" text-anchor="middle" font-weight="600">Vermittlungs-</text>
+  <text x="301" y="122" text-anchor="middle" font-weight="600">server</text>
   <rect x="470" y="78" width="130" height="58" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
   <text x="535" y="112" text-anchor="middle" font-weight="600">Gateway</text>
   <rect x="650" y="78" width="126" height="58" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
@@ -110,7 +116,7 @@ draußen. Der Schlüssel eines Handys entsteht auf dem Handy und verlässt es ni
   <line x1="160" y1="68" x2="160" y2="118" stroke="currentColor" stroke-width="2" marker-end="url(#rv-av)" marker-start="url(#rv-av)"/>
   <text x="172" y="98" font-size="13">verschlüsselt</text>
   <rect x="85" y="122" width="150" height="54" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
-  <text x="160" y="155" text-anchor="middle" font-weight="600">ForgeIEC-Server</text>
+  <text x="160" y="155" text-anchor="middle" font-weight="600">Vermittlungsserver</text>
   <line x1="160" y1="252" x2="160" y2="180" stroke="var(--rv-accent, #F59E0B)" stroke-width="3" marker-end="url(#rv-av2)"/>
   <text x="172" y="212" font-size="13" fill="var(--rv-accent, #F59E0B)">von innen aufgebaut</text>
   <rect x="20" y="240" width="280" height="220" rx="10" fill="none" stroke="currentColor" stroke-dasharray="5 5" opacity=".55"/>
@@ -130,9 +136,10 @@ geöffnet werden; auch Mobilfunk-Anschlüsse ohne eigene öffentliche Adresse fu
 
 ### Für wen
 
-Für Maschinen- und Anlagenbauer, die ihre Anlagen beim Kunden aus der Ferne betreuen wollen, ohne einen
-Cloud-Anbieter dazwischen. Und für Betreiber, die ihre Anlage selbst vom Handy aus bedienen wollen.
-<!-- ENTWURF: Zielgruppe „Maschinen- und Anlagenbauer“ ist eine Vorgabe des Inhabers; das Repository nennt „Betreiber:innen von Anlagen“ und „nicht an eine Branche gebunden“ (README.md, CLAUDE.md 1). -->
+Für Gemeinschaften, die im eigenen Netz Anlagen oder Dienste mit Weboberfläche betreiben und keine
+Netzwerkfachleute haben: Solidarische Landwirtschaften, Gemeinschaftsgärten, Wohnprojekte, Vereine. Ihr
+Alltag: Ehrenamtliche wechseln, Handys gehen verloren. Wer dazukommt, bekommt Zugang; wer geht, wird mit
+einem Klick gesperrt. Rivet ist an keine Branche und keinen Steuerungshersteller gebunden.
 
 ### Was vor Ort zu tun ist
 
@@ -140,22 +147,26 @@ Cloud-Anbieter dazwischen. Und für Betreiber, die ihre Anlage selbst vom Handy 
    <!-- ENTWURF: Welche Gateway-Hardware geliefert wird, ist offen (CLAUDE.md 11, Frage 6: „konkrete Boards?“). -->
 2. Die Oberfläche des Gateways öffnen und mit dem Zugangsschlüssel anmelden.
 3. Den Registrierungscode aus dem Portal eingeben. Was erreichbar ist, legen Sie im Portal fest.
-4. Handys im Portal hinzufügen: QR-Code mit der WireGuard-App scannen, Tunnel einschalten.
+4. Handys im Portal hinzufügen: per Einrichtungslink oder QR-Code mit der WireGuard-App, Tunnel
+   einschalten. Eine eigene App für Android und iOS entsteht.
 
 </div>
 <div>
 
 ### Was Rivet nicht ist
 
-- **Kein Cloud-Dienst eines Dritten.** Gateway, Server und Portal betreibt ForgeIEC selbst.
+- **Kein Cloud-Dienst.** Rivet ist freie Software zum Selbstbetrieb: Gateway, Vermittlungsserver und Portal
+  betreibt die Gemeinschaft selbst. Heute läuft der Pilot noch auf dem Server des Entwicklers.
 - **Kein Ersatz für Sicherheitsfunktionen.** Not-Halt, Verriegelungen und alles, was eine Anlage sicher
   macht, gehören in die Anlage, nicht in einen Fernzugriff.
-- **Noch kein fertiges Produkt** (siehe Status oben).
+- **Keine Ende-zu-Ende-Verschlüsselung gegenüber dem Betreiber.** Der Vermittlungsserver sieht den Verkehr;
+  dafür steht er in der Hand der Gemeinschaft.
+- **Noch nicht fertig** (siehe Stand oben).
 
 ### Nächster Schritt
 
-<p class="rv-cta">Sie möchten Rivet in einem Pilot erproben? <a href="/de/kontakt/?type=pilot">Pilot anfragen</a></p>
-<!-- ENTWURF: Ein Pilotangebot (Umfang, Konditionen, Kosten) ist im Repository nicht beschrieben. -->
+<p class="rv-cta">Der Code ist öffentlich: <a href="https://git.forgeiec.io/ForgeIEC/rivet">git.forgeiec.io/ForgeIEC/rivet</a>.
+Eure Gemeinschaft möchte Rivet 2027 als Pilotgruppe erproben, mit eigenem Server? <a href="/de/kontakt/?type=pilot">Meldet euch</a>.</p>
 
 </div>
 </div>
@@ -177,8 +188,9 @@ Cloud-Anbieter dazwischen. Und für Betreiber, die ihre Anlage selbst vom Handy 
 
 ## Für Fachleute: die Technik im Detail {#technik}
 
-Alle Angaben unten sind im Repository `forgeiec-rivet` (Branch `development`, Stand Commit `5f01540`,
-22.10.2026) nachprüfbar. Die Spezifikation steht dort in `CLAUDE.md`. Wir unterscheiden streng:
+Alle Angaben unten sind im öffentlichen Repository
+[git.forgeiec.io/ForgeIEC/rivet](https://git.forgeiec.io/ForgeIEC/rivet) nachprüfbar (Branch `development`;
+die Zahlen zu Tests und Code stammen vom Stand 22.10.2026, Commit `5f01540`). Die Spezifikation steht dort in `CLAUDE.md`. Wir unterscheiden streng:
 **umgesetzt** (Code und Tests vorhanden), **spezifiziert** (in `CLAUDE.md` beschrieben, nicht programmiert)
 und **geplant/offen** (als offene Frage oder „später“ vermerkt).
 
@@ -251,8 +263,6 @@ Einstellung, Vorgabe `forgeiec.io`):
 | Organisation | `<zone>.<basis>` | Modell `Zone` |
 | Kunde | `<kunde>.<zone>.<basis>` | Modell `Organisation` |
 | Gerät | `<gerät>.<kunde>.<zone>.<basis>` | `Gateway.fqdn`; hier antwortet das Gateway, nicht das Portal |
-
-Die README nennt noch das ältere Schema `<slug>.<zone>.forgeiec.io`; der Code verwendet das obige.
 
 - **Wildcard-Zertifikat je Kunde** `*.<kunde>.<zone>.<basis>`: ausgestellt von certbot mit
   `certbot-dns-hetzner` (DNS-01, ECDSA) aus dem venv des Portals; Erneuerung per Timer
@@ -356,9 +366,8 @@ Die README nennt noch das ältere Schema `<slug>.<zone>.forgeiec.io`; der Code v
 
 </div>
 
-Hinweis: Die README beschreibt den Gateway-Dienst noch ohne nftables und nur mit `CAP_NET_BIND_SERVICE`.
-Der aktuelle Code braucht für den Kernel-Weg zusätzlich `CAP_NET_ADMIN` (TUN `rivet0`, nftables per Netlink,
-ohne externe Programme).
+Hinweis: Für den Kernel-Weg braucht der Gateway-Dienst zusätzlich zu `CAP_NET_BIND_SERVICE` auch
+`CAP_NET_ADMIN` (TUN `rivet0`, nftables per Netlink, ohne externe Programme).
 
 ### Plattformen, Pakete und Bau {#pakete}
 
@@ -403,7 +412,7 @@ docs/            api-v1.md, betrieb-server.md, router-rutos.md
 .github/workflows/  client.yml, server.yml
 ```
 
-Lizenzangabe in beiden `Cargo.toml`: `LicenseRef-proprietary`.
+Lizenz: AGPL-3.0-or-later (`LICENSE` im Repository und `license` in beiden `Cargo.toml`).
 
 </details>
 
@@ -414,8 +423,10 @@ Lizenzangabe in beiden `Cargo.toml`: `LicenseRef-proprietary`.
   Portal. Gegenmaßnahmen laut Spezifikation: Ausnutzen braucht zusätzlich Umleitung von DNS oder Verkehr;
   Portale unter eigenen Zertifikaten; Sitzungs-Cookie nur für den eigenen Host; Notfall-Rotation; gesperrte
   Gateways bekommen keine neuen Zertifikate; kurze Laufzeiten von Let's Encrypt.
-- **Der Server ist der Vertrauensanker**: Er verteilt die Schlüssel und sieht den inneren Verkehr der Handys
-  auf dem Weg über den Server (bewusst akzeptiert).
+- **Wer den Vermittlungsserver betreibt, dem muss man vertrauen:** Über ihn läuft der gesamte Verkehr, und er
+  verwaltet Schlüssel, Zertifikate und Freigaben; das Portal auf diesem Server hält auch die privaten
+  Schlüssel der Wildcard-Zertifikate. Deshalb soll jede Gemeinschaft ihn selbst betreiben können, und die
+  geplante Härtung begrenzt, was er im Netz einer Anlage erreichen kann.
 - **Router-Gateways:** Ob der Server ins LAN kommt, entscheidet dort die Firewall des Routers, nicht Rivet.
 - **Manipulierte Routing-Datenbank:** Das nginx-Modul nimmt nur Ziele innerhalb `allow_backend` an.
 - **ECH** würde den SNI verbergen; für die Rivet-Zonen werden deshalb keine DNS-HTTPS-Records mit ECH
@@ -440,9 +451,9 @@ Die Tabelle nennt nur Eigenschaften, die aus dem Aufbau folgen.
 |---|---|---|---|---|
 | Eingehender Port am Standort | ja | nein | je nach Produkt | nein, das Gateway baut nur ausgehend auf |
 | Steuerung im Internet sichtbar | ja | nein | nein | nein |
-| Dritter im Datenpfad | nein | ja (Hersteller) | ja (Anbieter) | nein, nur der ForgeIEC-Server |
+| Dritter im Datenpfad | nein | ja (Hersteller) | ja (Anbieter) | nur der Vermittlungsserver, den die Gemeinschaft selbst betreiben soll |
 | Funktioniert ohne öffentliche IP (CGNAT, Mobilfunk) | nein | ja | ja | ja |
 | Freigabe je Handy und Port | nein | je nach Produkt | je nach Produkt | ja, im Portal |
-| Wer sieht entschlüsselten Verkehr | niemand dazwischen | der Hersteller | je nach Produkt | der ForgeIEC-Server beim Handy-Weg über den Server (siehe [Isolation](#isolation)) |
+| Wer sieht entschlüsselten Verkehr | niemand dazwischen | der Hersteller | je nach Produkt | der Betreiber des Vermittlungsservers (siehe [Isolation](#isolation)) |
 
 </div>

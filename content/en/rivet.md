@@ -3,7 +3,7 @@ title: "Rivet"
 date: 2026-10-22
 draft: false
 wide: true
-description: "Rivet: remote access from a phone to controllers in the local network, without port forwarding and without a third-party cloud. Status: in development, pilot with solidarity farms."
+description: "Rivet: free remote access from a phone to plants in the local network, without port forwarding and without a vendor cloud, for communities to run themselves. Status: proof of concept in pilot operation at a solidarity farm."
 ---
 
 <style>
@@ -46,15 +46,20 @@ description: "Rivet: remote access from a phone to controllers in the local netw
 
 <div class="rv">
 
-## Operate your plant from a phone – without opening a door into your network {#benefit}
+## Operate the plant from a phone – without an IT department, without a vendor cloud {#benefit}
 
-<p class="rv-lead">Rivet connects the phone of an authorised person with a controller in the local network.
-No port forwarding has to be set up on site, and no third-party cloud provider is involved.</p>
+<p class="rv-lead">Rivet connects the phone of an authorised person with a plant in the local network, for
+example an irrigation controller. No port forwarding is needed on site, not even on the mobile connection out
+in the field. Rivet is free software (AGPL-3.0-or-later); every community should be able to run the server
+for it themselves.</p>
 
-{{< callout type="warning" title="Status: in development" >}}
-Rivet is not a finished product yet. The code is being written and has so far been tried on a test server.
-The first intended use: solidarity farms (SoLaWis) want to operate their irrigation control from a phone
-with it.
+{{< callout type="warning" title="Status: proof of concept in pilot operation" >}}
+Since September 2026 the solidarity farm SoLaWi Ackervielfalt has operated its irrigation controller from a
+phone through Rivet, connected over mobile data. Gateway, relay server and portal still run on a single server
+of the developer: "works for me". The code was written with an AI programming tool, following the developer's
+own architecture and specification, with automated tests and three code reviews. What is still missing before
+others run it: a simple installation path for their own server, hardening, evidence and a thorough review by
+the developer. The goal is "thoroughly reviewed, works for you".
 {{< /callout >}}
 
 <div class="rv-cards">
@@ -65,17 +70,18 @@ it from elsewhere usually puts it straight on the internet or ties themselves to
 </div>
 <div class="rv-card">
 <h3>The solution</h3>
-<p>A small gateway on site opens the connection to our server <strong>from the inside out</strong>. Over
-this path the phone reaches only the services you have released in the portal, nothing else.</p>
+<p>A small gateway on site opens the connection to a relay server <strong>from the inside out</strong>.
+Over this path the phone reaches only the services released in the portal, nothing else.</p>
 </div>
 <div class="rv-card">
-<h3>What stays under your control</h3>
-<p>You decide in the portal which phones reach which plant. A blocked phone is out within seconds. A phone's
-key is created on the phone and never leaves it.</p>
+<h3>Whom you have to trust</h3>
+<p>Whoever runs the relay server has to be trusted: all traffic passes through it, and it manages keys,
+certificates and permissions. That is why every community should be able to run it themselves. A phone's
+private key is created on the phone and never leaves it.</p>
 </div>
 </div>
 
-<figure class="rv-fig" role="img" aria-label="Phone, ForgeIEC server, gateway and controller: the gateway opens the connection to the server from inside">
+<figure class="rv-fig" role="img" aria-label="Phone, relay server, gateway and controller: the gateway opens the connection to the server from inside">
 <svg class="rv-h" viewBox="0 0 800 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" font-size="15" fill="currentColor">
   <defs>
     <marker id="rv-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
@@ -86,7 +92,7 @@ key is created on the phone and never leaves it.</p>
   <rect x="10" y="78" width="130" height="58" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
   <text x="75" y="112" text-anchor="middle" font-weight="600">Phone</text>
   <rect x="226" y="78" width="150" height="58" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
-  <text x="301" y="104" text-anchor="middle" font-weight="600">ForgeIEC</text>
+  <text x="301" y="104" text-anchor="middle" font-weight="600">Relay</text>
   <text x="301" y="122" text-anchor="middle" font-weight="600">server</text>
   <rect x="470" y="78" width="130" height="58" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
   <text x="535" y="112" text-anchor="middle" font-weight="600">Gateway</text>
@@ -109,7 +115,7 @@ key is created on the phone and never leaves it.</p>
   <line x1="160" y1="68" x2="160" y2="118" stroke="currentColor" stroke-width="2" marker-end="url(#rv-av)" marker-start="url(#rv-av)"/>
   <text x="172" y="98" font-size="13">encrypted</text>
   <rect x="85" y="122" width="150" height="54" rx="8" fill="var(--rv-box, rgba(148,163,184,.12))" stroke="currentColor"/>
-  <text x="160" y="155" text-anchor="middle" font-weight="600">ForgeIEC server</text>
+  <text x="160" y="155" text-anchor="middle" font-weight="600">Relay server</text>
   <line x1="160" y1="252" x2="160" y2="180" stroke="var(--rv-accent, #F59E0B)" stroke-width="3" marker-end="url(#rv-av2)"/>
   <text x="172" y="212" font-size="13" fill="var(--rv-accent, #F59E0B)">opened from inside</text>
   <rect x="20" y="240" width="280" height="220" rx="10" fill="none" stroke="currentColor" stroke-dasharray="5 5" opacity=".55"/>
@@ -129,9 +135,10 @@ connection; mobile connections without their own public address work too.</figca
 
 ### Who it is for
 
-For machine and plant builders who want to service their machines at the customer's site remotely, without a
-cloud vendor in between. And for operators who want to operate their own plant from a phone.
-<!-- ENTWURF: The target group "machine and plant builders" is the owner's brief; the repository speaks of "operators of plants" and "not bound to an industry" (README.md, CLAUDE.md 1). -->
+For communities that run plants or services with a web interface in their own network and have no network
+specialists: solidarity farms, community gardens, housing projects, associations. Their everyday life:
+volunteers come and go, phones get lost. Whoever joins gets access; whoever leaves is blocked with one click.
+Rivet is not tied to an industry or a controller vendor.
 
 ### What you do on site
 
@@ -139,22 +146,26 @@ cloud vendor in between. And for operators who want to operate their own plant f
    <!-- ENTWURF: Which gateway hardware is supplied is open (CLAUDE.md 11, question 6: "concrete boards?"). -->
 2. Open the gateway's web interface and sign in with the access key.
 3. Enter the registration code from the portal. What can be reached is set in the portal.
-4. Add phones in the portal: scan the QR code with the WireGuard app, switch the tunnel on.
+4. Add phones in the portal: via a setup link or a QR code with the WireGuard app, switch the tunnel on.
+   An app of its own for Android and iOS is being built.
 
 </div>
 <div>
 
 ### What Rivet is not
 
-- **Not a cloud service of a third party.** ForgeIEC runs gateway, server and portal itself.
+- **Not a cloud service.** Rivet is free software for self-hosting: the community runs gateway, relay server
+  and portal itself. Today the pilot still runs on the developer's server.
 - **Not a replacement for safety functions.** Emergency stop, interlocks and everything that makes a plant
   safe belong in the plant, not in a remote access.
-- **Not a finished product yet** (see status above).
+- **No end-to-end encryption against the operator.** The relay server sees the traffic; that is why it
+  belongs in the community's own hands.
+- **Not finished yet** (see status above).
 
 ### Next step
 
-<p class="rv-cta">Would you like to try Rivet in a pilot? <a href="/en/contact/?type=pilot">Request a pilot</a></p>
-<!-- ENTWURF: A pilot offer (scope, terms, costs) is not described in the repository. -->
+<p class="rv-cta">The code is public: <a href="https://git.forgeiec.io/ForgeIEC/rivet">git.forgeiec.io/ForgeIEC/rivet</a>.
+Would your community like to try Rivet as a pilot group in 2027, with its own server? <a href="/en/contact/?type=pilot">Get in touch</a>.</p>
 
 </div>
 </div>
@@ -176,8 +187,9 @@ cloud vendor in between. And for operators who want to operate their own plant f
 
 ## For experts: the technology in detail {#technology}
 
-Everything below can be checked in the repository `forgeiec-rivet` (branch `development`, commit `5f01540`,
-22 Oct 2026). The specification is `CLAUDE.md` in that repository. We distinguish strictly between
+Everything below can be checked in the public repository
+[git.forgeiec.io/ForgeIEC/rivet](https://git.forgeiec.io/ForgeIEC/rivet) (branch `development`; the figures on
+tests and code are from 22 Oct 2026, commit `5f01540`). The specification is `CLAUDE.md` in that repository. We distinguish strictly between
 **implemented** (code and tests present), **specified** (described in `CLAUDE.md`, not coded) and
 **planned/open** (recorded as an open question or as "later").
 
@@ -250,8 +262,6 @@ Names follow four levels (`server/portal/gateways/hosts.py`; the base domain is 
 | Organisation | `<zone>.<base>` | model `Zone` |
 | Customer | `<customer>.<zone>.<base>` | model `Organisation` |
 | Device | `<device>.<customer>.<zone>.<base>` | `Gateway.fqdn`; the gateway answers here, not the portal |
-
-The README still shows the older scheme `<slug>.<zone>.forgeiec.io`; the code uses the one above.
 
 - **One wildcard certificate per customer** `*.<customer>.<zone>.<base>`: issued by certbot with
   `certbot-dns-hetzner` (DNS-01, ECDSA) from the portal's venv; renewal by the timer `forgeiec-rivet-certs`
@@ -350,9 +360,8 @@ The README still shows the older scheme `<slug>.<zone>.forgeiec.io`; the code us
 
 </div>
 
-Note: the README still describes the gateway service without nftables and with `CAP_NET_BIND_SERVICE` only.
-The current code additionally needs `CAP_NET_ADMIN` for the kernel path (TUN `rivet0`, nftables via netlink,
-no external programs).
+Note: for the kernel path the gateway service needs `CAP_NET_ADMIN` in addition to `CAP_NET_BIND_SERVICE`
+(TUN `rivet0`, nftables via netlink, no external programs).
 
 ### Platforms, packages and build {#packages}
 
@@ -398,7 +407,7 @@ docs/            api-v1.md, betrieb-server.md, router-rutos.md
 .github/workflows/  client.yml, server.yml
 ```
 
-Licence field in both `Cargo.toml` files: `LicenseRef-proprietary`.
+Licence: AGPL-3.0-or-later (`LICENSE` in the repository and `license` in both `Cargo.toml` files).
 
 </details>
 
@@ -409,8 +418,10 @@ Licence field in both `Cargo.toml` files: `LicenseRef-proprietary`.
   Countermeasures in the specification: exploiting it also requires redirecting DNS or traffic; portals under
   their own certificates; session cookie only for its own host; emergency rotation; blocked gateways receive
   no new certificates; short Let's Encrypt lifetimes.
-- **The server is the trust anchor**: it distributes the keys and sees the inner traffic of phones on the path
-  via the server (consciously accepted).
+- **Whoever runs the relay server has to be trusted:** all traffic passes through it, and it manages keys,
+  certificates and permissions; the portal on that server also holds the private keys of the wildcard
+  certificates. That is why every community should be able to run it themselves, and the planned hardening
+  limits what it can reach in a plant's network.
 - **Router gateways:** there, the router's firewall decides whether the server gets into the LAN, not Rivet.
 - **Tampered routing database:** the nginx module accepts only targets within `allow_backend`.
 - **ECH** would hide the SNI; therefore no DNS HTTPS records with ECH are published for the Rivet zones.
@@ -435,9 +446,9 @@ The table lists only properties that follow from the architecture.
 |---|---|---|---|---|
 | Inbound port at the site | yes | no | depends on the product | no, the gateway only connects outbound |
 | Controller visible on the internet | yes | no | no | no |
-| Third party in the data path | no | yes (vendor) | yes (provider) | no, only the ForgeIEC server |
+| Third party in the data path | no | yes (vendor) | yes (provider) | only the relay server, which the community is meant to run itself |
 | Works without a public IP (CGNAT, mobile) | no | yes | yes | yes |
 | Release per phone and port | no | depends on the product | depends on the product | yes, in the portal |
-| Who sees decrypted traffic | nobody in between | the vendor | depends on the product | the ForgeIEC server on the phone path via the server (see [isolation](#isolation)) |
+| Who sees decrypted traffic | nobody in between | the vendor | depends on the product | the operator of the relay server (see [isolation](#isolation)) |
 
 </div>
